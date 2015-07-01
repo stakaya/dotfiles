@@ -45,9 +45,6 @@ endif
 if has("win32")
 	set encoding=cp932
 
-	" ランタイムパス設定
-	set runtimepath=D:/Dropbox/Application/vim/vimfiles,$VIMRUNTIME,D:/Dropbox/Application/vim/vimfiles/after
-
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
@@ -68,7 +65,10 @@ endif
 imap { {}<LEFT>
 imap [ []<LEFT>
 imap ( ()<LEFT>
-imap ; :
+
+" コロンとセミコロンを入れ替える
+nnoremap ; :
+nnoremap : ;
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
