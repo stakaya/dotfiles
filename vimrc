@@ -1,33 +1,62 @@
 if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
+	set runtimepath+=$VIM\vim74\bundle\neobundle.vim
 endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
+if has("win32")
+	call neobundle#begin(expand('$VIM\vim74\bundle'))
+else 
+	call neobundle#begin(expand('~/.vim/bundle/'))
+endif
+
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
-NeoBundle 'Shougo/neocomplcache.git'
-
-NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'banyan/recognize_charcode.vim'
+NeoBundle 'itchyny/calendar.vim'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'kannokanno/previm'
-
+NeoBundle 'koron/dicwin-vim'
+NeoBundle 'koron/verifyenc-vim'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'shinchu/hz_ja.vim'
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/urilib.vim'
-
-NeoBundle 'mattn/emmet-vim'
-
-NeoBundle 'shinchu/hz_ja.vim'
-NeoBundle 'koron/verifyenc-vim'
-
-NeoBundle 'vim-scripts/autodate.vim'
 NeoBundle 'vim-scripts/Zenburn'
-NeoBundle 'koron/dicwin-vim'
-
-NeoBundle 'banyan/recognize_charcode.vim'
+NeoBundle 'vim-scripts/autodate.vim'
 
 call neobundle#end()
 
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
+let g:lightline = { 'colorscheme': 'wombat' }
+
+" neocompleteの設定
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+" VimFilerの設定
+" autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
+ 
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default=0
+let g:netrw_liststyle=3
 if has("mac")
 	set encoding=utf-8
 	autocmd BufWritePost * call SetUTF8Xattr(expand("<afile>"))
@@ -75,10 +104,6 @@ filetype plugin indent on
 
 augroup vimrcEx
 	au!
-
-	" テキストサイズは80カラム
-	autocmd FileType text setlocal textwidth=80
-
 	" ファイルが編集された時、カーソルを最適な位置に移動する
 	autocmd BufReadPost *
 				\ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -92,7 +117,7 @@ if &t_Co > 2 || has("gui_running")
 	set hlsearch
 endif
 
-colorscheme zenburn " カラー指定
+colorscheme Zenburn " カラー指定
 
 " カーソル行をハイライト
 set cursorline
@@ -208,4 +233,3 @@ function! SetUTF8Xattr(file)
 		call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
 	endif
 endfunction
-
