@@ -1,5 +1,6 @@
 " ユーザ設定を保存
-let s:cpo_save = &cpo
+let s:cpo_save=&cpo
+set lsp=2
 set cpo&vim
 
 if has("mac")
@@ -64,8 +65,8 @@ endif
 
 if has("win32")
 	set directory=C:\WINDOWS\Temp
-	set guifont=MS_Gothic:h16:cSHIFTJIS
-	set guifontwide=MS_Gothic:h16:cSHIFTJIS
+	let s:using_font= 'Osaka' . "\x81\x7c\x93\x99\x95\x9d"
+	let &guifont=s:using_font . ':h12:cSHIFTJIS'
 endif
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
