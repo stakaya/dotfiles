@@ -11,9 +11,11 @@ endif
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
+NeoBundle 'Shougo/vimproc'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'itchyny/calendar.vim'
 NeoBundle 'itchyny/lightline.vim'
@@ -31,6 +33,19 @@ NeoBundle 'vim-scripts/autodate.vim'
 
 call neobundle#end()
 
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+	
+	if has('win32') || has('win64')
+	  " Display user name on Windows.
+	  let g:vimshell_prompt = $USERNAME."% "
+	else
+	  " Display user name on Linux.
+	  let g:vimshell_prompt = $USER."% "
+	endif
+
+
+
+" calendarの設定
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
