@@ -16,12 +16,16 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
 NeoBundle 'Shougo/vimproc'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'itchyny/calendar.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'koron/dicwin-vim'
 NeoBundle 'koron/verifyenc-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'mattn/gist-vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'shinchu/hz_ja.vim'
@@ -30,6 +34,7 @@ NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/urilib.vim'
 NeoBundle 'vim-scripts/Zenburn'
 NeoBundle 'vim-scripts/autodate.vim'
+NeoBundle 'Align'
 
 call neobundle#end()
 
@@ -248,3 +253,4 @@ function! SetUTF8Xattr(file)
 		call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
 	endif
 endfunction
+
