@@ -15,7 +15,12 @@ NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc.vim', {
+			\ 'build' : {
+			\     'mac' : 'make -f make_mac.mak',
+			\     'linux' : 'make'
+			\    },
+			\ }
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'tpope/vim-surround'
@@ -90,7 +95,7 @@ if has("mac")
 	set langmenu=japanese
 
 	" ヘルプタグ設定
-	helptags ~/.vim/doc
+	" helptags ~/.vim/doc
 endif
 
 if has("win32")
