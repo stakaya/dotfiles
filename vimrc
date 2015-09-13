@@ -35,6 +35,7 @@ NeoBundle 'mattn/gist-vim'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'shinchu/hz_ja.vim'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/urilib.vim'
@@ -45,6 +46,7 @@ NeoBundle 'Align'
 
 call neobundle#end()
 
+" vimshellの設定
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 	
 	if has('win32') || has('win64')
