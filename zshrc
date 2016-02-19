@@ -84,17 +84,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh
 
-function execJad() {
-	jad -8 -s java -d $2 -r $1/**/*.class
-}
-
 function apk2src() {
-	local dst = ${${1##*/}%%.*}
-	dst += '.depackaged'
+	local dst=${${1##*/}%%.*}
+	dst+='.depackaged'
 	unzip $1 -d $dst
 	d2j-dex2jar ${dst}/classes.dex -o ${dst}/classes_dex2jar.jar
 	unzip ${dst}/classes_dex2jar.jar -d ${dst}/Classes
-	execJad ${dst} ${dst}/src
+	jad -8 -s java -d ${dst}/src -r ${dst}/**/*.class
+
+	for file in $(find ./${dst} -name '*.xml')
+	do
+	   java -jar AXMLPrinter2.jar ${file} >> ${file}.dep.xml
+	done
 }
 
 function peco-select-history() {
