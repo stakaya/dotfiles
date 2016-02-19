@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH=/Users/takayashuichi/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -49,13 +49,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx bundler brew emoji-clock)
+plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
-export PATH="$HOME/Library/Command:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -83,20 +82,33 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# alias ohmyzsh="mate ~/.oh-my-zsh
+
+function execJad() {
+	jad -8 -s java -d $2 -r $1/**/*.class
+}
+
+function apk2src() {
+	local dst = ${${1##*/}%%.*}
+	dst += '.depackaged'
+	unzip $1 -d $dst
+	d2j-dex2jar ${dst}/classes.dex -o ${dst}/classes_dex2jar.jar
+	unzip ${dst}/classes_dex2jar.jar -d ${dst}/Classes
+	execJad ${dst} ${dst}/src
+}
 
 function peco-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(\history -n 1 | \
-        eval $tac | \
-        peco --query "$LBUFFER")
-    CURSOR=$#BUFFER
-    zle clear-screen
-}
+local tac
+if which tac > /dev/null; then
+tac="tac"
+else
+	tac="tail -r"
+	fi
+	BUFFER=$(\history -n 1 | \
+			eval $tac | \
+					peco --query "$LBUFFER")
+	CURSOR=$#BUFFER
+		zle clear-screen
+	}
 zle -N peco-select-history
 bindkey '^r' peco-select-history
