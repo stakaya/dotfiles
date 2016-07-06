@@ -8,7 +8,15 @@ bindkey -v
 export ANDROID_HOME="$HOME/Library/Android/sdk/"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+export PATH="$HOME/Library/Libs:$PATH"
 
+# Alias
+alias adbreset='adb kill-server; adb start-server'
+alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
+alias adbuninstall='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
+alias adbscreenshot='FILENAME=$HOME/Desktop/`date +"%Y%m%d%I%m%S"`.png && screenshot2 $FILENAME && open $FILENAME'
+
+# Function
 function apk2src() {
 	local dst=${${1##*/}%%.*}
 	dst+='.depackaged'
@@ -35,6 +43,24 @@ else
 					peco --query "$LBUFFER")
 	CURSOR=$#BUFFER
 		zle clear-screen
-	}
+}
+
+function dex-method-count() {
+	cat $1 | head -c 92 | tail -c 4 | hexdump -e '1/4 "%d\n"'
+}
+
+function dex-method-count-by-package() {
+	dir=$(mktemp -d -t dex)
+	baksmali $1 -o $dir
+	for pkg in `find $dir/* -type d`; do
+		smali $pkg -o $pkg/classes.dex
+		count=$(dex-method-count $pkg/classes.dex)
+		name=$(echo ${pkg:(${#dir} + 1)} | tr '/' '.')
+		echo -e "$count\t$name"
+	done
+	rm -rf $dir   
+}
+
+# Keybind
 zle -N peco-select-history
 bindkey '^r' peco-select-history
