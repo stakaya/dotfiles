@@ -3,8 +3,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize
-bindkey -v
+# Enviroment
 export ANDROID_HOME="$HOME/Library/Android/sdk/"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
@@ -13,8 +12,8 @@ export PATH="$HOME/Library/Libs:$PATH"
 # Alias
 alias adbreset='adb kill-server; adb start-server'
 alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
-alias adbuninstall='adbp shell pm list package | sed -e s/package:// | peco | xargs adbp uninstall'
-alias adbscreenshot='FILENAME=$HOME/Desktop/`date +"%Y%m%d%I%m%S"`.png && screenshot2 $FILENAME && open $FILENAME'
+alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
+alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
 
 # Function
 function apk2src() {
@@ -64,3 +63,4 @@ function dex-method-count-by-package() {
 # Keybind
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+bindkey -v
