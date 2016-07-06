@@ -1,9 +1,9 @@
-# Source Prezto.
+# Source
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Enviroment
+# Environment
 export ANDROID_HOME="$HOME/Library/Android/sdk/"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
@@ -14,6 +14,7 @@ alias adbreset='adb kill-server; adb start-server'
 alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
 alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
+alias adblogcat='adb shell pm list package | sed -e s/package:// | peco | xargs echo pidcat $1'
 
 # Function
 function apk2src() {
