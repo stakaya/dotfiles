@@ -10,11 +10,12 @@ export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 export PATH="$HOME/Library/Libs:$PATH"
 
 # Alias
-alias adbreset='adb kill-server; adb start-server'
 alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
-alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
+alias adblogcat='pidcat `adb shell pm list package | sed -e s/package:// | peco`'
+alias adbreset='adb kill-server; adb start-server'
 alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
-alias adblogcat='adb shell pm list package | sed -e s/package:// | peco | xargs echo pidcat $1'
+alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
+alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | peco | xargs adb pull'
 
 # Function
 function apk2src() {
@@ -62,6 +63,6 @@ function dex-method-count-by-package() {
 }
 
 # Keybind
+bindkey -v
 zle -N peco-select-history
 bindkey '^r' peco-select-history
-bindkey -v
