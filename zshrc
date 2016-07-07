@@ -1,6 +1,6 @@
 # Source
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+	source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Environment
@@ -28,22 +28,22 @@ function apk2src() {
 
 	for file in $(find ./${dst} -name '*.xml')
 	do
-	   java -jar AXMLPrinter2.jar ${file} >> ${file}.dep.xml
+		java -jar AXMLPrinter2.jar ${file} >> ${file}.dep.xml
 	done
 }
 
 function peco-select-history() {
-local tac
-if which tac > /dev/null; then
-tac="tac"
-else
-	tac="tail -r"
+	local tac
+	if which tac > /dev/null; then
+		tac="tac"
+	else
+		tac="tail -r"
 	fi
 	BUFFER=$(\history -n 1 | \
-			eval $tac | \
-					peco --query "$LBUFFER")
+		eval $tac | \
+		peco --query "$LBUFFER")
 	CURSOR=$#BUFFER
-		zle clear-screen
+	zle clear-screen
 }
 
 function dex-method-count() {
