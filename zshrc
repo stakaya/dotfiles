@@ -1,12 +1,31 @@
+# Zsh-completions
+fpath=(~/.zsh-completions $fpath)
+autoload -U compinit; compinit 
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
+                             /usr/local/git/bin
 # Source
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 	source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Environment
-export ANDROID_HOME="$HOME/Library/Android/sdk/"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
+# TODO 下記のパスに修正
+# export ANT_HOME=/usr/local/opt/ant
+# export MAVEN_HOME=/usr/local/opt/maven
+# export GRADLE_HOME=/usr/local/opt/gradle
+# export ANDROID_HOME=/usr/local/opt/android-sdk
+# export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
+# export PATH=$ANT_HOME/bin:$PATH
+# export PATH=$MAVEN_HOME/bin:$PATH
+# export PATH=$GRADLE_HOME/bin:$PATH
+# export PATH=$ANDROID_HOME/tools:$PATH
+# export PATH=$ANDROID_HOME/platform-tools:$PATH
+# export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH
+
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$HOME/Library/Libs:$PATH"
 
 # Alias
@@ -16,6 +35,7 @@ alias adbreset='adb kill-server; adb start-server'
 alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
 alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | peco | xargs adb pull'
+alias brewupdate='brew update && brew cask update && brew upgrade && brew cleanup && brew cask cleanup'
 
 # Function
 function apk2src() {
@@ -44,22 +64,6 @@ function peco-select-history() {
 		peco --query "$LBUFFER")
 	CURSOR=$#BUFFER
 	zle clear-screen
-}
-
-function dex-method-count() {
-	cat $1 | head -c 92 | tail -c 4 | hexdump -e '1/4 "%d\n"'
-}
-
-function dex-method-count-by-package() {
-	dir=$(mktemp -d -t dex)
-	baksmali $1 -o $dir
-	for pkg in `find $dir/* -type d`; do
-		smali $pkg -o $pkg/classes.dex
-		count=$(dex-method-count $pkg/classes.dex)
-		name=$(echo ${pkg:(${#dir} + 1)} | tr '/' '.')
-		echo -e "$count\t$name"
-	done
-	rm -rf $dir   
 }
 
 # Keybind
