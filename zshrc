@@ -26,6 +26,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
+export PATH="$ANDROID_HOME/build-tools/$(ls | cat | sort -r | awk 'NR==1{print $1;}'):$PATH"
 export PATH="$HOME/Library/Libs:$PATH"
 
 # Alias
