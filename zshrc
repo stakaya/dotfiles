@@ -20,13 +20,11 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export PATH=$ANT_HOME/bin:$PATH
 # export PATH=$MAVEN_HOME/bin:$PATH
 # export PATH=$GRADLE_HOME/bin:$PATH
-# export PATH=$ANDROID_HOME/tools:$PATH
-# export PATH=$ANDROID_HOME/platform-tools:$PATH
-# export PATH=$ANDROID_HOME/build-tools/23.0.3:$PATH
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/tools:$PATH"
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | cat | sort -r | awk 'NR==1{print $1;}'):$PATH"
+export PATH="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | sort | awk 'END{print}'):$PATH"
 export PATH="$HOME/Library/Libs:$PATH"
 
 # Alias
