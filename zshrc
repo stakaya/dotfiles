@@ -34,6 +34,7 @@ alias adbreset='adb kill-server; adb start-server'
 alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
 alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
 alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | peco | xargs adb pull'
+alias apkcheck='jarsigner -verify -verbose -certs $1'
 alias brewupdate='brew update && brew cask update && brew upgrade && brew cleanup && brew cask cleanup'
 
 # Function
