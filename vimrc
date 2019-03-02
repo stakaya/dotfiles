@@ -110,9 +110,9 @@ if has("win32")
 endif
 
 " ファイルを最後に保存してからどの部分が編集されたかDIFFを取るコマンド
-if !exists(":DiffOrig")
-	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-endif
+"move to default| if !exists(":DiffOrig")
+"move to default|	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+"move to default| endif
 
 " マウスのホィールを有効にする
 if has("mouse")
@@ -131,14 +131,14 @@ nnoremap : ;
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
 
-augroup vimrcEx
-	au!
-	" ファイルが編集された時、カーソルを最適な位置に移動する
-	autocmd BufReadPost *
-				\ if line("'\"") > 1 && line("'\"") <= line("$") |
-				\   exe "normal! g`\"" |
-				\ endif
-augroup END
+"move to default| augroup vimrcEx
+"move to default|	au!
+"move to default|	" ファイルが編集された時、カーソルを最適な位置に移動する
+"move to default|	autocmd BufReadPost *
+"move to default|				\ if line("'\"") > 1 && line("'\"") <= line("$") |
+"move to default|				\   exe "normal! g`\"" |
+"move to default|				\ endif
+"move to default| augroup END
 
 " GUIで起動された場合シンタックスを有効にして検索ハイライトする
 if &t_Co > 2 || has("gui_running")
@@ -160,22 +160,22 @@ augroup END
 
 set clipboard=unnamed
 set ambiwidth=double
-set backspace=indent,eol,start " バックスペースキーで削除できるものを指定
+"move to default| set backspace=indent,eol,start " バックスペースキーで削除できるものを指定
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " エンコーディング指定
 set fileformats=unix,dos,mac " 改行コードの自動認識
-set history=50		" keep 50 lines of command line history
+"move to default| set history=50		" keep 50 lines of command line history
 set ignorecase 		" 検索時、大文字・小文字を気にせず
 set iminsert=0
 set imsearch=-1
-set incsearch		" do incremental searching
+"move to default| set incsearch		" do incremental searching
 set laststatus=2  	" ステータス行を表示
-set nocompatible  	" viとの互換性をとらない(vimの独自拡張機能を使う)
+"move to default| set nocompatible  	" viとの互換性をとらない(vimの独自拡張機能を使う)
 set noswapfile     	" スワップファイル不要 
 set nowrap
 set number
-set ruler		    " show the cursor position all the time
+"move to default| set ruler		    " show the cursor position all the time
 set shiftwidth=4
-set showcmd		    " display incomplete commands
+"move to default|set showcmd		    " display incomplete commands
 set tabstop=4
 set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
