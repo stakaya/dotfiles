@@ -1,3 +1,5 @@
+source $VIMRUNTIME/defaults.vim
+
 if has('vim_starting')
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
 	set runtimepath+=$VIM\vim74\bundle\neobundle.vim
@@ -12,7 +14,13 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/deoplete.nvim'
+if !has('nvim')
+  NeoBundle('roxma/nvim-yarp')
+  NeoBundle('roxma/vim-hug-neovim-rpc')
+endif
+let g:deoplete#enable_at_startup = 1
+
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
 NeoBundle 'Shougo/vimproc.vim', {
@@ -57,28 +65,11 @@ let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 	  let g:vimshell_prompt = $USER."% "
 	endif
 
-
-
 " calendarの設定
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
 let g:lightline = { 'colorscheme': 'wombat' }
-
-" neocompleteの設定
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_ignore_case = 1
-let g:neocomplete#enable_smart_case = 1
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns._ = '\h\w*'
-
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " VimFilerの設定
 " autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
@@ -93,14 +84,7 @@ if has("mac")
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
 	set iskeyword=@,48-57,_,128-167,224-235    
 
-	" メニューの日本語化 
-	set langmenu=japanese
-
-	" ヘルプタグ設定
-	" helptags ~/.vim/doc
-endif
-
-if has("win32")
+elseif has("win32")
 	set encoding=cp932
 
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
@@ -108,11 +92,6 @@ if has("win32")
 		let $PATH = $VIM . ';' . $PATH
 	endif
 endif
-
-" ファイルを最後に保存してからどの部分が編集されたかDIFFを取るコマンド
-"move to default| if !exists(":DiffOrig")
-"move to default|	command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-"move to default| endif
 
 " マウスのホィールを有効にする
 if has("mouse")
@@ -130,15 +109,6 @@ nnoremap : ;
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
-
-"move to default| augroup vimrcEx
-"move to default|	au!
-"move to default|	" ファイルが編集された時、カーソルを最適な位置に移動する
-"move to default|	autocmd BufReadPost *
-"move to default|				\ if line("'\"") > 1 && line("'\"") <= line("$") |
-"move to default|				\   exe "normal! g`\"" |
-"move to default|				\ endif
-"move to default| augroup END
 
 " GUIで起動された場合シンタックスを有効にして検索ハイライトする
 if &t_Co > 2 || has("gui_running")
@@ -160,22 +130,16 @@ augroup END
 
 set clipboard=unnamed
 set ambiwidth=double
-"move to default| set backspace=indent,eol,start " バックスペースキーで削除できるものを指定
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " エンコーディング指定
 set fileformats=unix,dos,mac " 改行コードの自動認識
-"move to default| set history=50		" keep 50 lines of command line history
 set ignorecase 		" 検索時、大文字・小文字を気にせず
 set iminsert=0
 set imsearch=-1
-"move to default| set incsearch		" do incremental searching
 set laststatus=2  	" ステータス行を表示
-"move to default| set nocompatible  	" viとの互換性をとらない(vimの独自拡張機能を使う)
 set noswapfile     	" スワップファイル不要 
 set nowrap
 set number
-"move to default| set ruler		    " show the cursor position all the time
 set shiftwidth=4
-"move to default|set showcmd		    " display incomplete commands
 set tabstop=4
 set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
