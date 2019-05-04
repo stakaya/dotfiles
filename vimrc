@@ -1,69 +1,64 @@
 source $VIMRUNTIME/defaults.vim
 
 if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
-	set runtimepath+=$VIM\vim74\bundle\neobundle.vim
+	set runtimepath+=~/.vim/plugins/dein.vim/
+	set runtimepath+=$VIM\vim81\plugins\dein.vim
 endif
 
 if has("win32")
-	call neobundle#begin(expand('$VIM\vim74\bundle'))
+	call dein#begin(expand('$VIM\vim81\plugins'))
 else 
-	call neobundle#begin(expand('~/.vim/bundle/'))
+	call dein#begin(expand('~/.vim/plugins/'))
 endif
 
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/deoplete.nvim'
+call dein#add('Shougo/vimproc.vim', {'build':{'mac' : 'make -f make_mac.mak'}})
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimshell')
+call dein#add('Shougo/deoplete.nvim')
 if !has('nvim')
-  NeoBundle('roxma/nvim-yarp')
-  NeoBundle('roxma/vim-hug-neovim-rpc')
+	call dein#add('roxma/nvim-yarp')
+	call dein#add('roxma/vim-hug-neovim-rpc')
 endif
 let g:deoplete#enable_at_startup = 1
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] }
-NeoBundle 'Shougo/vimproc.vim', {
-			\ 'build' : {
-			\     'mac' : 'make -f make_mac.mak',
-			\     'linux' : 'make'
-			\    },
-			\ }
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'banyan/recognize_charcode.vim'
-NeoBundle 'itchyny/calendar.vim'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'koron/dicwin-vim'
-NeoBundle 'koron/verifyenc-vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'mattn/gist-vim'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'shinchu/hz_ja.vim'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'tyru/urilib.vim'
-NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'blueshirts/darcula'
-NeoBundle 'vim-scripts/autodate.vim'
-NeoBundle 'Align'
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] })
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+call dein#add('thinca/vim-quickrun')
+call dein#add('thinca/vim-qfreplace')
+call dein#add('tpope/vim-surround')
+call dein#add('banyan/recognize_charcode.vim')
+call dein#add('itchyny/calendar.vim')
+call dein#add('itchyny/lightline.vim')
+call dein#add('kannokanno/previm')
+call dein#add('koron/dicwin-vim')
+call dein#add('koron/verifyenc-vim')
+call dein#add('mattn/webapi-vim')
+call dein#add('mattn/gist-vim')
+call dein#add('mattn/emmet-vim')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('shinchu/hz_ja.vim')
+call dein#add('tpope/vim-abolish')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('tyru/open-browser.vim')
+call dein#add('tyru/urilib.vim')
+call dein#add('taku-o/vim-toggle')
+call dein#add('blueshirts/darcula')
+call dein#add('vim-scripts/autodate.vim')
+call dein#add('vim-scripts/Alig')
 
-call neobundle#end()
+call dein#end()
 
 " vimshellの設定
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-	
-	if has('win32') || has('win64')
-	  " Display user name on Windows.
-	  let g:vimshell_prompt = $USERNAME."% "
-	else
-	  " Display user name on Linux.
-	  let g:vimshell_prompt = $USER."% "
-	endif
+
+if has('win32') || has('win64')
+	" Display user name on Windows.
+	let g:vimshell_prompt = $USERNAME."% "
+else
+	" Display user name on Linux.
+	let g:vimshell_prompt = $USER."% "
+endif
 
 " calendarの設定
 let g:calendar_google_calendar = 1
@@ -73,7 +68,7 @@ let g:lightline = { 'colorscheme': 'wombat' }
 
 " VimFilerの設定
 " autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
- 
+
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default=0
 let g:netrw_liststyle=3
@@ -84,7 +79,7 @@ if has("mac")
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
 	set iskeyword=@,48-57,_,128-167,224-235    
 
-elseif has("win32")
+elseif has("win32") || has("win64") 
 	set encoding=cp932
 
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
