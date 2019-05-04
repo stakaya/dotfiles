@@ -48,7 +48,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'tyru/urilib.vim'
 NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'vim-scripts/Zenburn'
+NeoBundle 'blueshirts/darcula'
 NeoBundle 'vim-scripts/autodate.vim'
 NeoBundle 'Align'
 
@@ -116,7 +116,7 @@ if &t_Co > 2 || has("gui_running")
 	set hlsearch
 endif
 
-colorscheme Zenburn " カラー指定
+colorscheme darcula " カラー指定
 
 " カーソル行をハイライト
 set cursorline
