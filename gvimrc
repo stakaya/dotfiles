@@ -5,12 +5,11 @@ set cpo&vim
 
 " OS毎の設定
 if has("mac")
-	set guifontwide=Osaka:h12
-	set guifont=Osaka-Mono:h14
-elseif has("win32")
+	set guifontwide=Menlo:h12
+	set guifont=Menlo\ Regular:h12
+elseif has("win32") || has("win64")
 	set directory=C:\WINDOWS\Temp
-	let s:using_font= 'Osaka' . "\x81\x7c\x93\x99\x95\x9d"
-	let &guifont=s:using_font . ':h12:cSHIFTJIS'
+	set guifont=Consolas:h12:cSHIFTJIS
 endif
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
