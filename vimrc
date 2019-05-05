@@ -1,29 +1,31 @@
 source $VIMRUNTIME/defaults.vim
 
 if has('vim_starting')
+	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
+	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
+	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
+
 	set runtimepath+=~/.vim/plugins/dein.vim/
 	set runtimepath+=$VIM\vim81\plugins\dein.vim
 endif
 
-if has("win32")
+if has('win32') || has('win64')
 	call dein#begin(expand('$VIM\vim81\plugins'))
 else 
 	call dein#begin(expand('~/.vim/plugins/'))
 endif
 
-call dein#add('Shougo/vimproc.vim', {'build':{'mac' : 'make -f make_mac.mak'}})
 call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/vimshell')
 call dein#add('Shougo/deoplete.nvim')
 if !has('nvim')
 	call dein#add('roxma/nvim-yarp')
 	call dein#add('roxma/vim-hug-neovim-rpc')
 endif
-let g:deoplete#enable_at_startup = 1
 
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] })
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('thinca/vim-quickrun')
 call dein#add('thinca/vim-qfreplace')
 call dein#add('tpope/vim-surround')
@@ -50,14 +52,17 @@ call dein#add('vim-scripts/Alig')
 
 call dein#end()
 
+" deopleteの設定
+let g:deoplete#enable_at_startup = 1
+
 " vimshellの設定
 let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
 
 if has('win32') || has('win64')
-	" Display user name on Windows.
+	" Display user name on Windows
 	let g:vimshell_prompt = $USERNAME."% "
 else
-	" Display user name on Linux.
+	" Display user name on Unix
 	let g:vimshell_prompt = $USER."% "
 endif
 
@@ -68,19 +73,19 @@ let g:calendar_google_task = 1
 let g:lightline = { 'colorscheme': 'wombat' }
 
 " VimFilerの設定
-" autocmd VimEnter * VimFiler -split -simple -winwidth=30 -no-quit
-
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default=0
 let g:netrw_liststyle=3
-if has("mac")
+
+" OS毎の設定
+if has('mac')
 	set encoding=utf-8
-	autocmd BufWritePost * call SetUTF8Xattr(expand("<afile>"))
+	autocmd BufWritePost * call SetUTF8Xattr(expand('<afile>'))
 
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
 	set iskeyword=@,48-57,_,128-167,224-235    
 
-elseif has("win32") || has("win64") 
+elseif has('win32') || has('win64') 
 	set encoding=cp932
 
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
@@ -90,7 +95,7 @@ elseif has("win32") || has("win64")
 endif
 
 " マウスのホィールを有効にする
-if has("mouse")
+if has('mouse')
 	set mouse=a
 endif
 
@@ -107,12 +112,13 @@ nnoremap : ;
 filetype plugin indent on
 
 " GUIで起動された場合シンタックスを有効にして検索ハイライトする
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
 	syntax on
 	set hlsearch
 endif
 
-colorscheme darcula " カラー指定
+" カラー指定
+colorscheme darcula
 
 " カーソル行をハイライト
 set cursorline
@@ -146,7 +152,7 @@ set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語�
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
-" phpコンパイル設定
+" phpの設定
 autocmd FileType php compiler php
 autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
@@ -217,8 +223,8 @@ map <F5> :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " utf出力時フラグセット
 "------------------------------------
 function! SetUTF8Xattr(file)
-	let isutf8 = &fileencoding == "utf-8" || ( &fileencoding == "" && &encoding == "utf-8")
-	if has("unix") && match(system("uname"),'Darwin') != -1 && isutf8
+	let isutf8 = &fileencoding == 'utf-8' || ( &fileencoding == '' && &encoding == 'utf-8')
+	if has('unix') && match(system('uname'),'Darwin') != -1 && isutf8
 		call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
 	endif
 endfunction
