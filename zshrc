@@ -1,31 +1,43 @@
+# Zsh-autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Zsh-completions
-fpath=(~/.zsh-completions $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -U compinit; compinit 
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                              /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
                              /usr/local/git/bin
-# Source
+
+# Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-	source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Environment
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-# TODO 下記のパスに修正
-# export ANT_HOME=/usr/local/opt/ant
-# export MAVEN_HOME=/usr/local/opt/maven
-# export GRADLE_HOME=/usr/local/opt/gradle
-# export ANDROID_HOME=/usr/local/opt/android-sdk
-# export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
-# export PATH=$ANT_HOME/bin:$PATH
-# export PATH=$MAVEN_HOME/bin:$PATH
-# export PATH=$GRADLE_HOME/bin:$PATH
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export IDEA_JDK=$JAVA_HOME
+export LANG=ja_JP.UTF-8;
+export PYENV_ROOT=$HOME/.pyenv
+export ANT_HOME=/usr/local/opt/ant
+export MAVEN_HOME=/usr/local/opt/maven
+export GRADLE_HOME=/usr/local/opt/gradle/libexec
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_NDK_HOME=/usr/local/opt/android-ndk
+export PATH=/usr/local/sbin:/usr/local/bin:$PATH
+export PATH=$HOME/.rbenv/shims:$PATH
+export PATH=$PYENV_ROOT/bin:$PATH
+export PATH=$PATH:`/usr/libexec/java_home -v 1.8`/bin
+export PATH=$ANT_HOME/bin:$PATH
+export PATH=$MAVEN_HOME/bin:$PATH
+export PATH=$GRADLE_HOME/bin:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$HOME/Library/Libs:$PATH
+export PATH=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | sort | awk 'END{print}'):$PATH
 
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$ANDROID_HOME/tools:$PATH"
-export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH="$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | sort | awk 'END{print}'):$PATH"
-export PATH="$HOME/Library/Libs:$PATH"
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
 
 # Alias
 alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
@@ -70,3 +82,4 @@ function peco-select-history() {
 bindkey -v
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
