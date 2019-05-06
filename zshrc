@@ -35,7 +35,7 @@ export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$HOME/Library/Libs:$PATH
 export PATH=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | sort | awk 'END{print}'):$PATH
 
-[[ -d ~/.rbenv  ]] && \
+[[ -d ~/.rbenv ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
   eval "$(rbenv init -)"
 

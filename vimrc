@@ -85,6 +85,9 @@ if has('mac')
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
 	set iskeyword=@,48-57,_,128-167,224-235    
 
+	" 編集箇所に移動
+	nnoremap “ g;
+	nnoremap ‘ g,
 elseif has('win32') || has('win64') 
 	set encoding=cp932
 
@@ -92,36 +95,23 @@ elseif has('win32') || has('win64')
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
 	endif
+
+	" 編集箇所に移動
+	nnoremap <A-[> g;
+	nnoremap <A-]> g,
 endif
 
-" マウスのホィールを有効にする
-if has('mouse')
-	set mouse=a
-endif
-
-" 自動的に閉じ括弧を入力
-imap {{ {}<LEFT>
-imap [[ []<LEFT>
-imap (( ()<LEFT>
-
-" コロンとセミコロンを入れ替える
-nnoremap ; :
-nnoremap : ;
+" キーマップの読み込み
+source ~/.vim/../vimrc.keymap
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
 
-" GUIで起動された場合シンタックスを有効にして検索ハイライトする
-if &t_Co > 2 || has('gui_running')
-	syntax on
-	set hlsearch
-endif
-
 " カラー指定
 colorscheme darcula
 
-" カーソル行をハイライト
-set cursorline
+" ハイライトサーチ解除
+nnoremap <ESC><ESC> :noh<CR>
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -130,22 +120,13 @@ augroup cch
 	autocmd WinEnter,BufRead * set cursorline
 augroup END
 
-set clipboard=unnamed
 set ambiwidth=double
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " エンコーディング指定
 set fileformats=unix,dos,mac " 改行コードの自動認識
-set ignorecase 		" 検索時、大文字・小文字を気にせず
-set iminsert=0
-set imsearch=-1
 set laststatus=2  	" ステータス行を表示
 set noswapfile     	" スワップファイル不要 
-set nowrap
-set number
-set shiftwidth=4
-set tabstop=4
 set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
-set whichwrap=<,>,[,]
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる 
 
 " ステータス行の指定
@@ -157,63 +138,9 @@ autocmd FileType php compiler php
 autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 
-" ヴィジュアルモードの時にバックススペースで削除
-vnoremap <BS> d
-
-" CTRL-X と SHIFT-Del でカット
-vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
-
-" CTRL-C と CTRL-Insert でコピー
-vnoremap <C-C> "+y
-vnoremap <C-Insert> "+y
-
-" CTRL-V と SHIFT-Insert でペースト
-map <C-V>		"+gP
-map <S-Insert>		"+gP
-cmap <C-V>		<C-R>+
-cmap <S-Insert>		<C-R>+
-
-" 範囲選択と貼りつけ
-exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
-exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
-imap <S-Insert>		<C-V>
-vmap <S-Insert>		<C-V>
-
-" CTRL-Q で範囲選択
-noremap <C-Q>		<C-V>
-
-" CTRL-S でセーブ
-noremap <C-S>		:update<CR>
-vnoremap <C-S>		<C-C>:update<CR>
-inoremap <C-S>		<C-O>:update<CR>
-
-" CTRL-Z でundo
-noremap <C-Z> u
-inoremap <C-Z> <C-O>u
-
-" CTRL-Y でredo
-noremap <C-Y> <C-R>
-inoremap <C-Y> <C-O><C-R>
-
-" CTRL-A で全選択
-noremap <C-A> gggH<C-O>G
-inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-A> <C-C>gggH<C-O>G
-onoremap <C-A> <C-C>gggH<C-O>G
-snoremap <C-A> <C-C>gggH<C-O>G
-xnoremap <C-A> <C-C>ggVG
-
-" CTRL-Tab でウインドウの切り替え
-noremap <C-Tab> <C-W>w
-inoremap <C-Tab> <C-O><C-W>w
-cnoremap <C-Tab> <C-C><C-W>w
-onoremap <C-Tab> <C-C><C-W>w
-
 "------------------------------------
 " open-blowser.vim
 "------------------------------------
-
 " カーソル下のURLをブラウザで開く
 map <F2> <Plug>(openbrowser-open)
 " カーソル下のキーワードをググる
@@ -223,7 +150,7 @@ map <F5> :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " utf出力時フラグセット
 "------------------------------------
 function! SetUTF8Xattr(file)
-	let isutf8 = &fileencoding == 'utf-8' || ( &fileencoding == '' && &encoding == 'utf-8')
+	let isutf8 = &fileencoding == 'utf-8' || (&fileencoding == '' && &encoding == 'utf-8')
 	if has('unix') && match(system('uname'),'Darwin') != -1 && isutf8
 		call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
 	endif
