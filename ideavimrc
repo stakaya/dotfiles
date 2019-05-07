@@ -1,4 +1,4 @@
-source vimrc.keymap
+source ~/.vimrc.keymap
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>

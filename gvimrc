@@ -7,6 +7,8 @@ set cpo&vim
 if has("mac")
 	set guifontwide=Menlo:h12
 	set guifont=Menlo\ Regular:h12
+	nnoremap <D-[> g;
+	nnoremap <D-]> g,
 elseif has("win32") || has("win64")
 	set directory=C:\WINDOWS\Temp
 	set guifont=Consolas:h12:cSHIFTJIS
