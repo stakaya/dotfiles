@@ -15,6 +15,7 @@ else
 	call dein#begin(expand('~/.vim/plugins/'))
 endif
 
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/deoplete.nvim')
 if !has('nvim')
