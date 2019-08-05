@@ -16,8 +16,6 @@ else
 endif
 
 call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-call dein#add('Shougo/vimshell')
 call dein#add('Shougo/deoplete.nvim')
 if !has('nvim')
 	call dein#add('roxma/nvim-yarp')
@@ -54,17 +52,6 @@ call dein#end()
 
 " deopleteの設定
 let g:deoplete#enable_at_startup = 1
-
-" vimshellの設定
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-
-if has('win32') || has('win64')
-	" Display user name on Windows
-	let g:vimshell_prompt = $USERNAME."% "
-else
-	" Display user name on Unix
-	let g:vimshell_prompt = $USER."% "
-endif
 
 " calendarの設定
 let g:calendar_google_calendar = 1
