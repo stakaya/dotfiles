@@ -20,6 +20,9 @@ imap {{ {}<LEFT>
 imap [[ []<LEFT>
 imap (( ()<LEFT>
 
+" 日本語キーボードで間違うので検索できるように
+nnoremap ( *
+
 " コロンとセミコロンを入れ替える
 nnoremap ; :
 nnoremap : ;
