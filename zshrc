@@ -1,6 +1,3 @@
-# Zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # Zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 autoload -U compinit; compinit 
@@ -13,7 +10,11 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+# Customize to your needs...
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Environment
+export LSCOLORS=gxfxcxdxbxGxDxabagacad
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export IDEA_JDK=$JAVA_HOME
 export LANG=ja_JP.UTF-8;
