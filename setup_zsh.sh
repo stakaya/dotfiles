@@ -9,4 +9,5 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 done
  
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+git clone git://github.com/zsh-users/zsh-completions.git
 chsh -s /bin/zsh
