@@ -20,8 +20,9 @@ imap {{ {}<LEFT>
 imap [[ []<LEFT>
 imap (( ()<LEFT>
 
-" 日本語キーボードも使うので"("で検索
+" 日本語キーボードも使うので
 nnoremap ( *
+nnoremap ! ~
 
 " コロンとセミコロンを入れ替える
 nnoremap ; :
