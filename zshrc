@@ -84,3 +84,5 @@ bindkey -v
 zle -N peco-select-history
 bindkey '^r' peco-select-history
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
