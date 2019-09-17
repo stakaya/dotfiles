@@ -147,3 +147,19 @@ function! SetUTF8Xattr(file)
 	endif
 endfunction
 
+"------------------------------------
+" fzf
+"------------------------------------
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g> :Rg<Space>
+nnoremap <leader><leader> :Commands<CR>
+nnoremap <C-p> :call FzfOmniFiles()<CR>
+
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
