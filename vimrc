@@ -152,6 +152,7 @@ endfunction
 "------------------------------------
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Rg<Space>
+" nnoremap <D-F> :Rg<Space>
 nnoremap <leader><leader> :Commands<CR>
 nnoremap <C-p> :call FzfOmniFiles()<CR>
 
