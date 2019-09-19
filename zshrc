@@ -35,6 +35,7 @@ export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$HOME/Library/Libs:$PATH
 export PATH=$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | sort | awk 'END{print}'):$PATH
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 [[ -d ~/.rbenv ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
