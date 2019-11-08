@@ -9,9 +9,9 @@ set incsearch		" do incremental searching
 set nowrap
 set number
 set ruler		    " show the cursor position all the time
-set shiftwidth=4
+set shiftwidth=2
 set showcmd		    " display incomplete commands
-set tabstop=4
+set tabstop=2
 set virtualedit=all
 set whichwrap=<,>,[,]
 
