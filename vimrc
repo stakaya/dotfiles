@@ -51,6 +51,7 @@ call dein#add('vim-scripts/Alig')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('leafgarland/typescript-vim')
+call dein#add('peitalin/vim-jsx-typescript')
 
 call dein#end()
 
