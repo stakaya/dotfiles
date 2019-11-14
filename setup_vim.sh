@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOT_FILES=(gvimrc vimrc vimrc.keymap ideavimrc xvimrc vim)
+DOT_FILES=(gvimrc vimrc vimrc.keymap ideavimrc xvimrc vim nvim)
 
 for file in ${DOT_FILES[@]}
 do
