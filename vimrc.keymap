@@ -1,4 +1,7 @@
-set clipboard=unnamed,autoselect
+if !has('nvim')
+	set clipboard=unnamed,autoselect
+endif
+
 set cursorline 		" カーソル行をハイライト
 set hlsearch 		" ハイライトサーチ
 set history=50		" keep 50 lines of command line history

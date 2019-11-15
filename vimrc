@@ -1,4 +1,6 @@
-source $VIMRUNTIME/defaults.vim
+if !has('nvim')
+	source $VIMRUNTIME/defaults.vim
+endif
 
 if has('vim_starting')
 	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
