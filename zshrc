@@ -50,6 +50,7 @@ alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xar
 alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | peco | xargs adb pull'
 alias apkcheck='jarsigner -verify -verbose -certs $1'
 alias brewupdate='brew update && brew cask update && brew upgrade && brew cleanup && brew cask cleanup'
+alias vi='nvim'
 
 # Function
 function apk2src() {
