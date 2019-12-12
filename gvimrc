@@ -1,6 +1,6 @@
 " ユーザ設定を保存
 let s:cpo_save=&cpo
-set lsp=2
+set linespace=2
 set cpo&vim
 
 " OS毎の設定

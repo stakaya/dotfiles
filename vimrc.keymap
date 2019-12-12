@@ -3,15 +3,15 @@ if !has('nvim')
 endif
 
 set cursorline 		" カーソル行をハイライト
-set hlsearch 		" ハイライトサーチ
+set hlsearch 			" ハイライトサーチ
 set history=50		" keep 50 lines of command line history
 set ignorecase 		" 検索時、大文字・小文字を気にせず
 set iminsert=0
 set imsearch=-1
-set incsearch		" do incremental searching
+set incsearch			" do incremental searching
 set nowrap
 set number
-set ruler		    " show the cursor position all the time
+set ruler		    	" show the cursor position all the time
 set shiftwidth=2
 set showcmd		    " display incomplete commands
 set tabstop=2
@@ -23,7 +23,7 @@ imap {{ {}<LEFT>
 imap [[ []<LEFT>
 imap (( ()<LEFT>
 
-" 日本語キーボードも使うので
+" 日本語キーボード互換
 nnoremap ( *
 nnoremap ! ~
 
@@ -34,25 +34,19 @@ nnoremap : ;
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
 
-" CTRL-X と SHIFT-Del でカット
+" CTRL-X でカット
 vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
 
-" CTRL-C と CTRL-Insert でコピー
+" CTRL-C でコピー
 vnoremap <C-C> "+y
-vnoremap <C-Insert> "+y
 
-" CTRL-V と SHIFT-Insert でペースト
+" CTRL-V でペースト
 map <C-V>		"+gP
-map <S-Insert>		"+gP
 cmap <C-V>		<C-R>+
-cmap <S-Insert>		<C-R>+
 
 " 範囲選択と貼りつけ
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
-imap <S-Insert>		<C-V>
-vmap <S-Insert>		<C-V>
 
 " CTRL-Q で範囲選択
 noremap <C-Q>		<C-V>
@@ -65,10 +59,6 @@ inoremap <C-S>		<C-O>:update<CR>
 " CTRL-Z でundo
 noremap <C-Z> u
 inoremap <C-Z> <C-O>u
-
-" CTRL-Y でredo
-noremap <C-Y> <C-R>
-inoremap <C-Y> <C-O><C-R>
 
 " CTRL-A で全選択
 noremap <C-A> gggH<C-O>G
