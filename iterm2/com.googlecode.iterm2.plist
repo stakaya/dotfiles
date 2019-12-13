@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdjustWindowForFontSizeChange</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -225,18 +227,34 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>2A08F8C4-3B33-4EC6-A61C-F1D730B50DB9</string>
+	<key>EnableDivisionView</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>HideTabNumber</key>
+	<true/>
+	<key>Hotkey</key>
+	<true/>
+	<key>HotkeyChar</key>
+	<integer>116</integer>
+	<key>HotkeyCode</key>
+	<integer>17</integer>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>HotkeyModifiers</key>
+	<integer>1310993</integer>
 	<key>IRMemory</key>
 	<integer>4</integer>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/dotfiles/iterm2</string>
+	<string>~/Desktop</string>
+	<key>NSNavLastUserSetHideExtensionButtonState</key>
+	<true/>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{799, 448}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -279,11 +297,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>624 510 799 448 0 0 2048 1129 </string>
+	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>529 324 570 377 0 0 2048 1129 </string>
+	<string>56 286 570 376 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>203 -29 1011 469 0 0 2048 1129 </string>
+	<string>483 137 570 377 0 0 2048 1129 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -963,19 +981,23 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2048, 1152}}</string>
 		<key>topLeft</key>
-		<string>{268, 807}</string>
+		<string>{48, 879}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>42002830-D168-4919-8D29-F0FD50586B40</string>
+	<key>NoSyncLastTipTime</key>
+	<real>597896178.02481699</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>4</integer>
+	<integer>9</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>597744729.51347494</real>
+	<real>597892676.820907</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
+	<true/>
+	<key>NoSyncPermissionToShowTip</key>
 	<true/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
@@ -1685,10 +1707,17 @@
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>597571929.513188</real>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+	</array>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>0</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1733,14 +1762,36 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-09T08:19:33Z</date>
+	<date>2019-12-13T02:16:17Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SeparateWindowTitlePerTab</key>
+	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
+	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>
 	<false/>
+	<key>StatusBarPosition</key>
+	<integer>0</integer>
+	<key>SwitchTabModifier</key>
+	<integer>9</integer>
+	<key>SwitchWindowModifier</key>
+	<integer>9</integer>
+	<key>TabStyleWithAutomaticOption</key>
+	<integer>4</integer>
+	<key>TabViewType</key>
+	<integer>0</integer>
 	<key>URLHandlersByGuid</key>
 	<dict/>
+	<key>UseLionStyleFullscreen</key>
+	<true/>
+	<key>UseVirtualKeyCodesForDetectingDigits</key>
+	<false/>
 	<key>VisualIndicatorForEsc</key>
+	<false/>
+	<key>WindowNumber</key>
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.3.7</string>
