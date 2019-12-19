@@ -14,7 +14,7 @@ fi
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Environment
-export LSCOLORS=gxfxcxdxbxGxDxabagacad
+# export LSCOLORS=gxfxcxdxbxGxDxabagacad
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export IDEA_JDK=$JAVA_HOME
 export LANG=ja_JP.UTF-8;
