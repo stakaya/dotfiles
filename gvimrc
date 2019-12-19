@@ -2,6 +2,7 @@
 let s:cpo_save=&cpo
 set linespace=2
 set cpo&vim
+set titlestring=%{''}
 
 " OS毎の設定
 if has("mac")
