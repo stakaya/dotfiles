@@ -299,7 +299,7 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>357 256 570 376 0 0 2048 1129 </string>
+	<string>887 621 570 376 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>483 137 570 377 0 0 2048 1129 </string>
 	<key>New Bookmarks</key>
@@ -986,9 +986,9 @@
 	<key>NoSyncInstallationId</key>
 	<string>42002830-D168-4919-8D29-F0FD50586B40</string>
 	<key>NoSyncLastTipTime</key>
-	<real>598152240.64592099</real>
+	<real>598240816.685395</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>12</integer>
+	<integer>13</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1712,6 +1712,7 @@
 		<string>000</string>
 		<string>0000</string>
 		<string>0001</string>
+		<string>0002</string>
 	</array>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
@@ -1763,13 +1764,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-16T01:24:01Z</date>
+	<date>2019-12-17T01:24:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SeparateWindowTitlePerTab</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>
