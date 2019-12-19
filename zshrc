@@ -42,12 +42,12 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
   eval "$(rbenv init -)"
 
 # Alias
-alias adbinstall='find ./ -name *.apk | peco | xargs adb install -r'
-alias adblogcat='pidcat `adb shell pm list package | sed -e s/package:// | peco`'
+alias adbinstall='find ./ -name *.apk | fzf | xargs adb install -r'
+alias adblogcat='pidcat `adb shell pm list package | sed -e s/package:// | fzf`'
 alias adbreset='adb kill-server; adb start-server'
 alias adbscreencap='FILE=`date +"%Y%m%d%I%m%S"`.png && adb shell screencap -p /sdcard/$FILE && adb pull /sdcard/$FILE $HOME/Desktop/$FILE && adb shell rm /sdcard/$FILE && open $HOME/Desktop/$FILE'
-alias adbuninstall='adb shell pm list package | sed -e s/package:// | peco | xargs adb uninstall'
-alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | peco | xargs adb pull'
+alias adbuninstall='adb shell pm list package | sed -e s/package:// | fzf | xargs adb uninstall'
+alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g" | fzf | xargs adb pull'
 alias apkcheck='jarsigner -verify -verbose -certs $1'
 alias brewupdate='brew update && brew cask update && brew upgrade && brew cleanup && brew cask cleanup'
 alias vi='nvim'
@@ -67,24 +67,7 @@ function apk2src() {
 	done
 }
 
-function peco-select-history() {
-	local tac
-	if which tac > /dev/null; then
-		tac="tac"
-	else
-		tac="tail -r"
-	fi
-	BUFFER=$(\history -n 1 | \
-		eval $tac | \
-		peco --query "$LBUFFER")
-	CURSOR=$#BUFFER
-	zle clear-screen
-}
-
 # Keybind
 bindkey -v
-zle -N peco-select-history
-bindkey '^r' peco-select-history
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
