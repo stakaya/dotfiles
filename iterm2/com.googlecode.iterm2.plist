@@ -4,6 +4,8 @@
 <dict>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -299,11 +301,11 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>770 82 710 726 0 0 2048 1129 </string>
+	<string>293 156 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>183 69 1606 782 0 0 2048 1129 </string>
+	<string>1055 122 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>220 273 570 376 0 0 2048 1129 </string>
+	<string>61 229 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>441 102 710 726 0 0 2048 1129 </string>
 	<key>New Bookmarks</key>
@@ -991,14 +993,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2048, 1152}}</string>
 		<key>topLeft</key>
-		<string>{142, 1065}</string>
+		<string>{699, 918}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>42002830-D168-4919-8D29-F0FD50586B40</string>
 	<key>NoSyncLastTipTime</key>
 	<real>598411308.85514402</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>14</integer>
+	<integer>16</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
