@@ -12,9 +12,9 @@ set incsearch			" do incremental searching
 set nowrap
 set number
 set ruler		    	" show the cursor position all the time
-set shiftwidth=2
+set shiftwidth=4
 set showcmd		    " display incomplete commands
-set tabstop=2
+set tabstop=4
 set virtualedit=all
 set whichwrap=<,>,[,]
 
@@ -73,6 +73,20 @@ noremap <C-Tab> <C-W>w
 inoremap <C-Tab> <C-O><C-W>w
 cnoremap <C-Tab> <C-C><C-W>w
 onoremap <C-Tab> <C-C><C-W>w
+
+" 画面分割
+noremap ss :split<Return><C-w>w
+noremap sv :vsplit<Return><C-w>w
+
+" ウインドウの移動コマンド
+map sh <C-w>h
+map sk <C-w>k
+map sj <C-w>j
+map sl <C-w>l
+
+" Tab でウインドウを移動
+noremap <S-Tab> :tabprev<Return>
+noremap <Tab> :tabnext<Return>
 
 " ファイル全体の整形
 nnoremap == gg=G

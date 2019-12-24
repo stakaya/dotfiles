@@ -55,11 +55,23 @@ call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('leafgarland/typescript-vim')
 call dein#add('peitalin/vim-jsx-typescript')
 call dein#add('andymass/vim-matchup')
+call dein#add('nathanaelkane/vim-indent-guides')
+call dein#add('vifm/vifm.vim')
 
 call dein#end()
 
+" indent_guidesの設定
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
+autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
+
 " deopleteの設定
 let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 " calendarの設定
 let g:calendar_google_calendar = 1

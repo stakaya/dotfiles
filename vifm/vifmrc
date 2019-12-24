@@ -410,6 +410,8 @@ nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 nnoremap ; :
 nnoremap : ;
+nnoremap . zo
+nnoremap .. zm
     
 
 " ------------------------------------------------------------------------------
