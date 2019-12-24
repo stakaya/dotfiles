@@ -4,6 +4,8 @@
 <dict>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -229,6 +231,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>2A08F8C4-3B33-4EC6-A61C-F1D730B50DB9</string>
+	<key>DoubleClickPerformsSmartSelection</key>
+	<true/>
 	<key>EnableDivisionView</key>
 	<false/>
 	<key>HapticFeedbackForEsc</key>
@@ -301,11 +305,11 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>293 156 710 726 0 0 2048 1129 </string>
+	<string>616 293 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1055 122 710 726 0 0 2048 1129 </string>
+	<string>861 59 1172 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>61 229 710 726 0 0 2048 1129 </string>
+	<string>60 118 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>441 102 710 726 0 0 2048 1129 </string>
 	<key>New Bookmarks</key>
@@ -998,9 +1002,9 @@
 	<key>NoSyncInstallationId</key>
 	<string>42002830-D168-4919-8D29-F0FD50586B40</string>
 	<key>NoSyncLastTipTime</key>
-	<real>598411308.85514402</real>
+	<real>598756603.96199298</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>16</integer>
+	<integer>18</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1719,13 +1723,17 @@
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>597571929.513188</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
+		<string>0003</string>
 		<string>0001</string>
 		<string>000</string>
+		<string>0004</string>
 		<string>0002</string>
 		<string>0000</string>
-		<string>0003</string>
+		<string>0005</string>
 	</array>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
@@ -1777,7 +1785,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-12-19T01:21:48Z</date>
+	<date>2019-12-23T01:16:43Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SeparateWindowTitlePerTab</key>
@@ -1808,6 +1816,8 @@
 	<false/>
 	<key>WindowNumber</key>
 	<false/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.3.7</string>
 </dict>
