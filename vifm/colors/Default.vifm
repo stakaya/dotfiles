@@ -1,14 +1,14 @@
 highlight clear
 
 highlight Border			cterm=none	ctermfg=235	ctermbg=235
-highlight TopLine			cterm=none	ctermfg=208	ctermbg=235
-highlight TopLineSel	cterm=none	ctermfg=220	ctermbg=235
+highlight TopLine			cterm=none	ctermfg=247	ctermbg=235
+highlight TopLineSel	cterm=none	ctermfg=208	ctermbg=235
 
 highlight Win					cterm=none	ctermfg=188	ctermbg=235
-highlight Directory 	cterm=none 	ctermfg=68 	ctermbg=none
+highlight Directory 	cterm=none 	ctermfg=75 	ctermbg=none
 highlight CurrLine 		cterm=none 	ctermfg=none ctermbg=236
 highlight OtherLine		cterm=none	ctermfg=247	ctermbg=235
-highlight Selected		cterm=none	ctermfg=226	ctermbg=238
+highlight Selected		cterm=bold	ctermfg=226	ctermbg=238
 
 highlight JobLine			cterm=bold	ctermfg=226	ctermbg=238
 highlight StatusLine	cterm=none	ctermfg=231	ctermbg=238
