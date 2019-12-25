@@ -69,24 +69,25 @@ snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
 " CTRL-Tab でウインドウの切り替え
-noremap <C-Tab> <C-W>w
-inoremap <C-Tab> <C-O><C-W>w
-cnoremap <C-Tab> <C-C><C-W>w
-onoremap <C-Tab> <C-C><C-W>w
+noremap <Tab> <C-W>w
+inoremap <Tab> <C-O><C-W>w
+cnoremap <Tab> <C-C><C-W>w
+onoremap <Tab> <C-C><C-W>w
 
 " 画面分割
-noremap ss :split<Return><C-w>w
-noremap sv :vsplit<Return><C-w>w
+noremap _ :split<Return><C-w>w
+noremap <Bar> :vsplit<Return><C-w>w
 
 " ウインドウの移動コマンド
-map sh <C-w>h
-map sk <C-w>k
-map sj <C-w>j
-map sl <C-w>l
+map th <C-w>h
+map tk <C-w>k
+map tj <C-w>j
+map tl <C-w>l
+noremap tt :bnext<Return>
 
 " Tab でウインドウを移動
-noremap <S-Tab> :tabprev<Return>
-noremap <Tab> :tabnext<Return>
+noremap <C-S-Tab> :tabprev<Return>
+noremap <C-Tab> :tabnext<Return>
 
 " ファイル全体の整形
 nnoremap == gg=G
