@@ -128,6 +128,7 @@ augroup cch
 augroup END
 
 set noshowmode
+set nofoldenable 	" 折りたたみしない
 set ambiwidth=double
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " エンコーディング指定
 set fileformats=unix,dos,mac " 改行コードの自動認識

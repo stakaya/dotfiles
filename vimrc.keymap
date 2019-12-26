@@ -81,7 +81,10 @@ map th <C-w>h
 map tk <C-w>k
 map tj <C-w>j
 map tl <C-w>l
+
 noremap tt :bnext<Return>
+noremap tT :bprev<Return>
+noremap tn :tabnew<Return>
 
 " ファイル全体の整形
 nnoremap == gg=G
