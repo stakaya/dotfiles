@@ -136,8 +136,6 @@ set noswapfile     	" スワップファイル不要
 set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
-set mouse=a
-set ttymouse=xterm2
 
 " ステータス行の指定
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}

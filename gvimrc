@@ -15,6 +15,10 @@ elseif has("win32") || has("win64")
 	set guifont=Consolas:h12:cSHIFTJIS
 endif
 
+" CTRL-Tab でタブを移動
+noremap <C-S-Tab> :tabprev<Return>
+noremap <C-Tab> :tabnext<Return>
+
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
 " 自動的にクリップボードに入るのを抑止する
 if !has('unix')

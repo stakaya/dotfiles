@@ -414,7 +414,7 @@ nnoremap : ;
 nnoremap . zo
 nnoremap .. zm
 
-" noremap <Tab> <C-W>w
+nnoremap <Tab> <C-W>w
 " ------------------------------------------------------------------------------
     
 

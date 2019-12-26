@@ -68,10 +68,8 @@ onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
-" CTRL-Tab でウインドウの切り替え
+" Tab でウインドウの切り替え
 noremap <Tab> <C-W>w
-inoremap <Tab> <C-O><C-W>w
-cnoremap <Tab> <C-C><C-W>w
 onoremap <Tab> <C-C><C-W>w
 
 " 画面分割
@@ -84,10 +82,6 @@ map tk <C-w>k
 map tj <C-w>j
 map tl <C-w>l
 noremap tt :bnext<Return>
-
-" Tab でウインドウを移動
-noremap <C-S-Tab> :tabprev<Return>
-noremap <C-Tab> :tabnext<Return>
 
 " ファイル全体の整形
 nnoremap == gg=G
