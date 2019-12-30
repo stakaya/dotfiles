@@ -11,7 +11,7 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
-set vicmd=vim
+" set vicmd=vim
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -70,7 +70,6 @@ colorscheme Default
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
 
-set timefmt=%m/%d\ %H:%M
 " set timefmt=" %Y/%m/%d %H:%M:%S"
 
 " Show list of matches on tab completion in command-line mode
@@ -110,7 +109,6 @@ set slowfs=curlftpfs
 " Set custom status line look
 
 "set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
-set statusline="  %t  %= %A %10u:%-7g %15s %20d "
 
 
 " ------------------------------------------------------------------------------
@@ -289,20 +287,6 @@ fileviewer *.doc antiword -
 fileviewer *.docx docx2txt.pl %f -
 
 
-" file types
-set classify='📁 :dir:/,💡 :exe:,📄 :reg:,🔗 :link:'
-" various file names
-set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📄 ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
-" archives
-set classify+='📚 ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
-" images
-set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
-" audio
-set classify+='📢 ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
-" media
-set classify+='🎞 ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
-" office files
-set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
 
 " Syntax highlighting in preview
 "
@@ -345,8 +329,6 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " Customize view columns a bit (enable ellipsis for truncated file names)
 "
 " set viewcolumns=-{name}..,6{}.
-set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
-set sizefmt=units:iec,precision:3
 
 " Filter-out build and temporary files
 "
@@ -408,13 +390,37 @@ nnoremap <f5> :copy<cr>
 nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
+
 " ------------------------------------------------------------------------------
+" My Customize
 nnoremap ; :
 nnoremap : ;
 nnoremap . zo
 nnoremap .. zm
 
 nnoremap <Tab> <C-W>w
+
+set vicmd=nvim
+
+set statusline="  %t  %= %A %10u:%-7g %15s %20d "
+set timefmt=%m/%d\ %H:%M
+set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
+set sizefmt=units:iec,precision:3
+
+" file types
+set classify='📁 :dir:/,💡 :exe:,📄 :reg:,🔗 :link:'
+" various file names
+set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📄 ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
+" archives
+set classify+='📚 ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
+" images
+set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+" audio
+set classify+='📢 ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+" media
+set classify+='🎞 ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
+" office files
+set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
 " ------------------------------------------------------------------------------
     
 
