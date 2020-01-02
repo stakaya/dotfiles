@@ -151,9 +151,9 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " open-blowser.vim
 "------------------------------------
 " カーソル下のURLをブラウザで開く
-map <F2> <Plug>(openbrowser-open)
-" カーソル下のキーワードをググる
-map <F5> :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+map <C-b> <Plug>(openbrowser-open)
+" 選択中のキーワードをググる
+vnoremap <C-b> :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
 "------------------------------------
 " utf出力時フラグセット
@@ -168,9 +168,7 @@ endfunction
 "------------------------------------
 " fzf
 "------------------------------------
-nnoremap <C-b> :Buffers<CR>
 nnoremap <C-g> :Rg<Space>
-" nnoremap <D-F> :Rg<Space>
 nnoremap <leader><leader> :Commands<CR>
 nnoremap <C-p> :call FzfOmniFiles()<CR>
 
@@ -182,3 +180,11 @@ fun! FzfOmniFiles()
     :GitFiles
   endif
 endfun
+
+"------------------------------------
+" tcomment_vim
+"------------------------------------
+nnoremap <D-/> :TComment<CR>
+vnoremap <D-/> :TComment<CR>
+nnoremap ÷  :TComment<CR>
+vnoremap ÷  :TComment<CR>
