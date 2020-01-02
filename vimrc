@@ -118,7 +118,7 @@ filetype plugin indent on
 colorscheme darcula
 
 " ハイライトサーチ解除
-nnoremap <ESC><ESC> :noh<CR>
+nnoremap <silent> <ESC><ESC> :noh<CR>
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -146,6 +146,9 @@ set statusline+=%=%l:%c
 autocmd FileType php compiler php
 autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+
+" 文字置換 
+nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 "------------------------------------
 " open-blowser.vim
