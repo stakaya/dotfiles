@@ -3,3 +3,6 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 
+nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
+
+
