@@ -151,7 +151,7 @@ set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
 " spaceをLeaderに割当
-let mapleader = '\<Space>'
+let mapleader = "\<Space>"
 
 " phpの設定
 autocmd FileType php compiler php
