@@ -138,11 +138,10 @@ set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
 
-
 " vimgrepをripgrepに入れ替える 
-if executable("rg")
-    set grepprg=rg\ --vimgrep\ --no-heading
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
+if executable('rg')
+	set grepprg=rg\ --vimgrep\ --no-heading
+	set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " ステータス行の指定
@@ -150,7 +149,7 @@ set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
 " spaceをLeaderに割当
-let mapleader = "\<Space>"
+let mapleader = '\<Space>'
 
 " phpの設定
 autocmd FileType php compiler php
@@ -161,7 +160,15 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
-nnoremap <C-g> "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// ** \|cw<CR>
+nnoremap <C-g> "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
+
+"------------------------------------
+" tcomment_vim
+"------------------------------------
+nnoremap <D-/> :TComment<CR>
+vnoremap <D-/> :TComment<CR>
+nnoremap ÷  :TComment<CR>
+vnoremap ÷  :TComment<CR>
 
 "------------------------------------
 " open-blowser.vim
@@ -189,19 +196,11 @@ nnoremap <leader><leader> :call FzfOmniFiles()<CR>
 nnoremap <leader>r :Commands<CR>
 
 fun! FzfOmniFiles()
-  let is_git = system('git status')
-  if v:shell_error
-    :Files
-  else
-    :GitFiles
-  endif
+	let is_git = system('git status')
+	if v:shell_error
+		:Files
+	else
+		:GitFiles
+	endif
 endfun
-
-"------------------------------------
-" tcomment_vim
-"------------------------------------
-nnoremap <D-/> :TComment<CR>
-vnoremap <D-/> :TComment<CR>
-nnoremap ÷  :TComment<CR>
-vnoremap ÷  :TComment<CR>
 
