@@ -1,2 +1,8 @@
-vim/
+vim
 .DS_Store
+
+# IDEA
+.idea/*
+*.iws
+*.iml
+*.ipr
