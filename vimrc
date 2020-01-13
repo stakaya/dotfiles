@@ -162,7 +162,13 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
-nnoremap <C-g> "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
+nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
+
+" インサート時のカーソル移動
+imap ˙  <Left>
+imap ∆ <Down>
+imap ˚  <Up>
+imap ¬ <Right>
 
 "------------------------------------
 " tcomment_vim
