@@ -4,5 +4,11 @@ nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 
 nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
+nnoremap <Space>r :action RunAnything<CR>
 
+" インサート時のカーソル移動
+inoremap <A-j> <Down>
+inoremap <A-h> <Left>
+inoremap <A-k> <Up>
+inoremap <A-l> <Right>
 

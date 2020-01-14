@@ -51,3 +51,5 @@ augroup InsModeAu
     autocmd InsertLeave,CmdwinLeave * set imdisable
 augroup END
 
+" IME OFF 
+inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>

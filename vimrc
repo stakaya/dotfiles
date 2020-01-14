@@ -95,8 +95,16 @@ if has('mac')
 	set iskeyword=@,48-57,_,128-167,224-235    
 
 	" 編集箇所に移動
+	" <A-[> <A-]> 
 	nnoremap “ g;
 	nnoremap ‘ g,
+
+	" インサート時のカーソル移動
+    " <A-j> <A-k> <A-h> <A-l> 
+	imap ˙  <Left>
+	imap ∆ <Down>
+	imap ˚  <Up>
+	imap ¬ <Right>
 elseif has('win32') || has('win64') 
 	set encoding=cp932
 
@@ -163,12 +171,6 @@ nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g
 
 " キーワードをgrep
 nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
-
-" インサート時のカーソル移動
-imap ˙  <Left>
-imap ∆ <Down>
-imap ˚  <Up>
-imap ¬ <Right>
 
 "------------------------------------
 " tcomment_vim

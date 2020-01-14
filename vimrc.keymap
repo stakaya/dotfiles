@@ -3,15 +3,15 @@ if !has('nvim')
 endif
 
 set cursorline 		" カーソル行をハイライト
-set hlsearch 			" ハイライトサーチ
+set hlsearch 		" ハイライトサーチ
 set history=50		" keep 50 lines of command line history
 set ignorecase 		" 検索時、大文字・小文字を気にせず
 set iminsert=0
 set imsearch=-1
-set incsearch			" do incremental searching
+set incsearch		" do incremental searching
 set nowrap
 set number
-set ruler		    	" show the cursor position all the time
+set ruler		    " show the cursor position all the time
 set shiftwidth=4
 set showcmd		    " display incomplete commands
 set tabstop=4
@@ -49,12 +49,12 @@ exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 
 " CTRL-Q で範囲選択
-noremap <C-Q>		<C-V>
+noremap <C-Q> <C-V>
 
 " CTRL-S でセーブ
-noremap <C-S>		:update<CR>
-vnoremap <C-S>		<C-C>:update<CR>
-inoremap <C-S>		<C-O>:update<CR>
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
 
 " CTRL-Z でundo
 noremap <C-Z> u
@@ -88,3 +88,4 @@ noremap tn :tabnew<Return>
 
 " ファイル全体の整形
 nnoremap == gg=G
+
