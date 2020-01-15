@@ -100,7 +100,7 @@ if has('mac')
 	nnoremap ‘ g,
 
 	" インサート時のカーソル移動
-    " <A-j> <A-k> <A-h> <A-l> 
+	" <A-j> <A-k> <A-h> <A-l> 
 	imap ˙  <Left>
 	imap ∆ <Down>
 	imap ˚  <Up>
