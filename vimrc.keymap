@@ -26,6 +26,7 @@ imap (( ()<LEFT>
 " 日本語キーボード互換
 nnoremap ( *
 nnoremap ! ~
+nnoremap & ^
 
 " コロンとセミコロンを入れ替える
 nnoremap ; :
