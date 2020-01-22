@@ -166,8 +166,12 @@ autocmd FileType php compiler php
 autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 
-" 文字置換 
+" 文字検索   
+vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
+
+" 文字置換   
 nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
+" vnoremap <C-f> "vyiw:let @/ = @z <CR>:set hlsearch<CR>:'<,'>s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
 nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
