@@ -79,7 +79,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
-let g:lightline = { 'colorscheme': 'seoul256' }
+let g:lightline = { 'colorscheme': 'wombat' }
 
 " VimFilerの設定
 let g:vimfiler_as_default_explorer = 1
