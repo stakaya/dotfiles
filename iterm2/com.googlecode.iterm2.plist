@@ -10,6 +10,8 @@
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -304,10 +306,12 @@
 	</dict>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>850 711 347 181 0 0 2048 1129 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>714 552 620 392 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>178 170 1179 858 0 0 2048 1129 </string>
+	<string>145 282 710 826 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>72 64 773 842 0 0 2048 1129 </string>
+	<string>40 128 710 826 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>224 103 710 726 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -985,6 +989,7 @@
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.7</string>
+		<string>3.3.8</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
@@ -1010,7 +1015,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>598756603.96199298</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>24</integer>
+	<integer>44</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1727,10 +1732,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>NoSyncSearchHistory2</key>
-	<array>
-		<string>System</string>
-	</array>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>597571929.513188</real>
 	<key>NoSyncTipsDisabled</key>
@@ -1795,8 +1796,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-01-06T01:13:13Z</date>
+	<date>2020-02-03T01:26:34Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SeparateWindowTitlePerTab</key>
 	<false/>
@@ -1829,6 +1832,6 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.7</string>
+	<string>3.3.8</string>
 </dict>
 </plist>
