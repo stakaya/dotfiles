@@ -19,6 +19,7 @@ endif
 noremap <C-S-Tab> :tabprev<Return>
 noremap <C-Tab> :tabnext<Return>
 
+
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
 " 自動的にクリップボードに入るのを抑止する
 if !has('unix')
@@ -28,11 +29,14 @@ endif
 " ラベル設定
 set guitablabel=%M%t        
 
-" アイコン非表示
+" メニュー・スクロールバー非表示
 set guioptions-=T
-
-" メニュー非表示
 set guioptions-=m
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
+set guioptions-=b
 
 " ユーザ設定を復元
 let &cpo = s:cpo_save
