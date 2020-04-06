@@ -8,12 +8,14 @@ if has('vim_starting')
 	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
 	set runtimepath+=~/.vim/plugins/dein.vim/
-	set runtimepath+=$VIM\vim81\plugins\dein.vim
+	set runtimepath+=vimfiles\plugins\dein.vim
 endif
 
 if has('win32') || has('win64')
-	call dein#begin(expand('$VIM\vim81\plugins'))
+	source _vimrc.keymap
+	call dein#begin(expand('vimfiles\plugins'))
 else 
+	source ~/.vim/../vimrc.keymap
 	call dein#begin(expand('~/.vim/plugins/'))
 endif
 
@@ -118,8 +120,6 @@ elseif has('win32') || has('win64')
 	nnoremap <A-]> g,
 endif
 
-" キーマップの読み込み
-source ~/.vim/../vimrc.keymap
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
