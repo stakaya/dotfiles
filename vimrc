@@ -8,12 +8,12 @@ if has('vim_starting')
 	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
 	set runtimepath+=~/.vim/plugins/dein.vim/
-	set runtimepath+=vimfiles\plugins\dein.vim
+	set runtimepath+=$HOME\vimfiles\plugins\dein.vim
 endif
 
 if has('win32') || has('win64')
-	source _vimrc.keymap
-	call dein#begin(expand('vimfiles\plugins'))
+	source $HOME\_vimrc.keymap
+	call dein#begin(expand($HOME . '\vimfiles\plugins'))
 else 
 	source ~/.vim/../vimrc.keymap
 	call dein#begin(expand('~/.vim/plugins/'))
