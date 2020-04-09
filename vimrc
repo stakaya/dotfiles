@@ -1,5 +1,8 @@
 if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
+	if has('win32') || has('win64')
+		set pythonthreedll=$LOCALAPPDATA\Programs\Python\Python38\python38.dll
+	endif
 endif
 
 if has('vim_starting')
@@ -13,7 +16,7 @@ endif
 
 if has('win32') || has('win64')
 	source $HOME\_vimrc.keymap
-	call dein#begin(expand($HOME . '\vimfiles\plugins'))
+	call dein#begin(expand($HOME.'\vimfiles\plugins'))
 else 
 	source ~/.vim/../vimrc.keymap
 	call dein#begin(expand('~/.vim/plugins/'))
@@ -21,12 +24,6 @@ endif
 
 call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/deoplete.nvim')
-if !has('nvim')
-	call dein#add('roxma/nvim-yarp')
-	call dein#add('roxma/vim-hug-neovim-rpc')
-endif
-
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] })
 call dein#add('thinca/vim-quickrun')
@@ -72,25 +69,20 @@ let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
 autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
 
-" deopleteの設定
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-
 " calendarの設定
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 
+" lightlineの設定
 let g:lightline = { 'colorscheme': 'wombat' }
 
 " VimFilerの設定
 let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default=0
-let g:netrw_liststyle=3
+let g:vimfiler_safe_mode_by_default = 0
+let g:netrw_liststyle = 3
 
 " OS毎の設定
 if has('mac')
-	set encoding=utf-8
 	autocmd BufWritePost * call SetUTF8Xattr(expand('<afile>'))
 
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
@@ -108,8 +100,6 @@ if has('mac')
 	imap ˚  <Up>
 	imap ¬ <Right>
 elseif has('win32') || has('win64') 
-	set encoding=cp932
-
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
@@ -119,7 +109,6 @@ elseif has('win32') || has('win64')
 	nnoremap <A-[> g;
 	nnoremap <A-]> g,
 endif
-
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
@@ -147,6 +136,7 @@ set noswapfile     	" スワップファイル不要
 set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
+set encoding=utf-8
 
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
@@ -170,8 +160,7 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
 
 " 文字置換   
-nnoremap <C-f> "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
-" vnoremap <C-f> "vyiw:let @/ = @z <CR>:set hlsearch<CR>:'<,'>s/<C-r>///g<Left><Left>
+nnoremap <leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
 nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
@@ -179,18 +168,18 @@ nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|c
 "------------------------------------
 " tcomment_vim
 "------------------------------------
+nnoremap <leader>/ :TComment<CR>
+vnoremap <leader>/ :TComment<CR>
 nnoremap <D-/> :TComment<CR>
 vnoremap <D-/> :TComment<CR>
-nnoremap ÷  :TComment<CR>
-vnoremap ÷  :TComment<CR>
 
 "------------------------------------
 " open-blowser.vim
 "------------------------------------
 " カーソル下のURLをブラウザで開く
-map <C-b> <Plug>(openbrowser-open)
+map <leader>b <Plug>(openbrowser-open)
 " 選択中のキーワードをググる
-vnoremap <C-b> :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+vnoremap <leader>b :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
 "------------------------------------
 " utf出力時フラグセット
@@ -205,7 +194,6 @@ endfunction
 "------------------------------------
 " fzf
 "------------------------------------
-" nnoremap <C-g> :Rg<Space>
 nnoremap <leader><leader> :call FzfOmniFiles()<CR>
 nnoremap <leader>r :Commands<CR>
 

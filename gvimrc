@@ -12,8 +12,10 @@ if has("mac")
 	nnoremap <D-]> g,
 elseif has("win32") || has("win64")
 	set directory=C:\WINDOWS\Temp
-	set guifontwide=Consolas:h12
-	set guifont=Consolas:h12:cSHIFTJIS
+	set renderoptions=type:directx
+	set ambiwidth=double
+	set guifont=Consolas:h12
+	set guifontwide=UD_デジタル_教科書体_N-R:h12
 endif
 
 " CTRL-Tab でタブを移動
@@ -23,7 +25,7 @@ noremap <C-Tab> :tabnext<Return>
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
 " 自動的にクリップボードに入るのを抑止する
 if !has('unix')
-  set guioptions-=a
+	set guioptions-=a
 endif
 
 " ラベル設定
@@ -44,15 +46,15 @@ unlet s:cpo_save
 
 " IME状態に応じたカーソル色を設定(for Windows)
 if has('multi_byte_ime')
-  highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold
-  highlight CursorIM guifg=NONE guibg=#ecbcbc
+	highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold
+	highlight CursorIM guifg=NONE guibg=#ecbcbc
 endif
 
 " インサートモードから抜ける時、IMEをOFFにする
 augroup InsModeAu
-    autocmd!
-    autocmd InsertEnter,CmdwinEnter * set noimdisable
-    autocmd InsertLeave,CmdwinLeave * set imdisable
+	autocmd!
+	autocmd InsertEnter,CmdwinEnter * set noimdisable
+	autocmd InsertLeave,CmdwinLeave * set imdisable
 augroup END
 
 " IME OFF 

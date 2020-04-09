@@ -13,4 +13,8 @@ if not exist "%LOCALAPPDATA%\nvim" (
 	mklink /D "%LOCALAPPDATA%\nvim" "%DOTFILES%\nvim" 
 )
 
+if not exist "%USERPROFILE%\vimfiles\dict" (
+	mklink /D "%USERPROFILE%\vimfiles\dict" "%DOTFILES%\vim\dict"
+)
+
 @pause
