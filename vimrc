@@ -86,7 +86,7 @@ if has('mac')
 	autocmd BufWritePost * call SetUTF8Xattr(expand('<afile>'))
 
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
-	set iskeyword=@,48-57,_,128-167,224-235    
+	set iskeyword = @,48-57,_,128-167,224-235    
 
 	" 編集箇所に移動
 	" <A-[> <A-]> 
@@ -109,6 +109,10 @@ elseif has('win32') || has('win64')
 	nnoremap <A-[> g;
 	nnoremap <A-]> g,
 endif
+
+" completeoptの設定
+inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
@@ -160,7 +164,7 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
 
 " 文字置換   
-nnoremap <leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
+nnoremap <leader>r "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
 nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
@@ -195,7 +199,7 @@ endfunction
 " fzf
 "------------------------------------
 nnoremap <leader><leader> :call FzfOmniFiles()<CR>
-nnoremap <leader>r :Commands<CR>
+nnoremap <leader>; :Commands<CR>
 
 fun! FzfOmniFiles()
 	let is_git = system('git status')
