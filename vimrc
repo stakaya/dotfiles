@@ -62,31 +62,31 @@ call dein#add('vifm/vifm.vim')
 call dein#end()
 
 " indent_guidesの設定
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
 autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
 
 " calendarの設定
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
+let g:calendar_google_calendar=1
+let g:calendar_google_task=1
 
 " lightlineの設定
 let g:lightline = { 'colorscheme': 'wombat' }
 
 " VimFilerの設定
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-let g:netrw_liststyle = 3
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_safe_mode_by_default=0
+let g:netrw_liststyle=3
 
 " OS毎の設定
 if has('mac')
 	autocmd BufWritePost * call SetUTF8Xattr(expand('<afile>'))
 
 	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
-	set iskeyword = @,48-57,_,128-167,224-235    
+	set iskeyword=@,48-57,_,128-167,224-235    
 
 	" 編集箇所に移動
 	" <A-[> <A-]> 

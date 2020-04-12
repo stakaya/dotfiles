@@ -12,4 +12,6 @@ inoremap <A-j> <Down>
 inoremap <A-h> <Left>
 inoremap <A-k> <Up>
 inoremap <A-l> <Right>
+" inoremap <A-r> :action $Redo
+" inoremap <A-u> :action $Undo
 
