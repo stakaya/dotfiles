@@ -12,7 +12,11 @@ done
 
 CONFIG_FILES=(nvim vifm)
 
-for file in ${DOT_FILES[@]}
+if [ ! -e ~/.config ]; then
+	mkdir -p ~/.config
+fi
+
+for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
 		echo "~/$file"
