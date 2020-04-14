@@ -3,9 +3,11 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 nnoremap <Space><Space> :action SearchEverywhere<CR>
-nnoremap <Space>r :action RunAnything<CR>
+nnoremap <Space>; :action RunAnything<CR>
 nnoremap gcc :action CommentByLineComment<CR>
 vnoremap gcc :action CommentByLineComment<CR>
+nnoremap <Space>/ :action CommentByLineComment<CR>
+vnoremap <Space>/ :action CommentByLineComment<CR>
 
 " インサート時のカーソル移動
 inoremap <A-j> <Down>
