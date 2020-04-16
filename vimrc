@@ -1,8 +1,5 @@
 if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
-	if has('win32') || has('win64')
-		set pythonthreedll=$LOCALAPPDATA\Programs\Python\Python38\python38.dll
-	endif
 endif
 
 if has('vim_starting')
@@ -121,7 +118,7 @@ filetype plugin indent on
 colorscheme darcula
 
 " ハイライトサーチ解除
-nnoremap <silent> <ESC><ESC> :noh<CR>
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -141,7 +138,8 @@ set vb t_vb=     	" ビープ音を鳴らさない
 set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
 set encoding=utf-8
-
+set splitbelow  " 新規ウインドウを下に表示
+                                   
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ --no-heading
@@ -160,6 +158,15 @@ autocmd FileType php compiler php
 autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 
+" カレントディレクトリを移動
+autocmd BufEnter * execute ':lcd ' . expand('%:p:h') 
+
+" ターミナル
+noremap <leader>t :terminal<CR>
+
+" エクスプローラ
+nnoremap <leader>e :VimFilerExplorer<CR> 
+
 " 文字検索   
 vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
 
@@ -167,7 +174,21 @@ vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><C
 nnoremap <leader>r "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " キーワードをgrep
-nnoremap <leader>g "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// * \|cw<CR>
+nnoremap <leader>f "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+
+"------------------------------------
+" キーワードをgrep
+"------------------------------------
+nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
+
+function! GrepGitFiles(keyword)
+	let is_git = system('git status')
+	if v:shell_error
+		execute ':vimgrep /' . a:keyword . '/ ** | cw'
+	else
+		execute ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
+	endif
+endfunction
 
 "------------------------------------
 " tcomment_vim
@@ -182,6 +203,7 @@ vnoremap <D-/> :TComment<CR>
 "------------------------------------
 " カーソル下のURLをブラウザで開く
 map <leader>b <Plug>(openbrowser-open)
+
 " 選択中のキーワードをググる
 vnoremap <leader>b :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 
@@ -196,17 +218,17 @@ function! SetUTF8Xattr(file)
 endfunction
 
 "------------------------------------
-" fzf
+" fzf ファイル検索
 "------------------------------------
 nnoremap <leader><leader> :call FzfOmniFiles()<CR>
 nnoremap <leader>; :Commands<CR>
 
-fun! FzfOmniFiles()
+function! FzfOmniFiles()
 	let is_git = system('git status')
 	if v:shell_error
 		:Files
 	else
 		:GitFiles
 	endif
-endfun
+endfunction
 
