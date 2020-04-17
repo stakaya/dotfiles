@@ -6,7 +6,6 @@ if has('vim_starting')
 	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
 	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
 	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
-
 	set runtimepath+=~/.vim/plugins/dein.vim/
 	set runtimepath+=$HOME\vimfiles\plugins\dein.vim
 endif
@@ -168,13 +167,19 @@ noremap <leader>t :terminal<CR>
 nnoremap <leader>e :VimFilerExplorer<CR> 
 
 " 文字検索   
-vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v,'\/'),"\n",'\\n','g')<CR><CR>
+vnoremap <silent> * "zy/\V<C-r>=substitute(escape(@z,'\/'),"\n",'\\n','g')<CR><CR>
 
 " 文字置換   
-nnoremap <leader>r "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
+nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
+vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>=substitute(escape(@z,'\/'),"\n",'\\n','g')<CR>//g<Left><Left>
 
-" キーワードをgrep
-nnoremap <leader>f "zyiw:let @/ = @z<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+" TODO grepして置換
+
+" 合計値を計算
+vnoremap <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
+
+" grepコマンド
+nnoremap <leader>f "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
 "------------------------------------
 " キーワードをgrep
@@ -218,10 +223,13 @@ function! SetUTF8Xattr(file)
 endfunction
 
 "------------------------------------
-" fzf ファイル検索
+" fzf
 "------------------------------------
-nnoremap <leader><leader> :call FzfOmniFiles()<CR>
+" コマンド検索
 nnoremap <leader>; :Commands<CR>
+
+" ファイル検索
+nnoremap <leader><leader> :call FzfOmniFiles()<CR>
 
 function! FzfOmniFiles()
 	let is_git = system('git status')
