@@ -4,19 +4,19 @@ endif
 
 set cursorline 		" カーソル行をハイライト
 set hlsearch 		" ハイライトサーチ
-set history=50		" keep 50 lines of command line history
+set history=50		" 履歴の保持数
 set ignorecase 		" 検索時、大文字・小文字を気にせず
-set iminsert=0
+set iminsert=0      " IMEをデフォルトオフ
 set imsearch=-1
-set incsearch		" do incremental searching
-set nowrap
-set number
-set ruler		    " show the cursor position all the time
-set shiftwidth=4
-set showcmd		    " display incomplete commands
+set incsearch		" インクリメンタルサーチ
+set nowrap          " ワープしない
+set number          " 行番号表示
+set ruler		    " カーソル行を常に表示
+set showcmd		    " コマンドの候補を表示
+set virtualedit=all " カーソル位置を自由に設定する
+set mouse=a			" マウスを使う
+set shiftwidth=4                       
 set tabstop=4
-set virtualedit=all
-set whichwrap=<,>,[,]
 
 " 自動的に閉じ括弧を入力
 imap {{ {}<LEFT>
@@ -72,13 +72,13 @@ onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
-" Tab でウインドウの切り替え
-noremap <Tab> <C-W>w
-onoremap <Tab> <C-C><C-W>w
-
 " 画面分割
 noremap _ :split<Return><C-w>w
 noremap <Bar> :vsplit<Return><C-w>w
+
+" Tab でウインドウの切り替え
+noremap <Tab> <C-W>w
+onoremap <Tab> <C-C><C-W>w
 
 " ウインドウの移動コマンド
 map th <C-w>h
@@ -86,9 +86,12 @@ map tk <C-w>k
 map tj <C-w>j
 map tl <C-w>l
 
-noremap tt :bnext<Return>
-noremap tT :bprev<Return>
-noremap tn :tabnew<Return>
+noremap tb :bnext<CR>
+noremap tB :bprev<CR>
+noremap tt :tabnext<CR>
+noremap tT :tabprevious<CR>
+noremap tn :tabnew<CR>
+noremap tc :tabclose<CR>
 
 " ファイル全体の整形
 nnoremap == gg=G

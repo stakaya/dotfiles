@@ -19,8 +19,8 @@ elseif has("win32") || has("win64")
 endif
 
 " CTRL-Tab でタブを移動
-noremap <C-S-Tab> :tabprev<Return>
-noremap <C-Tab> :tabnext<Return>
+noremap <C-S-Tab> :tabprev<CR>
+noremap <C-Tab> :tabnext<CR>
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
 " 自動的にクリップボードに入るのを抑止する
@@ -45,7 +45,7 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " IME状態に応じたカーソル色を設定(for Windows)
-if has('multi_byte_ime')
+if has('xim') || has('multi_byte_ime')
 	highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold
 	highlight CursorIM guifg=NONE guibg=#ecbcbc
 endif
@@ -56,6 +56,3 @@ augroup InsModeAu
 	autocmd InsertEnter,CmdwinEnter * set noimdisable
 	autocmd InsertLeave,CmdwinLeave * set imdisable
 augroup END
-
-" IME OFF 
-inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
