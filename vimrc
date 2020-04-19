@@ -6,8 +6,12 @@ if has('vim_starting')
 	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
 	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
 	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
-	set runtimepath+=~/.vim/plugins/dein.vim/
-	set runtimepath+=$HOME\vimfiles\plugins\dein.vim
+
+	if has('win32') || has('win64')
+		set runtimepath+=$HOME\vimfiles\plugins\dein.vim
+	else 
+		set runtimepath+=~/.vim/plugins/dein.vim/
+	endif
 endif
 
 if has('win32') || has('win64')
@@ -91,10 +95,10 @@ if has('mac')
 
 	" インサート時のカーソル移動
 	" <A-j> <A-k> <A-h> <A-l> 
-	imap ˙  <Left>
-	imap ∆ <Down>
-	imap ˚  <Up>
-	imap ¬ <Right>
+	imap ˙ <Left>
+	imap ∆  <Down>
+	imap ˚ <Up>
+	imap ¬  <Right>
 elseif has('win32') || has('win64') 
 	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
@@ -115,6 +119,42 @@ filetype plugin indent on
 
 " カラー指定
 colorscheme darcula
+
+" ターミナルカラー指定
+" black            
+" Red              
+" green            
+" yellow           
+" blue             
+" magenta          
+" cyan             
+" white            
+" black (bright)   
+" red (bright)     
+" green (bright)   
+" yellow (bright)  
+" blue (bright)    
+" magenta (bright) 
+" cyan (bright)    
+" white (bright)   
+" let g:terminal_ansi_colors = [
+" 			\ '#073642'," black                 
+" 			\ '#dc322f'," Red                   
+" 			\ '#859900'," green                 
+" 			\ '#b58900'," yellow                
+" 			\ '#268bd2'," blue                  
+" 			\ '#d33682'," magenta               
+" 			\ '#2aa198'," cyan                  
+" 			\ '#eee8d5'," white                 
+" 			\ '#002b36'," black (bright)        
+" 			\ '#cb4b16'," red (bright)          
+" 			\ '#586e75'," green (bright)        
+" 			\ '#657b83'," yellow (bright)       
+" 			\ '#839496'," blue (bright)         
+" 			\ '#6c71c4'," magenta (bright)      
+" 			\ '#93a1a1'," cyan (bright)         
+" 			\ '#fdf6e3'," white (bright)        
+" 			\ ]
 
 " ハイライトサーチ解除
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
@@ -138,7 +178,7 @@ set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
 set encoding=utf-8
 set splitbelow  " 新規ウインドウを下に表示
-                                   
+
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ --no-heading
@@ -158,28 +198,36 @@ autocmd FileType php setlocal makeprg=php\ -l\ %
 autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 
 " カレントディレクトリを移動
-autocmd BufEnter * execute ':lcd ' . expand('%:p:h') 
+autocmd BufEnter * exe ':lcd ' . expand('%:p:h') 
 
 " ターミナル
 noremap <leader>t :terminal<CR>
 
 " エクスプローラ
 nnoremap <leader>e :VimFilerExplorer<CR> 
+nnoremap <leader>E :Vifm<CR> 
 
 " 文字検索   
 vnoremap <silent> * "zy/\V<C-r>=substitute(escape(@z,'\/'),"\n",'\\n','g')<CR><CR>
 
 " 文字置換   
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
-vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>=substitute(escape(@z,'\/'),"\n",'\\n','g')<CR>//g<Left><Left>
+vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
-" TODO grepして置換
+" 範囲選択文字置換   
+vnoremap <C-R> :s///g<Left><Left><Left>
+
+" 検索結果に対して置換
+nnoremap <leader>q :Qfreplace<CR> 
 
 " 合計値を計算
 vnoremap <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
 
+" カウント
+vnoremap <leader>count g<C-a> 
+
 " grepコマンド
-nnoremap <leader>f "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+nnoremap <leader>/ "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
 "------------------------------------
 " キーワードをgrep
@@ -189,9 +237,9 @@ nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call Gre
 function! GrepGitFiles(keyword)
 	let is_git = system('git status')
 	if v:shell_error
-		execute ':vimgrep /' . a:keyword . '/ ** | cw'
+		exe ':vimgrep /' . a:keyword . '/ ** | cw'
 	else
-		execute ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
+		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
 	endif
 endfunction
 
@@ -210,7 +258,7 @@ vnoremap <D-/> :TComment<CR>
 map <leader>b <Plug>(openbrowser-open)
 
 " 選択中のキーワードをググる
-vnoremap <leader>b :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+vnoremap <leader>b :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
 
 "------------------------------------
 " utf出力時フラグセット

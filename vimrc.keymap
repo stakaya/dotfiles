@@ -34,6 +34,8 @@ vnoremap & ^
 " コロンとセミコロンを入れ替える
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
@@ -94,5 +96,4 @@ noremap tn :tabnew<CR>
 noremap tc :tabclose<CR>
 
 " ファイル全体の整形
-nnoremap == gg=G
-
+nnoremap == gg=Gg;

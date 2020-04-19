@@ -1,19 +1,11 @@
 set clipboard=unnamed,autoselect
 set cursorline 		" カーソル行をハイライト
 set hlsearch 		" ハイライトサーチ
-set history=50		" keep 50 lines of command line history
 set ignorecase 		" 検索時、大文字・小文字を気にせず
-set iminsert=0
-set imsearch=-1
 set incsearch		" do incremental searching
-set nowrap
-set number
-set ruler		    " show the cursor position all the time
 set shiftwidth=4
-set showcmd		    " display incomplete commands
 set tabstop=4
 set virtualedit=all
-set whichwrap=<,>,[,]
 
 " 自動的に閉じ括弧を入力
 imap {{ {}<LEFT>
@@ -27,9 +19,11 @@ nnoremap ! ~
 " コロンとセミコロンを入れ替える
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
 
 " ファイル全体の整形
-nnoremap == gg=G
+nnoremap == gg=Gg;
