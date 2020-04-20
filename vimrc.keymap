@@ -1,28 +1,3 @@
-if !has('nvim')
-	set clipboard=unnamed,autoselect
-endif
-
-set cursorline 		" カーソル行をハイライト
-set hlsearch 		" ハイライトサーチ
-set history=50		" 履歴の保持数
-set ignorecase 		" 検索時、大文字・小文字を気にせず
-set iminsert=0      " IMEをデフォルトオフ
-set imsearch=-1
-set incsearch		" インクリメンタルサーチ
-set nowrap          " ワープしない
-set number          " 行番号表示
-set ruler		    " カーソル行を常に表示
-set showcmd		    " コマンドの候補を表示
-set virtualedit=all " カーソル位置を自由に設定する
-set mouse=a			" マウスを使う
-set shiftwidth=4                       
-set tabstop=4
-
-" 自動的に閉じ括弧を入力
-imap {{ {}<LEFT>
-imap [[ []<LEFT>
-imap (( ()<LEFT>
-
 " 日本語キーボード互換
 nnoremap ( *
 nnoremap ! ~
@@ -48,7 +23,7 @@ vnoremap <C-C> "+y
 
 " CTRL-V でペースト
 map <C-V>		"+gP
-cmap <C-V>		<C-R>+
+cmap <C-V>		<C-r>+
 
 " 範囲選択と貼りつけ
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
@@ -75,8 +50,8 @@ snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
 " 画面分割
-noremap _ :split<Return><C-w>w
-noremap <Bar> :vsplit<Return><C-w>w
+noremap _ :split<CR><C-w>w
+noremap <Bar> :vsplit<CR><C-w>w
 
 " Tab でウインドウの切り替え
 noremap <Tab> <C-W>w

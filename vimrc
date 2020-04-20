@@ -1,5 +1,6 @@
 if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
+	set clipboard=unnamed,autoselect
 endif
 
 if has('vim_starting')
@@ -22,8 +23,8 @@ else
 	call dein#begin(expand('~/.vim/plugins/'))
 endif
 
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
 call dein#add('Shougo/unite.vim')
 call dein#add('Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] })
 call dein#add('thinca/vim-quickrun')
@@ -33,31 +34,26 @@ call dein#add('banyan/recognize_charcode.vim')
 call dein#add('itchyny/calendar.vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('kannokanno/previm')
+call dein#add('plasticboy/vim-markdown')
 call dein#add('kana/vim-fakeclip')
 call dein#add('koron/dicwin-vim')
 call dein#add('koron/verifyenc-vim')
 call dein#add('mattn/webapi-vim')
 call dein#add('mattn/gist-vim')
 call dein#add('mattn/emmet-vim')
-call dein#add('plasticboy/vim-markdown')
 call dein#add('shinchu/hz_ja.vim')
 call dein#add('tpope/vim-abolish')
 call dein#add('tomtom/tcomment_vim')
 call dein#add('tyru/open-browser.vim')
 call dein#add('tyru/urilib.vim')
-call dein#add('taku-o/vim-toggle')
 call dein#add('blueshirts/darcula')
-call dein#add('vim-scripts/autodate.vim')
-call dein#add('vim-scripts/Align')
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 call dein#add('leafgarland/typescript-vim')
 call dein#add('peitalin/vim-jsx-typescript')
 call dein#add('andymass/vim-matchup')
 call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('koron/dicwin-vim')
 call dein#add('koron/verifyenc-vim')
-call dein#add('vifm/vifm.vim')
 
 call dein#end()
 
@@ -120,42 +116,6 @@ filetype plugin indent on
 " カラー指定
 colorscheme darcula
 
-" ターミナルカラー指定
-" black            
-" Red              
-" green            
-" yellow           
-" blue             
-" magenta          
-" cyan             
-" white            
-" black (bright)   
-" red (bright)     
-" green (bright)   
-" yellow (bright)  
-" blue (bright)    
-" magenta (bright) 
-" cyan (bright)    
-" white (bright)   
-" let g:terminal_ansi_colors = [
-" 			\ '#073642'," black                 
-" 			\ '#dc322f'," Red                   
-" 			\ '#859900'," green                 
-" 			\ '#b58900'," yellow                
-" 			\ '#268bd2'," blue                  
-" 			\ '#d33682'," magenta               
-" 			\ '#2aa198'," cyan                  
-" 			\ '#eee8d5'," white                 
-" 			\ '#002b36'," black (bright)        
-" 			\ '#cb4b16'," red (bright)          
-" 			\ '#586e75'," green (bright)        
-" 			\ '#657b83'," yellow (bright)       
-" 			\ '#839496'," blue (bright)         
-" 			\ '#6c71c4'," magenta (bright)      
-" 			\ '#93a1a1'," cyan (bright)         
-" 			\ '#fdf6e3'," white (bright)        
-" 			\ ]
-
 " ハイライトサーチ解除
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
@@ -174,10 +134,24 @@ set fileformats=unix,dos,mac " 改行コードの自動認識
 set laststatus=2  	" ステータス行を表示
 set noswapfile     	" スワップファイル不要 
 set vb t_vb=     	" ビープ音を鳴らさない
-set virtualedit=all
 set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
+set splitbelow  	" 新規ウインドウを下に表示
+set cursorline 		" カーソル行をハイライト
+set hlsearch 		" ハイライトサーチ
+set history=50		" 履歴の保持数
+set ignorecase 		" 検索時、大文字・小文字を気にせず
+set iminsert=0      " IMEをデフォルトオフ
+set imsearch=-1
+set incsearch		" インクリメンタルサーチ
+set nowrap          " ワープしない
+set number          " 行番号表示
+set ruler		    " カーソル行を常に表示
+set showcmd		    " コマンドの候補を表示
+set virtualedit=all " カーソル位置を自由に設定する
+set mouse=a			" マウスを使う
 set encoding=utf-8
-set splitbelow  " 新規ウインドウを下に表示
+set shiftwidth=4                       
+set tabstop=4
 
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
@@ -201,38 +175,39 @@ autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 autocmd BufEnter * exe ':lcd ' . expand('%:p:h') 
 
 " ターミナル
-noremap <leader>t :terminal<CR>
+noremap <silent> <leader>t :terminal<CR>
 
 " エクスプローラ
-nnoremap <leader>e :VimFilerExplorer<CR> 
-nnoremap <leader>E :Vifm<CR> 
+nnoremap <silent> <leader>e :VimFilerExplorer<CR> 
 
 " 文字検索   
-vnoremap <silent> * "zy/\V<C-r>=substitute(escape(@z,'\/'),"\n",'\\n','g')<CR><CR>
+nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
+vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
 
 " 文字置換   
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " 範囲選択文字置換   
-vnoremap <C-R> :s///g<Left><Left><Left>
+vnoremap <C-r> :s///g<Left><Left><Left>
 
 " 検索結果に対して置換
-nnoremap <leader>q :Qfreplace<CR> 
+nnoremap <silent> <leader>q :Qfreplace<CR> 
 
 " 合計値を計算
-vnoremap <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
+vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
 
 " カウント
 vnoremap <leader>count g<C-a> 
 
 " grepコマンド
-nnoremap <leader>/ "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+nnoremap <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
 "------------------------------------
 " キーワードをgrep
 "------------------------------------
-nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
+nnoremap <silent> <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
+vnoremap <silent> <leader>g "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR> 
 
 function! GrepGitFiles(keyword)
 	let is_git = system('git status')
@@ -246,19 +221,15 @@ endfunction
 "------------------------------------
 " tcomment_vim
 "------------------------------------
-nnoremap <leader>/ :TComment<CR>
-vnoremap <leader>/ :TComment<CR>
-nnoremap <D-/> :TComment<CR>
-vnoremap <D-/> :TComment<CR>
+nnoremap <silent> <D-/> :TComment<CR>
+vnoremap <silent> <D-/> :TComment<CR>
 
 "------------------------------------
 " open-blowser.vim
 "------------------------------------
-" カーソル下のURLをブラウザで開く
-map <leader>b <Plug>(openbrowser-open)
-
 " 選択中のキーワードをググる
-vnoremap <leader>b :<C-u>OpenBrowserSearch<Space><C-r><C-w><CR>
+nnoremap <silent> <leader>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+vnoremap <silent> <leader>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
 
 "------------------------------------
 " utf出力時フラグセット
