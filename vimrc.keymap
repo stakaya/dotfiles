@@ -22,8 +22,8 @@ vnoremap <C-X> "+x
 vnoremap <C-C> "+y
 
 " CTRL-V でペースト
-map <C-V>		"+gP
-cmap <C-V>		<C-r>+
+map <C-V> "+gP
+cmap <C-V> <C-r>+
 
 " 範囲選択と貼りつけ
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']

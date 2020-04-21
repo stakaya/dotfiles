@@ -1,8 +1,3 @@
-if !has('nvim')
-	source $VIMRUNTIME/defaults.vim
-	set clipboard=unnamed,autoselect
-endif
-
 if has('vim_starting')
 	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
 	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
@@ -15,133 +10,59 @@ if has('vim_starting')
 	endif
 endif
 
-if has('win32') || has('win64')
-	source $HOME\_vimrc.keymap
-	call dein#begin(expand($HOME.'\vimfiles\plugins'))
-else 
-	source ~/.vim/../vimrc.keymap
-	call dein#begin(expand('~/.vim/plugins/'))
+if !has('nvim')
+	source $VIMRUNTIME/defaults.vim
+	set clipboard=unnamed,autoselect
 endif
 
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/vimproc.vim', {'build': 'make'})
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/vimfiler', { 'depends' : ['Shougo/unite.vim'] })
-call dein#add('thinca/vim-quickrun')
-call dein#add('thinca/vim-qfreplace')
-call dein#add('tpope/vim-surround')
-call dein#add('banyan/recognize_charcode.vim')
-call dein#add('itchyny/calendar.vim')
-call dein#add('itchyny/lightline.vim')
-call dein#add('kannokanno/previm')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('kana/vim-fakeclip')
-call dein#add('koron/dicwin-vim')
-call dein#add('koron/verifyenc-vim')
-call dein#add('mattn/webapi-vim')
-call dein#add('mattn/gist-vim')
-call dein#add('mattn/emmet-vim')
-call dein#add('shinchu/hz_ja.vim')
-call dein#add('tpope/vim-abolish')
-call dein#add('tomtom/tcomment_vim')
-call dein#add('tyru/open-browser.vim')
-call dein#add('tyru/urilib.vim')
-call dein#add('blueshirts/darcula')
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-call dein#add('leafgarland/typescript-vim')
-call dein#add('peitalin/vim-jsx-typescript')
-call dein#add('andymass/vim-matchup')
-call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('koron/verifyenc-vim')
+if has('win32') || has('win64')
+	let s:plugins = expand($HOME.'\vimfiles\plugins') 
+	source $HOME\_vimrc.keymap
 
-call dein#end()
-
-" indent_guidesの設定
-let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
-autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
-
-" calendarの設定
-let g:calendar_google_calendar=1
-let g:calendar_google_task=1
-
-" lightlineの設定
-let g:lightline = { 'colorscheme': 'wombat' }
-
-" VimFilerの設定
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_safe_mode_by_default=0
-let g:netrw_liststyle=3
-
-" OS毎の設定
-if has('mac')
-	autocmd BufWritePost * call SetUTF8Xattr(expand('<afile>'))
-
-	" デフォルトの'iskeyword'がcp932に対応しきれていないので修正
-	set iskeyword=@,48-57,_,128-167,224-235    
-
-	" 編集箇所に移動
-	" <A-[> <A-]> 
-	nnoremap “ g;
-	nnoremap ‘ g,
-
-	" インサート時のカーソル移動
-	" <A-j> <A-k> <A-h> <A-l> 
-	imap ˙ <Left>
-	imap ∆  <Down>
-	imap ˚ <Up>
-	imap ¬  <Right>
-elseif has('win32') || has('win64') 
-	" WindowsでPATHに$VIMが含まれていない時にexeを見つけ出せないので修正
+	" WindowsでPATHに$VIMが含まれていない時に
+	" currentのexeを見つけ出せないので追加
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
 	endif
-
-	" 編集箇所に移動
-	nnoremap <A-[> g;
-	nnoremap <A-]> g,
+else 
+	let s:plugins = expand('~/.vim/plugins/')
+	source ~/.vim/../vimrc.keymap
 endif
 
-" completeoptの設定
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+" プラグインの読み込み
+if dein#load_state(s:plugins)
+	call dein#begin(s:plugins)
+	call dein#load_toml(s:plugins . '/plugins.toml', {'lazy': 0})
+	call dein#load_toml(s:plugins . '/plugins_lazy.toml', {'lazy': 1})
+	call dein#end()
+	call dein#save_state()
+endif
 
-" 自動的にインデントプラグインを読み込む
-filetype plugin indent on
+if dein#check_install()
+	call dein#install()
+endif
 
-" カラー指定
-colorscheme darcula
-
-" ハイライトサーチ解除
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
-" カレントウィンドウにのみ罫線を引く
-augroup cch
-	autocmd! cch
-	autocmd WinLeave * set nocursorline
-	autocmd WinEnter,BufRead * set cursorline
-augroup END
-
-set noshowmode
-set nofoldenable 	" 折りたたみしない
+" エンコーディング指定
+set encoding=utf-8
 set ambiwidth=double
-set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " エンコーディング指定
-set fileformats=unix,dos,mac " 改行コードの自動認識
+set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
+set fileformats=unix,dos,mac
+
+" テキスト挿入中の自動折り返しを日本語に対応させる
+set formatoptions+=mMj
+
+set noshowmode      " モードを表示しない
+set nofoldenable 	" 折りたたみしない
 set laststatus=2  	" ステータス行を表示
 set noswapfile     	" スワップファイル不要 
 set vb t_vb=     	" ビープ音を鳴らさない
-set formatoptions+=mM " テキスト挿入中の自動折り返しを日本語に対応させる
 set splitbelow  	" 新規ウインドウを下に表示
 set cursorline 		" カーソル行をハイライト
 set hlsearch 		" ハイライトサーチ
 set history=50		" 履歴の保持数
 set ignorecase 		" 検索時、大文字・小文字を気にせず
 set iminsert=0      " IMEをデフォルトオフ
-set imsearch=-1
+set imsearch=-1     " IMEをデフォルトオフ 
 set incsearch		" インクリメンタルサーチ
 set nowrap          " ワープしない
 set number          " 行番号表示
@@ -149,9 +70,8 @@ set ruler		    " カーソル行を常に表示
 set showcmd		    " コマンドの候補を表示
 set virtualedit=all " カーソル位置を自由に設定する
 set mouse=a			" マウスを使う
-set encoding=utf-8
-set shiftwidth=4                       
-set tabstop=4
+set shiftwidth=2    " シフト幅                   
+set tabstop=4       " タブ幅
 
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
@@ -166,19 +86,28 @@ set statusline+=%=%l:%c
 " spaceをLeaderに割当
 let mapleader = "\<Space>"
 
-" phpの設定
-autocmd FileType php compiler php
-autocmd FileType php setlocal makeprg=php\ -l\ %
-autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+" completeoptの設定
+inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+
+" 自動的にインデントプラグインを読み込む
+filetype plugin indent on
+
+" ハイライトサーチ解除
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+	autocmd! cch
+	autocmd WinLeave * set nocursorline
+	autocmd WinEnter,BufRead * set cursorline
+augroup END
 
 " カレントディレクトリを移動
 autocmd BufEnter * exe ':lcd ' . expand('%:p:h') 
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
-
-" エクスプローラ
-nnoremap <silent> <leader>e :VimFilerExplorer<CR> 
 
 " 文字検索   
 nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
@@ -191,9 +120,6 @@ vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 " 範囲選択文字置換   
 vnoremap <C-r> :s///g<Left><Left><Left>
 
-" 検索結果に対して置換
-nnoremap <silent> <leader>q :Qfreplace<CR> 
-
 " 合計値を計算
 vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
 
@@ -203,9 +129,7 @@ vnoremap <leader>count g<C-a>
 " grepコマンド
 nnoremap <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
-"------------------------------------
 " キーワードをgrep
-"------------------------------------
 nnoremap <silent> <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 vnoremap <silent> <leader>g "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR> 
 
@@ -217,45 +141,3 @@ function! GrepGitFiles(keyword)
 		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
 	endif
 endfunction
-
-"------------------------------------
-" tcomment_vim
-"------------------------------------
-nnoremap <silent> <D-/> :TComment<CR>
-vnoremap <silent> <D-/> :TComment<CR>
-
-"------------------------------------
-" open-blowser.vim
-"------------------------------------
-" 選択中のキーワードをググる
-nnoremap <silent> <leader>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
-vnoremap <silent> <leader>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
-
-"------------------------------------
-" utf出力時フラグセット
-"------------------------------------
-function! SetUTF8Xattr(file)
-	let isutf8 = &fileencoding == 'utf-8' || (&fileencoding == '' && &encoding == 'utf-8')
-	if has('unix') && match(system('uname'),'Darwin') != -1 && isutf8
-		call system("xattr -w com.apple.TextEncoding 'utf-8;134217984' '" . a:file . "'")
-	endif
-endfunction
-
-"------------------------------------
-" fzf
-"------------------------------------
-" コマンド検索
-nnoremap <leader>; :Commands<CR>
-
-" ファイル検索
-nnoremap <leader><leader> :call FzfOmniFiles()<CR>
-
-function! FzfOmniFiles()
-	let is_git = system('git status')
-	if v:shell_error
-		:Files
-	else
-		:GitFiles
-	endif
-endfunction
-
