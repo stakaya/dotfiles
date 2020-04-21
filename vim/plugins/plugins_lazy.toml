@@ -1,0 +1,67 @@
+[[plugins]]
+repo = 'Shougo/vimfiler'
+depends = 'Shougo/unite.vim'
+hook_add = '''
+  let g:vimfiler_as_default_explorer=1
+  let g:vimfiler_safe_mode_by_default=0
+  let g:netrw_liststyle=3
+  nnoremap <silent> <leader>e :VimFilerExplorer<CR> 
+'''
+
+[[plugins]]
+repo = 'itchyny/calendar.vim'
+hook_add = '''
+  let g:calendar_google_calendar=1
+  let g:calendar_google_task=1
+'''
+
+[[plugins]]
+repo = 'tyru/urilib.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+  nnoremap <silent> <leader>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+  vnoremap <silent> <leader>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+'''
+
+[[plugins]]
+repo = 'thinca/vim-qfreplace'
+hook_add = '''
+  nnoremap <silent> <leader>q :Qfreplace<CR> 
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
+  autocmd FileType php compiler php
+  autocmd FileType php setlocal makeprg=php\ -l\ %
+  autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
+'''
+
+[[plugins]]
+repo = 'kannokanno/previm'
+
+[[plugins]]
+repo = 'koron/dicwin-vim'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'mattn/gist-vim'
+
+[[plugins]]
+repo = 'mattn/webapi-vim'
+
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+
+[[plugins]]
+repo = 'shinchu/hz_ja.vim'
