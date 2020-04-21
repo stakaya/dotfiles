@@ -1,6 +1,6 @@
 vim/*
-!vim/plugins/plugins.toml
-!vim/plugins/plugins_lazy.toml
+!plugins.toml
+!plugins_lazy.toml
 
 # mac
 .DS_Store
