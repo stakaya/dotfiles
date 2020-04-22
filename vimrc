@@ -1,45 +1,45 @@
 if has('vim_starting')
-	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
-	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
-	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
+  let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
+  let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
+  let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
-	if has('win32') || has('win64')
-		set runtimepath+=$HOME\vimfiles\plugins\dein.vim
-	else 
-		set runtimepath+=~/.vim/plugins/dein.vim/
-	endif
+  if has('win32') || has('win64')
+	set runtimepath+=$HOME\vimfiles\plugins\dein.vim
+  else 
+	set runtimepath+=~/.vim/plugins/dein.vim/
+  endif
 endif
 
 if !has('nvim')
-	source $VIMRUNTIME/defaults.vim
-	set clipboard=unnamed,autoselect
+  source $VIMRUNTIME/defaults.vim
+  set clipboard=unnamed,autoselect
 endif
 
 if has('win32') || has('win64')
-	let s:plugins = expand($HOME.'\vimfiles\plugins') 
-	source $HOME\_vimrc.keymap
+  let s:plugins = expand($HOME.'\vimfiles\plugins') 
+  source $HOME\_vimrc.keymap
 
-	" WindowsでPATHに$VIMが含まれていない時に
-	" currentのexeを見つけ出せないので追加
-	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
-		let $PATH = $VIM . ';' . $PATH
-	endif
+  " WindowsでPATHに$VIMが含まれていない時に
+  " currentのexeを見つけ出せないので追加
+  if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
+	let $PATH = $VIM . ';' . $PATH
+  endif
 else 
-	let s:plugins = expand('~/.vim/plugins/')
-	source ~/.vim/../vimrc.keymap
+  let s:plugins = expand('~/.vim/plugins')
+  source ~/.vim/../vimrc.keymap
 endif
 
 " プラグインの読み込み
 if dein#load_state(s:plugins)
-	call dein#begin(s:plugins)
-	call dein#load_toml(s:plugins . '/plugins.toml', {'lazy': 0})
-	call dein#load_toml(s:plugins . '/plugins_lazy.toml', {'lazy': 1})
-	call dein#end()
-	call dein#save_state()
+  call dein#begin(s:plugins)
+  call dein#load_toml(s:plugins . '/plugins.toml', {'lazy': 0})
+  call dein#load_toml(s:plugins . '/plugins_lazy.toml', {'lazy': 1})
+  call dein#end()
+  call dein#save_state()
 endif
 
 if dein#check_install()
-	call dein#install()
+  call dein#install()
 endif
 
 " エンコーディング指定
@@ -75,8 +75,8 @@ set tabstop=4       " タブ幅
 
 " vimgrepをripgrepに入れ替える 
 if executable('rg')
-	set grepprg=rg\ --vimgrep\ --no-heading
-	set grepformat=%f:%l:%c:%m,%f:%l:%m
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " ステータス行の指定
@@ -84,7 +84,7 @@ set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
 " spaceをLeaderに割当
-let mapleader = "\<Space>"
+let mapleader = "\<space>"
 
 " completeoptの設定
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
@@ -98,9 +98,9 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
-	autocmd! cch
-	autocmd WinLeave * set nocursorline
-	autocmd WinEnter,BufRead * set cursorline
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
 augroup END
 
 " カレントディレクトリを移動
@@ -108,10 +108,6 @@ autocmd BufEnter * exe ':lcd ' . expand('%:p:h')
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
-
-" 文字検索   
-nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
-vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
 
 " 文字置換   
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
@@ -134,10 +130,10 @@ nnoremap <silent> <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 vnoremap <silent> <leader>g "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR> 
 
 function! GrepGitFiles(keyword)
-	let is_git = system('git status')
-	if v:shell_error
-		exe ':vimgrep /' . a:keyword . '/ ** | cw'
-	else
-		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
-	endif
+  let is_git = system('git status')
+  if v:shell_error
+	exe ':vimgrep /' . a:keyword . '/ ** | cw'
+  else
+	exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
+  endif
 endfunction

@@ -11,6 +11,10 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
@@ -19,8 +23,8 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-  nnoremap <leader>; :Commands<CR>
-  nnoremap <leader><leader> :call FzfOmniFiles()<CR>
+  nnoremap <space>; :Commands<CR>
+  nnoremap <space><space> :call FzfOmniFiles()<CR>
   function! FzfOmniFiles()
 	  let is_git = system('git status')
 	  if v:shell_error
@@ -42,25 +46,27 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
+repo = 'Shougo/vimfiler'
+depends = 'Shougo/unite.vim'
 hook_add = '''
-  let g:indent_guides_auto_colors=0
-  let g:indent_guides_enable_on_vim_startup=1
-  let g:indent_guides_start_level=2
-  let g:indent_guides_guide_size=1
-  autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
-  autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
+  let g:vimfiler_as_default_explorer=1
+  let g:vimfiler_safe_mode_by_default=0
+  let g:netrw_liststyle=3
+  nnoremap <silent> <space>e :VimFilerExplorer<CR> 
 '''
-
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
 
 [[plugins]]
 repo = 'kana/vim-fakeclip'
 
 [[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
 repo = 'tpope/vim-abolish'
+hook_add = '''
+  nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
+  vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
+'''
 
 [[plugins]]
 repo = 'andymass/vim-matchup'
@@ -71,6 +77,3 @@ hook_add = '''
   nnoremap <silent> <D-/> :TComment<CR>
   vnoremap <silent> <D-/> :TComment<CR>
 '''
-
-[[plugins]]
-repo = 'tpope/vim-surround'

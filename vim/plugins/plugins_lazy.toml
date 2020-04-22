@@ -1,39 +1,46 @@
 [[plugins]]
-repo = 'Shougo/vimfiler'
-depends = 'Shougo/unite.vim'
-hook_add = '''
-  let g:vimfiler_as_default_explorer=1
-  let g:vimfiler_safe_mode_by_default=0
-  let g:netrw_liststyle=3
-  nnoremap <silent> <leader>e :VimFilerExplorer<CR> 
-'''
-
-[[plugins]]
 repo = 'itchyny/calendar.vim'
-hook_add = '''
+on_cmd = 'Calendar'
+hook_source = '''
   let g:calendar_google_calendar=1
   let g:calendar_google_task=1
 '''
 
 [[plugins]]
 repo = 'tyru/urilib.vim'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-hook_add = '''
-  nnoremap <silent> <leader>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
-  vnoremap <silent> <leader>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+on_event = 'VimEnter'
+hook_source = '''
+  nnoremap <silent> <space>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+  vnoremap <silent> <space>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
 '''
 
 [[plugins]]
 repo = 'thinca/vim-qfreplace'
-hook_add = '''
-  nnoremap <silent> <leader>q :Qfreplace<CR> 
+on_event = 'QuickFixCmdPre'
+hook_source = '''
+  nnoremap <silent> <space>q :Qfreplace<CR> 
+'''
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+on_ft = ['javascript']
+hook_source = '''
+  let g:indent_guides_auto_colors=0
+  let g:indent_guides_enable_on_vim_startup=1
+  let g:indent_guides_start_level=2
+  let g:indent_guides_guide_size=1
+  autocmd VimEnter,Colorscheme *.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
+  autocmd VimEnter,Colorscheme *.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
 '''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-hook_add = '''
+on_event = 'VimEnter'
+hook_source = '''
   autocmd FileType php compiler php
   autocmd FileType php setlocal makeprg=php\ -l\ %
   autocmd FileType php setlocal errorformat=%m\ in\ %f\ on\ line\ %l
@@ -41,27 +48,36 @@ hook_add = '''
 
 [[plugins]]
 repo = 'kannokanno/previm'
+on_cmd = 'PrevimOpen'
 
 [[plugins]]
 repo = 'koron/dicwin-vim'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-
-[[plugins]]
-repo = 'mattn/gist-vim'
-
-[[plugins]]
-repo = 'mattn/webapi-vim'
+on_ft = ['typescript']
 
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['typescript']
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['css', 'html']
+
+[[plugins]]
+repo = 'mattn/gist-vim'
+on_cmd = 'Gist'
+
+[[plugins]]
+repo = 'mattn/webapi-vim'
+on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'shinchu/hz_ja.vim'
+on_event = 'VimEnter'
