@@ -1,5 +1,5 @@
 @set DOTFILES=%USERPROFILE%\dotfiles
-for %%i in (vimrc, vimrc.keymap, gvimrc, ideavimrc) do (
+for %%i in (vimrc, gvimrc, ideavimrc) do (
 	if not exist "%USERPROFILE%\%%i" (
 		mklink "%USERPROFILE%\_%%i" "%DOTFILES%\%%i"
 	)

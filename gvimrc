@@ -1,7 +1,5 @@
 " ユーザ設定を保存
-let s:cpo_save=&cpo
 set linespace=2
-set cpo&vim
 set notitle
 
 " OS毎の設定
@@ -17,10 +15,6 @@ elseif has("win32") || has("win64")
 	set guifont=Consolas:h12
 	set guifontwide=UD_デジタル_教科書体_N-R:h12
 endif
-
-" CTRL-Tab でタブを移動
-noremap <C-S-Tab> :tabprev<CR>
-noremap <C-Tab> :tabnext<CR>
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が
 " 自動的にクリップボードに入るのを抑止する
@@ -40,10 +34,6 @@ set guioptions-=l
 set guioptions-=L
 set guioptions-=b
 
-" ユーザ設定を復元
-let &cpo = s:cpo_save
-unlet s:cpo_save
-
 " IME状態に応じたカーソル色を設定(for Windows)
 if has('xim') || has('multi_byte_ime')
 	highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold
@@ -56,3 +46,7 @@ augroup InsModeAu
 	autocmd InsertEnter,CmdwinEnter * set noimdisable
 	autocmd InsertLeave,CmdwinLeave * set imdisable
 augroup END
+
+" CTRL-Tab でタブを移動
+noremap <C-S-Tab> :tabprev<CR>
+noremap <C-Tab> :tabnext<CR>

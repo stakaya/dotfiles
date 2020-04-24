@@ -14,6 +14,7 @@ set smartcase
 set sortnumbers
 set statusline="  %t  %= %A %10u:%-7g %15s %20d "
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+set syscalls
 set timefmt=%m/%d\ %H:%M
 set trash
 set undolevels=100
@@ -109,3 +110,5 @@ nnoremap .. zm
 " 画面タブ移動
 nnoremap <Tab> <C-W>w
 
+" 初回実行コマンド
+view

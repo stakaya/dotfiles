@@ -1,3 +1,14 @@
+" spaceをLeaderに割当
+let mapleader = "\<space>"
+
+" カスタマイズキーマップを読み込み
+source $HOME/dotfiles/vimrc.keymap 
+
+if !has('nvim')
+  source $VIMRUNTIME/defaults.vim
+  set clipboard=unnamed,autoselect
+endif
+
 if has('vim_starting')
   let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
   let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
@@ -10,14 +21,8 @@ if has('vim_starting')
   endif
 endif
 
-if !has('nvim')
-  source $VIMRUNTIME/defaults.vim
-  set clipboard=unnamed,autoselect
-endif
-
 if has('win32') || has('win64')
   let s:plugins = expand($HOME.'\vimfiles\plugins') 
-  source $HOME\_vimrc.keymap
 
   " WindowsでPATHに$VIMが含まれていない時に
   " currentのexeを見つけ出せないので追加
@@ -26,7 +31,6 @@ if has('win32') || has('win64')
   endif
 else 
   let s:plugins = expand('~/.vim/plugins')
-  source ~/.vim/../vimrc.keymap
 endif
 
 " プラグインの読み込み
@@ -83,18 +87,12 @@ endif
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
-" spaceをLeaderに割当
-let mapleader = "\<space>"
-
-" completeoptの設定
-inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
-
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
 
-" ハイライトサーチ解除
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+" 設定ファイルを編集コマンド 
+command Reload source $HOME/dotfiles/vimrc
+command Config edit $HOME/dotfiles/vimrc
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -105,6 +103,13 @@ augroup END
 
 " カレントディレクトリを移動
 autocmd BufEnter * exe ':lcd ' . expand('%:p:h') 
+
+" completeoptの設定
+inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
+
+" ハイライトサーチ解除
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
