@@ -256,12 +256,8 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
-	<key>NSNavLastUserSetHideExtensionButtonState</key>
-	<true/>
+	<string>~/dotfiles/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{799, 448}</string>
-	<key>NSNavPanelExpandedSizeForSaveMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
@@ -304,18 +300,14 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>714 552 620 392 0 0 2048 1129 </string>
+	<string>330 288 620 392 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>145 282 710 826 0 0 2048 1129 </string>
+	<string>48 0 710 800 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>40 128 710 826 0 0 2048 1129 </string>
+	<string>211 0 710 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>224 103 710 726 0 0 2048 1129 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>441 102 710 726 0 0 2048 1129 </string>
+	<string>96 -391 710 726 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -989,43 +981,29 @@
 	<key>NoSyncAllAppVersions</key>
 	<array>
 		<string>3.3.7</string>
-		<string>3.3.8</string>
+		<string>3.3.9</string>
 	</array>
-	<key>NoSyncBFPRecents</key>
-	<array>
-		<string>Menlo</string>
-		<string>Monaco</string>
-	</array>
-	<key>NoSyncFrame_SessionsPreferences</key>
-	<dict>
-		<key>screenFrame</key>
-		<string>{{0, 0}, {2048, 1152}}</string>
-		<key>topLeft</key>
-		<string>{774, 950}</string>
-	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2048, 1152}}</string>
+		<string>{{0, 0}, {1280, 800}}</string>
 		<key>topLeft</key>
-		<string>{573, 825}</string>
+		<string>{91, 800}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
-	<string>42002830-D168-4919-8D29-F0FD50586B40</string>
-	<key>NoSyncLastTipTime</key>
-	<real>598756603.96199298</real>
+	<string>C1B170FC-25B9-4A6A-B244-3F1BA29060FB</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>44</integer>
+	<integer>46</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>597892676.820907</real>
+	<real>598163395.86663198</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
 	<key>NoSyncPermissionToShowTip</key>
-	<true/>
+	<false/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
 		<key>0</key>
@@ -1539,14 +1517,6 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.terminalIconName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>currentSession.presentationName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -1733,19 +1703,7 @@
 		</array>
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
-	<real>597571929.513188</real>
-	<key>NoSyncTipsDisabled</key>
-	<true/>
-	<key>NoSyncTipsToNotShow</key>
-	<array>
-		<string>0003</string>
-		<string>0001</string>
-		<string>000</string>
-		<string>0004</string>
-		<string>0002</string>
-		<string>0000</string>
-		<string>0005</string>
-	</array>
+	<real>597849029.70305598</real>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
@@ -1786,17 +1744,19 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/stakaya/dotfiles/iterm2</string>
+	<string>/Users/takaya/dotfiles/iterm2</string>
+	<key>PromptOnQuit</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=79</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=74</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-02-03T01:26:34Z</date>
+	<date>2020-04-25T09:01:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -1832,6 +1792,6 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.8</string>
+	<string>3.3.9</string>
 </dict>
 </plist>

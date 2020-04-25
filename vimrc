@@ -46,6 +46,11 @@ if dein#check_install()
   call dein#install()
 endif
 
+" true color
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 " エンコーディング指定
 set encoding=utf-8
 set ambiwidth=double
@@ -54,7 +59,6 @@ set fileformats=unix,dos,mac
 
 " テキスト挿入中の自動折り返しを日本語に対応させる
 set formatoptions+=mMj
-
 set noshowmode      " モードを表示しない
 set nofoldenable 	" 折りたたみしない
 set laststatus=2  	" ステータス行を表示
@@ -91,8 +95,8 @@ set statusline+=%=%l:%c
 filetype plugin indent on
 
 " 設定ファイルを編集コマンド 
-command Reload source $HOME/dotfiles/vimrc
-command Config edit $HOME/dotfiles/vimrc
+command! Reload source $HOME/dotfiles/vimrc
+command! Config edit $HOME/dotfiles/vimrc
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
