@@ -1,3 +1,5 @@
+# 起動時に読み込むプラグイン
+
 [[plugins]]
 repo = 'blueshirts/darcula'
 hook_add = '''
