@@ -106,7 +106,7 @@ augroup cch
 augroup END
 
 " カレントディレクトリを移動
-autocmd BufEnter * if &buftype !=# 'acwrite' && &buftype !=# 'terminal' | lcd %:p:h | endif
+autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
 
 " completeoptの設定
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
