@@ -3,12 +3,12 @@ set linespace=2
 set notitle
 
 " OS毎の設定
-if has("mac")
+if has('mac')
 	set guifontwide=Menlo:h12
 	set guifont=Menlo\ Regular:h12
 	nnoremap <D-[> g;
 	nnoremap <D-]> g,
-elseif has("win32") || has("win64")
+elseif has('win32') || has('win64')
 	set directory=C:\WINDOWS\Temp
 	set renderoptions=type:directx
 	set ambiwidth=double
