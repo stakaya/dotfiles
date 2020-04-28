@@ -70,5 +70,11 @@ noremap tT :tabprevious<CR>
 noremap tn :tabnew<CR>
 noremap tc :tabclose<CR>
 
+" ウインドウのリサイズ
+noremap > <C-w>>
+noremap < <C-w><
+noremap - <C-w>-
+noremap + <C-w>+
+
 " ファイル全体の整形
 nnoremap == gg=Gg;
