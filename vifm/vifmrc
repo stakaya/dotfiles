@@ -68,7 +68,9 @@ endif
 
 if executable('open') 
   nnoremap o :!open -g %f<cr>
-elseif executable('xdg-open')
+endif
+
+if executable('xdg-open')
   nnoremap o :!xdg-open %f<cr>
 else
   nnoremap o :file &<cr>l
