@@ -64,7 +64,9 @@ nnoremap v :view<cr>
 " ファイルを開くコマンド
 if executable('start') 
   nnoremap o :!start %f<cr>
-elseif executable('open') 
+endif
+
+if executable('open') 
   nnoremap o :!open -g %f<cr>
 elseif executable('xdg-open')
   nnoremap o :!xdg-open %f<cr>

@@ -29,4 +29,8 @@ if not exist "%USERPROFILE%\vimfiles\dict" (
 	mklink /D "%USERPROFILE%\vimfiles\dict" "%DOTFILES%\vim\dict"
 )
 
+if not exist "%USERPROFILE%\.tmux.conf" (
+	mklink "%USERPROFILE%\.tmux.conf" "%DOTFILES%\tmux.conf" 
+)
+
 @pause
