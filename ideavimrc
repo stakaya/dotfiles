@@ -1,19 +1,23 @@
+set surround
 source ~/.vimrc.keymap
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap == :action ReformatCode<CR>
-vnoremap == :action ReformatCode<CR>
-nnoremap <Space><Space> :action SearchEverywhere<CR>
-nnoremap <Space>; :action RunAnything<CR>
-nnoremap gcc :action CommentByLineComment<CR>
-vnoremap gcc :action CommentByLineComment<CR>
-nnoremap <Space>/ :action CommentByLineComment<CR>
-vnoremap <Space>/ :action CommentByLineComment<CR>
 
-" インサート時のカーソル移動
-inoremap <A-j> <Down>
-inoremap <A-h> <Left>
-inoremap <A-k> <Up>
-inoremap <A-l> <Right>
-" inoremap <A-r> :action $Redo
-" inoremap <A-u> :action $Undo
+inoremap <C-]> <Esc>
+nnoremap <C-]> <Esc>
+vnoremap <C-]> <Esc>
+nnoremap gd :<C-u>action GotoDeclaration<CR>
+nnoremap g; :<C-u>action JumpToLastChange<CR>
+nnoremap g, :<C-u>action JumpToNextChange<CR>
+nnoremap == :<C-u>action ReformatCode<CR>
+vnoremap == :<C-u>action ReformatCode<CR>
+nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
+nnoremap <Space>; :<C-u>action RunAnything<CR>
+nnoremap <Space>g :<C-u>action FindInPath<CR>
+vnoremap <Space>g :<C-u>action FindInPath<CR>
+nnoremap <Space>* :<C-u>action Find<CR>
+vnoremap <Space>* :<C-u>action Find<CR>
+nnoremap gcc :<C-u>action CommentByLineComment<CR>
+vnoremap gcc :<C-u>action CommentByLineComment<CR>
+nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
+nnoremap <Space>r :<C-u>action ReplaceInPath<CR>
+vnoremap <Space>r :<C-u>action ReplaceInPath<CR>
 
