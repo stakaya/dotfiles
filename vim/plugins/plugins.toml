@@ -68,14 +68,18 @@ hook_add = '''
   		let s:dict = expand('~/.vim/dict')
 	endif
 
-	let g:eskk_dictionary = s:dict . '/SKK-JISYO.user'
-	let g:eskk_large_dictionary = s:dict . '/SKK-JISYO.L'
-  endif
+	let g:eskk#dictionary = {
+	\	'path': s:dict.'/SKK-JISYO.user',
+	\	'sorted': 0,
+	\	'encoding': 'utf-8',
+	\}
 
-  let g:eskk_debug = 0
-  let g:eskk_egg_like_newline = 1
-  let g:eskk_revert_henkan_style = "okuri"
-  let g:eskk_enable_completion = 0
+	let g:eskk#large_dictionary = {
+	\	'path': s:dict.'/SKK-JISYO.L',
+	\	'sorted': 1,
+	\	'encoding': 'euc-jp',
+	\}
+  endif
 '''
 
 [[plugins]]
