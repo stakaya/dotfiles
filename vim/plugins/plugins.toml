@@ -59,6 +59,26 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'tyru/eskk.vim'
+hook_add = '''
+  if has('vim_starting')
+	if has('win32') || has('win64')
+  		let s:dict = expand($HOME.'\vimfiles\dict') 
+	else 
+  		let s:dict = expand('~/.vim/dict')
+	endif
+
+	let g:eskk_dictionary = s:dict . '/SKK-JISYO.user'
+	let g:eskk_large_dictionary = s:dict . '/SKK-JISYO.L'
+  endif
+
+  let g:eskk_debug = 0
+  let g:eskk_egg_like_newline = 1
+  let g:eskk_revert_henkan_style = "okuri"
+  let g:eskk_enable_completion = 0
+'''
+
+[[plugins]]
 repo = 'kana/vim-fakeclip'
 
 [[plugins]]
