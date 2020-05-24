@@ -30,3 +30,7 @@ bindkey -v
 
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
+# vim でCtrl Keyが効かないのを修整
+stty stop undef
+stty start undef
