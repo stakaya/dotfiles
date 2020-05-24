@@ -1,4 +1,3 @@
-" ユーザ設定を保存
 set linespace=2
 set notitle
 
