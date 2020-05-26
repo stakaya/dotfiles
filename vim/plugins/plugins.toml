@@ -1,4 +1,10 @@
 # 起動時に読み込むプラグイン
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
 
 [[plugins]]
 repo = 'blueshirts/darcula'
@@ -11,10 +17,6 @@ repo = 'itchyny/lightline.vim'
 hook_add = '''
   let g:lightline = { 'colorscheme': 'wombat' }
 '''
-
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
 
 [[plugins]]
 repo = 'junegunn/fzf'

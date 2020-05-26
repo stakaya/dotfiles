@@ -10,7 +10,8 @@ if not exist "%USERPROFILE%\vimfiles\plugins" (
 	mklink /D "%USERPROFILE%\vimfiles\plugins" "%DOTFILES%\vim\plugins" 
 	mklink "%USERPROFILE%\vimfiles\plugins\plugins.toml" "%DOTFILES%\vim\plugins\plugins.toml"
 	mklink "%USERPROFILE%\vimfiles\plugins\plugins_lazy.toml" "%DOTFILES%\vim\plugins\plugins_lazy.toml"
-   	git clone git://github.com/Shougo/dein.vim "%USERPROFILE%\vimfiles\plugins\dein.vim"
+ 	mkdir "%USERPROFILE%\vimfiles\plugins\repos\github.com\Shougo\dein.vim"
+   	git clone git://github.com/Shougo/dein.vim "%USERPROFILE%\vimfiles\plugins\repos\github.com\Shougo\dein.vim"
 )
 
 if not exist "%USERPROFILE%\.vim" (
