@@ -70,17 +70,8 @@ hook_add = '''
   		let s:dict = expand('~/.vim/dict')
 	endif
 
-	let g:eskk#dictionary = {
-	\	'path': s:dict.'/SKK-JISYO.user',
-	\	'sorted': 0,
-	\	'encoding': 'utf-8',
-	\}
-
-	let g:eskk#large_dictionary = {
-	\	'path': s:dict.'/SKK-JISYO.L',
-	\	'sorted': 1,
-	\	'encoding': 'euc-jp',
-	\}
+	let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
+	let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
   endif
 '''
 

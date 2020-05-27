@@ -84,3 +84,24 @@ on_ft = ['markdown']
 [[plugins]]
 repo = 'shinchu/hz_ja.vim'
 on_event = 'VimEnter'
+
+# LSP関連
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_event = 'VimEnter'
