@@ -23,5 +23,6 @@ do
 		ln -s $HOME/dotfiles/$file $HOME/.config/$file
 	fi
 done
-[ ! -d ~/.vim/plugins ] && mkdir -p ~/.vim/plugins && git clone git://github.com/Shougo/dein.vim ~/.vim/plugins/dein.vim
 
+[ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim
+git clone git://github.com/Shougo/dein.vim ~/.vim/plugins/repos/github.com/Shougo/dein.vim

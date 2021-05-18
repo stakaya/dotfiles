@@ -15,9 +15,9 @@ if has('vim_starting')
   let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
   if has('win32') || has('win64')
-	set runtimepath+=$HOME\vimfiles\plugins\dein.vim
+	set runtimepath+=$HOME\vimfiles\plugins\plugins\repos\github.com\Shougo\dein.vim
   else 
-	set runtimepath+=~/.vim/plugins/dein.vim/
+	set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
   endif
 endif
 

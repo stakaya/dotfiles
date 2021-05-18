@@ -12,6 +12,9 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+" vv で矩形選択
+nnoremap vv <C-V>
+
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
 
@@ -28,9 +31,6 @@ cmap <C-V> <C-r>+
 " 範囲選択と貼りつけ
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
-
-" CTRL-Q で範囲選択
-noremap <C-Q> <C-V>
 
 " CTRL-S でセーブ
 noremap <C-S> :update<CR>
@@ -69,6 +69,12 @@ noremap tt :tabnext<CR>
 noremap tT :tabprevious<CR>
 noremap tn :tabnew<CR>
 noremap tc :tabclose<CR>
+
+" ウインドウのリサイズ
+noremap <S-Left> <C-w><
+noremap <S-Right> <C-w>>
+noremap <S-Down> <C-w>+
+noremap <S-Up> <C-w>-
 
 " ファイル全体の整形
 nnoremap == gg=Gg;

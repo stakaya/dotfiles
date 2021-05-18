@@ -1,5 +1,4 @@
 # 起動時に読み込むプラグイン
-
 [[plugins]]
 repo = 'blueshirts/darcula'
 hook_add = '''
@@ -13,10 +12,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
-
-[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
@@ -26,6 +21,7 @@ repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
   nnoremap <space>; :Commands<CR>
+  nnoremap <space>w :Buffers<CR>
   nnoremap <space><space> :call FzfOmniFiles()<CR>
   function! FzfOmniFiles()
 	  let is_git = system('git status')
@@ -55,6 +51,21 @@ hook_add = '''
   let g:vimfiler_safe_mode_by_default=0
   let g:netrw_liststyle=3
   nnoremap <silent> <space>e :VimFilerExplorer<CR> 
+'''
+
+[[plugins]]
+repo = 'tyru/eskk.vim'
+hook_add = '''
+  if has('vim_starting')
+	if has('win32') || has('win64')
+  		let s:dict = expand($HOME.'\vimfiles\dict') 
+	else 
+  		let s:dict = expand('~/.vim/dict')
+	endif
+
+	let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
+	let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+  endif
 '''
 
 [[plugins]]

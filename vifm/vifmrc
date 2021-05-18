@@ -9,30 +9,31 @@ set incsearch
 set nofollowlinks
 set nowrap
 set scrolloff=4
-set sizefmt=units:iec,precision:3
 set smartcase
 set sortnumbers
 set statusline="  %t  %= %A %10u:%-7g %15s %20d "
-set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 set syscalls
 set timefmt=%m/%d\ %H:%M
 set trash
 set undolevels=100
-set vicmd=vi
+set vicmd=vim
 set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp
 set wildmenu
-set wildstyle=popup
 
-if !has('win')
-  set slowfs=curlftpfs
-  set classify='📁 :dir:/,💡 :exe:,📓 :reg:,🔗 :link:'
+" for mac
+if executable('defaults') 
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
-  set classify+='📚 ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+  set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
+  set classify+='📚 ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
   set classify+='📢 ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
   set classify+='📹 ::*.avi,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
-  set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
+  set classify='📁 :dir:/,💡 :exe:,📓 :reg:,🔗 :link:'
+  set sizefmt=units:iec,precision:3
+  set slowfs=curlftpfs
+  set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+  set wildstyle=popup
 endif
 
 " コマンド
@@ -61,11 +62,15 @@ nnoremap V v
 nnoremap v :view<cr>
 
 " ファイルを開くコマンド
+if executable('start') 
+  nnoremap o :!start %f<cr>
+endif
+
 if executable('open') 
   nnoremap o :!open -g %f<cr>
-elseif executable('start') 
-  nnoremap o :!start %f<cr>
-elseif executable('xdg-open')
+endif
+
+if executable('xdg-open')
   nnoremap o :!xdg-open %f<cr>
 else
   nnoremap o :file &<cr>l
