@@ -131,6 +131,9 @@ vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
 " カウント
 vnoremap <leader>count g<C-a> 
 
+" 文字コードをUTF-8にする
+nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
+
 " grepコマンド
 nnoremap <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
