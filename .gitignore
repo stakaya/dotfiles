@@ -5,6 +5,9 @@ vim/*
 # mac
 .DS_Store
 
+# windows
+Thumbs.db
+
 # IDEA
 .idea/*
 *.iws
