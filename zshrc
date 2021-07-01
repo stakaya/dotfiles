@@ -22,7 +22,7 @@ fi
 export LSCOLORS=gxfxcxdxbxGxDxabagacad
 
 # Alias
-alias brewupdate='brew update && brew cask upgrade'
+alias brewupdate='brew cleanup && brew update && brew cask upgrade'
 alias vi='nvim'
 
 # Keybind
