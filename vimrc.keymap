@@ -77,4 +77,4 @@ noremap <S-Down> <C-w>+
 noremap <S-Up> <C-w>-
 
 " ファイル全体の整形
-nnoremap == gg=Gg;
+nnoremap == ggvG$=<C-o><C-o>
