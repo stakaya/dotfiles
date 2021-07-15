@@ -12,6 +12,9 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'kana/vim-fakeclip'
+
+[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
@@ -69,10 +72,14 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'kana/vim-fakeclip'
+repo = 'andymass/vim-matchup'
 
 [[plugins]]
-repo = 'tpope/vim-surround'
+repo = 'tomtom/tcomment_vim'
+hook_add = '''
+  nnoremap <silent> <D-/> :TComment<CR>
+  vnoremap <silent> <D-/> :TComment<CR>
+'''
 
 [[plugins]]
 repo = 'tpope/vim-abolish'
@@ -82,11 +89,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'andymass/vim-matchup'
-
-[[plugins]]
-repo = 'tomtom/tcomment_vim'
+repo = 'tpope/vim-surround'
 hook_add = '''
-  nnoremap <silent> <D-/> :TComment<CR>
-  vnoremap <silent> <D-/> :TComment<CR>
 '''
+

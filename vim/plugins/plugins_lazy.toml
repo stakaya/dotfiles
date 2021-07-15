@@ -41,7 +41,7 @@ hook_source = '''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-on_event = 'VimEnter'
+on_ft = ['ruby','php']
 hook_source = '''
   autocmd FileType php compiler php
   autocmd FileType php setlocal makeprg=php\ -l\ %
@@ -51,6 +51,10 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'koron/dicwin-vim'
@@ -78,14 +82,40 @@ depends = 'mattn/webapi-vim'
 on_cmd = 'Gist'
 
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-
-[[plugins]]
 repo = 'shinchu/hz_ja.vim'
 on_event = 'VimEnter'
 
 # LSP関連
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_event = 'VimEnter'
+hook_source = '''
+if empty(globpath(&rtp, 'autoload/lsp.vim'))
+  finish
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <f2> <plug>(lsp-rename)
+  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_popup_delay = 200
+let g:lsp_text_edit_enabled = 1
+'''
+
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
 on_event = 'VimEnter'
@@ -95,7 +125,15 @@ repo = 'prabirshrestha/vim-lsp'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'mattn/vim-lsp-settings'
+repo = 'mattn/vim-lsp-icons'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
 on_event = 'VimEnter'
 
 [[plugins]]
