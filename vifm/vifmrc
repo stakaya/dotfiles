@@ -38,7 +38,7 @@ endif
 
 " コマンド
 command! df df -h %m 2> /dev/null
-command! zip zip -r %f.zip %f
+command! zip zip -r %f.zip %f -x "*.DS_Store"
 command! run !! ./%f
 command! make !!make %a
 command! vimgrep vi "+grep %a"
