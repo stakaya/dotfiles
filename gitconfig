@@ -1,0 +1,18 @@
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[user]
+	name = "Shuichi Takaya"
+	email = takayashuichi-git@yahoo.co.jp
+[github]
+	user = stakaya
+[credential]
+	helper = osxkeychain
+[url "github:"]
+    InsteadOf = https://github.com/
+    InsteadOf = git@github.com:
+[url "gitlab:"]
+    InsteadOf = https://gitlab.com/
+    InsteadOf = git@gitlab.com:

@@ -1,5 +1,7 @@
 #!/bin/zsh
 ln -s $HOME/dotfiles/zshrc $HOME/.zshrc
+ln -s $HOME/dotfiles/gitconfig $HOME/.gitconfig
+ln -s $HOME/dotfiles/sshconfig $HOME/.ssh/config
  
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
  
