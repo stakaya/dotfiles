@@ -29,19 +29,19 @@ hook_source = '''
 
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
-on_ft = ['javascript','ruby','php','c','cpp','java','kotlin']
+on_ft = ['typescript','javascript','ruby','php','c','cpp','java','kotlin']
 hook_source = '''
   let g:indent_guides_auto_colors=0
   let g:indent_guides_enable_on_vim_startup=1
   let g:indent_guides_start_level=2
   let g:indent_guides_guide_size=1
-  autocmd VimEnter,Colorscheme *.php,*.c,*.cpp,*.java,*.kt,*.js :hi IndentGuidesOdd  guibg=#2f2f2f ctermbg=236
-  autocmd VimEnter,Colorscheme *.php,*.c,*.cpp,*.java,*.kt,*.js :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
+  autocmd VimEnter,Colorscheme *.php,*.c,*.cpp,*.java,*.kt,*.js,*.ts :hi IndentGuidesOdd  guibg=#2e2e2e ctermbg=236
+  autocmd VimEnter,Colorscheme *.php,*.c,*.cpp,*.java,*.kt,*.js,*.ts :hi IndentGuidesEven guibg=#2f2f2f ctermbg=236
 '''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-on_ft = ['ruby','php']
+on_ft = ['php']
 hook_source = '''
   autocmd FileType php compiler php
   autocmd FileType php setlocal makeprg=php\ -l\ %
