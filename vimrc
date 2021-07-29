@@ -99,7 +99,7 @@ filetype plugin indent on
 " 拡張子によってタブ幅を変更
 augroup fileTypeIndent
 	autocmd!
-	autocmd BufNewFile,BufRead *.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc* setlocal tabstop=2 shiftwidth=2
+	autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc* setlocal tabstop=2 shiftwidth=2
   autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
 augroup END
 
