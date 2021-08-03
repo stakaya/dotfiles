@@ -127,6 +127,9 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
 
+" 画面移動
+noremap <silent> <leader>w :Buffers<CR>
+
 " 文字置換   
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>

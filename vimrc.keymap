@@ -12,8 +12,11 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+" ESC の代わり
+inoremap <silent> jj <ESC>
+
 " vv で矩形選択
-nnoremap vv <C-V>
+nnoremap <silent> vv <C-V>
 
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
