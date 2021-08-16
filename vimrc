@@ -100,7 +100,7 @@ filetype plugin indent on
 augroup fileTypeIndent
 	autocmd!
 	autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc* setlocal tabstop=2 shiftwidth=2
-  autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
+	autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
 augroup END
 
 " 設定ファイルを編集コマンド 
@@ -108,8 +108,8 @@ command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 
 " カレントウィンドウにのみ罫線を引く
-augroup cch
-	autocmd! cch
+augroup cursorLine
+	autocmd!
 	autocmd WinLeave * set nocursorline
 	autocmd WinEnter,BufRead * set cursorline
 augroup END
@@ -126,9 +126,6 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
-
-" 画面移動
-noremap <leader>w :Buffers<CR>
 
 " 文字置換   
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>

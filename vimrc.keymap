@@ -1,22 +1,8 @@
-" 日本語キーボード互換
-nnoremap ( *
-nnoremap ! ~
-nnoremap & ^
-vnoremap ( *
-vnoremap ! ~
-vnoremap & ^
-
 " コロンとセミコロンを入れ替える
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
-
-" ESC の代わり
-inoremap <silent> jj <ESC>
-
-" vv で矩形選択
-nnoremap <silent> vv <C-V>
 
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
@@ -57,8 +43,8 @@ noremap _ :split<CR><C-w>w
 noremap <Bar> :vsplit<CR><C-w>w
 
 " Tab でウインドウの切り替え
-noremap <Tab> <C-W>w
-onoremap <Tab> <C-C><C-W>w
+noremap <Tab> <C-w>w
+onoremap <Tab> <C-C><C-w>w
 
 " ウインドウの移動コマンド
 map th <C-w>h
@@ -78,6 +64,16 @@ noremap <S-Left> <C-w><
 noremap <S-Right> <C-w>>
 noremap <S-Down> <C-w>+
 noremap <S-Up> <C-w>-
+
+"履歴移動コマンド
+nnoremap <silent> H <C-o>
+nnoremap <silent> L <C-i>
+
+" ESC の代わり
+inoremap <silent> jj <ESC>
+
+" vv で矩形選択
+nnoremap <silent> vv <C-V>
 
 " ファイル全体の整形
 nnoremap == ggvG$=<C-o><C-o>

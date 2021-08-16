@@ -39,7 +39,7 @@ if has('xim') || has('multi_byte_ime')
 	highlight CursorIM guifg=NONE guibg=#ecbcbc
 endif
 
-" インサートモードから抜ける時、IMEをOFFにする
+" インサートモードから抜ける時にIMEをOFFにする
 augroup InsModeAu
 	autocmd!
 	autocmd InsertEnter,CmdwinEnter * set noimdisable
