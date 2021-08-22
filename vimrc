@@ -1,8 +1,8 @@
 " spaceをLeaderに割当
-let mapleader = "\<space>"
+let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
-source $HOME/dotfiles/vimrc.keymap 
+source $HOME/dotfiles/vimrc.keymap
 
 if !has('nvim')
 	source $VIMRUNTIME/defaults.vim
@@ -16,20 +16,20 @@ if has('vim_starting')
 
 	if has('win32') || has('win64')
 		set runtimepath+=$HOME\vimfiles\plugins\plugins\repos\github.com\Shougo\dein.vim
-	else 
+	else
 		set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
 	endif
 endif
 
 if has('win32') || has('win64')
-	let s:plugins = expand($HOME.'\vimfiles\plugins') 
+	let s:plugins = expand($HOME.'\vimfiles\plugins')
 
 	" WindowsでPATHに$VIMが含まれていない時に
 	" currentのexeを見つけ出せないので追加
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
 	endif
-else 
+else
 	let s:plugins = expand('~/.vim/plugins')
 endif
 
@@ -62,7 +62,7 @@ set formatoptions+=mMj
 set noshowmode      " モードを表示しない
 set nofoldenable 		" 折りたたみしない
 set laststatus=2  	" ステータス行を表示
-set noswapfile     	" スワップファイル不要 
+set noswapfile     	" スワップファイル不要
 set vb t_vb=     		" ビープ音を鳴らさない
 set splitbelow  		" 新規ウインドウを下に表示
 set cursorline 			" カーソル行をハイライト
@@ -70,7 +70,7 @@ set hlsearch 				" ハイライトサーチ
 set history=50			" 履歴の保持数
 set ignorecase 			" 検索時、大文字・小文字を気にせず
 set iminsert=0      " IMEをデフォルトオフ
-set imsearch=-1     " IMEをデフォルトオフ 
+set imsearch=-1     " IMEをデフォルトオフ
 set incsearch				" インクリメンタルサーチ
 set nowrap          " ワープしない
 set number          " 行番号表示
@@ -78,12 +78,12 @@ set ruler		    		" カーソル行を常に表示
 set showcmd		    	" コマンドの候補を表示
 set virtualedit=all " カーソル位置を自由に設定する
 set mouse=a					" マウスを使う
-set shiftwidth=4    " シフト幅                   
+set shiftwidth=4    " シフト幅
 set tabstop=4       " タブ幅
 set autoindent     	" 自動インデント
 set smartindent    	" プログラミング用インデント
 
-" vimgrepをripgrepに入れ替える 
+" vimgrepをripgrepに入れ替える
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ --no-heading
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
@@ -103,7 +103,7 @@ augroup fileTypeIndent
 	autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
 augroup END
 
-" 設定ファイルを編集コマンド 
+" 設定ファイルを編集コマンド
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 
@@ -127,18 +127,18 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
 
-" 文字置換   
+" 文字置換
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
-" 範囲選択文字置換   
+" 範囲選択文字置換
 vnoremap <C-r> :s///g<Left><Left><Left>
 
 " 合計値を計算
-vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR> 
+vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
-vnoremap <leader>count g<C-a> 
+vnoremap <leader>count g<C-a>
 
 " 文字コードをUTF-8にする
 nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
@@ -147,8 +147,8 @@ nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 nnoremap <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
 " キーワードをgrep
-nnoremap <silent> <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
-vnoremap <silent> <leader>g "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR> 
+nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
+vnoremap <silent> <leader>* "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 
 function! GrepGitFiles(keyword)
 	let is_git = system('git status')
