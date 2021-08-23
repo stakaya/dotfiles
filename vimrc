@@ -144,7 +144,8 @@ vnoremap <leader>count g<C-a>
 nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 
 " grepコマンド
-nnoremap <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+vnoremap <leader>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
 
 " キーワードをgrep
 nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
