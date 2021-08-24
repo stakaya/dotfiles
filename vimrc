@@ -67,7 +67,7 @@ set vb t_vb=     		" ビープ音を鳴らさない
 set splitbelow  		" 新規ウインドウを下に表示
 set cursorline 			" カーソル行をハイライト
 set hlsearch 				" ハイライトサーチ
-set history=50			" 履歴の保持数
+set history=100			" 履歴の保持数
 set ignorecase 			" 検索時、大文字・小文字を気にせず
 set iminsert=0      " IMEをデフォルトオフ
 set imsearch=-1     " IMEをデフォルトオフ
@@ -96,9 +96,10 @@ set statusline+=%=%l:%c
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
 
-" 拡張子によってタブ幅を変更
+" 拡張子によって変更
 augroup fileTypeIndent
 	autocmd!
+	autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap
 	autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc* setlocal tabstop=2 shiftwidth=2
 	autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
 augroup END
