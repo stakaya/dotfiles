@@ -67,7 +67,6 @@ set vb t_vb=     		" ビープ音を鳴らさない
 set splitbelow  		" 新規ウインドウを下に表示
 set cursorline 			" カーソル行をハイライト
 set hlsearch 				" ハイライトサーチ
-set history=100			" 履歴の保持数
 set ignorecase 			" 検索時、大文字・小文字を気にせず
 set iminsert=0      " IMEをデフォルトオフ
 set imsearch=-1     " IMEをデフォルトオフ
