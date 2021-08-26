@@ -2,7 +2,7 @@
 if [[ -e ~/.zsh/zsh-completions ]]; then
 	fpath=(~/.zsh/zsh-completions $fpath)
 
-	autoload -U compinit; compinit -u 
+	autoload -U compinit; compinit -u
 	zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 		/usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
 		/usr/local/git/bin
@@ -22,8 +22,10 @@ fi
 export LSCOLORS=gxfxcxdxbxGxDxabagacad
 
 # Alias
-alias brewupdate='brew cleanup && brew update && brew cask upgrade'
 alias vi='nvim'
+alias brewclean='brew cleanup && brew update && brew upgrade --cask'
+alias apkcheck='jarsigner -verify -verbose -certs $1'
+alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
 
 # Keybind
 bindkey -v
