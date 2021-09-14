@@ -51,36 +51,34 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" エンコーディング指定
-set encoding=utf-8
 set ambiwidth=double
+set autoindent     	   " 自動インデント
+set cursorline 			   " カーソル行をハイライト
+set encoding=utf-8     " 文字コードはUTF8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
 set fileformats=unix,dos,mac
-
-" テキスト挿入中の自動折り返しを日本語に対応させる
-set formatoptions+=mMj
-set noshowmode      " モードを表示しない
-set nofoldenable 		" 折りたたみしない
-set laststatus=2  	" ステータス行を表示
-set noswapfile     	" スワップファイル不要
-set vb t_vb=     		" ビープ音を鳴らさない
-set splitbelow  		" 新規ウインドウを下に表示
-set cursorline 			" カーソル行をハイライト
-set hlsearch 				" ハイライトサーチ
-set ignorecase 			" 検索時、大文字・小文字を気にせず
-set iminsert=0      " IMEをデフォルトオフ
-set imsearch=-1     " IMEをデフォルトオフ
-set incsearch				" インクリメンタルサーチ
-set nowrap          " ワープしない
-set number          " 行番号表示
-set ruler		    		" カーソル行を常に表示
-set showcmd		    	" コマンドの候補を表示
-set virtualedit=all " カーソル位置を自由に設定する
-set mouse=a					" マウスを使う
-set shiftwidth=4    " シフト幅
-set tabstop=4       " タブ幅
-set autoindent     	" 自動インデント
-set smartindent    	" プログラミング用インデント
+set formatoptions+=mMj " テキスト挿入中の自動折り返しを日本語に対応させる
+set hlsearch 				   " ハイライトサーチ
+set ignorecase 			   " 検索時、大文字・小文字を気にせず
+set iminsert=0         " IMEをデフォルトオフ
+set imsearch=-1        " IMEをデフォルトオフ
+set incsearch				   " インクリメンタルサーチ
+set laststatus=2  	   " ステータス行を表示
+set mouse=a					   " マウスを使う
+set nofoldenable 		   " 折りたたみしない
+set nolist             " 制御コード不可視
+set noshowmode         " モードを表示しない
+set noswapfile     	   " スワップファイル不要
+set nowrap             " ワープしない
+set number             " 行番号表示
+set ruler		    		   " カーソル行を常に表示
+set shiftwidth=4       " シフト幅
+set showcmd		    	   " コマンドの候補を表示
+set smartindent    	   " プログラミング用インデント
+set splitbelow  		   " 新規ウインドウを下に表示
+set tabstop=4          " タブ幅
+set vb t_vb=     		   " ビープ音を鳴らさない
+set virtualedit=all    " カーソル位置を自由に設定する
 
 " vimgrepをripgrepに入れ替える
 if executable('rg')
