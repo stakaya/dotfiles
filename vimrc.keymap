@@ -15,7 +15,7 @@ vnoremap <C-C> "+y
 
 " CTRL-V でペースト
 map <C-V> "+gP
-cmap <C-V> <C-r>+
+cmap <C-V> <C-R>+
 
 " 範囲選択と貼りつけ
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
@@ -39,18 +39,18 @@ snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
 " 画面分割
-noremap _ :split<CR><C-w>w
-noremap <Bar> :vsplit<CR><C-w>w
+noremap _ :split<CR><C-W>w
+noremap <BAR> :vsplit<CR><C-W>w
 
 " Tab でウインドウの切り替え
-noremap <Tab> <C-w>w
-onoremap <Tab> <C-C><C-w>w
+noremap <TAB> <C-W>w
+onoremap <TAB> <C-C><C-W>w
 
 " ウインドウの移動コマンド
-map th <C-w>h
-map tk <C-w>k
-map tj <C-w>j
-map tl <C-w>l
+map th <C-W>h
+map tk <C-W>k
+map tj <C-W>j
+map tl <C-W>l
 
 noremap tb :bnext<CR>
 noremap tB :bprev<CR>
@@ -60,20 +60,21 @@ noremap tn :tabnew<CR>
 noremap tc :tabclose<CR>
 
 " ウインドウのリサイズ
-noremap <S-Left> <C-w><
-noremap <S-Right> <C-w>>
-noremap <S-Down> <C-w>+
-noremap <S-Up> <C-w>-
+noremap <S-LEFT> <C-W><
+noremap <S-RIGHT> <C-W>>
+noremap <S-DOWN> <C-W>+
+noremap <S-UP> <C-W>-
 
 "履歴移動コマンド
-nnoremap <silent> H <C-o>
-nnoremap <silent> L <C-i>
+nnoremap <silent> H <C-O>
+nnoremap <silent> L <C-I>
 
 " ESC の代わり
 inoremap <silent> jj <ESC>
+inoremap <S-CR> <ESC>
 
 " vv で矩形選択
 nnoremap <silent> vv <C-V>
 
 " ファイル全体の整形
-nnoremap == ggvG$=<C-o><C-o>
+nnoremap == ggvG$=<C-O><C-O>
