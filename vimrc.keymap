@@ -71,7 +71,8 @@ nnoremap <silent> L <C-I>
 
 " ESC の代わり
 inoremap <silent> jj <ESC>
-inoremap <S-CR> <ESC>
+inoremap <silent> <S-CR> <ESC>
+vnoremap <silent> <S-CR> <ESC>
 
 " vv で矩形選択
 nnoremap <silent> vv <C-V>

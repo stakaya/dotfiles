@@ -1,0 +1,129 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.activityBar.visible": true,
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 13,
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "diffEditor.renderSideBySide": false,
+    "vim.insertModeKeyBindings": [
+        "<C-n>"
+    ],
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/dotfiles/nvim/init.vim",
+    "vscode-neovim.highlightGroups.highlights": {
+
+
+        "Directory": "vim",
+        "IncSearch": {
+            "backgroundColor": "theme.editor.findMatchBackground",
+            "borderColor": "theme.editor.findMatchBorder"
+        },
+        "Search": {
+            "backgroundColor": "theme.editor.findMatchHighlightBackground",
+            "borderColor": "theme.editor.findMatchHighlightBorder"
+        },
+        "Visual": {
+            "backgroundColor": "theme.editor.selectionBackground"
+        },
+        "Conceal": "vim",
+        "Substitute": "vim"
+    },
+    "vscode-neovim.useCtrlKeysForInsertMode": false,
+    "vscode-neovim.useCtrlKeysForNormalMode": false,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "vscode-neovim.highlightGroups.ignoreHighlights": [
+
+        "SpecialKey",
+        "EndOfBuffer",
+        "TermCursor",
+        "TermCursorNC",
+        "NonText",
+        "ErrorMsg",
+        "MoreMsg",
+        "ModeMsg",
+        "LineNr",
+        "CursorLineNr",
+        "Question",
+        "StatusLine",
+        "StatusLineNC",
+        "VertSplit",
+        "Title",
+        "VisualNC",
+        "WarningMsg",
+        "WildMenu",
+        "^Diff",
+        "Sign",
+        "SignColumn",
+        "^Spell",
+        "^Pmenu",
+        "^Tab",
+        "^Cursor",
+        "ColorColumn",
+        "QuickFixLine",
+        "Whitespace",
+        "NormalNC",
+        "Normal",
+        "NormalFloat",
+        "MsgSeparator",
+        "MsgArea",
+        "^RedrawDebug",
+        "Cursor",
+        "lCursor",
+        "MatchParen",
+        "^Nvim",
+        "Operator",
+        "Delimiter",
+        "Identifier",
+        "SpecialChar",
+        "Number",
+        "Type",
+        "String",
+        "Error",
+        "Comment",
+        "Constant",
+        "Special",
+        "Statement",
+        "PreProc",
+        "Underlined",
+        "Ignore",
+        "Todo",
+        "Character",
+        "Boolean",
+        "Float",
+        "Function",
+        "Conditional",
+        "Repeat",
+        "Label",
+        "Keyword",
+        "Exception",
+        "Include",
+        "Define",
+        "Macro",
+        "PreCondit",
+        "StorageClass",
+        "Structure",
+        "Typedef",
+        "Tag",
+        "SpecialComment",
+        "Debug",
+        "Folded",
+        "FoldColumn"
+    ],
+    "terminal.integrated.defaultProfile.osx": "/bin/zsh (migrated)",
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.automationShell.osx": "zsh",
+    "terminal.integrated.profiles.osx": {
+        "/bin/zsh (migrated)": {
+            "path": "/bin/zsh",
+            "args": [
+                "-l"
+            ]
+        }
+    },
+    "vscode-neovim.logPath": "/tmp/nvim.log",
+    "workbench.colorTheme": "Darcula"
+
+}
