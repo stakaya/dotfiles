@@ -1,5 +1,6 @@
 scriptencoding utf-8
 set clipboard=unnamed
+set inccommand=split
 
 if has('win32') || has('win64')
   source $HOME\_vimrc
