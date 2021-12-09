@@ -21,8 +21,8 @@ set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp
 set wildmenu
 
-" for mac
-if executable('defaults') 
+" for mac of wsl
+if executable('defaults') || executable('clip.exe')
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
   set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
@@ -44,10 +44,10 @@ command! make !!make %a
 command! vimgrep vi "+grep %a"
 command! reload :write | restart
 
-if executable('mvim') 
+if executable('mvim')
   command! config :!mvim --remote-tab-silent $MYVIFMRC
   command! diff :!mvim -d %f %F
-elseif executable('gvim') 
+elseif executable('gvim')
   command! config :!gvim --remote-tab-silent $MYVIFMRC
   command! diff :!gvim -d %f %F
 else
@@ -62,11 +62,11 @@ nnoremap V v
 nnoremap v :view<cr>
 
 " ファイルを開くコマンド
-if executable('start') 
+if executable('start.exe')
   nnoremap o :!start %f<cr>
 endif
 
-if executable('open') 
+if executable('open')
   nnoremap o :!open -g %f<cr>
 endif
 
@@ -77,10 +77,10 @@ else
 endif
 
 " クリップボードへパスをコピー
-if executable('pbcopy') 
+if executable('pbcopy')
   nnoremap yp :!printf %d | pbcopy<cr>
   nnoremap yf :!printf %c:p | pbcopy<cr>
-elseif executable('clip') 
+elseif executable('clip.exe')
   nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
   nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
 elseif executable('xclip')
@@ -89,14 +89,14 @@ elseif executable('xclip')
 endif
 
 " Quick Look でプレビュー
-if executable('qlmanage') 
+if executable('qlmanage')
   nnoremap q :!qlmanage -p %f > /dev/null 2>&1<cr>
 endif
 
 " gui vim を設定する
-if executable('mvim') 
+if executable('mvim')
   nnoremap e :!mvim --remote-tab-silent %f<cr>
-elseif executable('gvim') 
+elseif executable('gvim')
   nnoremap e :!gvim --remote-tab-silent %f<cr>
 else
   nnoremap e :!vi %f<cr>

@@ -29,6 +29,7 @@ if has('win32') || has('win64')
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
 	endif
+
 else
 	let s:plugins = expand('~/.vim/plugins')
 endif
@@ -112,6 +113,14 @@ augroup Binary
 	autocmd BufWritePost *.bin if &bin | %!xxd
 	autocmd BufWritePost *.bin set nomod | endif
 augroup END
+
+" for WSL
+if !has('clip.exe')
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+endif
 
 " 設定ファイルを編集コマンド
 command! Reload source $HOME/dotfiles/vimrc
