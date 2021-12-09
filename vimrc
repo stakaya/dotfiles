@@ -115,7 +115,7 @@ augroup Binary
 augroup END
 
 " for WSL
-if !has('clip.exe')
+if executable('clip.exe')
   augroup Yank
     autocmd!
     autocmd TextYankPost * :call system('clip.exe', @")
