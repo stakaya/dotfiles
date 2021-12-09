@@ -15,6 +15,7 @@
     "vscode-neovim.highlightGroups.highlights": {
 
 
+
         "Directory": "vim",
         "IncSearch": {
             "backgroundColor": "theme.editor.findMatchBackground",
@@ -33,6 +34,7 @@
     "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
     "vscode-neovim.mouseSelectionStartVisualMode": true,
     "vscode-neovim.highlightGroups.ignoreHighlights": [
+
 
         "SpecialKey",
         "EndOfBuffer",
@@ -123,6 +125,10 @@
     },
     "vscode-neovim.logPath": "/tmp/nvim.log",
     "workbench.colorTheme": "Darcula",
-    "vscode-neovim.useWSL": true
+    "vscode-neovim.useWSL": true,
+    "svelte.enable-ts-plugin": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true
 
 }
