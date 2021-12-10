@@ -20,3 +20,4 @@ vifm/vifminfo.json
 # nvim
 nvim/plugins/*
 !.gitkeep
+nvim/dict

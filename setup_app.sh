@@ -1,7 +1,7 @@
 #!/bin/bash
 
+# link for dot files
 DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf)
-
 for file in ${DOT_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
@@ -10,12 +10,13 @@ do
 	fi
 done
 
-CONFIG_FILES=(nvim vifm)
-
+# make config directory
 if [ ! -e ~/.config ]; then
 	mkdir -p ~/.config
 fi
 
+# link for config directory
+CONFIG_FILES=(nvim vifm)
 for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
@@ -24,5 +25,9 @@ do
 	fi
 done
 
+# link dictionary file
+ln -s $HOME/dotfiles/vim/dict $HOME/dotfiles/nvim/dict
+
+# down load plugin control
 [ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim
 git clone git://github.com/Shougo/dein.vim ~/.vim/plugins/repos/github.com/Shougo/dein.vim
