@@ -13,4 +13,10 @@ Thumbs.db
 *.iws
 *.iml
 *.ipr
+
+# vifm
 vifm/vifminfo.json
+
+# nvim
+nvim/plugins/*
+!.gitkeep

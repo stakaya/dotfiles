@@ -15,30 +15,35 @@ if has('vim_starting')
 	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
 	if has('win32') || has('win64')
-		set runtimepath+=$HOME\vimfiles\plugins\plugins\repos\github.com\Shougo\dein.vim
+		set runtimepath+=$HOME\vimfiles\plugins\repos\github.com\Shougo\dein.vim
 	else
 		set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
 	endif
 endif
 
 if has('win32') || has('win64')
-	let s:plugins = expand($HOME.'\vimfiles\plugins')
+	let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
 
 	" WindowsでPATHに$VIMが含まれていない時に
 	" currentのexeを見つけ出せないので追加
 	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
 		let $PATH = $VIM . ';' . $PATH
 	endif
-
 else
-	let s:plugins = expand('~/.vim/plugins')
+	let s:plugin_conf = expand('~/.vim/plugins')
+endif
+
+if has('nvim')
+	let s:pluins = expand('~/.config/nvim/plugins')
+else
+	let s:pluins = expand('~/.vim/plugins')
 endif
 
 " プラグインの読み込み
-if dein#load_state(s:plugins)
-	call dein#begin(s:plugins)
-	call dein#load_toml(s:plugins . '/plugins.toml', {'lazy': 0})
-	call dein#load_toml(s:plugins . '/plugins_lazy.toml', {'lazy': 1})
+if dein#load_state(s:pluins)
+	call dein#begin(s:pluins)
+	call dein#load_toml(s:plugin_conf . '/plugins.toml', {'lazy': 0})
+	call dein#load_toml(s:plugin_conf . '/plugins_lazy.toml', {'lazy': 1})
 	call dein#end()
 	call dein#save_state()
 endif
