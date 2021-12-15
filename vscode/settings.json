@@ -129,6 +129,7 @@
     "svelte.enable-ts-plugin": true,
     "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
     "git.enableSmartCommit": true,
-    "git.autofetch": true
+    "git.autofetch": true,
+    "git.confirmSync": false
 
 }
