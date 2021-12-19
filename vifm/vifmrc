@@ -21,8 +21,8 @@ set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp
 set wildmenu
 
-" for mac of wsl
-if executable('defaults') || executable('clip.exe')
+" except windows
+if executable('pbcopy') || executable('clip.exe') || executable('xclip')
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
   set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
