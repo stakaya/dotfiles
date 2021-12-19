@@ -125,6 +125,11 @@ if executable('clip.exe')
     autocmd!
     autocmd TextYankPost * :call system('clip.exe', @")
   augroup END
+elseif executable('xclip')
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('xclip', @")
+  augroup END
 endif
 
 " 設定ファイルを編集コマンド
