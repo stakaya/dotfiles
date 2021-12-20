@@ -22,7 +22,7 @@ set vimhelp
 set wildmenu
 
 " except windows
-if executable('pbcopy') || executable('clip.exe') || executable('xclip')
+if has('mac') || has('unix')
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
   set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
@@ -83,6 +83,9 @@ if executable('pbcopy')
 elseif executable('clip.exe')
   nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
   nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+elseif executable('wl-copy')
+  nnoremap yp :!echo %d | wl-copy<cr>
+  nnoremap yf :!echo %c:p | wl-copy<cr>
 elseif executable('xclip')
   nnoremap yp :!echo %d | xclip %i<cr>
   nnoremap yf :!echo %c:p | xclip %i<cr>
