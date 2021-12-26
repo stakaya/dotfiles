@@ -130,6 +130,6 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/home/linuxbrew/.linuxbrew/bin/nvim",
     "git.enableSmartCommit": true,
     "git.autofetch": true,
-    "git.confirmSync": false
-
+    "git.confirmSync": false,
+    "vscode-neovim.neovimInitVimPaths.linux": "~/dotfiles/nvim/init.vim"
 }
