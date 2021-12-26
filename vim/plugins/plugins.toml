@@ -93,3 +93,6 @@ repo = 'tpope/vim-surround'
 hook_add = '''
 '''
 
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
