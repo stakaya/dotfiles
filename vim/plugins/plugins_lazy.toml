@@ -10,11 +10,18 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'tyru/urilib.vim'
+repo = 'koron/dicwin-vim'
 on_event = 'VimEnter'
+hook_source = '''
+  let g:dicwin_mapleader = "\<C-k>"
+'''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'tyru/urilib.vim'
 on_event = 'VimEnter'
 
 [[plugins]]
@@ -41,13 +48,6 @@ repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 
 [[plugins]]
-repo = 'koron/dicwin-vim'
-on_event = 'VimEnter'
-hook_source = '''
-let g:dicwin_mapleader = "\<C-k>"
-'''
-
-[[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['typescript']
 
@@ -57,7 +57,7 @@ on_ft = ['typescript']
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['css', 'html']
+on_ft = ['svelte', 'css', 'html']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
@@ -77,35 +77,22 @@ on_event = 'VimEnter'
 repo = 'mattn/vim-lsp-settings'
 on_event = 'VimEnter'
 hook_source = '''
-if empty(globpath(&rtp, 'autoload/lsp.vim'))
-  finish
-endif
+  if empty(globpath(&rtp, 'autoload/lsp.vim'))
+    finish
+  endif
 
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-endfunction
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> gd <plug>(lsp-definition)
+  endfunction
 
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
+  augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
+  command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -116,16 +103,16 @@ repo = 'mattn/vim-lsp-icons'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-on_event = 'VimEnter'
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event = 'VimEnter'
+hook_source = '''
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_text_edit_enabled = 1
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 0
+  let g:asyncomplete_popup_delay = 1000
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'

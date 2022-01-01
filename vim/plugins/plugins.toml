@@ -96,3 +96,10 @@ hook_add = '''
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
+hook_add = '''
+  set statusline^=%{coc#status()}
+'''
+
+[[plugins]]
+repo = 'antoinemadec/coc-fzf'
+rev = 'release'
