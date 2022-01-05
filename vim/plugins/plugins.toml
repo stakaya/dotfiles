@@ -66,6 +66,10 @@ hook_add = '''
        let s:dict = expand('~/.vim/dict')
     endif
 
+    let g:eskk#marker_henkan = "💬"
+    let g:eskk#marker_henkan_select = "✅"
+    let g:eskk#marker_jisyo_touroku = "📖"
+    let g:eskk#egg_like_newline = 1
     let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
     let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
   endif
@@ -92,14 +96,3 @@ hook_add = '''
 repo = 'tpope/vim-surround'
 hook_add = '''
 '''
-
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-rev = 'release'
-hook_add = '''
-  set statusline^=%{coc#status()}
-'''
-
-[[plugins]]
-repo = 'antoinemadec/coc-fzf'
-rev = 'release'
