@@ -42,6 +42,7 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -58,6 +59,14 @@ on_ft = ['typescript']
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['svelte', 'css', 'html']
+
+[[plugins]]
+repo = 'evanleck/vim-svelte'
+on_ft = ['svelte']
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
@@ -97,6 +106,10 @@ hook_source = '''
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_event = 'VimEnter'
+hook_source = '''
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+'''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'
@@ -106,12 +119,9 @@ on_event = 'VimEnter'
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event = 'VimEnter'
 hook_source = '''
-  let g:lsp_diagnostics_enabled = 1
-  let g:lsp_diagnostics_echo_cursor = 1
-  let g:lsp_text_edit_enabled = 1
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_auto_completeopt = 0
-  let g:asyncomplete_popup_delay = 1000
+  let g:asyncomplete_popup_delay = 200
 '''
 
 [[plugins]]

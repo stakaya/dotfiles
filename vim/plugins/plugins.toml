@@ -88,11 +88,11 @@ hook_add = '''
 [[plugins]]
 repo = 'tpope/vim-abolish'
 hook_add = '''
+  nnoremap n N
+  nnoremap N n
   nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
   vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
 '''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
-hook_add = '''
-'''
