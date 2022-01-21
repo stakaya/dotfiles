@@ -57,16 +57,8 @@ repo = 'peitalin/vim-jsx-typescript'
 on_ft = ['typescript']
 
 [[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['svelte', 'css', 'html']
-
-[[plugins]]
-repo = 'evanleck/vim-svelte'
-on_ft = ['svelte']
-
-[[plugins]]
 repo = 'cespare/vim-toml'
-on_ft = ['toml']
+on_ft = ['conf']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'

@@ -37,6 +37,8 @@ if has('mac') || has('unix')
 endif
 
 " コマンド
+command! cat cat %f > %d/%f_
+command! print echo %f %m 2> /dev/null
 command! df df -h %m 2> /dev/null
 command! zip zip -r %f.zip %f -x "*.DS_Store"
 command! run !! ./%f

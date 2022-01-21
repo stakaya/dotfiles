@@ -73,6 +73,14 @@ hook_add = '''
     let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
     let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
   endif
+
+  augroup eskk
+    autocmd!
+    autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
+  augroup END
+
+  inoremap <space>j <Plug>(eskk:toggle)
+  cnoremap <space>j <Plug>(eskk:toggle)
 '''
 
 [[plugins]]
@@ -96,3 +104,9 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'evanleck/vim-svelte'
