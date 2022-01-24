@@ -38,7 +38,7 @@ endif
 
 " コマンド
 " command! debug echo %d %m 2> /dev/null
-command! concat cat %f > %d/%c.concat
+command! concat cat %f > %d/concat.%c
 command! df df -h %m 2> /dev/null
 command! zip zip -r %f.zip %f -x "*.DS_Store"
 command! run !! ./%f
@@ -59,6 +59,7 @@ endif
 
 " キーのカスタマイズ
 nnoremap <space> t
+nnoremap J :concat<cr>
 nnoremap t :shell<cr>
 nnoremap V v
 nnoremap v :view<cr>
