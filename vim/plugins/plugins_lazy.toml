@@ -71,11 +71,11 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
-on_ft = ['markdown']
+on_ft = ['md','markdown']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
+on_ft = ['md','markdown']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
@@ -87,7 +87,7 @@ on_ft = ['typescript']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
-on_ft = ['conf']
+on_ft = ['conf', 'toml']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
@@ -138,7 +138,7 @@ on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
-on_event = 'VimEnter'
+on_i = 1
 hook_source = '''
   let g:asyncomplete_auto_popup = 1
   let g:asyncomplete_auto_completeopt = 0
