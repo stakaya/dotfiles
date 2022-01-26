@@ -57,41 +57,15 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'tyru/eskk.vim'
-hook_add = '''
-  if has('vim_starting')
-    if has('win32') || has('win64')
-       let s:dict = expand($HOME.'\vimfiles\dict')
-    else
-       let s:dict = expand('~/.vim/dict')
-    endif
-
-    let g:eskk#marker_henkan = "💬"
-    let g:eskk#marker_henkan_select = "✅"
-    let g:eskk#marker_jisyo_touroku = "📖"
-    let g:eskk#egg_like_newline = 1
-    let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
-    let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
-
-    augroup eskk
-      autocmd!
-      autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
-    augroup END
-
-    imap <space>j <Plug>(eskk:toggle)
-    cmap <space>j <Plug>(eskk:toggle)
-    nmap <space>j i<Plug>(eskk:toggle)
-  endif
-'''
-
-[[plugins]]
 repo = 'andymass/vim-matchup'
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 hook_add = '''
   nnoremap <silent> <D-/> :TComment<CR>
+  nnoremap <silent> <C-_> :TComment<CR>
   vnoremap <silent> <D-/> :TComment<CR>
+  vnoremap <silent> <C-_> :TComment<CR>
 '''
 
 [[plugins]]
