@@ -34,6 +34,8 @@ bindkey -v
 bindkey "jj" vi-cmd-mode
 bindkey "ll" end-of-line
 bindkey "kk" history-incremental-search-backward
+bindkey '^P' history-beginning-search-backward
+bindkey '^N' history-beginning-search-forward
 
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
