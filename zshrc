@@ -31,6 +31,9 @@ alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Nam
 
 # Keybind
 bindkey -v
+bindkey "jj" vi-cmd-mode
+bindkey "ll" end-of-line
+bindkey "kk" history-incremental-search-backward
 
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
