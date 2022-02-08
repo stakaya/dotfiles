@@ -1,5 +1,5 @@
 set surround
-source ~/.vimrc.keymap
+source ~/dotfiles/vimrc.keymap
 
 inoremap <C-[> <Esc>
 nnoremap <C-[> <Esc>
@@ -21,3 +21,4 @@ nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
 nnoremap <Space>r :<C-u>action ReplaceInPath<CR>
 vnoremap <Space>r :<C-u>action ReplaceInPath<CR>
 
+set ideajoin
