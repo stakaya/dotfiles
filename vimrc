@@ -185,9 +185,14 @@ nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 vnoremap <silent> <leader>* "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 
 function! GrepGitFiles(keyword)
-	let is_git = system('git status')
+	let l:ex = '*.' . expand('%:e')
+	if l:ex == '*.'
+	  let l:ex = expand('%')
+	endif
+
+    let l:is_git = system('git status')
 	if v:shell_error
-		exe ':vimgrep /' . a:keyword . '/ **'
+		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
 	else
 		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
 	endif
