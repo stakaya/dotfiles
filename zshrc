@@ -20,6 +20,7 @@ fi
 
 # Environment
 export LSCOLORS=gxfxcxdxbxGxDxabagacad
+export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # Alias
 alias vi='nvim'

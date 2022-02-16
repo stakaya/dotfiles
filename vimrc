@@ -190,7 +190,7 @@ function! GrepGitFiles(keyword)
 	  let l:ex = expand('%')
 	endif
 
-    let l:is_git = system('git status')
+  let l:is_git = system('git status')
 	if v:shell_error
 		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
 	else
