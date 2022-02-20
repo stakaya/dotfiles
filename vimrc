@@ -177,7 +177,7 @@ vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
 " カウント
 vnoremap <silent> <leader>+ g<C-a>
 vnoremap <silent> <leader>- g<C-A>
-vnoremap <silent> <leader>number :'<,'>s/^/\=printf("%d", line(".") - line("'<") + 1)<CR>
+vnoremap <silent> <leader>index :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
 
 " 文字コードをUTF-8にする
 nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
@@ -191,7 +191,6 @@ function! GrepGitFiles(keyword)
 	if l:ex == '*.'
 	  let l:ex = expand('%')
 	endif
-
   let l:is_git = system('git status')
 	if v:shell_error
 		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
