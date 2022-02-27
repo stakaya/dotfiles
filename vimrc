@@ -59,6 +59,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 set ambiwidth=single   " 2バイト文字の表示
 set autoindent         " 自動インデント
+set autowrite          " 自動保存
 set cursorline         " カーソル行をハイライト
 set encoding=utf-8     " 文字コードはUTF8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
