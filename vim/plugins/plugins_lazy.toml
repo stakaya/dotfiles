@@ -141,7 +141,7 @@ hook_add = '''
   let g:lsp_highlights_enabled = 1
   let g:lsp_insert_text_enabled = 0
   let g:lsp_log_verbose = 1
-  let g:lsp_log_file = expand('~/lsp.log')
+  let g:lsp_log_file = expand('~/.vim/lsp.log')
   let g:lsp_preview_autoclose = 0
   let g:lsp_preview_doubletap = 0
   let g:lsp_preview_keep_focus = 0
@@ -167,7 +167,7 @@ hook_add = '''
   let g:asyncomplete_auto_completeopt = 1
   let g:asyncomplete_remove_duplicates = 1
   let g:asyncomplete_smart_completion = 1
-  let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+  let g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
 
   imap <C-n> <Plug>(asyncomplete_force_refresh)
   imap <C-p> <Plug>(asyncomplete_force_refresh)

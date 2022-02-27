@@ -20,6 +20,7 @@ fi
 
 # Environment
 export LSCOLORS=gxfxcxdxbxGxDxabagacad
+export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # Alias
 alias vi='nvim'
@@ -32,7 +33,7 @@ alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Nam
 # Keybind
 bindkey -v
 bindkey "jj" vi-cmd-mode
-bindkey "ll" end-of-line
+bindkey ";;" end-of-line
 bindkey "kk" history-incremental-search-backward
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward

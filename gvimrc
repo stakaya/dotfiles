@@ -3,16 +3,16 @@ set notitle
 
 " OS毎の設定
 if has('mac')
-  set guifontwide=Menlo:h12
-  set guifont=Menlo\ Regular:h12
+  set guifontwide=Menlo:h14
+  set guifont=Menlo\ Regular:h14
   nnoremap <D-[> g;
   nnoremap <D-]> g,
 elseif has('win32') || has('win64')
   set directory=C:\WINDOWS\Temp
   set renderoptions=type:directx
   set ambiwidth=double
-  set guifont=Consolas:h12
-  set guifontwide=UD_デジタル_教科書体_N-R:h12
+  set guifont=Consolas:h14
+  set guifontwide=UD_デジタル_教科書体_N-R:h14
 endif
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が

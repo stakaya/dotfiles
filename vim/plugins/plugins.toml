@@ -23,9 +23,15 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-  nnoremap <space>; :Commands<CR>
-  nnoremap <space>w :Buffers<CR>
-  nnoremap <space><space> :call FzfOmniFiles()<CR>
+  nnoremap <silent> <space>; :Commands<CR>
+  nnoremap <silent> <space>w :Buffers<CR>
+  nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
+
+  if executable('rg')
+    nnoremap <silent> <space>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
+    vnoremap <silent> <space>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
+  endif
+
   function! FzfOmniFiles()
 	  let is_git = system('git status')
 	  if v:shell_error

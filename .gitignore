@@ -1,3 +1,4 @@
+*.log
 vim/*
 !plugins.toml
 !plugins_lazy.toml

@@ -87,9 +87,9 @@ set tabstop=4          " タブ幅
 set vb t_vb=           " ビープ音を鳴らさない
 set virtualedit=all    " カーソル位置を自由に設定する
 
-" vimgrepをripgrepに入れ替える
+" grepをripgrepに入れ替える
 if executable('rg')
-	set grepprg=rg\ --vimgrep\ --no-heading
+	set grepprg=rg\ --vimgrep
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
@@ -152,6 +152,9 @@ augroup END
 " カレントディレクトリを移動
 autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
 
+" 自動でQuickfixオープン
+autocmd QuickfixCmdPost make,grep,vimgrep copen
+
 " completeoptの設定
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
@@ -173,24 +176,26 @@ vnoremap <C-r> :s///g<Left><Left><Left>
 vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
-vnoremap <leader>count g<C-a>
+vnoremap <silent> <leader>+ g<C-a>
+vnoremap <silent> <leader>- g<C-A>
+vnoremap <silent> <leader>index :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
 
 " 文字コードをUTF-8にする
-nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
-
-" grepコマンド
-nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
-vnoremap <leader>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 
 " キーワードをgrep
 nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 vnoremap <silent> <leader>* "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 
 function! GrepGitFiles(keyword)
-	let is_git = system('git status')
+	let l:ex = '*.' . expand('%:e')
+	if l:ex == '*.'
+	  let l:ex = expand('%')
+	endif
+  let l:is_git = system('git status')
 	if v:shell_error
-		exe ':vimgrep /' . a:keyword . '/ ** | cw'
+		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
 	else
-		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
+		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
 	endif
 endfunction
