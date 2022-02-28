@@ -38,6 +38,16 @@ endif
 
 " コマンド
 " command! debug echo %d %m 2> /dev/null
+command! pull git fetch && git pull %m 2> /dev/null 
+command! push git push %m 2> /dev/null 
+command! add git add %f %m 2> /dev/null 
+command! reset git restore .
+command! rollback git restore -S %f
+command! log git log --oneline  %m 2> /dev/null  
+command! commit git commit -m '%a'
+command! branch git branch %a && git checkout %a
+command! list git branch %m 2> /dev/null 
+
 command! concat cat %f > %d/concat.%c
 command! df df -h %m 2> /dev/null
 command! zip zip -r %f.zip %f -x "*.DS_Store"
