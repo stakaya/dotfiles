@@ -57,6 +57,27 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+" terminal color
+" black red green yellow blue magenta cyan white (bright is next line)
+let g:terminal_ansi_colors = [
+\ '#000000',
+\ '#fd6b67',
+\ '#097e00',
+\ '#ccca00',
+\ '#5496ef',
+\ '#fd75ff',
+\ '#39cbcc',
+\ '#bbbbbb',
+\ '#676767',
+\ '#fd8784',
+\ '#73f961',
+\ '#fefb00',
+\ '#7eaff4',
+\ '#fd9cff',
+\ '#6ed9d9',
+\ '#f1f1f1',
+\ ]
+
 set ambiwidth=single   " 2バイト文字の表示
 set autoindent         " 自動インデント
 set autowrite          " 自動保存

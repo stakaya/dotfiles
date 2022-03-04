@@ -48,6 +48,8 @@ command! log git log --oneline  %m 2> /dev/null
 command! commit git commit -m '%a' %m 2> /dev/null 
 command! branch git branch %a && git checkout %a %m 2> /dev/null 
 command! list git branch %m 2> /dev/null 
+command! rebranch git branch -m %a %m 2> /dev/null 
+command! remove git branch -d %a %m 2> /dev/null 
 
 command! concat cat %f > %d/concat.%c
 command! df df -h %m 2> /dev/null
