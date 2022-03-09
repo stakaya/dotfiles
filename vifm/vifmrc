@@ -21,8 +21,8 @@ set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp
 set wildmenu
 
-" for mac of wsl
-if executable('defaults') || executable('clip.exe')
+" except windows
+if has('mac') || has('unix')
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
   set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
@@ -37,6 +37,21 @@ if executable('defaults') || executable('clip.exe')
 endif
 
 " コマンド
+" command! debug echo %d %m 2> /dev/null
+command! pull git fetch && git pull %m 2> /dev/null 
+command! push git push %m 2> /dev/null 
+command! stage git add . %m 2> /dev/null 
+command! add git add %f %m 2> /dev/null 
+command! reset git restore . %m 2> /dev/null 
+command! rollback git restore -S %f %m 2> /dev/null 
+command! log git log --oneline  %m 2> /dev/null  
+command! commit git commit -m '%a' %m 2> /dev/null 
+command! branch git branch %a && git checkout %a %m 2> /dev/null 
+command! list git branch %m 2> /dev/null 
+command! rebranch git branch -m %a %m 2> /dev/null 
+command! remove git branch -d %a %m 2> /dev/null 
+
+command! concat cat %f > %d/concat.%c
 command! df df -h %m 2> /dev/null
 command! zip zip -r %f.zip %f -x "*.DS_Store"
 command! run !! ./%f
@@ -57,6 +72,7 @@ endif
 
 " キーのカスタマイズ
 nnoremap <space> t
+nnoremap J :concat<cr>
 nnoremap t :shell<cr>
 nnoremap V v
 nnoremap v :view<cr>
@@ -83,6 +99,9 @@ if executable('pbcopy')
 elseif executable('clip.exe')
   nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
   nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+elseif executable('wl-copy')
+  nnoremap yp :!echo %d | wl-copy<cr>
+  nnoremap yf :!echo %c:p | wl-copy<cr>
 elseif executable('xclip')
   nnoremap yp :!echo %d | xclip %i<cr>
   nnoremap yf :!echo %c:p | xclip %i<cr>

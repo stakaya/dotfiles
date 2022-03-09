@@ -10,11 +10,47 @@ hook_source = '''
 '''
 
 [[plugins]]
-repo = 'tyru/urilib.vim'
+repo = 'tyru/eskk.vim'
 on_event = 'VimEnter'
+hook_add = '''
+  if has('vim_starting')
+    if has('win32') || has('win64')
+       let s:dict = expand($HOME.'\vimfiles\dict')
+    else
+       let s:dict = expand('~/.vim/dict')
+    endif
+
+    let g:eskk#marker_henkan = "💬"
+    let g:eskk#marker_henkan_select = "✅"
+    let g:eskk#marker_jisyo_touroku = "📖"
+    let g:eskk#egg_like_newline = 1
+    let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
+    let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+
+    augroup eskk
+      autocmd!
+      autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
+    augroup END
+
+    imap <space>j <Plug>(eskk:toggle)
+    cmap <space>j <Plug>(eskk:toggle)
+    nmap <space>j i<Plug>(eskk:toggle)
+  endif
+'''
+
+[[plugins]]
+repo = 'koron/dicwin-vim'
+on_event = 'VimEnter'
+hook_source = '''
+  let g:dicwin_mapleader = "\<C-k>"
+'''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'tyru/urilib.vim'
 on_event = 'VimEnter'
 
 [[plugins]]
@@ -35,17 +71,11 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
+on_ft = ['md','markdown']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-
-[[plugins]]
-repo = 'koron/dicwin-vim'
-on_event = 'VimEnter'
-hook_source = '''
-let g:dicwin_mapleader = "\<C-k>"
-'''
+on_ft = ['md','markdown']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
@@ -56,8 +86,8 @@ repo = 'peitalin/vim-jsx-typescript'
 on_ft = ['typescript']
 
 [[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['css', 'html']
+repo = 'cespare/vim-toml'
+on_ft = ['conf', 'toml']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
@@ -77,56 +107,88 @@ on_event = 'VimEnter'
 repo = 'mattn/vim-lsp-settings'
 on_event = 'VimEnter'
 hook_source = '''
-if empty(globpath(&rtp, 'autoload/lsp.vim'))
-  finish
-endif
+  if empty(globpath(&rtp, 'autoload/lsp.vim'))
+    finish
+  endif
 
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-endfunction
+  function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> gd <plug>(lsp-definition)
+  endfunction
 
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
+  augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+  augroup END
 '''
-
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-on_event = 'VimEnter'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_event = 'VimEnter'
+hook_add = '''
+  nnoremap <leader>ph :LspHover<CR>
+  nnoremap <leader>pn :LspNextDiagnostic<CR>
+  nnoremap <leader>pc :pclose<CR>
+  autocmd FileType typescript nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
+
+  let g:lsp_async_completion = 1
+  let g:lsp_auto_enable = 1
+  let g:lsp_diagnostics_echo_cursor = 1
+  let g:lsp_diagnostics_enabled = 1
+  let g:lsp_fold_enabled = 0
+  let g:lsp_highlight_references_enabled = 1
+  let g:lsp_highlights_enabled = 1
+  let g:lsp_insert_text_enabled = 0
+  let g:lsp_log_verbose = 1
+  let g:lsp_log_file = expand('~/.vim/lsp.log')
+  let g:lsp_preview_autoclose = 0
+  let g:lsp_preview_doubletap = 0
+  let g:lsp_preview_keep_focus = 0
+  let g:lsp_signature_help_enabled = 0
+  let g:lsp_signs_enabled = 1
+  let g:lsp_signs_error = {'text': '❌'}
+  let g:lsp_signs_hint = {'text': '💡'}
+  let g:lsp_signs_warning = {'text': '❓'}
+  let g:lsp_text_edit_enabled = 0
+  let g:lsp_textprop_enabled = 0
+  let g:lsp_virtual_text_enabled = 0
+'''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip'
-on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-on_event = 'VimEnter'
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
 on_event = 'VimEnter'
+hook_add = '''
+  let g:asyncomplete_auto_popup = 1
+  let g:asyncomplete_auto_completeopt = 1
+  let g:asyncomplete_remove_duplicates = 1
+  let g:asyncomplete_smart_completion = 1
+  let g:asyncomplete_log_file = expand('~/.vim/asyncomplete.log')
+
+  imap <C-n> <Plug>(asyncomplete_force_refresh)
+  imap <C-p> <Plug>(asyncomplete_force_refresh)
+  set completeopt-=preview
+
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+  endfunction
+
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+  inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ asyncomplete#force_refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 on_event = 'VimEnter'
+depends = ['asyncomplete.vim', 'vim-lsp']

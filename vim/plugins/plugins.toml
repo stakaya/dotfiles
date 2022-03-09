@@ -23,9 +23,15 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-  nnoremap <space>; :Commands<CR>
-  nnoremap <space>w :Buffers<CR>
-  nnoremap <space><space> :call FzfOmniFiles()<CR>
+  nnoremap <silent> <space>; :Commands<CR>
+  nnoremap <silent> <space>w :Buffers<CR>
+  nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
+
+  if executable('rg')
+    nnoremap <silent> <space>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
+    vnoremap <silent> <space>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
+  endif
+
   function! FzfOmniFiles()
 	  let is_git = system('git status')
 	  if v:shell_error
@@ -57,39 +63,31 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'tyru/eskk.vim'
-hook_add = '''
-  if has('vim_starting')
-    if has('win32') || has('win64')
-       let s:dict = expand($HOME.'\vimfiles\dict')
-    else
-       let s:dict = expand('~/.vim/dict')
-    endif
-
-    let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
-    let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
-  endif
-'''
-
-[[plugins]]
 repo = 'andymass/vim-matchup'
 
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 hook_add = '''
   nnoremap <silent> <D-/> :TComment<CR>
+  nnoremap <silent> <C-_> :TComment<CR>
   vnoremap <silent> <D-/> :TComment<CR>
+  vnoremap <silent> <C-_> :TComment<CR>
 '''
 
 [[plugins]]
 repo = 'tpope/vim-abolish'
 hook_add = '''
+  nnoremap n N
+  nnoremap N n
   nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
   vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
 '''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
-hook_add = '''
-'''
 
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo = 'evanleck/vim-svelte'

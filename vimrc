@@ -57,8 +57,30 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+" terminal color
+" black red green yellow blue magenta cyan white (bright is next line)
+let g:terminal_ansi_colors = [
+\ '#000000',
+\ '#fd6b67',
+\ '#097e00',
+\ '#ccca00',
+\ '#5496ef',
+\ '#fd75ff',
+\ '#39cbcc',
+\ '#bbbbbb',
+\ '#676767',
+\ '#fd8784',
+\ '#73f961',
+\ '#fefb00',
+\ '#7eaff4',
+\ '#fd9cff',
+\ '#6ed9d9',
+\ '#f1f1f1',
+\ ]
+
 set ambiwidth=single   " 2バイト文字の表示
 set autoindent         " 自動インデント
+set autowrite          " 自動保存
 set cursorline         " カーソル行をハイライト
 set encoding=utf-8     " 文字コードはUTF8
 set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
@@ -86,9 +108,9 @@ set tabstop=4          " タブ幅
 set vb t_vb=           " ビープ音を鳴らさない
 set virtualedit=all    " カーソル位置を自由に設定する
 
-" vimgrepをripgrepに入れ替える
+" grepをripgrepに入れ替える
 if executable('rg')
-	set grepprg=rg\ --vimgrep\ --no-heading
+	set grepprg=rg\ --vimgrep
 	set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
@@ -119,11 +141,21 @@ augroup Binary
 	autocmd BufWritePost *.bin set nomod | endif
 augroup END
 
-" for WSL
+" Yankでクリップボードにコピー
 if executable('clip.exe')
   augroup Yank
     autocmd!
     autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+elseif executable('wl-copy')
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('wl-copy', @")
+  augroup END
+elseif executable('xclip')
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('xclip', @")
   augroup END
 endif
 
@@ -140,6 +172,9 @@ augroup END
 
 " カレントディレクトリを移動
 autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
+
+" 自動でQuickfixオープン
+autocmd QuickfixCmdPost make,grep,vimgrep copen
 
 " completeoptの設定
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
@@ -162,24 +197,26 @@ vnoremap <C-r> :s///g<Left><Left><Left>
 vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
-vnoremap <leader>count g<C-a>
+vnoremap <silent> <leader>+ g<C-a>
+vnoremap <silent> <leader>- g<C-A>
+vnoremap <silent> <leader>index :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
 
 " 文字コードをUTF-8にする
-nnoremap <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
-
-" grepコマンド
-nnoremap <leader>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
-vnoremap <leader>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:vimgrep /<C-r>// **/*.* \|cw
+nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 
 " キーワードをgrep
 nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 vnoremap <silent> <leader>* "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 
 function! GrepGitFiles(keyword)
-	let is_git = system('git status')
+	let l:ex = '*.' . expand('%:e')
+	if l:ex == '*.'
+	  let l:ex = expand('%')
+	endif
+  let l:is_git = system('git status')
 	if v:shell_error
-		exe ':vimgrep /' . a:keyword . '/ ** | cw'
+		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
 	else
-		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h` | cw'
+		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
 	endif
 endfunction
