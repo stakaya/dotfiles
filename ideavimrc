@@ -7,6 +7,8 @@ vnoremap <C-[> <Esc>
 nnoremap gd :<C-u>action GotoDeclaration<CR>
 nnoremap g; :<C-u>action JumpToLastChange<CR>
 nnoremap g, :<C-u>action JumpToNextChange<CR>
+nnoremap H :<C-u>action JumpToLastChange<CR>
+nnoremap L :<C-u>action JumpToNextChange<CR>
 nnoremap == :<C-u>action ReformatCode<CR>
 vnoremap == :<C-u>action ReformatCode<CR>
 nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
