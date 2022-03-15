@@ -31,7 +31,7 @@
         "Conceal": "vim",
         "Substitute": "vim"
     },
-    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "vscode-neovim.mouseSelectionStartVisualMode": true,
     "vscode-neovim.highlightGroups.ignoreHighlights": [
 
