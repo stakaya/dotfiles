@@ -23,6 +23,7 @@ endif
 
 if has('win32') || has('win64')
 	let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
+	let s:pluins = s:plugin_conf
 
 	" WindowsでPATHに$VIMが含まれていない時に
 	" currentのexeを見つけ出せないので追加
@@ -31,13 +32,13 @@ if has('win32') || has('win64')
 	endif
 else
 	let s:plugin_conf = expand('~/.vim/plugins')
+  if has('nvim')
+    let s:pluins = expand('~/.config/nvim/plugins')
+  else
+    let s:pluins = expand('~/.vim/plugins')
+  endif
 endif
 
-if has('nvim')
-	let s:pluins = expand('~/.config/nvim/plugins')
-else
-	let s:pluins = expand('~/.vim/plugins')
-endif
 
 " プラグインの読み込み
 if dein#load_state(s:pluins)
@@ -185,7 +186,6 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
-noremap <silent> <leader>tw :call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })<CR>
 
 " 文字置換
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
