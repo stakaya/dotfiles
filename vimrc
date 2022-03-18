@@ -186,6 +186,7 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
+noremap <silent> <leader>c :call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })<CR>
 
 " 文字置換
 nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
