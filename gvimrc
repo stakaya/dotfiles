@@ -11,8 +11,8 @@ elseif has('win32') || has('win64')
   set directory=C:\WINDOWS\Temp
   set renderoptions=type:directx
   set ambiwidth=double
-  set guifont=Consolas:h14
-  set guifontwide=UD_デジタル_教科書体_N-R:h14
+  set guifont=Consolas:h12
+  set guifontwide=UD_デジタル_教科書体_N-R:h12
 endif
 
 " Unix系のOSでヴィジュアルモードで反転させた文字列が

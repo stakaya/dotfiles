@@ -6,24 +6,22 @@ for %%i in (vimrc, gvimrc, ideavimrc) do (
 )
 
 if not exist "%USERPROFILE%\vimfiles\plugins" (
-	md "%USERPROFILE%\vimfiles\" 
-	mklink /D "%USERPROFILE%\vimfiles\plugins" "%DOTFILES%\vim\plugins" 
-	mklink "%USERPROFILE%\vimfiles\plugins\plugins.toml" "%DOTFILES%\vim\plugins\plugins.toml"
-	mklink "%USERPROFILE%\vimfiles\plugins\plugins_lazy.toml" "%DOTFILES%\vim\plugins\plugins_lazy.toml"
+	md "%USERPROFILE%\vimfiles\"
+	mklink /D "%USERPROFILE%\vimfiles\plugins" "%DOTFILES%\vim\plugins"
  	mkdir "%USERPROFILE%\vimfiles\plugins\repos\github.com\Shougo\dein.vim"
-   	git clone git://github.com/Shougo/dein.vim "%USERPROFILE%\vimfiles\plugins\repos\github.com\Shougo\dein.vim"
-)
-
-if not exist "%USERPROFILE%\.vim" (
-	mklink /D "%USERPROFILE%\.vim" "%DOTFILES%\vim" 
+   	git clone https://github.com/Shougo/dein.vim.git "%USERPROFILE%\vimfiles\plugins\repos\github.com\Shougo\dein.vim"
 )
 
 if not exist "%LOCALAPPDATA%\nvim" (
-	mklink /D "%LOCALAPPDATA%\nvim" "%DOTFILES%\nvim" 
+	mklink /D "%LOCALAPPDATA%\nvim" "%DOTFILES%\nvim"
 )
 
 if not exist "%APPDATA%\Vifm" (
-	mklink /D "%APPDATA%\Vifm" "%DOTFILES%\vifm" 
+	mklink /D "%APPDATA%\Vifm" "%DOTFILES%\vifm"
+)
+
+if not exist "%USERPROFILE%\vimfiles\plugins" (
+	mklink /D "%USERPROFILE%\vimfiles\plugins" "%DOTFILES%\vim\plugins"
 )
 
 if not exist "%USERPROFILE%\vimfiles\dict" (
@@ -31,7 +29,7 @@ if not exist "%USERPROFILE%\vimfiles\dict" (
 )
 
 if not exist "%USERPROFILE%\.tmux.conf" (
-	mklink "%USERPROFILE%\.tmux.conf" "%DOTFILES%\tmux.conf" 
+	mklink "%USERPROFILE%\.tmux.conf" "%DOTFILES%\tmux.conf"
 )
 
 @pause
