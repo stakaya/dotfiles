@@ -32,7 +32,7 @@ hook_add = '''
       autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
     augroup END
 
-    imap <space>j <Plug>(eskk:toggle)
+    imap <C-J> <Plug>(eskk:toggle)
     cmap <space>j <Plug>(eskk:toggle)
     nmap <space>j i<Plug>(eskk:toggle)
   endif
