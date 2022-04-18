@@ -33,6 +33,9 @@ hook_add = '''
     augroup END
 
     imap <C-J> <Plug>(eskk:toggle)
+    cmap <C-J> <Plug>(eskk:toggle)
+    nmap <C-J> <Plug>(eskk:toggle)
+    imap JJ <Plug>(eskk:toggle)
     cmap <space>j <Plug>(eskk:toggle)
     nmap <space>j i<Plug>(eskk:toggle)
   endif
