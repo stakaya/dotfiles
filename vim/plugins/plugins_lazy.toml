@@ -82,15 +82,19 @@ on_ft = ['md','markdown']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript']
+on_ft = ['ts', 'typescript']
 
 [[plugins]]
 repo = 'peitalin/vim-jsx-typescript'
-on_ft = ['typescript']
+on_ft = ['ts', 'typescript']
 
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['conf', 'toml']
+
+[[plugins]]
+repo = 'udalov/kotlin-vim'
+on_ft = ['kt', 'kotlin']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
