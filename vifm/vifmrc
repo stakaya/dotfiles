@@ -38,18 +38,20 @@ endif
 
 " コマンド
 " command! debug echo %d %m 2> /dev/null
-command! pull git fetch && git pull %m 2> /dev/null 
-command! push git push %m 2> /dev/null 
-command! stage git add . %m 2> /dev/null 
-command! add git add %f %m 2> /dev/null 
-command! reset git restore . %m 2> /dev/null 
-command! rollback git restore -S %f %m 2> /dev/null 
-command! log git log --oneline  %m 2> /dev/null  
-command! commit git commit -m '%a' %m 2> /dev/null 
-command! branch git branch %a && git checkout %a %m 2> /dev/null 
-command! list git branch %m 2> /dev/null 
-command! rebranch git branch -m %a %m 2> /dev/null 
-command! remove git branch -d %a %m 2> /dev/null 
+command! pull git fetch && git pull %m 2> /dev/null
+command! push git push %m 2> /dev/null
+command! stage git add . %m 2> /dev/null
+command! add git add %f %m 2> /dev/null
+command! reset git restore . %m 2> /dev/null
+command! rollback git restore -S %f %m 2> /dev/null
+command! log git log --oneline  %m 2> /dev/null
+command! commit git commit -m '%a' %m 2> /dev/null
+command! branch git branch %a && git checkout %a %m 2> /dev/null
+command! list git branch %m 2> /dev/null
+command! rebranch git branch -m %a %m 2> /dev/null
+command! remove git branch -d %a %m 2> /dev/null
+
+command! search find . -name "%a" %m 2> /dev/null
 
 command! concat cat %f > %d/concat.%c
 command! df df -h %m 2> /dev/null
