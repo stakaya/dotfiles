@@ -128,6 +128,7 @@ augroup fileTypeIndent
 	autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap expandtab
 	autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc setlocal tabstop=2 shiftwidth=2
 	autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
+  autocmd BufNewFile,BufRead *.rules  set filetype=javascript
 augroup END
 
 " バイナリファイルを開く場合
