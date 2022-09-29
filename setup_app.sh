@@ -30,4 +30,4 @@ ln -s $HOME/dotfiles/vim/dict $HOME/dotfiles/nvim/dict
 
 # down load plugin control
 [ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim
-git clone git://github.com/Shougo/dein.vim ~/.vim/plugins/repos/github.com/Shougo/dein.vim
+git clone https://github.com/Shougo/dein.vim ~/.vim/plugins/repos/github.com/Shougo/dein.vim

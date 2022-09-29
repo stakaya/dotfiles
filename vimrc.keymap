@@ -1,3 +1,11 @@
+" 日本語キーボード互換
+nnoremap ( *
+nnoremap ! ~
+nnoremap & ^
+vnoremap ( *
+vnoremap ! ~
+vnoremap & ^
+
 " コロンとセミコロンを入れ替える
 nnoremap ; :
 nnoremap : ;
