@@ -35,7 +35,7 @@ hook_add = '''
     imap <C-J> <Plug>(eskk:toggle)
     cmap <C-J> <Plug>(eskk:toggle)
     nmap <C-J> <Plug>(eskk:toggle)
-    imap JJ <Plug>(eskk:toggle)
+    imap ii <Plug>(eskk:toggle)
     nmap <space>j i<Plug>(eskk:toggle)
   endif
 '''
