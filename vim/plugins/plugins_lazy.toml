@@ -1,15 +1,6 @@
 # 遅延読み込みプラグイン
 
 [[plugins]]
-repo = 'itchyny/calendar.vim'
-on_cmd = 'Calendar'
-hook_source = '''
-  let g:calendar_google_calendar=1
-  let g:calendar_google_task=1
-  source ~/.cache/calendar.vim/credentials.vim
-'''
-
-[[plugins]]
 repo = 'tyru/eskk.vim'
 on_event = 'VimEnter'
 hook_add = '''
@@ -94,6 +85,14 @@ on_ft = ['conf', 'toml']
 [[plugins]]
 repo = 'udalov/kotlin-vim'
 on_ft = ['kt', 'kotlin']
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'svelte']
+
+[[plugins]]
+repo = 'evanleck/vim-svelte'
+on_ft = ['svelte']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'
