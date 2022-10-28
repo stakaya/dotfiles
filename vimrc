@@ -200,7 +200,7 @@ vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 vnoremap <C-r> :s///g<Left><Left><Left>
 
 " 合計値を計算
-vnoremap <silent> <leader>sum :'<,'>!awk '{sum += $1} END {print sum}'<CR>
+vnoremap <silent> <leader>sum :!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
 vnoremap <silent> <leader>+ g<C-a>
