@@ -29,7 +29,7 @@ alias python='python3'
 alias gitreset='git fetch --all && git reset --hard origin/main'
 alias brewclean='brew cleanup && brew update && brew upgrade --cask'
 alias apkcheck='jarsigner -verify -verbose -certs $1'
-alias search='find ./ -type f -not -path "*/.git/*" | xargs grep $1'
+alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
 alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
 
 # Keybind
