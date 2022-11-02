@@ -207,6 +207,10 @@ vnoremap <silent> <leader>+ g<C-a>
 vnoremap <silent> <leader>- g<C-A>
 vnoremap <silent> <leader>index :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
 
+" 行の折返し変更
+noremap <silent> <leader>wb :set wrap<CR>
+noremap <silent> <leader>ww :set nowrap<CR>
+
 " 文字コードをUTF-8にする
 nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 

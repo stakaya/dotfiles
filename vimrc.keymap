@@ -12,10 +12,6 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" 行の折返し変更
-noremap <silent> W :set wrap<CR>
-noremap <silent> WW :set nowrap<CR>
-
 " ヴィジュアルモードの時にバックススペースで削除
 vnoremap <BS> d
 
