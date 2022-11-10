@@ -8,7 +8,7 @@ nvim
 
 vim
 
-# 設定ファイルのパスを指定
+<!-- 設定ファイルのパスを指定 -->
 open -a /Applications/iTerm.app
 
 cd
