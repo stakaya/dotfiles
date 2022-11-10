@@ -1,14 +1,12 @@
-set surround
 source ~/dotfiles/vimrc.keymap
 
 inoremap <C-[> <Esc>
-nnoremap <C-[> <Esc>
 vnoremap <C-[> <Esc>
 nnoremap gd :<C-u>action GotoDeclaration<CR>
 nnoremap g; :<C-u>action JumpToLastChange<CR>
 nnoremap g, :<C-u>action JumpToNextChange<CR>
-nnoremap H :<C-u>action JumpToLastChange<CR>
-nnoremap L :<C-u>action JumpToNextChange<CR>
+nnoremap H :<C-u>action Back<CR>
+nnoremap L :<C-u>action Forward<CR>
 nnoremap == :<C-u>action ReformatCode<CR>
 vnoremap == :<C-u>action ReformatCode<CR>
 nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
@@ -23,4 +21,5 @@ nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
 nnoremap <Space>r :<C-u>action ReplaceInPath<CR>
 vnoremap <Space>r :<C-u>action ReplaceInPath<CR>
 
+set surround
 set ideajoin

@@ -88,7 +88,7 @@ on_ft = ['kt', 'kotlin']
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['html', 'svelte']
+on_ft = ['asp', 'aspx', 'html', 'jsp', 'jsx', 'php', 'svelte', 'vue', 'xhtml', 'xml']
 
 [[plugins]]
 repo = 'evanleck/vim-svelte'
