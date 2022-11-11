@@ -88,7 +88,7 @@ on_ft = ['kt', 'kotlin']
 
 [[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['asp', 'aspx', 'html', 'jsp', 'jsx', 'php', 'svelte', 'vue', 'xhtml', 'xml']
+on_ft = ['asp', 'aspx', 'erb', 'html', 'jsp', 'jsx', 'php', 'svelte', 'tsx', 'vue', 'xhtml', 'xml']
 
 [[plugins]]
 repo = 'evanleck/vim-svelte'
@@ -109,91 +109,42 @@ on_event = 'VimEnter'
 
 # LSP関連
 [[plugins]]
-repo = 'mattn/vim-lsp-settings'
+repo = 'prabirshrestha/vim-lsp'
 on_event = 'VimEnter'
 hook_source = '''
-  if empty(globpath(&rtp, 'autoload/lsp.vim'))
-    finish
-  endif
-
   function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    nmap <buffer> gd <plug>(lsp-definition)
+      setlocal omnifunc=lsp#complete
+      setlocal signcolumn=yes
+      if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+      nmap <buffer> gd <plug>(lsp-definition)
+      nmap <buffer> gs <plug>(lsp-document-symbol-search)
+      nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+      nmap <buffer> gr <plug>(lsp-references)
+      nmap <buffer> gi <plug>(lsp-implementation)
+      nmap <buffer> gt <plug>(lsp-type-definition)
+      nmap <buffer> <leader>rn <plug>(lsp-rename)
+      nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+      nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+      nmap <buffer> K <plug>(lsp-hover)
+      nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+      nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+      let g:lsp_format_sync_timeout = 1000
+      autocmd! BufWritePre *.ts,*.js call execute('LspDocumentFormatSync')
   endfunction
 
   augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+      au!
+      autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
   augroup END
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
+repo = 'mattn/vim-lsp-settings'
 on_event = 'VimEnter'
-hook_add = '''
-  nnoremap <leader>ph :LspHover<CR>
-  nnoremap <leader>pn :LspNextDiagnostic<CR>
-  nnoremap <leader>pc :pclose<CR>
-  autocmd FileType typescript nnoremap gd :<C-u> TagImposterAnticipateJump <Bar> LspDefinition<CR>
-
-  let g:lsp_async_completion = 1
-  let g:lsp_auto_enable = 1
-  let g:lsp_diagnostics_echo_cursor = 1
-  let g:lsp_diagnostics_enabled = 1
-  let g:lsp_fold_enabled = 0
-  let g:lsp_highlight_references_enabled = 1
-  let g:lsp_highlights_enabled = 1
-  let g:lsp_insert_text_enabled = 0
-  let g:lsp_log_verbose = 1
-  let g:lsp_log_file = expand('~/dotfiles/lsp.log')
-  let g:lsp_preview_autoclose = 0
-  let g:lsp_preview_doubletap = 0
-  let g:lsp_preview_keep_focus = 0
-  let g:lsp_signature_help_enabled = 0
-  let g:lsp_signs_enabled = 1
-  let g:lsp_signs_error = {'text': '❌'}
-  let g:lsp_signs_hint = {'text': '💡'}
-  let g:lsp_signs_warning = {'text': '❓'}
-  let g:lsp_text_edit_enabled = 0
-  let g:lsp_textprop_enabled = 0
-  let g:lsp_virtual_text_enabled = 0
+hook_source = '''
 '''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'
 on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-on_event = 'VimEnter'
-hook_add = '''
-  let g:asyncomplete_auto_popup = 1
-  let g:asyncomplete_auto_completeopt = 1
-  let g:asyncomplete_remove_duplicates = 1
-  let g:asyncomplete_smart_completion = 1
-  let g:asyncomplete_log_file = expand('~/dotfiles/asyncomplete.log')
-
-  imap <C-n> <Plug>(asyncomplete_force_refresh)
-  imap <C-p> <Plug>(asyncomplete_force_refresh)
-  set completeopt-=preview
-
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-  endfunction
-
-  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-  inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-  inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ asyncomplete#force_refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-'''
-
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_event = 'VimEnter'
-depends = ['asyncomplete.vim', 'vim-lsp']
