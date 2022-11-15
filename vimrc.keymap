@@ -34,9 +34,13 @@ noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
+" redo
+nnoremap <silent> U <C-R>
+
 " CTRL-Z でundo
 noremap <C-Z> u
 inoremap <C-Z> <C-O>u
+
 
 " CTRL-A で全選択
 noremap <C-A> gggH<C-O>G
