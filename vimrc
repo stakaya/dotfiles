@@ -98,13 +98,13 @@ set nofoldenable       " 折りたたみしない
 set nolist             " 制御コード不可視
 set noshowmode         " モードを表示しない
 set noswapfile         " スワップファイル不要
-set nowrap             " ワープしない
+set nowrap             " 折返ししない
 set number             " 行番号表示
 set ruler              " カーソル行を常に表示
 set shiftwidth=4       " シフト幅
 set showcmd            " コマンドの候補を表示
 set smartindent        " プログラミング用インデント
-set splitbelow         " 新規ウインドウを下に表示
+set splitbelow         " 新規ウインドウを画面の下に表示
 set tabstop=4          " タブ幅
 set vb t_vb=           " ビープ音を鳴らさない
 set virtualedit=all    " カーソル位置を自由に設定する
@@ -118,6 +118,13 @@ endif
 " ステータス行の指定
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
+
+" カレントウィンドウにのみ罫線を引く
+augroup cursorLine
+	autocmd!
+	autocmd WinLeave * set nocursorline
+	autocmd WinEnter,BufRead * set cursorline
+augroup END
 
 " 自動的にインデントプラグインを読み込む
 filetype plugin indent on
@@ -165,13 +172,6 @@ endif
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 
-" カレントウィンドウにのみ罫線を引く
-augroup cursorLine
-	autocmd!
-	autocmd WinLeave * set nocursorline
-	autocmd WinEnter,BufRead * set cursorline
-augroup END
-
 " カレントディレクトリを移動
 autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
 
@@ -217,6 +217,14 @@ nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>
 " キーワードをgrep
 nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
 vnoremap <silent> <leader>* "zy:let @/ = @z<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
+
+" キーワードが含まれる行を削除
+nnoremap <leader>d "zyiw:let @/ = @z<CR>:set hlsearch<CR>:g/<C-r>//d<Left><Left>
+vnoremap <leader>d "zy:let @/ = @z<CR>:set hlsearch<CR>:g/<C-r>//d<Left><Left>
+
+" マクロの記録・実行
+nnoremap <leader>m qz
+nnoremap <leader>mm @z
 
 function! GrepGitFiles(keyword)
 	let l:ex = '*.' . expand('%:e')

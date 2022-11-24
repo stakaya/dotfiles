@@ -41,7 +41,6 @@ nnoremap <silent> U <C-R>
 noremap <C-Z> u
 inoremap <C-Z> <C-O>u
 
-
 " CTRL-A で全選択
 noremap <C-A> gggH<C-O>G
 inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
