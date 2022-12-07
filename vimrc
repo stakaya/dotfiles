@@ -187,7 +187,6 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
 noremap <silent> <leader>t :terminal<CR>
-noremap <silent> <leader>c :call popup_create(term_start([&shell], #{ hidden: 1, term_finish: 'close'}), #{ border: [], minwidth: winwidth(0)/2, minheight: &lines/2 })<CR>
 tnoremap <silent> <C-l> <C-W>N
 tnoremap <silent> <C-n> <DOWN>
 tnoremap <silent> <C-p> <UP>
@@ -197,15 +196,16 @@ nnoremap <leader>r "zyiw:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Lef
 vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 
 " 範囲選択文字置換
-vnoremap <C-r> :s///g<Left><Left><Left>
+vnoremap <leader>R :s///g<Left><Left><Left>
 
-" 合計値を計算
-vnoremap <silent> <leader>sum :!awk '{sum += $1} END {print sum}'<CR>
+" 計算
+nnoremap <silent> <leader>a :call setline(".",eval(getline(".")))<CR>
+vnoremap <silent> <leader>a :!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
-vnoremap <silent> <leader>+ g<C-a>
-vnoremap <silent> <leader>- g<C-A>
-vnoremap <silent> <leader>index :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
+vnoremap <silent> <leader>+ g<C-A>
+vnoremap <silent> <leader>- g<C-X>
+vnoremap <silent> <leader>n :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
 
 " 行の折返し変更
 noremap <silent> <leader>wb :set wrap<CR>
@@ -223,8 +223,8 @@ nnoremap <leader>d "zyiw:let @/ = @z<CR>:set hlsearch<CR>:g/<C-r>//d<Left><Left>
 vnoremap <leader>d "zy:let @/ = @z<CR>:set hlsearch<CR>:g/<C-r>//d<Left><Left>
 
 " マクロの記録・実行
-nnoremap <leader>m qz
-nnoremap <leader>mm @z
+nnoremap <leader>M qz
+nnoremap <leader>m @z
 
 function! GrepGitFiles(keyword)
 	let l:ex = '*.' . expand('%:e')
