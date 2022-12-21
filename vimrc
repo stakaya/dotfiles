@@ -39,18 +39,17 @@ else
   endif
 endif
 
-
 " プラグインの読み込み
 if dein#load_state(s:pluins)
-	call dein#begin(s:pluins)
-	call dein#load_toml(s:plugin_conf . '/plugins.toml', {'lazy': 0})
-	call dein#load_toml(s:plugin_conf . '/plugins_lazy.toml', {'lazy': 1})
-	call dein#end()
-	call dein#save_state()
+  call dein#begin(s:pluins)
+  call dein#load_toml(s:plugin_conf . '/plugins.toml', {'lazy': 0})
+  call dein#load_toml(s:plugin_conf . '/plugins_lazy.toml', {'lazy': 1})
+  call dein#end()
+  call dein#save_state()
 endif
 
 if dein#check_install()
-	call dein#install()
+  call dein#install()
 endif
 
 " true color
