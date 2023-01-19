@@ -16,7 +16,7 @@ if [ ! -e ~/.config ]; then
 fi
 
 # link for config directory
-CONFIG_FILES=(nvim vifm)
+CONFIG_FILES=(nvim vifm alacritty)
 for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
