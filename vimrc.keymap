@@ -49,6 +49,26 @@ onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
+"履歴移動コマンド
+nnoremap <silent> H <C-O>
+nnoremap <silent> L <C-I>
+
+" ESC の代わり
+inoremap <silent> jj <ESC>
+inoremap <silent> <S-CR> <ESC>
+vnoremap <silent> <S-CR> <ESC>
+
+" vv で矩形選択
+nnoremap <silent> vv <C-V>
+
+" ファイル全体の整形
+nnoremap == ggvG$=<C-O><C-O>
+
+" for vscode
+if exists('g:vscode')
+  finish
+endif
+
 " 画面分割
 noremap _ :split<CR><C-W>w
 noremap <BAR> :vsplit<CR><C-W>w
@@ -75,18 +95,3 @@ noremap <S-LEFT> <C-W><
 noremap <S-RIGHT> <C-W>>
 noremap <S-DOWN> <C-W>+
 noremap <S-UP> <C-W>-
-
-"履歴移動コマンド
-nnoremap <silent> H <C-O>
-nnoremap <silent> L <C-I>
-
-" ESC の代わり
-inoremap <silent> jj <ESC>
-inoremap <silent> <S-CR> <ESC>
-vnoremap <silent> <S-CR> <ESC>
-
-" vv で矩形選択
-nnoremap <silent> vv <C-V>
-
-" ファイル全体の整形
-nnoremap == ggvG$=<C-O><C-O>
