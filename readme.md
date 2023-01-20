@@ -1,5 +1,1 @@
-git clone https://github.com/stakaya/dotfiles.git
-
-zsh -f setup_shell.sh
-
-bash -f setup_app.sh
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/stakaya/dotfiles/master/setup.sh)"
