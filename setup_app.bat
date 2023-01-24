@@ -20,6 +20,10 @@ if not exist "%APPDATA%\Vifm" (
 	mklink /D "%APPDATA%\Vifm" "%DOTFILES%\vifm"
 )
 
+if not exist "%APPDATA%\alacritty" (
+	mklink /D "%APPDATA%\alacritty" "%DOTFILES%\alacritty"
+)
+
 if not exist "%USERPROFILE%\vimfiles\plugins" (
 	mklink /D "%USERPROFILE%\vimfiles\plugins" "%DOTFILES%\vim\plugins"
 )

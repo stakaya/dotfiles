@@ -185,7 +185,12 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
-noremap <silent> <leader>t :terminal<CR>
+if has('win32') || has('win64')
+  " ubuntuをpowershellに変更可能未指定の場合cmd.exeが起動する
+  noremap <silent> <leader>t :terminal ++close ++curwin ubuntu<CR>
+else
+  noremap <silent> <leader>t :terminal<CR>
+endif
 tnoremap <silent> <C-l> <C-W>N
 tnoremap <silent> <C-n> <DOWN>
 tnoremap <silent> <C-p> <UP>

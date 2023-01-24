@@ -19,18 +19,20 @@ if [[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
 fi
 
 # Environment
-# export LSCOLORS=gxfxcxdxbxGxDxabagacad
+export LANG=ja_JP.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # Alias
-alias vi='nvim'
+alias apkcheck='jarsigner -verify -verbose -certs $1'
+alias brewclean='brew cleanup && brew update && brew upgrade --cask'
+alias gitreset='git fetch --all && git reset --hard origin/main'
+alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
 alias pip='pip3'
 alias python='python3'
-alias gitreset='git fetch --all && git reset --hard origin/main'
-alias brewclean='brew cleanup && brew update && brew upgrade --cask'
-alias apkcheck='jarsigner -verify -verbose -certs $1'
 alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
-alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
+alias tmux='tmux -u -2'
+alias vi='nvim'
 
 # Keybind
 bindkey -v
