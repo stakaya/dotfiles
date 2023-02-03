@@ -38,18 +38,18 @@ endif
 
 " コマンド
 " command! debug echo %d %m 2> /dev/null
-command! pull git fetch && git pull %m 2> /dev/null
-command! push git push %m 2> /dev/null
-command! stage git add . %m 2> /dev/null
-command! add git add %f %m 2> /dev/null
-command! reset git restore . %m 2> /dev/null
-command! rollback git restore -S %f %m 2> /dev/null
-command! log git log --oneline  %m 2> /dev/null
-command! commit git commit -m '%a' %m 2> /dev/null
-command! branch git branch %a && git checkout %a %m 2> /dev/null
-command! list git branch %m 2> /dev/null
-command! rebranch git branch -m %a %m 2> /dev/null
-command! remove git branch -d %a %m 2> /dev/null
+command! gpull git fetch && git pull %m 2> /dev/null
+command! gpush git push %m 2> /dev/null
+command! gstage git add . %m 2> /dev/null
+command! gadd git add %f %m 2> /dev/null
+command! greset git restore . %m 2> /dev/null
+command! grollback git restore -S %f %m 2> /dev/null
+command! glog git log --oneline  %m 2> /dev/null
+command! gcommit git commit -m '%a' %m 2> /dev/null
+command! gbranch git branch %a && git checkout %a %m 2> /dev/null
+command! glist git branch %m 2> /dev/null
+command! grebranch git branch -m %a %m 2> /dev/null
+command! gremove git branch -d %a %m 2> /dev/null
 
 command! search find . -name "%a" %m 2> /dev/null
 
@@ -104,9 +104,6 @@ elseif executable('clip.exe')
 elseif executable('wl-copy')
   nnoremap yp :!echo %d | wl-copy<cr>
   nnoremap yf :!echo %c:p | wl-copy<cr>
-elseif executable('xclip')
-  nnoremap yp :!echo %d | xclip %i<cr>
-  nnoremap yf :!echo %c:p | xclip %i<cr>
 endif
 
 " Quick Look でプレビュー

@@ -160,10 +160,10 @@ elseif executable('wl-copy')
     autocmd!
     autocmd TextYankPost * :call system('wl-copy', @")
   augroup END
-elseif executable('xclip')
+elseif executable('pbcopy')
   augroup Yank
     autocmd!
-    autocmd TextYankPost * :call system('xclip', @")
+    autocmd TextYankPost * :call system('pbcopy', @")
   augroup END
 endif
 
