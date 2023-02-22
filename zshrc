@@ -33,6 +33,7 @@ alias python='python3'
 alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
 alias tmux='tmux -u -2'
 alias vi='nvim'
+alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 
 # Keybind
 bindkey -v
