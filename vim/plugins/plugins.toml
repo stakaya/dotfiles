@@ -28,8 +28,8 @@ hook_add = '''
   nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
 
   if executable('rg')
-    nnoremap <silent> <space>g "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
-    vnoremap <silent> <space>g "zy:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:Rg <C-r> <CR>
+    nnoremap <silent> <space>g "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
+    vnoremap <silent> <space>g "zy:let @/ = @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
   endif
 
   function! FzfOmniFiles()
@@ -83,3 +83,9 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
