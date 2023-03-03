@@ -58,6 +58,9 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " terminal color
+highlight Terminal guibg='#2a2a2a'
+highlight Terminal guifg='#bbbbbb'
+
 " black red green yellow blue magenta cyan white (bright is next line)
 let g:terminal_ansi_colors = [
 \ '#000000',
