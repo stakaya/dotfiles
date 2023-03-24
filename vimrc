@@ -5,33 +5,33 @@ let g:mapleader = "\<space>"
 source $HOME/dotfiles/vimrc.keymap
 
 if !has('nvim')
-	source $VIMRUNTIME/defaults.vim
-	set clipboard=unnamed,autoselect
+  source $VIMRUNTIME/defaults.vim
+  set clipboard=unnamed,autoselect
 endif
 
 if has('vim_starting')
-	let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
-	let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
-	let &t_SR .= "\e[4 q" " 置換モード下線カーソル
+  let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
+  let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
+  let &t_SR .= "\e[4 q" " 置換モード下線カーソル
 
-	if has('win32') || has('win64')
-		set runtimepath+=$HOME\vimfiles\plugins\repos\github.com\Shougo\dein.vim
-	else
-		set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
-	endif
+  if has('win32') || has('win64')
+    set runtimepath+=$HOME\vimfiles\plugins\repos\github.com\Shougo\dein.vim
+  else
+    set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
+  endif
 endif
 
 if has('win32') || has('win64')
-	let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
-	let s:pluins = s:plugin_conf
+  let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
+  let s:pluins = s:plugin_conf
 
-	" WindowsでPATHに$VIMが含まれていない時に
-	" currentのexeを見つけ出せないので追加
-	if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
-		let $PATH = $VIM . ';' . $PATH
-	endif
+  " WindowsでPATHに$VIMが含まれていない時に
+  " currentのexeを見つけ出せないので追加
+  if $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
+    let $PATH = $VIM . ';' . $PATH
+  endif
 else
-	let s:plugin_conf = expand('~/.vim/plugins')
+  let s:plugin_conf = expand('~/.vim/plugins')
   if has('nvim')
     let s:pluins = expand('~/.config/nvim/plugins')
   else
@@ -58,28 +58,28 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " terminal color
-highlight Terminal guibg='#2a2a2a'
-highlight Terminal guifg='#bbbbbb'
+highlight Terminal guibg=#2a2a2a
+highlight Terminal guifg=#bbbbbb
 
 " black red green yellow blue magenta cyan white (bright is next line)
 let g:terminal_ansi_colors = [
-\ '#000000',
-\ '#fd6b67',
-\ '#097e00',
-\ '#ccca00',
-\ '#5496ef',
-\ '#fd75ff',
-\ '#39cbcc',
-\ '#bbbbbb',
-\ '#676767',
-\ '#fd8784',
-\ '#73f961',
-\ '#fefb00',
-\ '#7eaff4',
-\ '#fd9cff',
-\ '#6ed9d9',
-\ '#f1f1f1',
-\ ]
+      \ '#000000',
+      \ '#fd6b67',
+      \ '#097e00',
+      \ '#ccca00',
+      \ '#5496ef',
+      \ '#fd75ff',
+      \ '#39cbcc',
+      \ '#bbbbbb',
+      \ '#676767',
+      \ '#fd8784',
+      \ '#73f961',
+      \ '#fefb00',
+      \ '#7eaff4',
+      \ '#fd9cff',
+      \ '#6ed9d9',
+      \ '#f1f1f1',
+      \ ]
 
 set ambiwidth=single   " 2バイト文字の表示
 set autoindent         " 自動インデント
@@ -113,8 +113,8 @@ set virtualedit=all    " カーソル位置を自由に設定する
 
 " grepをripgrepに入れ替える
 if executable('rg')
-	set grepprg=rg\ --vimgrep
-	set grepformat=%f:%l:%c:%m,%f:%l:%m
+  set grepprg=rg\ --vimgrep
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " ステータス行の指定
@@ -123,9 +123,9 @@ set statusline+=%=%l:%c
 
 " カレントウィンドウにのみ罫線を引く
 augroup cursorLine
-	autocmd!
-	autocmd WinLeave * set nocursorline
-	autocmd WinEnter,BufRead * set cursorline
+  autocmd!
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
 augroup END
 
 " 自動的にインデントプラグインを読み込む
@@ -133,23 +133,23 @@ filetype plugin indent on
 
 " 拡張子によって変更
 augroup fileTypeIndent
-	autocmd!
-	autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap expandtab
-	autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc setlocal tabstop=2 shiftwidth=2
-	autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
-  autocmd BufNewFile,BufRead *.rules  set filetype=javascript
+  autocmd!
+  autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap expandtab
+  autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc setlocal tabstop=2 shiftwidth=2
+  autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.js setlocal cindent expandtab shiftround
+  autocmd BufNewFile,BufRead *.rules set filetype=javascript
 augroup END
 
 " バイナリファイルを開く場合
-augroup Binary
-	autocmd!
-	autocmd BufReadPre  *.bin let &bin=1
-	autocmd BufReadPost *.bin if &bin | %!xxd
-	autocmd BufReadPost *.bin set ft=xxd | endif
-	autocmd BufWritePre *.bin if &bin | %!xxd -r
-	autocmd BufWritePre *.bin endif
-	autocmd BufWritePost *.bin if &bin | %!xxd
-	autocmd BufWritePost *.bin set nomod | endif
+augroup fileTypeBinary
+  autocmd!
+  autocmd BufReadPre *.bin let &bin=1
+  autocmd BufReadPost *.bin if &bin | %!xxd
+  autocmd BufReadPost *.bin set ft=xxd | endif
+  autocmd BufWritePre *.bin if &bin | %!xxd -r
+  autocmd BufWritePre *.bin endif
+  autocmd BufWritePost *.bin if &bin | %!xxd
+  autocmd BufWritePost *.bin set nomod | endif
 augroup END
 
 " Yankでクリップボードにコピー
@@ -234,14 +234,14 @@ nnoremap <leader>M qz
 nnoremap <leader>m @z
 
 function! GrepGitFiles(keyword)
-	let l:ex = '*.' . expand('%:e')
-	if l:ex == '*.'
-	  let l:ex = expand('%')
-	endif
+  let l:ex = '*.' . expand('%:e')
+  if l:ex == '*.'
+    let l:ex = expand('%')
+  endif
   let l:is_git = system('git status')
-	if v:shell_error
-		exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
-	else
-		exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
-	endif
+  if v:shell_error
+    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
+  else
+    exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
+  endif
 endfunction

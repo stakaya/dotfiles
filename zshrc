@@ -1,5 +1,5 @@
-# Tmux
-if [[ ! -n $TMUX && $- == *l* ]]; then
+# Tmux with Alacritty
+if [[ -n "$ALACRITTY_WINDOW_ID" && ! -n $TMUX && $- == *l* ]]; then
   # get the IDs
   ID="`tmux list-sessions`"
   if [[ -z "$ID" ]]; then

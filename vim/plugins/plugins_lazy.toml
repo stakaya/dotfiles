@@ -163,3 +163,16 @@ on_event = 'VimEnter'
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
 on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+on_ft = ['css', 'html', 'java', 'javascript', 'kotlin', 'php', 'python', 'sh', 'svlete', 'swift', 'toml', 'vim']
+hook_source = '''
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['css', 'html', 'java', 'javascript', 'kotlin', 'php', 'python', 'sh', 'svlete', 'swift', 'toml', 'vim']

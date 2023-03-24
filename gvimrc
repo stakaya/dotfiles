@@ -44,6 +44,7 @@ augroup InsModeAu
   autocmd!
   autocmd InsertEnter,CmdwinEnter * set noimdisable
   autocmd InsertLeave,CmdwinLeave * set imdisable
+  autocmd InsertEnter,InsertLeave * set iminsert=0
 augroup END
 
 " CTRL-Tab でタブを移動
