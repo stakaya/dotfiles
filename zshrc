@@ -54,8 +54,8 @@ alias tmux='tmux -u -2'
 alias vi='nvim'
 alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 
-zle -N git_checkout _git_checkout
-zle -N jump_directory _jump_directory
+zle -N git_checkout
+zle -N jump_directory
 
 # Keybind
 bindkey -v
@@ -75,7 +75,7 @@ stty stop undef
 stty start undef
 
 # checkout git branch
-function _git_checkout() {
+function git_checkout() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
@@ -83,7 +83,7 @@ function _git_checkout() {
 }
 
 # selected directory
-function _jump_directory() {
+function jump_directory() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
