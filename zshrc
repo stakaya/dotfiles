@@ -54,6 +54,9 @@ alias tmux='tmux -u -2'
 alias vi='nvim'
 alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 
+zle -N git_checkout _git_checkout
+zle -N jump_directory _jump_directory
+
 # Keybind
 bindkey -v
 bindkey "jj" vi-cmd-mode
@@ -61,6 +64,8 @@ bindkey ";;" end-of-line
 bindkey "kk" history-incremental-search-backward
 bindkey '^P' history-beginning-search-backward
 bindkey '^N' history-beginning-search-forward
+bindkey 'jd' jump_directory
+bindkey 'gc' git_checkout
 
 # fzf
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
@@ -70,17 +75,18 @@ stty stop undef
 stty start undef
 
 # checkout git branch
-gitcheckout() {
+function _git_checkout() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-#cd to selected directory
-md() {
+# selected directory
+function _jump_directory() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+
