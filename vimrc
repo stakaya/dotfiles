@@ -23,7 +23,7 @@ endif
 
 if has('win32') || has('win64')
   let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
-  let s:pluins = s:plugin_conf
+  let s:plugin = s:plugin_conf
 
   " WindowsでPATHに$VIMが含まれていない時に
   " currentのexeを見つけ出せないので追加
@@ -33,15 +33,15 @@ if has('win32') || has('win64')
 else
   let s:plugin_conf = expand('~/.vim/plugins')
   if has('nvim')
-    let s:pluins = expand('~/.config/nvim/plugins')
+    let s:plugin = expand('~/.config/nvim/plugins')
   else
-    let s:pluins = expand('~/.vim/plugins')
+    let s:plugin = expand('~/.vim/plugins')
   endif
 endif
 
 " プラグインの読み込み
-if dein#load_state(s:pluins)
-  call dein#begin(s:pluins)
+if dein#load_state(s:plugin)
+  call dein#begin(s:plugin)
   call dein#load_toml(s:plugin_conf . '/plugins.toml', {'lazy': 0})
   call dein#load_toml(s:plugin_conf . '/plugins_lazy.toml', {'lazy': 1})
   call dein#end()
@@ -153,7 +153,12 @@ augroup fileTypeBinary
 augroup END
 
 " Yankでクリップボードにコピー
-if executable('clip.exe')
+if executable('pbcopy')
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('pbcopy', @")
+  augroup END
+elseif executable('clip.exe')
   augroup Yank
     autocmd!
     autocmd TextYankPost * :call system('clip.exe', @")
@@ -162,11 +167,6 @@ elseif executable('wl-copy')
   augroup Yank
     autocmd!
     autocmd TextYankPost * :call system('wl-copy', @")
-  augroup END
-elseif executable('pbcopy')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('pbcopy', @")
   augroup END
 endif
 
@@ -206,8 +206,8 @@ vnoremap <leader>r "zy:let @/ = @z<CR>:set hlsearch<CR>:%s/<C-r>///g<Left><Left>
 vnoremap <leader>R :s///g<Left><Left><Left>
 
 " 計算
-nnoremap <silent> <leader>a :call setline(".",eval(getline(".")))<CR>
-vnoremap <silent> <leader>a :!awk '{sum += $1} END {print sum}'<CR>
+nnoremap <silent> <leader>c :call setline(".",eval(getline(".")))<CR>
+vnoremap <silent> <leader>c :!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
 vnoremap <silent> <leader>+ g<C-A>
@@ -232,6 +232,9 @@ vnoremap <leader>d "zy:let @/ = @z<CR>:set hlsearch<CR>:g/<C-r>//d<Left><Left>
 " マクロの記録・実行
 nnoremap <leader>M qz
 nnoremap <leader>m @z
+
+" コマンド履歴
+noremap <silent> <leader>kk :<C-F>
 
 function! GrepGitFiles(keyword)
   let l:ex = '*.' . expand('%:e')

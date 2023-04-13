@@ -80,12 +80,12 @@ nnoremap V v
 nnoremap v :view<cr>
 
 " ファイルを開くコマンド
-if executable('start.exe')
-  nnoremap o :!start %f<cr>
-endif
-
 if executable('open')
   nnoremap o :!open -g %f<cr>
+endif
+
+if executable('start.exe')
+  nnoremap o :!start %f<cr>
 endif
 
 if executable('xdg-open')
