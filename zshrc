@@ -42,10 +42,10 @@ fi
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!**/.git/*"'
-export FZF_DEFAULT_OPTS="--no-scrollbar --height 40% --reverse"
-export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_CTRL_T_OPTS='--preview-window=+8,noborder --preview "bat --color=always --style=header,grid --line-range :100 {}"'
+export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
+export FZF_DEFAULT_OPTS="--preview-window=border-none --no-scrollbar --height 40%"
+export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 
 # Alias
 alias apkcheck='jarsigner -verify -verbose -certs $1'
@@ -72,7 +72,6 @@ bindkey '^N' history-beginning-search-forward
 bindkey '^P' history-beginning-search-backward
 bindkey 'gc' git_checkout
 bindkey 'kk' fzf-history-widget
-bindkey 'tt' fzf-cd-widget
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -90,12 +89,14 @@ function git_checkout() {
 }
 
 function space_widget() {
-	# when inptting spack key it changing directory
-	if [[ "${BUFFER}" == " " ]]; then
-      fzf-file-widget
-   	else
-   		zle self-insert
-	fi
+  # when inptting spack key it changing directory
+  if [[ "${BUFFER}" == " " ]]; then
+    fzf-cd-widget
+  elif [[ "${BUFFER}" == "vi " || "${BUFFER}" == "vim " ]]; then
+    fzf-file-widget
+  else
+    zle self-insert
+  fi
 }
 
 function extract() {

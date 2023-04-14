@@ -23,6 +23,14 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
+  let g:fzf_layout = {
+  \  'window': {
+  \    'width': 0.8,
+  \    'height': 0.6,
+  \    'border': 'none'
+  \  }
+  \ }
+
   nnoremap <silent> <space>; :Commands<CR>
   nnoremap <silent> <space>w :Buffers<CR>
   nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
