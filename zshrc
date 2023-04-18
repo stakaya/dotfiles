@@ -29,8 +29,8 @@ if [[ -e ~/.zsh/zsh-completions ]]; then
 fi
 
 # Prezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-	source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+if [[ -s ~/.zprezto/init.zsh ]]; then
+  source ~/.zprezto/init.zsh
 fi
 
 # zsh-autosuggestions
