@@ -18,12 +18,12 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-bin-gem-node \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
+### End of Zinit's installer chunk
 
+# load zsh plugin
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/fast-syntax-highlighting
-
-### End of Zinit's installer chunk
 
 # Environment
 export LANG=ja_JP.UTF-8
@@ -62,6 +62,7 @@ alias gitreset='git fetch --all && git reset --hard origin/main'
 alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
 alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
 alias tmux='tmux -u -2'
+alias ls='ls --color'
 alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 alias -s {md,markdown,txt,conf,toml,json,yml,yaml}=vi
 alias -s {gz,tgz,zip,bz2,tar}=extract
@@ -85,6 +86,9 @@ bindkey 'kk' fzf-history-widget
 # vim でCtrl Keyが効かないのを修整
 stty stop undef
 stty start undef
+
+# prompt
+eval "$(starship init zsh)"
 
 # checkout git branch
 function git_checkout() {
