@@ -1,3 +1,4 @@
 format = """
-[┌ ](bold green)$shell$time$directory$git_branch$git_status$cmd_duration
-[└─>](bold green) """
+[┌ ](bold blue)$shell$time$directory$git_branch$git_status$cmd_duration
+[└](bold blue)$character"""
+
