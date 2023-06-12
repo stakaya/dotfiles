@@ -7,9 +7,6 @@
 			"Packages" :
 			[
 				{
-					"PackageIdentifier" : "AgileBits.1Password"
-				},
-				{
 					"PackageIdentifier" : "Brave.Brave"
 				},
 				{
@@ -19,13 +16,7 @@
 					"PackageIdentifier" : "Git.Git"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.WindowsTerminal"
-				},
-				{
 					"PackageIdentifier" : "vim.vim"
-				},
-				{
-					"PackageIdentifier" : "SlackTechnologies.Slack"
 				},
 				{
 					"PackageIdentifier" : "Alacritty.Alacritty"
