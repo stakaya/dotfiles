@@ -17,7 +17,7 @@ keymap ,    PREV_MARK
 # Mark all search terms
 keymap \"   REG_MARK
 # Mark URL-like strings as anchors
-keymap  :   NULL
+# keymap  :   NULL
 keymap ";"  MARK_URL
 # Mark current word as URL
 keymap M-";"  MARK_WORD
@@ -50,11 +50,11 @@ keymap w    NEXT_WORD
 # Various ways to to proceed page by page
 keymap =    NEXT_PAGE
 keymap +    NEXT_PAGE
-keymap L    NEXT_PAGE
+# keymap L    NEXT_PAGE
 keymap SPC  NEXT_PAGE
 keymap DOWN NEXT_PAGE
 keymap -    PREV_PAGE
-keymap H    PREV_PAGE
+# keymap H    PREV_PAGE
 keymap UP   PREV_PAGE
 
 keymap TAB  NEXT_LINK
@@ -99,9 +99,8 @@ keymap n    SEARCH_NEXT
 # }}}
 # Tab operations {{{
 
-keymap {        PREV_TAB
-keymap DEL      PREV_TAB
-keymap }        NEXT_TAB
+keymap h        PREV_TAB
+keymap l        NEXT_TAB
 
 # Move tabs around
 keymap M-{      TAB_LEFT
@@ -109,15 +108,15 @@ keymap M-}      TAB_RIGHT
 
 keymap C-q      CLOSE_TAB
 keymap C-w      CLOSE_TAB
-keymap C-t      NEW_TAB
+keymap t        NEW_TAB
 keymap M-t      TAB_MENU
 
 # }}}
 # Links {{{
 
 # Open link in new tab
-keymap t    TAB_LINK
-keymap T    TAB_LINK
+keymap tt    TAB_LINK
+keymap TT    TAB_LINK
 
 keymap a    SAVE_LINK
 
@@ -155,7 +154,7 @@ keymap u    PEEK_LINK
 # menu of links
 keymap M-l  LIST_MENU
 # Another link list
-keymap L    LIST
+# keymap L    LIST
 # jump to link in page (same as LIST_MENU?)
 keymap M-M  MOVE_LIST_MENU
 
@@ -163,11 +162,12 @@ keymap M-M  MOVE_LIST_MENU
 # Buffer operations {{{
 
 # Previous buffer, close current
-keymap B    BACK
+keymap H    BACK
 # Navigate back without deleting current buffer
 keymap <        PREV
 keymap LEFT     PREV
 # Navigate forward without deleting current buffer
+keymap L        NEXT
 keymap >        NEXT
 keymap RIGHT    NEXT
 # Display current buffer URL
@@ -181,7 +181,7 @@ keymap U    GOTO
 keymap M-u  GOTO_RELATIVE
 # Open local file
 keymap V    LOAD
-keymap :e   LOAD
+keymap ";"e   LOAD
 
 # edit buffer (the textual rendering, not the html source) in VIM (or editor)
 keymap M-e  EDIT_SCREEN
@@ -194,7 +194,7 @@ keymap |    PIPE_BUF
 keymap S    SAVE_SCREEN
 # Save html (source)
 keymap M-s  SAVE
-keymap :w   SAVE
+keymap ";"w   SAVE
 
 keymap C-l  REDRAW
 
@@ -241,12 +241,13 @@ keymap D    DOWNLOAD_LIST
 # Toggle frames
 keymap F    FRAME
 # View the key mappings (with w3m descriptions), including the possible unassigned commands
-keymap H    HELP
+keymap gH   HELP
 keymap M-m  MOUSE_TOGGLE
 keymap ZZ   QUIT
 keymap q    QUIT
 keymap Q    NULL
 keymap ZQ   EXIT
+keymap ";"q   EXIT
 keymap r    VERSION
 
 # Optionally configurable menu (~/.w3m/menu)
@@ -256,7 +257,7 @@ keymap M-a ADD_BOOKMARK
 # Bookmark page
 keymap M-b BOOKMARK
 # Run internal command
-keymap :: COMMAND
+keymap ";"";" COMMAND
 keymap M-c COMMAND
 keymap M-k DEFINE_KEY
 # Invoke the external dictionary with input word
@@ -267,14 +268,15 @@ keymap M-W DICT_WORD_AT
 keymap W WRAP_TOGGLE
 # }}}
 # User-defined bindings {{{
-keymap  :b       SHELL "$EDITOR ~/.config/surfraw/bookmarks"
-keymap  :c       SHELL "$EDITOR ~/.w3m/config"
-keymap  :k       SHELL "$EDITOR ~/.w3m/keymap"
-keymap  :u       SHELL "$EDITOR ~/.w3m/urimethodmap"
+keymap  ";"b       SHELL "$EDITOR ~/.config/surfraw/bookmarks"
+keymap  ";"c       SHELL "$EDITOR ~/.w3m/config"
+keymap  ";"k       SHELL "$EDITOR ~/.w3m/keymap"
+keymap  ";"u       SHELL "$EDITOR ~/.w3m/urimethodmap"
 # }}}
+
 # Scripts/cgi-bin {{{
-keymap pp GOTO file:/cgi-bin/goto_clipboard.cgi
-keymap pt GOTO file:/cgi-bin/goto_tmux_clipboard.cgi
+# keymap pp GOTO file:/cgi-bin/goto_clipboard.cgi
+# keymap pt GOTO file:/cgi-bin/goto_tmux_clipboard.cgi
 # }}}
 # Macros {{{
 
