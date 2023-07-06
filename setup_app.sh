@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # link for dot files
-DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf)
+DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf w3m)
 for file in ${DOT_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
