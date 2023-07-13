@@ -80,18 +80,9 @@ noremap <BAR> :vsplit<CR><C-W>w
 noremap <TAB> <C-W>w
 onoremap <TAB> <C-C><C-W>w
 
-" ウインドウの移動コマンド
-map th <C-W>h
-map tk <C-W>k
-map tj <C-W>j
-map tl <C-W>l
-
-noremap tb :bnext<CR>
-noremap tB :bprev<CR>
-noremap tt :tabnext<CR>
-noremap tT :tabprevious<CR>
-noremap tn :tabnew<CR>
-noremap tc :tabclose<CR>
+noremap gb :bnext<CR>
+noremap gB :bprev<CR>
+noremap <C-N> :tabnew<CR>
 
 " ウインドウのリサイズ
 noremap <S-LEFT> <C-W><
