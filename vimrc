@@ -50,6 +50,7 @@ endif
 
 if dein#check_install()
   call dein#install()
+  call dein#recache_runtimepath()
 endif
 
 let s:removed_plugins = dein#check_clean()
@@ -180,6 +181,9 @@ endif
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 
+" 新規ファイルの場合はインサートモード
+autocmd VimEnter * if argc() == 0 | startinsert | endif
+
 " カレントディレクトリを移動
 autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
 
@@ -200,6 +204,7 @@ if has('win32') || has('win64')
 else
   noremap <silent> <leader>t :terminal<CR>
 endif
+
 tnoremap <silent> <C-l> <C-W>N
 tnoremap <silent> <C-n> <DOWN>
 tnoremap <silent> <C-p> <UP>
@@ -219,6 +224,9 @@ vnoremap <silent> <leader>c :!awk '{sum += $1} END {print sum}'<CR>
 vnoremap <silent> <leader>+ g<C-A>
 vnoremap <silent> <leader>- g<C-X>
 vnoremap <silent> <leader>n :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
+
+" タブ
+noremap <silent> <leader>n :tabnew<CR>
 
 " 行の折返し変更
 noremap <silent> <leader>wb :set wrap<CR>

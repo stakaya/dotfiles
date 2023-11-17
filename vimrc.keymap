@@ -82,7 +82,6 @@ onoremap <TAB> <C-C><C-W>w
 
 noremap gb :bnext<CR>
 noremap gB :bprev<CR>
-noremap <C-N> :tabnew<CR>
 
 " ウインドウのリサイズ
 noremap <S-LEFT> <C-W><

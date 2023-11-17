@@ -29,6 +29,11 @@ zinit light zdharma/fast-syntax-highlighting
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
+
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init -)"
+
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
 export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
