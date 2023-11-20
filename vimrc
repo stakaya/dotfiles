@@ -50,7 +50,6 @@ endif
 
 if dein#check_install()
   call dein#install()
-  call dein#recache_runtimepath()
 endif
 
 let s:removed_plugins = dein#check_clean()
