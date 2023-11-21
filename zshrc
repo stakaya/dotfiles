@@ -70,6 +70,8 @@ alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 alias -s {md,markdown,txt,conf,toml,json,yml,yaml}=vi
 alias -s {gz,tgz,zip,bz2,tar}=extract
 
+zle -N git_add
+zle -N git_checkout_from_remote
 zle -N git_checkout
 zle -N space_widget
 
@@ -80,7 +82,9 @@ bindkey ";;" end-of-line
 bindkey "jj" vi-cmd-mode
 bindkey '^N' history-beginning-search-forward
 bindkey '^P' history-beginning-search-backward
+bindkey 'ga' git_add
 bindkey 'gc' git_checkout
+bindkey 'gr' git_checkout_from_remote
 bindkey 'kk' fzf-history-widget
 
 # fzf
@@ -99,6 +103,31 @@ function git_checkout() {
   branches=$(git branch -vv) && \
     branch=$(echo "$branches" | fzf +m) && \
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+function git_checkout_from_remote() {
+  local branches branch
+  branches=$(git branch -vv -r) && \
+    branch=$(echo "$branches" | fzf +m) && \
+    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+function git_add() {
+  local out q n addfiles
+  while out=$(
+      git status --short |
+      awk '{if (substr($0,2,1) !~ / /) print $2}' |
+      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+    q=$(head -1 <<< "$out")
+    n=$[$(wc -l <<< "$out") - 1]
+    addfiles=(`echo $(tail "-$n" <<< "$out")`)
+    [[ -z "$addfiles" ]] && continue
+    if [ "$q" = ctrl-d ]; then
+      git diff --color=always $addfiles | less -R
+    else
+      git add $addfiles
+    fi
+  done
 }
 
 function space_widget() {
