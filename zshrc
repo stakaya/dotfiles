@@ -1,10 +1,10 @@
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
+  print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+    print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    print -P "%F{160} The clone has failed.%f%b"
 fi
 
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
@@ -14,26 +14,34 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
-    zdharma-continuum/zinit-annex-bin-gem-node \
-    zdharma-continuum/zinit-annex-patch-dl \
-    zdharma-continuum/zinit-annex-rust
+  zdharma-continuum/zinit-annex-as-monitor \
+  zdharma-continuum/zinit-annex-bin-gem-node \
+  zdharma-continuum/zinit-annex-patch-dl \
+  zdharma-continuum/zinit-annex-rust
 ### End of Zinit's installer chunk
 
 # load zsh plugin
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light zdharma/fast-syntax-highlighting
+zinit light rupa/z
 
 # Environment
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
-[[ -d ~/.rbenv  ]] && \
+[[ -d ~/.rbenv ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
   eval "$(rbenv init -)"
 
+# jump around
+[ -f ~/z/z.sh ] && source ~/z/z.sh
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fzf option
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
 export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
@@ -71,7 +79,7 @@ alias -s {md,markdown,txt,conf,toml,json,yml,yaml}=vi
 alias -s {gz,tgz,zip,bz2,tar}=extract
 
 zle -N git_add
-zle -N git_checkout_from_remote
+zle -N git_fetch
 zle -N git_checkout
 zle -N space_widget
 
@@ -84,11 +92,8 @@ bindkey '^N' history-beginning-search-forward
 bindkey '^P' history-beginning-search-backward
 bindkey 'ga' git_add
 bindkey 'gc' git_checkout
-bindkey 'gr' git_checkout_from_remote
+bindkey 'gf' git_fetch
 bindkey 'kk' fzf-history-widget
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim でCtrl Keyが効かないのを修整
 stty stop undef
@@ -105,19 +110,17 @@ function git_checkout() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-function git_checkout_from_remote() {
+function git_fetch() {
   local branches branch
   branches=$(git branch -vv -r) && \
     branch=$(echo "$branches" | fzf +m) && \
-    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+    git fetch $(echo "$branch" | awk '{print $1}' | sed "s/\// /")
 }
 
 function git_add() {
   local out q n addfiles
-  while out=$(
-      git status --short |
-      awk '{if (substr($0,2,1) !~ / /) print $2}' |
-      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+  while out=$(git status --short | awk '{if (substr($0,2,1) !~ / /) print $2}' | fzf-tmux --multi --exit-0 --expect=ctrl-d);
+  do
     q=$(head -1 <<< "$out")
     n=$[$(wc -l <<< "$out") - 1]
     addfiles=(`echo $(tail "-$n" <<< "$out")`)
@@ -142,12 +145,12 @@ function space_widget() {
 }
 
 function extract() {
-	case $1 in
-		*.tar.gz|*.tgz) tar xzvf $1;;
-		*.zip) unzip $1;;
-		*.tar.bz2|*.tbz) tar xjvf $1;;
-		*.gz) gzip -d $1;;
-		*.bz2) bzip2 -dc $1;;
-		*.tar) tar xvf $1;;
-	esac
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf $1;;
+    *.zip) unzip $1;;
+    *.tar.bz2|*.tbz) tar xjvf $1;;
+    *.gz) gzip -d $1;;
+    *.bz2) bzip2 -dc $1;;
+    *.tar) tar xvf $1;;
+  esac
 }
