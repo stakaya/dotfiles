@@ -68,7 +68,7 @@ fi
 
 # Alias
 alias apkcheck='jarsigner -verify -verbose -certs $1'
-alias brewclean='brew cleanup && brew update && brew upgrade --cask'
+alias brewclean='brew cleanup && brew update && brew upgrade && brew upgrade --cask'
 alias gitreset='git fetch --all && git reset --hard origin/main'
 alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Names}}" | fzf` sh'
 alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
