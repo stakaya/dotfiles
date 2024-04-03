@@ -16,7 +16,7 @@ if [ ! -e ~/.config ]; then
 fi
 
 # link for config directory
-CONFIG_FILES=(nvim vifm alacritty starship.toml)
+CONFIG_FILES=(nvim vifm alacritty starship.toml git)
 for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
