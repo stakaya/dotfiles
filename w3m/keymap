@@ -37,11 +37,14 @@ keymap M-.  RIGHT
 
 # Movement across the page
 keymap h    MOVE_LEFT
-keymap C-u  MOVE_UP
 keymap k    MOVE_UP
-keymap C-d  MOVE_DOWN
 keymap j    MOVE_DOWN
 keymap l    MOVE_RIGHT
+keymap C-u  PREV_PAGE
+keymap C-d  NEXT_PAGE
+keymap ?    HELP
+keymap C-n  NEXT_LINK
+keymap C-p  PREV_LINK
 keymap M-<  SHIFT_LEFT
 keymap M->  SHIFT_RIGHT
 keymap W    PREV_WORD
@@ -88,11 +91,11 @@ keymap z    CENTER_V
 
 # Incremental search
 keymap C-r  ISEARCH_BACK
-keymap C-s  ISEARCH
+# keymap C-s  ISEARCH
 
 # Regular search
 keymap /    SEARCH
-keymap ?    SEARCH_BACK
+# keymap ?    SEARCH_BACK
 keymap N    SEARCH_PREV
 keymap n    SEARCH_NEXT
 
@@ -195,6 +198,7 @@ keymap S    SAVE_SCREEN
 # Save html (source)
 keymap M-s  SAVE
 keymap ";"w   SAVE
+keymap C-s  SAVE
 
 keymap C-l  REDRAW
 
@@ -242,6 +246,7 @@ keymap D    DOWNLOAD_LIST
 keymap F    FRAME
 # View the key mappings (with w3m descriptions), including the possible unassigned commands
 keymap gH   HELP
+keymap ?    HELP
 keymap M-m  MOUSE_TOGGLE
 keymap ZZ   QUIT
 keymap q    QUIT
