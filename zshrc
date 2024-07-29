@@ -81,8 +81,6 @@ alias -s {gz,tgz,zip,bz2,tar}=extract
 zle -N git_add
 zle -N git_fetch
 zle -N git_switch
-zle -N git_restore
-zle -N git_checkout
 zle -N space_widget
 
 # Keybind
@@ -93,8 +91,6 @@ bindkey "jj" vi-cmd-mode
 bindkey '^N' history-beginning-search-forward
 bindkey '^P' history-beginning-search-backward
 bindkey 'ga' git_add
-bindkey 'gc' git_checkout
-bindkey 'gr' git_restore
 bindkey 'gs' git_switch
 bindkey 'gf' git_fetch
 bindkey 'kk' fzf-history-widget
@@ -113,35 +109,11 @@ function git_switch() {
     git switch $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-# checkout git branch
-function git_checkout() {
-  local branches branch
-  branches=$(git branch -vv) && \
-    branch=$(echo "$branches" | fzf +m) && \
-    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
-
 function git_fetch() {
   local branches branch
   branches=$(git branch -vv -r) && \
     branch=$(echo "$branches" | fzf +m) && \
     git fetch $(echo "$branch" | awk '{print $1}' | sed "s/\// /")
-}
-
-function git_restore() {
-  local out q n addfiles
-  while out=$(git status --short | awk '{if (substr($0,2,1) !~ / /) print $2}' | fzf-tmux --multi --exit-0 --expect=ctrl-d);
-  do
-    q=$(head -1 <<< "$out")
-    n=$[$(wc -l <<< "$out") - 1]
-    addfiles=(`echo $(tail "-$n" <<< "$out")`)
-    [[ -z "$addfiles" ]] && continue
-    if [ "$q" = ctrl-d ]; then
-      git diff --color=always $addfiles | less -R
-    else
-      git restore $addfiles
-    fi
-  done
 }
 
 function git_add() {
