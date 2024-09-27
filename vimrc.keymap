@@ -47,10 +47,8 @@ onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
-" 選択時のコピペ
-vnoremap X ""x
-vnoremap Y ""y
-vnoremap P ""gP
+" 選択時のペースト
+nnoremap PP "0P
 
 " 履歴移動コマンド
 nnoremap <silent> H <C-O>
