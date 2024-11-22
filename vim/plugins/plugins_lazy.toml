@@ -104,6 +104,13 @@ depends = 'mattn/webapi-vim'
 on_cmd = 'Gist'
 
 [[plugins]]
+repo = 'madox2/vim-ai'
+on_cmd = ['AI', 'AIEdit', 'AIChat', 'AIRedo', 'AINewChat']
+hook_source = '''
+  let g:vim_ai_token_file_path = '~/.config/openai.token'
+'''
+
+[[plugins]]
 repo = 'shinchu/hz_ja.vim'
 on_event = 'VimEnter'
 
