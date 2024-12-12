@@ -106,8 +106,17 @@ on_cmd = 'Gist'
 [[plugins]]
 repo = 'madox2/vim-ai'
 on_cmd = ['AI', 'AIEdit', 'AIChat', 'AIRedo', 'AINewChat']
-hook_source = '''
+hook_add = '''
   let g:vim_ai_token_file_path = '~/.config/openai.token'
+  nnoremap <silent> <space>ai :AI<CR>
+  xnoremap <silent> <space>ai :AI<CR>
+  xnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
+  nnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
+  xnoremap <space>edit :AIEdit<Space>
+  nnoremap <space>edit :AIEdit<Space>
+  xnoremap <silent> <space>chat :AIChat<CR>
+  nnoremap <silent> <space>chat :AIChat<CR>
+  nnoremap <silent> <space>redo :AIRedo<CR>
 '''
 
 [[plugins]]
