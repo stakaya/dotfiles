@@ -1,6 +1,0 @@
-tap "homebrew/bundle"
-tap "homebrew/core"
-brew "util-linux"
-brew "curl"
-brew "neovim"
-brew "vifm"
