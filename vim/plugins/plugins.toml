@@ -96,3 +96,10 @@ hook_add = '''
 
 [[plugins]]
 repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'github/copilot.vim'
+hook_add = '''
+  let g:copilot_no_tab_map = v:true
+  imap <silent><script><expr> <space><CR> copilot#Accept("\<CR>")
+'''
