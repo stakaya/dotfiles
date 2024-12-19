@@ -176,9 +176,10 @@ elseif executable('wl-copy')
   augroup END
 endif
 
-" 設定ファイルを編集コマンド
+" 設定ファイル関連のコマンド
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
+command! UpdatePlug call dein#update()
 
 " 新規ファイルの場合はインサートモード
 autocmd VimEnter * if argc() == 0 | startinsert | endif
