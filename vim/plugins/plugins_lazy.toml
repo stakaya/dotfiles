@@ -112,11 +112,10 @@ hook_add = '''
   xnoremap <silent> <space>ai :AI<CR>
   xnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
   nnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
-  xnoremap <space>edit :AIEdit<Space>
-  nnoremap <space>edit :AIEdit<Space>
-  xnoremap <silent> <space>chat :AIChat<CR>
-  nnoremap <silent> <space>chat :AIChat<CR>
-  nnoremap <silent> <space>redo :AIRedo<CR>
+  xnoremap <space>edit :AIEdit<space>
+  nnoremap <space>edit :AIEdit<space>
+  xnoremap <silent> <space><CR> :AIChat<CR>
+  nnoremap <silent> <space><CR> :AIChat<CR>
 '''
 
 [[plugins]]
