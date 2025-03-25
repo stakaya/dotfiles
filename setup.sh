@@ -20,8 +20,10 @@ fi
 
 cd dotfiles
 
-echo "Installing software & library..."
-brew bundle -v --file=./apps/Brewfile
+if [ -f /usr/local/bin/brew ]
+    echo "Installing software & library..."
+    brew bundle -v --file=./apps/Brewfile
+fi
 
 echo "Setup zsh."
 zsh -f setup_shell.sh && echo "Done."
