@@ -14,5 +14,5 @@
       ]
     }
   },
-  "postCreateCommand": "apk update"
+  "postCreateCommand": "apk update && adduser vscode sudo"
 }
