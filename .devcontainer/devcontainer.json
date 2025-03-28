@@ -14,5 +14,6 @@
       ]
     }
   },
-  "postCreateCommand": "apk update && adduser vscode sudo"
+  "remoteUser": "root",
+  "postCreateCommand": "apk update"
 }
