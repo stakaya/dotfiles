@@ -22,6 +22,6 @@
       }
     }
   },
-  "postCreateCommand": "apt-get update && apt-get install -y vim git curl && git clone https://github.com/stakaya/dotfiles.git ~/dotfiles && ~/dotfiles/setup.sh",
+  "postCreateCommand": "apt-get update && apt-get install -y vim git curl",
   "remoteUser": "vscode"
 }
