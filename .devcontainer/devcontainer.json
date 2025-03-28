@@ -1,34 +1,27 @@
 {
-    "name": "Dotfiles Development Container",
-    "image": "mcr.microsoft.com/devcontainers/universal:latest",
-    "features": {
-        "ghcr.io/devcontainers/features/github-cli:1": {},
-        "ghcr.io/devcontainers/features/node:1": {
-            "version": "lts"
-        },
-        "ghcr.io/devcontainers/features/python:1": {
-            "installTools": true
+  "name": "Dotfiles Development Container",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscodevim.vim"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
         }
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "GitHub.copilot",
-                "ms-python.python",
-                "ms-vscode.js-debug",
-                "esbenp.prettier-vscode",
-                "dbaeumer.vscode-eslint"
-            ],
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "zsh",
-                "terminal.integrated.profiles.linux": {
-                    "zsh": {
-                        "path": "/bin/zsh"
-                    }
-                }
-            }
-        }
-    },
-    "postCreateCommand": "git clone https://github.com/stakaya/dotfiles.git ~/dotfiles && ~/dotfiles/setup.sh",
-    "remoteUser": "vscode"
+      }
+    }
+  },
+  "postCreateCommand": "apt-get update && apt-get install -y vim git curl && git clone https://github.com/stakaya/dotfiles.git ~/dotfiles && ~/dotfiles/setup.sh",
+  "remoteUser": "vscode"
 }
