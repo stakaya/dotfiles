@@ -141,8 +141,8 @@ filetype plugin indent on
 augroup fileTypeIndent
   autocmd!
   autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap expandtab
-  autocmd BufNewFile,BufRead *.svelte,*.ts,*.js,*.md,*.html,*.css,*.rb,*vimrc setlocal tabstop=2 shiftwidth=2
-  autocmd BufNewFile,BufRead *.php,*.c,*.cpp,*.java,*.kt,*.kts,*.js setlocal cindent expandtab shiftround
+  autocmd BufNewFile,BufRead *.json,*.md,*.html,*.css,*.ts,*.js,*vimrc* setlocal tabstop=2 shiftwidth=2
+  autocmd BufNewFile,BufRead *.php,*.c,*.java,*.kt,*.js setlocal cindent expandtab shiftround
   autocmd BufNewFile,BufRead *.rules set filetype=javascript
 augroup END
 
@@ -221,12 +221,7 @@ nnoremap <silent> <leader>c :call setline(".",eval(getline(".")))<CR>
 vnoremap <silent> <leader>c :!awk '{sum += $1} END {print sum}'<CR>
 
 " カウント
-vnoremap <silent> <leader>+ g<C-A>
-vnoremap <silent> <leader>- g<C-X>
 vnoremap <silent> <leader>n :s/^/\=printf("%d", line(".") - line("'<") + 1)/<CR>
-
-" タブ
-noremap <silent> <leader>n :tabnew<CR>
 
 " 行の折返し変更
 noremap <silent> <leader>wb :set wrap<CR>
