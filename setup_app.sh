@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # link for dot files
-DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf)
+DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf zsh)
 for file in ${DOT_FILES[@]}
 do
 	if [ ! -e ~/$file ]; then
@@ -15,7 +15,7 @@ if [ ! -e ~/.config ]; then
 	mkdir -p ~/.config
 fi
 
-# link for config directory
+# link for config directory and files
 CONFIG_FILES=(nvim vifm alacritty starship.toml git)
 for file in ${CONFIG_FILES[@]}
 do
