@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 set -e
 cd ~
 
@@ -21,6 +21,7 @@ fi
 cd dotfiles
 
 if [ -f /usr/local/bin/brew ]
+	then
     echo "Installing software & library..."
     brew bundle -v --file=./apps/Brewfile
 fi
