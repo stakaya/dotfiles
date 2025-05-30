@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 set -e
 cd ~
 
@@ -21,6 +21,7 @@ fi
 cd dotfiles
 
 if [ -f /usr/local/bin/brew ]
+	then
     echo "Installing software & library..."
     brew bundle -v --file=./apps/Brewfile
 fi
@@ -29,7 +30,7 @@ echo "Setup zsh."
 zsh -f setup_shell.sh && echo "Done."
 
 echo "Setup vim."
-bash -f setup_app.sh && echo "Done."
+zsh -f setup_app.sh && echo "Done."
 
 if [ -f /usr/bin/defaults ]
 	then
