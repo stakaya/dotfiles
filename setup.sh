@@ -29,7 +29,7 @@ echo "Setup zsh."
 zsh -f setup_shell.sh && echo "Done."
 
 echo "Setup vim."
-bash -f setup_app.sh && echo "Done."
+zsh -f setup_app.sh && echo "Done."
 
 if [ -f /usr/bin/defaults ]
 	then

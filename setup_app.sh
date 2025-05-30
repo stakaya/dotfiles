@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # link for dot files
 DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf zsh)
