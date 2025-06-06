@@ -229,7 +229,7 @@ noremap <silent> <leader>wb :set wrap<CR>
 noremap <silent> <leader>ww :set nowrap<CR>
 
 " 文字コードをUTF-8にする
-nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>set fenc=utf-8 bomb<CR>
+nnoremap <silent> <leader>utf :set ff=unix<CR>:set fileencoding=utf-8<CR>:set fenc=utf-8 bomb<CR>
 
 " キーワードをgrep
 nnoremap <silent> <leader>* "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>:call GrepGitFiles(@z)<CR>
