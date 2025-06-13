@@ -43,26 +43,30 @@
 
 ```mermaid
 graph TD
-    A[setup.sh 実行] --> B{Homebrew インストール済み?};
-    B -- No --> C[Homebrew インストール];
-    B -- Yes --> D;
-    C --> D{dotfiles クローン済み?};
-    D -- No --> E[dotfiles リポジトリをクローン];
-    D -- Yes --> F;
-    E --> F[brew bundle でアプリインストール];
-    F --> G[setup_shell.sh 実行];
-    G --> H[zshrc シンボリックリンク作成];
-    G --> I[Zinit インストール];
-    G --> J[デフォルトシェルを Zsh に変更];
-    F --> K[setup_app.sh 実行];
-    K --> L[設定ファイルのシンボリックリンク作成];
-    K --> M[Dein.vim インストール];
-    F --> N{macOS?};
-    N -- Yes --> O[macOS 特有設定を適用];
-    N -- No --> P[完了];
-    O --> P;
-    J --> P;
-    M --> P;
+    A[setup.sh 実行] --> B{OS判定}
+    B -- macOS --> C{Homebrew インストール済み?}
+    B -- その他 --> D{dotfiles クローン済み?}
+    C -- No --> E[Homebrew インストール]
+    C -- Yes --> D
+    E --> D
+    D -- No --> F[dotfiles リポジトリをクローン]
+    D -- Yes --> G[brew bundle でアプリインストール]
+    F --> G
+    G --> H[setup_shell.sh 実行]
+    G --> I[setup_app.sh 実行]
+    H --> J[zshrc シンボリックリンク作成]
+    H --> K[Zinit インストール]
+    H --> L[デフォルトシェルを Zsh に変更]
+    I --> M[設定ファイルのシンボリックリンク作成]
+    I --> N[Dein.vim インストール]
+    
+    subgraph "macOS環境の場合"
+        B -- macOS --> O[macOS 特有設定を適用]
+    end
+    
+    L --> P[完了]
+    N --> P
+    O --> P
 ```
 
 ### シェル設定 (Zsh)
@@ -70,20 +74,26 @@ graph TD
 Zsh は高機能なシェルであり、この dotfiles 環境の主要なコンポーネントの一つです。設定は主に `~/.zshrc` (実体は `$HOME/dotfiles/zshrc` へのシンボリックリンク) と `~/dotfiles/zsh/` ディレクトリ内のファイルで行われます。
 
 ```mermaid
-graph LR
-    A[~/.zshrc] --> B(Zinit プラグインマネージャ)
+graph TB
+    A[~/.zshrc] --> B[Zinit プラグインマネージャ]
     A --> C[環境変数設定]
     A --> D[エイリアス読み込み]
     A --> E[カスタム関数]
     A --> F[キーバインド設定]
     A --> G[Starship プロンプト]
-    B --> H[zsh-users/zsh-autosuggestions]
-    B --> I[zsh-users/zsh-completions]
-    B --> J[zdharma/fast-syntax-highlighting]
-    B --> K[rupa/z]
-    D --> L[zsh/aliases/general.zsh]
-    D --> M[zsh/aliases/dev.zsh]
-    D --> N[zsh/aliases/git.zsh]
+    
+    subgraph "Zinitプラグイン"
+        B -.管理.-> H[zsh-autosuggestions]
+        B -.管理.-> I[zsh-completions]
+        B -.管理.-> J[fast-syntax-highlighting]
+        B -.管理.-> K[z]
+    end
+    
+    subgraph "エイリアスファイル"
+        D --> L[general.zsh]
+        D --> M[dev.zsh]
+        D --> N[git.zsh]
+    end
 ```
 
 **主な設定内容:**
@@ -232,71 +242,74 @@ Vifm は Vi ライクなキーバインドを持つコンソールベースの�
 
 この `dotfiles` リポジトリの主要なディレクトリとその役割の概要を以下に示します。
 
+### メインディレクトリ構造
+
 ```mermaid
-graph TD
-    R[dotfiles/] --> A[alacritty/]
-    R --> AP[apps/]
-    R --> D[doc/]
-    R --> G[git/]
-    R --> N[nvim/]
-    R --> S[setup.sh]
-    R --> SA[setup_app.sh]
-    R --> SS[setup_shell.sh]
-    R --> ST[starship.toml]
-    R --> T[tmux.conf]
-    R --> VF[vifm/]
-    R --> V[vim/]
-    R --> VM[vimrc]
-    R --> Z[zsh/]
-    R --> ZR[zshrc]
-
-    subgraph 設定ファイル群
-        A --> A_toml[alacritty.toml]
-        N --> N_init[init.vim]
-        N --> N_dict[dict/]
-        V --> V_plugin[plugins/]
-        V --> V_dict[dict/]
-        VF --> VF_rc[vifmrc]
-        VF --> VF_colors[colors/]
-        Z --> Z_aliases[aliases/]
-        Z --> Z_func[functions/]
+graph TB
+    subgraph "ルートディレクトリ"
+        R[dotfiles/]
+        R --> setup[セットアップスクリプト]
+        R --> config[設定ファイル群]
+        R --> apps[アプリリスト]
     end
-
-    subgraph スクリプト群
-        S
-        SA
-        SS
+    
+    subgraph "セットアップスクリプト"
+        setup --> setup_sh[setup.sh]
+        setup --> setup_app[setup_app.sh]
+        setup --> setup_shell[setup_shell.sh]
     end
-
-    subgraph アプリケーションリスト
-        AP --> brew[Brewfile]
-        AP --> winget[winget.dump]
+    
+    subgraph "アプリケーション管理"
+        apps --> brewfile[apps/Brewfile]
+        apps --> winget[apps/winget.dump]
     end
+    
+    subgraph "主要設定ファイル"
+        config --> zsh_config[Zsh設定]
+        config --> vim_config[Vim/Neovim設定]
+        config --> terminal_config[ターミナル設定]
+        config --> other_config[その他の設定]
+    end
+```
 
-    A_toml((alacritty.toml))
-    brew((Brewfile))
-    winget((winget.dump))
-    D((spec.ja.md))
-    G --> ignore[ignore]
-    ignore((ignore))
-    N_init((init.vim))
-    N_dict((dict))
-    S((setup.sh))
-    SA((setup_app.sh))
-    SS((setup_shell.sh))
-    ST((starship.toml))
-    T((tmux.conf))
-    VF_rc((vifmrc))
-    VF_colors((colors))
-    V_plugin((plugins))
-    V_dict((dict))
-    VM((vimrc))
-    Z_aliases((aliases))
-    Z_func((functions))
-    ZR((zshrc))
+### 詳細なディレクトリ構造
 
-    classDef main fill:#eee,stroke:#333,stroke-width:2px;
-    class R main;
+#### Zsh関連設定
+```mermaid
+graph LR
+    zsh_root[zsh/] --> aliases[aliases/]
+    zsh_root --> functions[functions/]
+    aliases --> general[general.zsh]
+    aliases --> dev[dev.zsh]
+    aliases --> git[git.zsh]
+    
+    zshrc[zshrc] 
+```
+
+#### Vim/Neovim関連設定
+```mermaid
+graph LR
+    vim_root[vim/] --> plugins[plugins/]
+    vim_root --> dict[dict/]
+    plugins --> plugins_toml[plugins.toml]
+    plugins --> plugins_lazy[plugins_lazy.toml]
+    
+    nvim_root[nvim/] --> init[init.vim]
+    nvim_root --> nvim_dict[dict/]
+    nvim_dict -.symlink.-> dict
+    
+    vimrc[vimrc]
+```
+
+#### ターミナル関連設定
+```mermaid
+graph LR
+    alacritty_root[alacritty/] --> alacritty_toml[alacritty.toml]
+    tmux_conf[tmux.conf]
+    starship_toml[starship.toml]
+    
+    vifm_root[vifm/] --> vifmrc[vifmrc]
+    vifm_root --> colors[colors/]
 ```
 
 *   **`alacritty/`**: Alacritty ターミナルエミュレータの設定 (`alacritty.toml`)。
