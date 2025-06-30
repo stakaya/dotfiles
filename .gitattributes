@@ -1,0 +1,28 @@
+# テキストファイルは改行コードをLFに統一
+* text=auto eol=lf
+
+# バイナリファイルは text 属性を無効化
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+
+# 明示的にLF
+*.bat   text eol=lf
+*.conf  text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.mdc   text eol=lf
+*.sh    text eol=lf
+*.toml  text eol=lf
+*.txt   text eol=lf
+*.vifm  text eol=lf
+*.vim   text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.zsh   text eol=lf
+*vimrc  text eol=lf
+
+# Markdownや設定ファイルも常にLF
+README* text eol=lf
