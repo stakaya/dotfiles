@@ -21,9 +21,13 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # load zsh plugin
+zinit ice atinit"zicompinit; zicdreplay"
 zinit light zsh-users/zsh-autosuggestions
+zinit ice atinit"zicompinit; zicdreplay"
 zinit light zsh-users/zsh-completions
+zinit ice atload"_zsh_highlight"
 zinit light zdharma/fast-syntax-highlighting
+zinit ice atload"_z_complete"
 zinit light rupa/z
 
 # Environment

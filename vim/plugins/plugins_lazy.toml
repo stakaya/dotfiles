@@ -1,6 +1,63 @@
 # 遅延読み込みプラグイン
 
 [[plugins]]
+repo = 'Shougo/unite.vim'
+on_cmd = ['Unite', 'UniteWithInput', 'Unitegrep']
+hook_add = '''
+  if executable('rg')
+	let g:unite_source_grep_command = 'rg'
+	let g:unite_source_grep_default_opts = '-n --no-heading --color never'
+	let g:unite_source_grep_recursive_opt = ''
+  endif
+'''
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+depends = 'Shougo/unite.vim'
+on_cmd = ['VimFilerExplorer', 'VimFilerBufferDir', 'VimFiler']
+hook_add = '''
+  let g:vimfiler_as_default_explorer=1
+  let g:vimfiler_safe_mode_by_default=0
+  let g:netrw_liststyle=3
+  nnoremap <silent> <space>e :VimFilerExplorer<CR>
+'''
+
+[[plugins]]
+repo = 'andymass/vim-matchup'
+on_event = 'WinEnter'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+on_map = ['<D-/>', '<C-_>']
+hook_add = '''
+  nnoremap <silent> <D-/> :TComment<CR>
+  nnoremap <silent> <C-_> :TComment<CR>
+  vnoremap <silent> <D-/> :TComment<CR>
+  vnoremap <silent> <C-_> :TComment<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-abolish'
+on_map = ['*'] # This might be too broad, consider specific command or function if available
+hook_add = '''
+  nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
+  vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+on_map = ['ys', 'cs', 'ds', 'S'] # S in visual mode
+
+[[plugins]]
+repo = 'github/copilot.vim'
+on_event = ['InsertEnter', 'BufReadPre'] # BufReadPre to enable for existing files
+on_cmd = ['Copilot', 'CopilotPanel']
+hook_add = '''
+  let g:copilot_no_tab_map = v:true
+  imap <silent><script><expr> <C-Y> copilot#Accept("\<CR>")
+'''
+
+[[plugins]]
 repo = 'tyru/eskk.vim'
 on_event = 'VimEnter'
 hook_add = '''

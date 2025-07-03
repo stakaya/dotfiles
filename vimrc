@@ -160,22 +160,22 @@ augroup fileTypeBinary
 augroup END
 
 " Yankでクリップボードにコピー
-if executable('pbcopy')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('pbcopy', @")
-  augroup END
-elseif executable('clip.exe')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('clip.exe', @")
-  augroup END
-elseif executable('wl-copy')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('wl-copy', @")
-  augroup END
-endif
+"if executable('pbcopy')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('pbcopy', @")
+"  augroup END
+"elseif executable('clip.exe')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('clip.exe', @")
+"  augroup END
+"elseif executable('wl-copy')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('wl-copy', @")
+"  augroup END
+"endif
 
 " 設定ファイル関連のコマンド
 command! Reload source $HOME/dotfiles/vimrc
@@ -253,8 +253,10 @@ function! GrepGitFiles(keyword)
   endif
   let l:is_git = system('git status')
   if v:shell_error
-    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
+    " Not a git repository, grep in current filetype
+    exe 'grep /' . shellescape(a:keyword) . '/ **/' . l:ex
   else
-    exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
+    " Git repository, grep in git ls-files
+    exe 'grep /' . shellescape(a:keyword) . '/ `git ls-files %:p:h`'
   endif
 endfunction
