@@ -52,10 +52,18 @@ if dein#check_install()
   call dein#install()
 endif
 
-let s:removed_plugins = dein#check_clean()
-if len(s:removed_plugins) > 0
-  call map(s:removed_plugins, "delete(v:val, 'rf')")
-  call dein#recache_runtimepath()
+" Only check for removed plugins once per day to improve startup time
+let s:cleanup_file = expand('~/.vim/.dein_cleanup_check')
+let s:should_cleanup = !filereadable(s:cleanup_file) || 
+  \ (localtime() - getftime(s:cleanup_file)) > 86400
+
+if s:should_cleanup
+  let s:removed_plugins = dein#check_clean()
+  if len(s:removed_plugins) > 0
+    call map(s:removed_plugins, "delete(v:val, 'rf')")
+    call dein#recache_runtimepath()
+  endif
+  call writefile([string(localtime())], s:cleanup_file)
 endif
 
 " true color
@@ -251,10 +259,20 @@ function! GrepGitFiles(keyword)
   if l:ex == '*.'
     let l:ex = expand('%')
   endif
-  let l:is_git = system('git status')
-  if v:shell_error
-    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
+  
+  " Cache git status check for current directory
+  let l:git_dir = expand('%:p:h')
+  let l:cache_key = 'git_status_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
+  
+  if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
+    let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
+    let g:[l:cache_key] = !v:shell_error
+    let g:[l:cache_key . '_time'] = localtime()
+  endif
+  
+  if g:[l:cache_key]
+    exe ':vimgrep /' . a:keyword . '/ `git ls-files ' . shellescape(expand('%:p:h')) . '`'
   else
-    exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
+    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
   endif
 endfunction

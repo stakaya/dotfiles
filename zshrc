@@ -1,3 +1,23 @@
+# Performance monitoring (remove after testing)
+if [[ -n "$ZSH_STARTUP_TIME" ]]; then
+  zmodload zsh/datetime
+  setopt PROMPT_SUBST
+  PS4='+$EPOCHREALTIME %N:%i> '
+  exec 3>&2 2>$ZSH_STARTUP_TIME
+  setopt XTRACE
+fi
+
+
+# Performance monitoring (remove after testing)
+if [[ -n "$ZSH_STARTUP_TIME" ]]; then
+  zmodload zsh/datetime
+  setopt PROMPT_SUBST
+  PS4='+$EPOCHREALTIME %N:%i> '
+  exec 3>&2 2>$ZSH_STARTUP_TIME
+  setopt XTRACE
+fi
+
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
   print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -20,20 +40,27 @@ zinit light-mode for \
   zdharma-continuum/zinit-annex-rust
 ### End of Zinit's installer chunk
 
-# load zsh plugin
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-zinit light zdharma/fast-syntax-highlighting
-zinit light rupa/z
+# load zsh plugin with turbo mode for faster startup
+zinit wait lucid for \
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-completions \
+  zdharma/fast-syntax-highlighting \
+  rupa/z
 
 # Environment
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
-[[ -d ~/.rbenv ]] && \
-  export PATH=${HOME}/.rbenv/bin:${PATH} && \
-  eval "$(rbenv init -)"
+# Only initialize rbenv if ruby files are commonly used
+[[ -d ~/.rbenv ]] && {
+  export PATH=${HOME}/.rbenv/bin:${PATH}
+  # Lazy load rbenv - only initialize when needed
+  rbenv() {
+    eval "$(command rbenv init -)"
+    rbenv "$@"
+  }
+}
 
 # jump around
 [ -f ~/z/z.sh ] && source ~/z/z.sh
@@ -47,22 +74,28 @@ export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 
-# Tmux with Alacritty
+# Tmux with Alacritty - optimized with caching
 if [[ -n "$ALACRITTY_WINDOW_ID" && ! -n $TMUX && $- == *l* ]]; then
-	# get the IDs
-	ID="`tmux list-sessions`"
+	# Cache tmux sessions for 5 seconds to avoid repeated calls
+	local cache_file="/tmp/tmux_sessions_$$"
+	local cache_time=5
+	
+	if [[ ! -f "$cache_file" ]] || [[ $(($(date +%s) - $(stat -c %Y "$cache_file" 2>/dev/null || echo 0))) -gt $cache_time ]]; then
+		tmux list-sessions 2>/dev/null > "$cache_file"
+	fi
+	
+	ID="$(cat "$cache_file" 2>/dev/null)"
 	if [[ -z "$ID" ]]; then
 		tmux new-session
-	fi
-	create_new_session="Create New Session"
-	ID="$ID\n${create_new_session}:"
-	ID="`echo $ID | fzf | cut -d: -f1`"
-	if [[ "$ID" = "${create_new_session}" ]]; then
-		tmux new-session
-	elif [[ -n "$ID" ]]; then
-		tmux attach-session -t "$ID"
 	else
-		:  # Start terminal normally
+		create_new_session="Create New Session"
+		ID="$ID\n${create_new_session}:"
+		ID="$(echo $ID | fzf | cut -d: -f1)"
+		if [[ "$ID" = "${create_new_session}" ]]; then
+			tmux new-session
+		elif [[ -n "$ID" ]]; then
+			tmux attach-session -t "$ID"
+		fi
 	fi
 fi
 
