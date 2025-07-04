@@ -3,10 +3,16 @@ set -e
 cd ~
 
 if ! command -v brew >/dev/null 2>&1; then
-	echo "Installing Homebrew..."
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo "Installing Homebrew..."
+    install_script=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+    if [ $? -eq 0 ]; then
+        /bin/bash -c "$install_script"
+    else
+        echo "Error: Failed to download Homebrew installation script." >&2
+        exit 1
+    fi
 else
-	echo "Homebrew already installed."
+    echo "Homebrew already installed."
 fi
 
 if [ ! -d ~/dotfiles ]

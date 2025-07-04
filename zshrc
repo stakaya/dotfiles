@@ -1,23 +1,3 @@
-# Performance monitoring (remove after testing)
-if [[ -n "$ZSH_STARTUP_TIME" ]]; then
-  zmodload zsh/datetime
-  setopt PROMPT_SUBST
-  PS4='+$EPOCHREALTIME %N:%i> '
-  exec 3>&2 2>$ZSH_STARTUP_TIME
-  setopt XTRACE
-fi
-
-
-# Performance monitoring (remove after testing)
-if [[ -n "$ZSH_STARTUP_TIME" ]]; then
-  zmodload zsh/datetime
-  setopt PROMPT_SUBST
-  PS4='+$EPOCHREALTIME %N:%i> '
-  exec 3>&2 2>$ZSH_STARTUP_TIME
-  setopt XTRACE
-fi
-
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
   print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
