@@ -168,22 +168,22 @@ augroup fileTypeBinary
 augroup END
 
 " Yankでクリップボードにコピー
-if executable('pbcopy')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('pbcopy', @")
-  augroup END
-elseif executable('clip.exe')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('clip.exe', @")
-  augroup END
-elseif executable('wl-copy')
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('wl-copy', @")
-  augroup END
-endif
+"if executable('pbcopy')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('pbcopy', @")
+"  augroup END
+"elseif executable('clip.exe')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('clip.exe', @")
+"  augroup END
+"elseif executable('wl-copy')
+"  augroup Yank
+"    autocmd!
+"    autocmd TextYankPost * :call system('wl-copy', @")
+"  augroup END
+"endif
 
 " 設定ファイル関連のコマンド
 command! Reload source $HOME/dotfiles/vimrc
