@@ -23,10 +23,6 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-  let $FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
-  let $FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
-  let $FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
-  let $FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 
   let g:fzf_layout = {
   \  'window': {
@@ -46,11 +42,20 @@ hook_add = '''
   endif
 
   function! FzfOmniFiles()
-	  let is_git = system('git status')
-	  if v:shell_error
-		  :Files
-	  else
+	  " Cache git status check for current directory
+	  let l:git_dir = expand('%:p:h')
+	  let l:cache_key = 'fzf_git_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
+	  
+	  if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
+		  let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
+		  let g:[l:cache_key] = !v:shell_error
+		  let g:[l:cache_key . '_time'] = localtime()
+	  endif
+	  
+	  if g:[l:cache_key]
 		  :GitFiles
+	  else
+		  :Files
 	  endif
   endfunction
 '''
