@@ -2,26 +2,29 @@
 set -e
 cd ~
 
-if [ ! -f /usr/local/bin/brew ]
-	then
-		echo "Installing Homebrew..."
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-	else
-		echo "Homebrew already installed."
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing Homebrew..."
+    install_script=$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)
+    if [ $? -eq 0 ]; then
+        /bin/bash -c "$install_script"
+    else
+        echo "Error: Failed to download Homebrew installation script." >&2
+        exit 1
+    fi
+else
+    echo "Homebrew already installed."
 fi
 
 if [ ! -d ~/dotfiles ]
-	then
-		echo "Cloning dotfiles..."
-		git clone https://github.com/stakaya/dotfiles.git
-	else
-		echo "dotfiles already cloned."
+then
+	echo "Cloning dotfiles..."
+	git clone https://github.com/stakaya/dotfiles.git
+else
+	echo "dotfiles already cloned."
 fi
 
 cd dotfiles
-
-if [ -f /usr/local/bin/brew ]
-	then
+if command -v brew >/dev/null 2>&1; then
     echo "Installing software & library..."
     brew bundle -v --file=./apps/Brewfile
 fi
