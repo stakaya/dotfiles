@@ -8,7 +8,7 @@ let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
 " 日本語キーボード対応やVimライクなキーバインドを設定
-source $HOME/dotfiles/vimrc.keymap
+source ~/repos/dotfiles/vimrc.keymap
 
 " Neovim以外の場合の設定
 if !has('nvim')
