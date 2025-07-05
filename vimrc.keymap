@@ -1,45 +1,48 @@
-" 日本語キーボード互換
-nnoremap ( *
-nnoremap ! ~
-nnoremap & ^
-vnoremap ( *
+" 日本語キーボード対応キーマッピング設定
+" 参考: https://vim-jp.org/
+" 参考: https://qiita.com/tags/vim
+
+" 日本語キーボード互換マッピング
+nnoremap ( *    " ( で単語検索
+nnoremap ! ~    " ! でチルダ
+nnoremap & ^    " & で行頭
+vnoremap ( *    " ビジュアルモードでも同様
 vnoremap ! ~
 vnoremap & ^
 
-" コロンとセミコロンを入れ替える
+" セミコロンとコロンのキーバインド入れ替え
+" 日本語キーボードでのコマンド入力を効率化
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" ヴィジュアルモードの時にバックススペースで削除
+" ビジュアルモード時のバックスペースで削除
 vnoremap <BS> d
 
-" CTRL-X でカット
-vnoremap <C-X> "+x
+" Windows風クリップボード操作
+vnoremap <C-X> "+x    " Ctrl+X でカット
+vnoremap <C-C> "+y    " Ctrl+C でコピー
 
-" CTRL-C でコピー
-vnoremap <C-C> "+y
-
-" CTRL-V でペースト
+" Ctrl+V でペースト（各モード対応）
 map <C-V> "+gP
 cmap <C-V> <C-R>+
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 
-" CTRL-S でセーブ
+" Ctrl+S でファイル保存
 noremap <C-S> :update<CR>
 vnoremap <C-S> <C-C>:update<CR>
 inoremap <C-S> <C-O>:update<CR>
 
-" redo
+" Redo操作の改善
 nnoremap <silent> U <C-R>
 
-" CTRL-Z でundo
+" Ctrl+Z でアンドゥ
 noremap <C-Z> u
 inoremap <C-Z> <C-O>u
 
-" CTRL-A で全選択
+" Ctrl+A で全選択（各モード対応）
 noremap <C-A> gggH<C-O>G
 inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
 cnoremap <C-A> <C-C>gggH<C-O>G
@@ -47,42 +50,44 @@ onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
 
-" 選択時のペースト
+" 選択時のペースト改善
+" レジスタ0の内容でペースト（削除内容に影響されない）
 nnoremap P "0P
 
 " 履歴移動コマンド
-nnoremap <silent> H <C-O>
-nnoremap <silent> L <C-I>
+nnoremap <silent> H <C-O>  " 前の位置
+nnoremap <silent> L <C-I>  " 次の位置
 
-" ESC の代わり
-inoremap <silent> jj <ESC>
-inoremap <silent> <S-CR> <ESC>
-vnoremap <silent> <S-CR> <ESC>
+" ESCキーの代替
+inoremap <silent> jj <ESC>        " jj でESC
+inoremap <silent> <S-CR> <ESC>    " Shift+Enter でESC
+vnoremap <silent> <S-CR> <ESC>    " ビジュアルモードでも同様
 
-" vv で矩形選択
+" 矩形選択の簡易化
 nnoremap <silent> vv <C-V>
 
 " ファイル全体の整形
 nnoremap == ggvG$=<C-O><C-O>
 
-" for vscode
+" VSCode使用時は以下の設定をスキップ
 if exists('g:vscode')
   finish
 endif
 
-" 画面分割
-noremap _ :split<CR><C-W>w
-noremap <BAR> :vsplit<CR><C-W>w
+" 画面分割操作
+noremap _ :split<CR><C-W>w      " _ で水平分割
+noremap <BAR> :vsplit<CR><C-W>w " | で垂直分割
 
-" Tab でウインドウの切り替え
-noremap <TAB> <C-W>w
+" ウィンドウ切り替え
+noremap <TAB> <C-W>w     " Tab でウィンドウ切り替え
 onoremap <TAB> <C-C><C-W>w
 
-noremap gb :bnext<CR>
-noremap gB :bprev<CR>
+" バッファ移動
+noremap gb :bnext<CR>    " 次のバッファ
+noremap gB :bprev<CR>    " 前のバッファ
 
-" ウインドウのリサイズ
-noremap <S-LEFT> <C-W><
-noremap <S-RIGHT> <C-W>>
-noremap <S-DOWN> <C-W>+
-noremap <S-UP> <C-W>-
+" ウィンドウリサイズ
+noremap <S-LEFT> <C-W><   " Shift+左矢印で幅を狭く
+noremap <S-RIGHT> <C-W>>  " Shift+右矢印で幅を広く
+noremap <S-DOWN> <C-W>+   " Shift+下矢印で高さを高く
+noremap <S-UP> <C-W>-     " Shift+上矢印で高さを低く

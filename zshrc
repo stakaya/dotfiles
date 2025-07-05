@@ -1,4 +1,9 @@
-### Added by Zinit's installer
+# Zsh設定ファイル
+# 参考: https://github.com/zdharma-continuum/zinit
+# 参考: https://zsh.sourceforge.io/
+
+### Zinitプラグインマネージャーの自動インストール
+# Zinitが未インストールの場合は自動的にダウンロード・セットアップ
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
   print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
   command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
@@ -7,70 +12,89 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{160} The clone has failed.%f%b"
 fi
 
+# Zinitの初期化
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
+# Zinit拡張機能（Annexes）の読み込み
+# プラグインの高度な管理機能を提供
 zinit light-mode for \
   zdharma-continuum/zinit-annex-as-monitor \
   zdharma-continuum/zinit-annex-bin-gem-node \
   zdharma-continuum/zinit-annex-patch-dl \
   zdharma-continuum/zinit-annex-rust
-### End of Zinit's installer chunk
+### Zinitインストーラー部分終了
 
-# load zsh plugin
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-zinit light zdharma/fast-syntax-highlighting
-zinit light rupa/z
+# Zshプラグインの読み込み
+# 参考: https://github.com/zsh-users
+zinit light zsh-users/zsh-autosuggestions      # コマンド履歴からの自動補完提案
+zinit light zsh-users/zsh-completions          # 追加の補完定義
+zinit light zdharma/fast-syntax-highlighting   # コマンドラインのシンタックスハイライト
+zinit light rupa/z                             # ディレクトリ移動の高速化
 
-# Environment
-export LANG=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
+# 環境変数設定
+export LANG=ja_JP.UTF-8      # システム言語を日本語に設定
+export LC_CTYPE=ja_JP.UTF-8  # 文字タイプを日本語に設定
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
+# rbenv（Ruby環境管理）の初期化
 [[ -d ~/.rbenv ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
   eval "$(rbenv init -)"
 
-# jump around
+# z（ディレクトリジャンプツール）の初期化
+# 参考: https://github.com/rupa/z
 [ -f ~/z/z.sh ] && source ~/z/z.sh
 
-# fzf
+# fzf（ファジーファインダー）の初期化
+# 参考: https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Fzf option
+# fzf設定オプション
+# ripgrepを使用してファイル検索を高速化
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
+# ダークテーマの色設定とプレビューウィンドウの設定
 export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
+# Ctrl+Tでのファイル検索設定
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
+# batを使用したファイルプレビュー設定
 export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 
-# Tmux with Alacritty
+# Alacritty起動時のtmux自動セッション管理
+# Alacrittyターミナル起動時に既存のtmuxセッションに接続または新規作成
 if [[ -n "$ALACRITTY_WINDOW_ID" && ! -n $TMUX && $- == *l* ]]; then
-	# get the IDs
-	ID="`tmux list-sessions`"
-	if [[ -z "$ID" ]]; then
+	# 既存のtmuxセッション一覧を取得
+	session_list="`tmux list-sessions`"
+	if [[ -z "$session_list" ]]; then
+		# セッションが存在しない場合は新規作成
 		tmux new-session
 	fi
+	# 新規セッション作成オプションを追加
 	create_new_session="Create New Session"
-	ID="$ID\n${create_new_session}:"
-	ID="`echo $ID | fzf | cut -d: -f1`"
-	if [[ "$ID" = "${create_new_session}" ]]; then
+	session_list="$session_list\n${create_new_session}:"
+	# fzfでセッションを選択
+	selected_session="`echo $session_list | fzf | cut -d: -f1`"
+	if [[ "$selected_session" = "${create_new_session}" ]]; then
+		# 新規セッション作成
 		tmux new-session
-	elif [[ -n "$ID" ]]; then
-		tmux attach-session -t "$ID"
+	elif [[ -n "$selected_session" ]]; then
+		# 既存セッションにアタッチ
+		tmux attach-session -t "$selected_session"
 	else
-		:  # Start terminal normally
+		# 何も選択されなかった場合は通常のターミナルとして起動
+		:
 	fi
 fi
 
-# Load aliases
+# エイリアス設定ファイルの読み込み
+# 開発ツール、Git、一般コマンドのエイリアスを一括読み込み
 for alias_file in $HOME/dotfiles/zsh/aliases/*.zsh; do
   source $alias_file
 done
 
+# カスタムウィジェットの登録
+# fzfを使用したインタラクティブなGit操作とスペースキー機能
 zle -N git_add
 zle -N git_fetch
 zle -N git_switch

@@ -1,28 +1,32 @@
+# Git グローバル除外設定ファイル
+# 参考: https://git-scm.com/docs/gitignore
+
+# ログファイル
 *.log
 .trash/
 
 ### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
+# 一般的なmacOSシステムファイル
+.DS_Store                              # Finder情報ファイル
+.AppleDouble                           # AppleDoubleファイル
+.LSOverride                            # Launch Services設定
 
-# Icon must end with two \r
+# アイコンファイル（末尾に2つの\rが必要）
 Icon
 
-# Thumbnails
-._*
+# サムネイル
+._*                                    # リソースフォーク
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
+# ボリュームルートに作成される可能性のあるファイル
+.DocumentRevisions-V100                # 文書リビジョン
+.fseventsd                            # ファイルシステムイベント
+.Spotlight-V100                       # Spotlight検索インデックス
+.TemporaryItems                       # 一時アイテム
+.Trashes                              # ゴミ箱
+.VolumeIcon.icns                      # ボリュームアイコン
+.com.apple.timemachine.donotpresent   # Time Machine除外
 
-# Directories potentially created on remote AFP share
+# リモートAFP共有で作成される可能性のあるディレクトリ
 .AppleDB
 .AppleDesktop
 Network Trash Folder
@@ -30,64 +34,64 @@ Temporary Items
 .apdisk
 
 ### Windows ###
-# Windows thumbnail cache files
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
+# Windowsサムネイルキャッシュファイル
+Thumbs.db                             # サムネイルキャッシュ
+Thumbs.db:encryptable                 # 暗号化可能サムネイル
+ehthumbs.db                           # 拡張サムネイル
+ehthumbs_vista.db                     # Vista拡張サムネイル
 
-# Dump file
+# ダンプファイル
 *.stackdump
 
-# Folder config file
+# フォルダ設定ファイル
 [Dd]esktop.ini
 
-# Recycle Bin used on file shares
+# ファイル共有で使用されるごみ箱
 $RECYCLE.BIN/
 
-# Windows Installer files
+# Windowsインストーラーファイル
 *.cab
 *.msi
 *.msix
 *.msm
 *.msp
 
-# Windows shortcuts
+# Windowsショートカット
 *.lnk
 
-### Intellij ###
-# Project format
-.idea/
-*.iml
-*.ipr
-*.iws
-out/
+### IntelliJ IDEA ###
+# プロジェクト形式
+.idea/                                # IDEA設定ディレクトリ
+*.iml                                 # IDEAモジュールファイル
+*.ipr                                 # IDEAプロジェクトファイル
+*.iws                                 # IDEAワークスペースファイル
+out/                                  # ビルド出力ディレクトリ
 
 # CMake
 cmake-build-*/
 
-# mpeltonen/sbt-idea plugin
+# mpeltonen/sbt-idea プラグイン
 .idea_modules/
 
-# JIRA plugin
+# JIRA プラグイン
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashlytics プラグイン（Android Studio・IntelliJ用）
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+### Visual Studio Code ###
+.vscode/*                             # VSCode設定（一部除外）
+!.vscode/settings.json                # 設定ファイルは保持
+!.vscode/tasks.json                   # タスク設定は保持
+!.vscode/launch.json                  # デバッグ設定は保持
+!.vscode/extensions.json              # 拡張機能設定は保持
+!.vscode/*.code-snippets              # コードスニペットは保持
 
-# Local History for Visual Studio Code
+# Visual Studio Code ローカル履歴
 .history/
 
-# Built Visual Studio Code Extensions
+# ビルドされたVSCode拡張機能
 *.vsix
