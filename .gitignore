@@ -1,24 +1,30 @@
-*.log
-vim/*
-!plugins.toml
-!plugins_lazy.toml
+# dotfiles プロジェクト固有除外設定
+# 参考: https://git-scm.com/docs/gitignore
 
-# mac
+# ログファイル
+*.log
+
+# Vim プラグインディレクトリ（設定ファイル以外）
+vim/*
+!plugins.toml      # プラグイン設定は含める
+!plugins_lazy.toml  # 遅延読み込みプラグイン設定は含める
+
+# macOS システムファイル
 .DS_Store
 
-# windows
+# Windows システムファイル
 Thumbs.db
 
-# IDEA
+# IntelliJ IDEA プロジェクトファイル
 .idea/
 *.iws
 *.iml
 *.ipr
 
-# vifm
+# vifm 実行時生成ファイル
 vifm/vifminfo.json
 
-# nvim
+# Neovim プラグインディレクトリ
 nvim/plugins/*
-!.gitkeep
-nvim/dict
+!.gitkeep      # .gitkeepファイルは保持
+nvim/dict      # 辞書ファイル
