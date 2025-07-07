@@ -10,9 +10,9 @@ alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 
 # プロジェクト内ファイル検索
 # .gitディレクトリを除外してgrep検索を実行
-alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
+alias look='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
 
 # サフィックスエイリアス設定
 # ファイル拡張子に応じて自動的にアプリケーションを起動
 alias -s {md,markdown,txt,conf,toml,json,yml,yaml}=vi  # テキストファイルはviで開く
-alias -s {gz,tgz,zip,bz2,tar}=extract                 # アーカイブファイルは展開   
+alias -s {gz,tgz,zip,bz2,tar}=extract                  # アーカイブファイルは展開

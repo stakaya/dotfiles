@@ -17,14 +17,14 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Zinit拡張機能（Annexes）の読み込み
-# プラグインの高度な管理機能を提供
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
 zinit light-mode for \
   zdharma-continuum/zinit-annex-as-monitor \
   zdharma-continuum/zinit-annex-bin-gem-node \
   zdharma-continuum/zinit-annex-patch-dl \
   zdharma-continuum/zinit-annex-rust
-### Zinitインストーラー部分終了
+### End of Zinit's installer chunk
 
 # Zshプラグインの読み込み（起動時間改善のためturboモード使用）
 # 参考: https://github.com/zsh-users
@@ -61,7 +61,7 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 # ripgrepを使用してファイル検索を高速化
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
 # ダークテーマの色設定とプレビューウィンドウの設定
-export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
+#export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
 # Ctrl+Tでのファイル検索設定
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 # batを使用したファイルプレビュー設定
@@ -73,11 +73,11 @@ if [[ -n "$ALACRITTY_WINDOW_ID" && ! -n $TMUX && $- == *l* ]]; then
 	# tmuxセッションを5秒間キャッシュして重複呼び出しを回避
 	local cache_file="/tmp/tmux_sessions_$$"
 	local cache_time=5
-	
+
 	if [[ ! -f "$cache_file" ]] || [[ $(($(date +%s) - $(stat -c %Y "$cache_file" 2>/dev/null || echo 0))) -gt $cache_time ]]; then
 		tmux list-sessions 2>/dev/null > "$cache_file"
 	fi
-	
+
 	session_list="$(cat "$cache_file" 2>/dev/null)"
 	if [[ -z "$session_list" ]]; then
 		# セッションが存在しない場合は新規作成

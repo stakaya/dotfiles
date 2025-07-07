@@ -43,13 +43,13 @@ x = 1  # 水平オフセット
 y = 1  # 垂直オフセット
 
 # キーバインド設定
-# Command+R: 再読み込み
+# 履歴選択用にバインド
 [[keyboard.bindings]]
 chars = "\u0012"
 key = "R"
 mods = "Command"
 
-# Command+T: 新規タブ
+# Tmux用にバインド
 [[keyboard.bindings]]
 chars = "\u0014"
 key = "T"

@@ -8,7 +8,7 @@ let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
 " 日本語キーボード対応やVimライクなキーバインドを設定
-source ~/repos/dotfiles/vimrc.keymap
+source $HOME/dotfiles/vimrc.keymap
 
 " Neovim以外の場合の設定
 if !has('nvim')
@@ -292,11 +292,10 @@ noremap <silent> <leader>kk :<C-F>
 " Git対応検索関数
 " Gitリポジトリ内ではgit管理ファイルのみを検索対象とする
 function! GrepGitFiles(keyword)
-  let file_extension = '*.' . expand('%:e')
-  if file_extension == '*.'
-    let file_extension = expand('%')
+  let l:file_extension = '*.' . expand('%:e')
+  if l:file_extension == '*.'
+    let l:file_extension = expand('%')
   endif
-<<<<<<< HEAD
 
   " Cache git status check for current directory
   let l:git_dir = expand('%:p:h')
@@ -310,24 +309,7 @@ function! GrepGitFiles(keyword)
 
   if g:[l:cache_key]
     exe ':vimgrep /' . a:keyword . '/ `git ls-files ' . shellescape(expand('%:p:h')) . '`'
-||||||| parent of 1b0837f (feat: dotfiles全体の可読性向上)
-  let l:is_git = system('git status')
-  if v:shell_error
-    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
-=======
-  let git_status_result = system('git status')
-  if v:shell_error
-    " Gitリポジトリ外：通常のファイル検索
-    exe ':vimgrep /' . a:keyword . '/ **/' . file_extension
->>>>>>> 1b0837f (feat: dotfiles全体の可読性向上)
   else
-<<<<<<< HEAD
-    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
-||||||| parent of 1b0837f (feat: dotfiles全体の可読性向上)
-    exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
-=======
-    " Gitリポジトリ内：Git管理ファイルのみ検索
-    exe ':vimgrep /' . a:keyword . '/ `git ls-files %:p:h`'
->>>>>>> 1b0837f (feat: dotfiles全体の可読性向上)
+    exe ':vimgrep /' . a:keyword . '/ **/' . l:file_extension
   endif
 endfunction
