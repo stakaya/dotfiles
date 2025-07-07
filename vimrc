@@ -1,19 +1,31 @@
-" spaceをLeaderに割当
+" Vim設定ファイル
+" 参考: https://vim-jp.org/
+" 参考: https://github.com/vim-jp/vim-jp.github.io
+
+" スペースキーをリーダーキーに設定
+" リーダーキーは独自キーマップのプレフィックスとして使用
 let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
-source $HOME/dotfiles/vimrc.keymap
+" 日本語キーボード対応やVimライクなキーバインドを設定
+source $HOME/.vimrc.keymap
 
+" Neovim以外の場合の設定
 if !has('nvim')
+  " Vimのデフォルト設定を読み込み
   source $VIMRUNTIME/defaults.vim
+  " クリップボード連携を有効化
   set clipboard=unnamed,autoselect
 endif
 
+" Vim起動時の初期設定
 if has('vim_starting')
-  let &t_SI .= "\e[6 q" " 挿入モード縦棒カーソル
-  let &t_EI .= "\e[2 q" " ノーマルモードブロックカーソル
-  let &t_SR .= "\e[4 q" " 置換モード下線カーソル
+  " カーソル形状の設定（ターミナル用）
+  let &t_SI .= "\e[6 q" " 挿入モード：縦棒カーソル
+  let &t_EI .= "\e[2 q" " ノーマルモード：ブロックカーソル
+  let &t_SR .= "\e[4 q" " 置換モード：下線カーソル
 
+  " dein.vimプラグインマネージャーのパス設定
   if has('win32') || has('win64')
     set runtimepath+=$HOME\vimfiles\plugins\repos\github.com\Shougo\dein.vim
   else
@@ -22,8 +34,8 @@ if has('vim_starting')
 endif
 
 if has('win32') || has('win64')
-  let s:plugin_conf = expand($HOME.'\vimfiles\plugins')
-  let s:plugin = s:plugin_conf
+  let s:plugin_config_dir = expand($HOME.'\vimfiles\plugins')
+  let s:plugin_install_dir = s:plugin_config_dir
 
   " WindowsでPATHに$VIMが含まれていない時に
   " currentのexeを見つけ出せないので追加
@@ -31,28 +43,31 @@ if has('win32') || has('win64')
     let $PATH = $VIM . ';' . $PATH
   endif
 else
-  let s:plugin_conf = expand('~/.vim/plugins')
+  let s:plugin_config_dir = expand('~/.vim/plugins')
   if has('nvim')
-    let s:plugin = expand('~/.config/nvim/plugins')
+    let s:plugin_install_dir = expand('~/.config/nvim/plugins')
   else
-    let s:plugin = expand('~/.vim/plugins')
+    let s:plugin_install_dir = expand('~/.vim/plugins')
   endif
 endif
 
 " プラグインの読み込み
-if dein#load_state(s:plugin)
-  call dein#begin(s:plugin)
-  call dein#load_toml(s:plugin_conf . '/plugins.toml', {'lazy': 0})
-  call dein#load_toml(s:plugin_conf . '/plugins_lazy.toml', {'lazy': 1})
+" dein.vim プラグインマネージャーを使用
+" 参考: https://github.com/Shougo/dein.vim
+if dein#load_state(s:plugin_install_dir)
+  call dein#begin(s:plugin_install_dir)
+  call dein#load_toml(s:plugin_config_dir . '/plugins.toml', {'lazy': 0})
+  call dein#load_toml(s:plugin_config_dir . '/plugins_lazy.toml', {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
 
+" プラグインの自動インストール
 if dein#check_install()
   call dein#install()
 endif
 
-" Only check for removed plugins once per day to improve startup time
+" 不要なプラグインの自動削除（起動時間改善のため1日1回のみチェック）
 let s:cleanup_file = expand('~/.vim/.dein_cleanup_check')
 let s:should_cleanup = !filereadable(s:cleanup_file) ||
   \ (localtime() - getftime(s:cleanup_file)) > 86400
@@ -66,12 +81,14 @@ if s:should_cleanup
   call writefile([string(localtime())], s:cleanup_file)
 endif
 
-" true color
+" True Color（24bit色）サポートを有効化
+" 現代的なターミナルでの色表現を向上
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" terminal color
+" ターミナルモードの色設定
+" 背景：ダークグレー、文字：ライトグレー
 highlight Terminal guibg=#2a2a2a
 highlight Terminal guifg=#bbbbbb
 
@@ -95,67 +112,79 @@ let g:terminal_ansi_colors = [
       \ '#f1f1f1',
       \ ]
 
-set ambiwidth=single   " 2バイト文字の表示
-set autoindent         " 自動インデント
-set autowrite          " 自動保存
-set cursorline         " カーソル行をハイライト
-set encoding=utf-8     " 文字コードはUTF8
-set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
-set fileformats=unix,dos,mac
-set formatoptions+=mMj " テキスト挿入中の自動折り返しを日本語に対応させる
-set hlsearch           " ハイライトサーチ
-set ignorecase         " 検索時、大文字・小文字を気にせず
-set iminsert=0         " IMEをデフォルトオフ
-set imsearch=-1        " IMEをデフォルトオフ
-set incsearch          " インクリメンタルサーチ
-set laststatus=2       " ステータス行を表示
-set mouse=a            " マウスを使う
-set nofoldenable       " 折りたたみしない
-set nolist             " 制御コード不可視
-set noshowmode         " モードを表示しない
-set noswapfile         " スワップファイル不要
-set nowrap             " 折返ししない
-set number             " 行番号表示
-set ruler              " カーソル行を常に表示
-set shiftwidth=4       " シフト幅
-set showcmd            " コマンドの候補を表示
-set smartindent        " プログラミング用インデント
-set splitbelow         " 新規ウインドウを画面の下に表示
-set tabstop=4          " タブ幅
-set vb t_vb=           " ビープ音を鳴らさない
-set virtualedit=all    " カーソル位置を自由に設定する
+" 基本設定
+" 参考: https://vim-jp.org/vimdoc-ja/options.html
 
-" grepをripgrepに入れ替える
+set ambiwidth=single   " 全角文字の幅を1文字分として扱う
+set autoindent         " 新しい行で前の行のインデントを維持
+set autowrite          " バッファ切り替え時に自動保存
+set cursorline         " カーソル行をハイライト表示
+set encoding=utf-8     " 内部文字エンコーディングをUTF-8に設定
+set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " ファイル読み込み時の文字エンコーディング自動判定
+set fileformats=unix,dos,mac " 改行コードの自動判定順序
+set formatoptions+=mMj " 日本語テキストの自動折り返し対応
+set hlsearch           " 検索結果をハイライト表示
+set ignorecase         " 検索時に大文字小文字を区別しない
+set iminsert=0         " 挿入モード開始時のIME状態（オフ）
+set imsearch=-1        " 検索時のIME状態（挿入モードと同じ）
+set incsearch          " 検索文字入力中にリアルタイム検索
+set laststatus=2       " ステータスラインを常に表示
+set mouse=a            " 全モードでマウス操作を有効化
+set nofoldenable       " コード折りたたみ機能を無効化
+set nolist             " タブや改行などの制御文字を非表示
+set noshowmode         " モード表示を無効化（ステータスラインで表示）
+set noswapfile         " スワップファイルを作成しない
+set nowrap             " 長い行の折り返し表示を無効化
+set number             " 行番号を表示
+set ruler              " カーソル位置（行・列）を常に表示
+set shiftwidth=4       " 自動インデント時の幅
+set showcmd            " 入力中のコマンドを画面右下に表示
+set smartindent        " プログラミング言語に適したインデント
+set splitbelow         " 水平分割時に新ウィンドウを下に表示
+set tabstop=4          " タブ文字の表示幅
+set vb t_vb=           " ビープ音を無効化（視覚ベルも無効）
+set virtualedit=all    " 文字のない場所にもカーソル移動可能
+
+" 外部ツール設定
+" ripgrep（rg）が利用可能な場合はgrepコマンドを置き換え
+" 参考: https://github.com/BurntSushi/ripgrep
 if executable('rg')
   set grepprg=rg\ --vimgrep
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-" ステータス行の指定
+" ステータスライン設定
+" 文字エンコーディング、改行コード、カーソル位置を表示
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
 set statusline+=%=%l:%c
 
-" カレントウィンドウにのみ罫線を引く
+" カーソルライン表示の制御
+" アクティブウィンドウでのみカーソル行をハイライト
 augroup cursorLine
   autocmd!
   autocmd WinLeave * set nocursorline
   autocmd WinEnter,BufRead * set cursorline
 augroup END
 
-" 自動的にインデントプラグインを読み込む
+" ファイルタイプ検出とプラグイン・インデント設定を有効化
 filetype plugin indent on
 
-" 拡張子によって変更
+" ファイルタイプ別設定
 augroup fileTypeIndent
   autocmd!
+  " テキストファイルとMarkdownは行の折り返しとタブ展開を有効
   autocmd BufNewFile,BufRead *.txt,*.md setlocal wrap expandtab
+  " Web系ファイルはインデント幅を2に設定
   autocmd BufNewFile,BufRead *.json,*.md,*.html,*.css,*.ts,*.js,*vimrc* setlocal tabstop=2 shiftwidth=2
+  " プログラミング言語はC言語スタイルのインデントを適用
   autocmd BufNewFile,BufRead *.php,*.c,*.java,*.kt,*.js setlocal cindent expandtab shiftround
+  " カスタムファイルタイプの設定
   autocmd BufNewFile,BufRead *.rules set filetype=javascript
   autocmd BufNewFile,BufRead *.mdc set filetype=markdown
 augroup END
 
-" バイナリファイルを開く場合
+" バイナリファイル編集設定
+" xxdコマンドを使用してバイナリファイルを16進数表示で編集
 augroup fileTypeBinary
   autocmd!
   autocmd BufReadPre *.bin let &bin=1
@@ -167,19 +196,21 @@ augroup fileTypeBinary
   autocmd BufWritePost *.bin set nomod | endif
 augroup END
 
-" 設定ファイル関連のコマンド
+" カスタムコマンド定義設定ファイル関連のコマンド
+" カスタムコマンド定義設定ファイル関連のコマンド
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 command! PlugUpdate call dein#update()
 command! PlugRecache call dein#recache_runtimepath()
 
-" 新規ファイルの場合はインサートモード
+" 自動動作設定
+" 引数なしでVim起動時は挿入モードで開始
 autocmd VimEnter * if argc() == 0 | startinsert | endif
 
-" カレントディレクトリを移動
+" ファイル編集時にカレントディレクトリを自動変更
 autocmd BufEnter * if isdirectory(expand('%:p:h')) | lcd %:p:h | endif
 
-" 自動でQuickfixオープン
+" make、grep実行後にQuickfixウィンドウを自動表示
 autocmd QuickfixCmdPost make,grep,vimgrep copen
 
 " completeoptの設定
@@ -237,10 +268,12 @@ nnoremap <leader>m @z
 " コマンド履歴
 noremap <silent> <leader>kk :<C-F>
 
+" Git対応検索関数
+" Gitリポジトリ内ではgit管理ファイルのみを検索対象とする
 function! GrepGitFiles(keyword)
-  let l:ex = '*.' . expand('%:e')
-  if l:ex == '*.'
-    let l:ex = expand('%')
+  let l:file_extension = '*.' . expand('%:e')
+  if l:file_extension == '*.'
+    let l:file_extension = expand('%')
   endif
 
   " Cache git status check for current directory
@@ -256,6 +289,6 @@ function! GrepGitFiles(keyword)
   if g:[l:cache_key]
     exe ':vimgrep /' . a:keyword . '/ `git ls-files ' . shellescape(expand('%:p:h')) . '`'
   else
-    exe ':vimgrep /' . a:keyword . '/ **/' . l:ex
+    exe ':vimgrep /' . a:keyword . '/ **/' . l:file_extension
   endif
 endfunction

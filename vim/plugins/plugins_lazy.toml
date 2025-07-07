@@ -1,84 +1,40 @@
 # 遅延読み込みプラグイン
+# 参考: https://github.com/Shougo/dein.vim
 
-[[plugins]]
-repo = 'Shougo/unite.vim'
-hook_add = '''
-  if executable('rg')
-	let g:unite_source_grep_command = 'rg'
-	let g:unite_source_grep_default_opts = '-n --no-heading --color never'
-	let g:unite_source_grep_recursive_opt = ''
-  endif
-'''
-
-[[plugins]]
-repo = 'Shougo/vimfiler'
-depends = 'Shougo/unite.vim'
-on_cmd = ['VimFilerExplorer', 'VimFilerBufferDir', 'VimFiler']
-hook_add = '''
-  let g:vimfiler_as_default_explorer=1
-  let g:vimfiler_safe_mode_by_default=0
-  let g:netrw_liststyle=3
-  nnoremap <silent> <space>e :VimFilerExplorer<CR>
-'''
-
-[[plugins]]
-repo = 'andymass/vim-matchup'
-on_event = 'WinEnter'
-
-[[plugins]]
-repo = 'tomtom/tcomment_vim'
-on_map = ['<D-/>', '<C-_>']
-hook_add = '''
-  nnoremap <silent> <D-/> :TComment<CR>
-  nnoremap <silent> <C-_> :TComment<CR>
-  vnoremap <silent> <D-/> :TComment<CR>
-  vnoremap <silent> <C-_> :TComment<CR>
-'''
-
-[[plugins]]
-repo = 'tpope/vim-abolish'
-on_map = ['*'] # This might be too broad, consider specific command or function if available
-hook_add = '''
-  nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
-  vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
-'''
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-on_map = ['ys', 'cs', 'ds', 'S'] # S in visual mode
-
-[[plugins]]
-repo = 'github/copilot.vim'
-on_event = ['InsertEnter', 'BufReadPre'] # BufReadPre to enable for existing files
-on_cmd = ['Copilot', 'CopilotPanel']
-hook_add = '''
-  let g:copilot_no_tab_map = v:true
-  imap <silent><script><expr> <C-Y> copilot#Accept("\<CR>")
-'''
-
+# eskk.vim（SKK日本語入力）
+# 参考: https://github.com/tyru/eskk.vim
 [[plugins]]
 repo = 'tyru/eskk.vim'
 on_event = 'VimEnter'
 hook_add = '''
   if has('vim_starting')
+    " 辞書ディレクトリの設定
     if has('win32') || has('win64')
-       let s:dict = expand($HOME.'\vimfiles\dict')
+       let s:dictionary_dir = expand($HOME.'\vimfiles\dict')
     else
-       let s:dict = expand('~/.vim/dict')
+       let s:dictionary_dir = expand('~/.vim/dict')
     endif
 
-    let g:eskk#marker_henkan = "💬"
-    let g:eskk#marker_henkan_select = "✅"
-    let g:eskk#marker_jisyo_touroku = "📖"
-    let g:eskk#egg_like_newline = 1
-    let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
-    let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+    " SKK入力モードマーカー設定
+    let g:eskk#marker_henkan = "💬"          " 変換モード
+    let g:eskk#marker_henkan_select = "✅"   " 変換選択モード
+    let g:eskk#marker_jisyo_touroku = "📖"   " 辞書登録モード
 
+    " Egg like newline（改行時の動作設定）
+    let g:eskk#egg_like_newline = 1
+
+    " ユーザー辞書設定（個人用単語）
+    let g:eskk#dictionary = { 'path': s:dictionary_dir.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
+    " 大辞書設定（基本辞書）
+    let g:eskk#large_dictionary = { 'path': s:dictionary_dir.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+
+    " eskk自動コマンド設定
     augroup eskk
       autocmd!
       autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
     augroup END
 
+    " SKK入力切り替えキーマップ
     imap <C-J> <Plug>(eskk:toggle)
     cmap <C-J> <Plug>(eskk:toggle)
     nmap <C-J> i<Plug>(eskk:toggle)

@@ -1,124 +1,155 @@
-" カラースキーム
+" vifm設定ファイル
+" 参考: https://vifm.info/
+" 参考: https://github.com/vifm/vifm
+
+" カラースキーム設定
 colorscheme Default
 
 " 基本設定
-set fusehome=/tmp/vifm_FUSE
-set history=100
-set ignorecase
-set incsearch
-set nofollowlinks
-set nowrap
-set scrolloff=4
-set smartcase
-set sortnumbers
-set statusline="  %t  %= %A %10u:%-7g %15s %20d "
-set syscalls
-set timefmt=%m/%d\ %H:%M
-set trash
-set undolevels=100
-set vicmd=vim
-set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
-set vimhelp
-set wildmenu
+set fusehome=/tmp/vifm_FUSE                   " FUSEマウントポイント
+set history=100                               " ディレクトリ履歴の保存数
+set ignorecase                                " 検索時に大文字小文字を区別しない
+set incsearch                                 " インクリメンタル検索を有効化
+set nofollowlinks                             " シンボリックリンクの自動解決を無効化
+set nowrap                                    " 長いファイル名の折り返し表示を無効化
+set scrolloff=4                               " カーソルと画面端の間に4行の余白を保持
+set smartcase                                 " 大文字が含まれる場合のみ大文字小文字を区別
+set sortnumbers                               " ファイル名内の数値を自然順序でソート
+set statusline="  %t  %= %A %10u:%-7g %15s %20d "  " ステータスライン表示形式
+set syscalls                                  " ファイル操作をvifm自体で実行（高速化）
+set timefmt=%m/%d\ %H:%M                      " 時刻表示フォーマット
+set trash                                     " ゴミ箱機能を有効化
+set undolevels=100                            " 元に戻せる変更の最大数
+set vicmd=vim                                 " ファイル編集時に使用するエディタ
+set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}  " カラム表示設定
+set vimhelp                                   " Vimヘルプ形式を使用
+set wildmenu                                  " コマンドライン補完を有効化
 
-" except windows
+" macOS・Unix環境での追加設定
 if has('mac') || has('unix')
+  " ファイルタイプ別アイコン設定
+  " スクリプト、ソースコード、ライセンスファイル、Git、電子書籍、PDF、HTML/XML
   set classify+='↩ ::../::,📔 ::*.sh::,📔 ::*.[hc]pp::,📔 ::*.[hc]::,📓  ::/^copying|license$/::,📦 ::.git/,,*.git/::,📒 ::*.epub,,*.fb2,,*.djvu::,📕 ::*.pdf::,📓 ::*.htm,,*.html,,**.[sx]html,,*.xml::'
+  " 画像ファイル
   set classify+='🎨 ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+  " Officeファイル
   set classify+='📘 ::*.doc,,*.docx::,📗 ::*.xls,,*.xls[mx]::,📙 ::*.pptx,,*.ppt::'
+  " アーカイブファイル
   set classify+='📚 ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
+  " 音声ファイル
   set classify+='📢 ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+  " 動画ファイル
   set classify+='📹 ::*.avi,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
+  " 基本ファイルタイプ
   set classify='📁 :dir:/,💡 :exe:,📓 :reg:,🔗 :link:'
+  " ファイルサイズ表示形式（IEC単位、3桁精度）
   set sizefmt=units:iec,precision:3
+  " 低速ファイルシステム設定
   set slowfs=curlftpfs
+  " 候補表示設定
   set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+  " 補完スタイル（ポップアップ形式）
   set wildstyle=popup
 endif
 
-" コマンド
+" カスタムコマンド定義
 " command! debug echo %d %m 2> /dev/null
 
-command! search find . -name "%a" %m 2> /dev/null
-command! concat cat %f > %d/concat.%c
-command! df df -h %m 2> /dev/null
-command! zip zip -r %f.zip %f -x "*.DS_Store"
-command! run !! ./%f
-command! make !!make %a
-command! vimgrep vi "+grep %a"
-command! reload :write | restart
+command! search find . -name "%a" %m 2> /dev/null   " ファイル検索
+command! concat cat %f > %d/concat.%c               " ファイル結合
+command! df df -h %m 2> /dev/null                   " ディスク使用量表示
+command! zip zip -r %f.zip %f -x "*.DS_Store"       " ZIP圧縮（.DS_Store除外）
+command! run !! ./%f                                " ファイル実行
+command! make !!make %a                             " make実行
+command! look vi "+grep %a"                      " Vimでgrep実行
+command! reload :write | restart                    " 設定再読み込み
 
+" エディタ別コマンド設定
 if executable('mvim')
-  command! config :!mvim --remote-tab-silent $MYVIFMRC
-  command! diff :!mvim -d %f %F
+  " MacVim使用時
+  command! config :!mvim --remote-tab-silent $MYVIFMRC  " 設定ファイル編集
+  command! diff :!mvim -d %f %F                         " ファイル差分表示
 elseif executable('gvim')
-  command! config :!gvim --remote-tab-silent $MYVIFMRC
-  command! diff :!gvim -d %f %F
+  " GVim使用時
+  command! config :!gvim --remote-tab-silent $MYVIFMRC  " 設定ファイル編集
+  command! diff :!gvim -d %f %F                         " ファイル差分表示
 else
-  command! config :write | exe ':!vi $MYVIFMRC' | restart
-  command! diff :!vi -d %f %F
+  " 標準Vi使用時
+  command! config :write | exe ':!vi $MYVIFMRC' | restart  " 設定ファイル編集
+  command! diff :!vi -d %f %F                              " ファイル差分表示
 endif
 
-" キーのカスタマイズ
-nnoremap <space> t
-nnoremap J :concat<cr>
-nnoremap t :shell<cr>
-nnoremap V v
-nnoremap v :view<cr>
+" キーマッピング設定
+nnoremap <space> t      " スペースキーでタグ切り替え
+nnoremap J :concat<cr>  " J でファイル結合
+nnoremap t :shell<cr>   " t でシェル起動
+nnoremap V v            " V で選択モード
+nnoremap v :view<cr>    " v でプレビュー表示
 
-" ファイルを開くコマンド
+" OS別ファイルオープン設定
 if executable('open')
+  " macOS環境
   nnoremap o :!open -g %f<cr>
 endif
 
 if executable('start.exe')
+  " Windows環境
   nnoremap o :!start %f<cr>
 endif
 
 if executable('xdg-open')
+  " Linux環境
   nnoremap o :!xdg-open %f<cr>
 else
+  " フォールバック
   nnoremap o :file &<cr>l
 endif
 
-" クリップボードへパスをコピー
+" OS別クリップボード連携設定
 if executable('pbcopy')
-  nnoremap yp :!printf %d | pbcopy<cr>
-  nnoremap yf :!printf %c:p | pbcopy<cr>
+  " macOS環境
+  nnoremap yp :!printf %d | pbcopy<cr>      " ディレクトリパスをコピー
+  nnoremap yf :!printf %c:p | pbcopy<cr>    " ファイルパスをコピー
 elseif executable('clip.exe')
-  nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
-  nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
+  " Windows/WSL環境
+  nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>  " ディレクトリパスをコピー
+  nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>  " ファイルパスをコピー
 elseif executable('wl-copy')
-  nnoremap yp :!echo %d | wl-copy<cr>
-  nnoremap yf :!echo %c:p | wl-copy<cr>
+  " Linux（Wayland）環境
+  nnoremap yp :!echo %d | wl-copy<cr>       " ディレクトリパスをコピー
+  nnoremap yf :!echo %c:p | wl-copy<cr>     " ファイルパスをコピー
 endif
 
-" Quick Look でプレビュー
+" macOS Quick Lookプレビュー
 if executable('qlmanage')
-  nnoremap q :!qlmanage -p %f > /dev/null 2>&1<cr>
+  nnoremap q :!qlmanage -p %f > /dev/null 2>&1<cr>  " q でQuick Lookプレビュー
 endif
 
-" gui vim を設定する
+" エディタ起動設定
 if executable('mvim')
+  " MacVim使用時
   nnoremap e :!mvim --remote-tab-silent %f<cr>
 elseif executable('gvim')
+  " GVim使用時
   nnoremap e :!gvim --remote-tab-silent %f<cr>
 else
+  " 標準Vi使用時
   nnoremap e :!vi %f<cr>
 endif
 
-" セミコロンを入れ替え
+" セミコロンとコロンのキーバインド入れ替え
+" セミコロンでコマンド実行、コロンで前回のペインに移動
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" 隠しファイル表示操作
-nnoremap . zo
-nnoremap .. zm
+" 隠しファイル表示切り替え
+nnoremap . zo    " . で隠しファイル表示
+nnoremap .. zm   " .. で隠しファイル非表示
 
-" 画面タブ移動
-nnoremap <Tab> <C-W>w
+" ペイン間移動
+nnoremap <Tab> <C-W>w  " Tab でペイン切り替え
 
-" 初回実行コマンド
+" 初回実行時にプレビューモードで開始
 view

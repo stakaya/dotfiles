@@ -1,50 +1,65 @@
+# Alacritty ターミナル設定ファイル
+# 参考: https://alacritty.org/
+# 参考: https://github.com/alacritty/alacritty
+
+# 明色設定（ハイライト色）
 [colors.bright]
-black = "#676767"
-blue = "#7eaff4"
-cyan = "#6ed9d9"
-green = "#73f961"
-magenta = "#fd9cff"
-red = "#fd8784"
-white = "#f1f1f1"
-yellow = "#fefb00"
+black = "#676767"    # 明黒（グレー）
+blue = "#7eaff4"     # 明青
+cyan = "#6ed9d9"     # 明シアン
+green = "#73f961"    # 明緑
+magenta = "#fd9cff"  # 明マゼンタ
+red = "#fd8784"      # 明赤
+white = "#f1f1f1"    # 明白
+yellow = "#fefb00"   # 明黄
 
+# 通常色設定
 [colors.normal]
-black = "#000000"
-blue = "#5496ef"
-cyan = "#39cbcc"
-green = "#097e00"
-magenta = "#fd75ff"
-red = "#fd6b67"
-white = "#bbbbbb"
-yellow = "#ccca00"
+black = "#000000"    # 黒
+blue = "#5496ef"     # 青
+cyan = "#39cbcc"     # シアン
+green = "#097e00"    # 緑
+magenta = "#fd75ff"  # マゼンタ
+red = "#fd6b67"      # 赤
+white = "#bbbbbb"    # 白
+yellow = "#ccca00"   # 黄
 
+# 基本色設定
 [colors.primary]
-background = "#2a2a2a"
-foreground = "#bbbbbb"
+background = "#2a2a2a"  # 背景色：ダークグレー
+foreground = "#bbbbbb"  # 文字色：ライトグレー
 
+# 環境変数設定
 [env]
-TERM = "xterm-256color"
+TERM = "xterm-256color"  # ターミナルタイプ（256色対応）
 
+# フォント設定
 [font]
-size = 14.0
+size = 14.0  # フォントサイズ
 
+# フォントオフセット設定
 [font.offset]
-x = 1
-y = 1
+x = 1  # 水平オフセット
+y = 1  # 垂直オフセット
 
+# キーバインド設定
+# 履歴選択用にバインド
 [[keyboard.bindings]]
 chars = "\u0012"
 key = "R"
 mods = "Command"
 
+# Tmux用にバインド
 [[keyboard.bindings]]
 chars = "\u0014"
 key = "T"
 mods = "Command"
 
+# ウィンドウ設定
 [window]
-title = ""
+title = ""  # ウィンドウタイトル（空文字）
 
+# ウィンドウパディング設定
 [window.padding]
-x = 2
-y = 0
+x = 2  # 水平パディング
+y = 0  # 垂直パディング

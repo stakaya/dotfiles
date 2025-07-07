@@ -1,24 +1,14 @@
-*.log
+# dotfiles プロジェクト固有除外設定
+# 参考: https://git-scm.com/docs/gitignore
+
+# Vim プラグインディレクトリ（設定ファイル以外）
 vim/*
 !plugins.toml
 !plugins_lazy.toml
 
-# mac
-.DS_Store
-
-# windows
-Thumbs.db
-
-# IDEA
-.idea/
-*.iws
-*.iml
-*.ipr
-
-# vifm
+# vifm 実行時生成ファイル
 vifm/vifminfo.json
 
-# nvim
+# Neovim プラグインディレクトリ
 nvim/plugins/*
-!.gitkeep
 nvim/dict
