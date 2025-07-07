@@ -29,14 +29,14 @@ zinit light-mode for \
 # Zshプラグインの読み込み（起動時間改善のためturboモード使用）
 # 参考: https://github.com/zsh-users
 zinit wait lucid for \
-  zsh-users/zsh-autosuggestions \      # コマンド履歴からの自動補完提案
-  zsh-users/zsh-completions \          # 追加の補完定義
-  zdharma/fast-syntax-highlighting \   # コマンドラインのシンタックスハイライト
-  rupa/z                               # ディレクトリ移動の高速化
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-completions \
+  zdharma/fast-syntax-highlighting \
+  rupa/z
 
 # 環境変数設定
-export LANG=ja_JP.UTF-8      # システム言語を日本語に設定
-export LC_CTYPE=ja_JP.UTF-8  # 文字タイプを日本語に設定
+export LANG=ja_JP.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # rbenv（Ruby環境管理）の遅延初期化（起動時間改善）

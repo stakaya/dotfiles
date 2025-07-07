@@ -7,24 +7,24 @@
 
 ### macOS ###
 # 一般的なmacOSシステムファイル
-.DS_Store                              # Finder情報ファイル
-.AppleDouble                           # AppleDoubleファイル
-.LSOverride                            # Launch Services設定
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # アイコンファイル（末尾に2つの\rが必要）
 Icon
 
 # サムネイル
-._*                                    # リソースフォーク
+._*
 
 # ボリュームルートに作成される可能性のあるファイル
-.DocumentRevisions-V100                # 文書リビジョン
-.fseventsd                            # ファイルシステムイベント
-.Spotlight-V100                       # Spotlight検索インデックス
-.TemporaryItems                       # 一時アイテム
-.Trashes                              # ゴミ箱
-.VolumeIcon.icns                      # ボリュームアイコン
-.com.apple.timemachine.donotpresent   # Time Machine除外
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # リモートAFP共有で作成される可能性のあるディレクトリ
 .AppleDB
@@ -35,10 +35,10 @@ Temporary Items
 
 ### Windows ###
 # Windowsサムネイルキャッシュファイル
-Thumbs.db                             # サムネイルキャッシュ
-Thumbs.db:encryptable                 # 暗号化可能サムネイル
-ehthumbs.db                           # 拡張サムネイル
-ehthumbs_vista.db                     # Vista拡張サムネイル
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
 
 # ダンプファイル
 *.stackdump
@@ -61,11 +61,11 @@ $RECYCLE.BIN/
 
 ### IntelliJ IDEA ###
 # プロジェクト形式
-.idea/                                # IDEA設定ディレクトリ
-*.iml                                 # IDEAモジュールファイル
-*.ipr                                 # IDEAプロジェクトファイル
-*.iws                                 # IDEAワークスペースファイル
-out/                                  # ビルド出力ディレクトリ
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
 
 # CMake
 cmake-build-*/
@@ -83,12 +83,12 @@ crashlytics-build.properties
 fabric.properties
 
 ### Visual Studio Code ###
-.vscode/*                             # VSCode設定（一部除外）
-!.vscode/settings.json                # 設定ファイルは保持
-!.vscode/tasks.json                   # タスク設定は保持
-!.vscode/launch.json                  # デバッグ設定は保持
-!.vscode/extensions.json              # 拡張機能設定は保持
-!.vscode/*.code-snippets              # コードスニペットは保持
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
 # Visual Studio Code ローカル履歴
 .history/

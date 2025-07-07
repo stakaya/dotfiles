@@ -8,7 +8,7 @@ let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
 " 日本語キーボード対応やVimライクなキーバインドを設定
-source $HOME/dotfiles/vimrc.keymap
+source $HOME/.vimrc.keymap
 
 " Neovim以外の場合の設定
 if !has('nvim')
@@ -34,8 +34,8 @@ if has('vim_starting')
 endif
 
 if has('win32') || has('win64')
-  let plugin_config_dir = expand($HOME.'\vimfiles\plugins')
-  let plugin_install_dir = plugin_config_dir
+  let s:plugin_config_dir = expand($HOME.'\vimfiles\plugins')
+  let s:plugin_install_dir = s:plugin_config_dir
 
   " WindowsでPATHに$VIMが含まれていない時に
   " currentのexeを見つけ出せないので追加
@@ -43,21 +43,21 @@ if has('win32') || has('win64')
     let $PATH = $VIM . ';' . $PATH
   endif
 else
-  let plugin_config_dir = expand('~/.vim/plugins')
+  let s:plugin_config_dir = expand('~/.vim/plugins')
   if has('nvim')
-    let plugin_install_dir = expand('~/.config/nvim/plugins')
+    let s:plugin_install_dir = expand('~/.config/nvim/plugins')
   else
-    let plugin_install_dir = expand('~/.vim/plugins')
+    let s:plugin_install_dir = expand('~/.vim/plugins')
   endif
 endif
 
 " プラグインの読み込み
 " dein.vim プラグインマネージャーを使用
 " 参考: https://github.com/Shougo/dein.vim
-if dein#load_state(plugin_install_dir)
-  call dein#begin(plugin_install_dir)
-  call dein#load_toml(plugin_config_dir . '/plugins.toml', {'lazy': 0})
-  call dein#load_toml(plugin_config_dir . '/plugins_lazy.toml', {'lazy': 1})
+if dein#load_state(s:plugin_install_dir)
+  call dein#begin(s:plugin_install_dir)
+  call dein#load_toml(s:plugin_config_dir . '/plugins.toml', {'lazy': 0})
+  call dein#load_toml(s:plugin_config_dir . '/plugins_lazy.toml', {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
@@ -196,33 +196,12 @@ augroup fileTypeBinary
   autocmd BufWritePost *.bin set nomod | endif
 augroup END
 
-" OS別クリップボード連携設定
-" ヤンク操作時に自動的にシステムクリップボードにコピー
-if executable('pbcopy')
-  " macOS環境
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('pbcopy', @")
-  augroup END
-elseif executable('clip.exe')
-  " Windows/WSL環境
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('clip.exe', @")
-  augroup END
-elseif executable('wl-copy')
-  " Linux（Wayland）環境
-  augroup Yank
-    autocmd!
-    autocmd TextYankPost * :call system('wl-copy', @")
-  augroup END
-endif
-
-" カスタムコマンド定義
-command! Reload source $HOME/dotfiles/vimrc  " 設定ファイル再読み込み
-command! Config edit $HOME/dotfiles/vimrc    " 設定ファイル編集
-command! PlugUpdate call dein#update()       " プラグイン更新
-command! PlugRecache call dein#recache_runtimepath()  " プラグインキャッシュ再構築
+" カスタムコマンド定義設定ファイル関連のコマンド
+" カスタムコマンド定義設定ファイル関連のコマンド
+command! Reload source $HOME/dotfiles/vimrc
+command! Config edit $HOME/dotfiles/vimrc
+command! PlugUpdate call dein#update()
+command! PlugRecache call dein#recache_runtimepath()
 
 " 自動動作設定
 " 引数なしでVim起動時は挿入モードで開始

@@ -6,7 +6,7 @@
 colorscheme Default
 
 " 基本設定
-set fusehome=/tmp/vifm_FUSE                    " FUSEマウントポイント
+set fusehome=/tmp/vifm_FUSE                   " FUSEマウントポイント
 set history=100                               " ディレクトリ履歴の保存数
 set ignorecase                                " 検索時に大文字小文字を区別しない
 set incsearch                                 " インクリメンタル検索を有効化
@@ -55,7 +55,7 @@ endif
 " カスタムコマンド定義
 " command! debug echo %d %m 2> /dev/null
 
-command! search find . -name "%a" %m 2> /dev/null    " ファイル検索
+command! search find . -name "%a" %m 2> /dev/null   " ファイル検索
 command! concat cat %f > %d/concat.%c               " ファイル結合
 command! df df -h %m 2> /dev/null                   " ディスク使用量表示
 command! zip zip -r %f.zip %f -x "*.DS_Store"       " ZIP圧縮（.DS_Store除外）
