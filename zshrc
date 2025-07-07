@@ -60,10 +60,10 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 # fzf設定オプション
 # ripgrepを使用してファイル検索を高速化
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
-# ダークテーマの色設定とプレビューウィンドウの設定
-#export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
+
 # Ctrl+Tでのファイル検索設定
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
+
 # batを使用したファイルプレビュー設定
 export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 

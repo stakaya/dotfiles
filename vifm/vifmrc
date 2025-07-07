@@ -61,7 +61,7 @@ command! df df -h %m 2> /dev/null                   " ディスク使用量表�
 command! zip zip -r %f.zip %f -x "*.DS_Store"       " ZIP圧縮（.DS_Store除外）
 command! run !! ./%f                                " ファイル実行
 command! make !!make %a                             " make実行
-command! vimgrep vi "+grep %a"                      " Vimでgrep実行
+command! look vi "+grep %a"                      " Vimでgrep実行
 command! reload :write | restart                    " 設定再読み込み
 
 " エディタ別コマンド設定

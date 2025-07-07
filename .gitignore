@@ -12,15 +12,3 @@ vifm/vifminfo.json
 # Neovim プラグインディレクトリ
 nvim/plugins/*
 nvim/dict
-
-# mac
-.DS_Store
-
-# windows
-Thumbs.db
-
-# IDEA
-.idea/
-*.iws
-*.iml
-*.ipr
