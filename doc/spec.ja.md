@@ -59,11 +59,11 @@ graph TD
     H --> L[デフォルトシェルを Zsh に変更]
     I --> M[設定ファイルのシンボリックリンク作成]
     I --> N[Dein.vim インストール]
-    
+
     subgraph "macOS環境の場合"
         B -- macOS --> O[macOS 特有設定を適用]
     end
-    
+
     L --> P[完了]
     N --> P
     O --> P
@@ -81,14 +81,14 @@ graph TB
     A --> E[カスタム関数]
     A --> F[キーバインド設定]
     A --> G[Starship プロンプト]
-    
+
     subgraph "Zinitプラグイン"
         B -.管理.-> H[zsh-autosuggestions]
         B -.管理.-> I[zsh-completions]
         B -.管理.-> J[fast-syntax-highlighting]
         B -.管理.-> K[z]
     end
-    
+
     subgraph "エイリアスファイル"
         D --> L[general.zsh]
         D --> M[dev.zsh]
@@ -151,7 +151,7 @@ Vim および Neovim は、この dotfiles 環境で中心的な役割を果た�
 *   **Neovim (`nvim/init.vim`)**:
     *   Neovim の設定エントリポイントです。
     *   クリップボード設定 (`set clipboard=unnamed`) やインクリメンタルコマンドプレビュー (`set inccommand=split`) など基本的な設定を行います。
-    *   環境（VSCode内、Windows、その他）に応じて、`$HOME/dotfiles/vimrc.keymap` や `$HOME/dotfiles/vimrc` (または `_vimrc` for Windows) を読み込みます。
+    *   環境（VSCode内、Windows、その他）に応じて、`$HOME/.vimrc.keymap` や `$HOME/.vimrc` (または `_vimrc` for Windows) を読み込みます。
     *   Python3 のホストプログラムパスを設定します。
 *   **Vim (`vimrc`)**:
     *   (Neovim の設定からも読み込まれる) Vim の基本的な設定が含まれます。
@@ -252,18 +252,18 @@ graph TB
         R --> config[設定ファイル群]
         R --> apps[アプリリスト]
     end
-    
+
     subgraph "セットアップスクリプト"
         setup --> setup_sh[setup.sh]
         setup --> setup_app[setup_app.sh]
         setup --> setup_shell[setup_shell.sh]
     end
-    
+
     subgraph "アプリケーション管理"
         apps --> brewfile[apps/Brewfile]
         apps --> winget[apps/winget.dump]
     end
-    
+
     subgraph "主要設定ファイル"
         config --> zsh_config[Zsh設定]
         config --> vim_config[Vim/Neovim設定]
@@ -282,8 +282,8 @@ graph LR
     aliases --> general[general.zsh]
     aliases --> dev[dev.zsh]
     aliases --> git[git.zsh]
-    
-    zshrc[zshrc] 
+
+    zshrc[zshrc]
 ```
 
 #### Vim/Neovim関連設定
@@ -293,11 +293,11 @@ graph LR
     vim_root --> dict[dict/]
     plugins --> plugins_toml[plugins.toml]
     plugins --> plugins_lazy[plugins_lazy.toml]
-    
+
     nvim_root[nvim/] --> init[init.vim]
     nvim_root --> nvim_dict[dict/]
     nvim_dict -.symlink.-> dict
-    
+
     vimrc[vimrc]
 ```
 
@@ -307,7 +307,7 @@ graph LR
     alacritty_root[alacritty/] --> alacritty_toml[alacritty.toml]
     tmux_conf[tmux.conf]
     starship_toml[starship.toml]
-    
+
     vifm_root[vifm/] --> vifmrc[vifmrc]
     vifm_root --> colors[colors/]
 ```

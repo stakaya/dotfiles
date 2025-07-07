@@ -16,10 +16,10 @@ if has('mac')
 elseif has('win32') || has('win64')
   " Windows環境設定
   set directory=C:\WINDOWS\Temp                    " スワップファイル保存先
-  set renderoptions=type:directx                   # DirectXレンダリング使用
+  set renderoptions=type:directx                   " DirectXレンダリング使用
   set ambiwidth=double                             " 曖昧幅文字を全角扱い
   set guifont=Consolas:h12                         " 半角文字用フォント
-  set guifontwide=UD_デジタル_教科書体_N-R:h12      " 全角文字用フォント
+  set guifontwide=UD_デジタル_教科書体_N-R:h12     " 全角文字用フォント
 endif
 
 " Unix系OSでの自動クリップボード機能を抑制
@@ -29,7 +29,7 @@ if !has('unix')
 endif
 
 " タブラベル設定
-# %M: 変更フラグ、%t: ファイル名
+" %M: 変更フラグ、%t: ファイル名
 set guitablabel=%M%t
 
 " GUI要素の非表示設定
