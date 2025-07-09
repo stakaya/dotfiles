@@ -5,10 +5,6 @@
 " 共通キーマッピング設定を読み込み
 source ~/dotfiles/vimrc.keymap
 
-" 基本キーマッピング
-inoremap <C-[> <Esc>  " Ctrl+[ でESC
-vnoremap <C-[> <Esc>  " ビジュアルモードでもCtrl+[ でESC
-
 " IDE固有ナビゲーション
 nnoremap gd :<C-u>action GotoDeclaration<CR>     " 定義へジャンプ
 nnoremap g; :<C-u>action JumpToLastChange<CR>    " 最後の変更箇所へ

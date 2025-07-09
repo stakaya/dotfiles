@@ -2,7 +2,7 @@
 
 # 参考: https://www.gnu.org/software/bash/manual/
 
-DOT_FILES=(gvimrc vimrc vimrc.keymap ideavimrc vim vifm tmux.conf zsh)
+DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf zsh)
 for file in ${DOT_FILES[@]}
 do
 	if [ ! -e ~/.$file ]; then

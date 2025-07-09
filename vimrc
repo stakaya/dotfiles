@@ -8,7 +8,7 @@ let g:mapleader = "\<space>"
 
 " カスタマイズキーマップを読み込み
 " 日本語キーボード対応やVimライクなキーバインドを設定
-source $HOME/.vimrc.keymap
+source $HOME/dotfiles/vimrc.keymap
 
 " Neovim以外の場合の設定
 if !has('nvim')
@@ -120,7 +120,8 @@ set autoindent         " 新しい行で前の行のインデントを維持
 set autowrite          " バッファ切り替え時に自動保存
 set cursorline         " カーソル行をハイライト表示
 set encoding=utf-8     " 内部文字エンコーディングをUTF-8に設定
-set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan " ファイル読み込み時の文字エンコーディング自動判定
+                       " ファイル読み込み時の文字エンコーディング自動判定
+set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,japan
 set fileformats=unix,dos,mac " 改行コードの自動判定順序
 set formatoptions+=mMj " 日本語テキストの自動折り返し対応
 set hlsearch           " 検索結果をハイライト表示
@@ -177,7 +178,7 @@ augroup fileTypeIndent
   " Web系ファイルはインデント幅を2に設定
   autocmd BufNewFile,BufRead *.json,*.md,*.html,*.css,*.ts,*.js,*vimrc* setlocal tabstop=2 shiftwidth=2
   " プログラミング言語はC言語スタイルのインデントを適用
-  autocmd BufNewFile,BufRead *.php,*.c,*.java,*.kt,*.js setlocal cindent expandtab shiftround
+  autocmd BufNewFile,BufRead *.ts,*.js setlocal cindent expandtab shiftround
   " カスタムファイルタイプの設定
   autocmd BufNewFile,BufRead *.rules set filetype=javascript
   autocmd BufNewFile,BufRead *.mdc set filetype=markdown

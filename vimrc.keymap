@@ -3,7 +3,6 @@
 " 参考: https://qiita.com/tags/vim
 
 " 日本語キーボード互換マッピング
-" ( で単語検索
 nnoremap ( *
 nnoremap ! ~
 nnoremap & ^
@@ -12,7 +11,6 @@ vnoremap ! ~
 vnoremap & ^
 
 " セミコロンとコロンのキーバインド入れ替え
-" 日本語キーボードでのコマンド入力を効率化
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
@@ -46,10 +44,6 @@ inoremap <C-Z> <C-O>u
 " Ctrl+A で全選択（各モード対応）
 noremap <C-A> gggH<C-O>G
 inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-A> <C-C>gggH<C-O>G
-onoremap <C-A> <C-C>gggH<C-O>G
-snoremap <C-A> <C-C>gggH<C-O>G
-xnoremap <C-A> <C-C>ggVG
 
 " 選択時のペースト改善
 " レジスタ0の内容でペースト（削除内容に影響されない）
@@ -61,8 +55,6 @@ nnoremap <silent> L <C-I>
 
 " ESCキーの代替
 inoremap <silent> jj <ESC>
-inoremap <silent> <S-CR> <ESC>
-vnoremap <silent> <S-CR> <ESC>
 
 " 矩形選択の簡易化
 nnoremap <silent> vv <C-V>

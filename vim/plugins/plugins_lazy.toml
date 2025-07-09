@@ -76,11 +76,11 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
-on_ft = ['md','markdown']
+on_ft = ['md', 'markdown']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
-on_ft = ['md','markdown']
+on_ft = ['md', 'markdown']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
@@ -95,16 +95,8 @@ repo = 'cespare/vim-toml'
 on_ft = ['conf', 'toml']
 
 [[plugins]]
-repo = 'udalov/kotlin-vim'
-on_ft = ['kt', 'kotlin']
-
-[[plugins]]
 repo = 'mattn/emmet-vim'
-on_ft = ['asp', 'aspx', 'erb', 'html', 'jsp', 'jsx', 'php', 'svelte', 'tsx', 'vue', 'xhtml', 'xml']
-
-[[plugins]]
-repo = 'evanleck/vim-svelte'
-on_ft = ['svelte']
+on_ft = ['html', 'xml']
 
 [[plugins]]
 repo = 'mattn/webapi-vim'

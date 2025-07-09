@@ -15,11 +15,11 @@ if has('mac')
   nnoremap <D-]> g,
 elseif has('win32') || has('win64')
   " Windows環境設定
-  set directory=C:\WINDOWS\Temp                    " スワップファイル保存先
-  set renderoptions=type:directx                   " DirectXレンダリング使用
-  set ambiwidth=double                             " 曖昧幅文字を全角扱い
-  set guifont=Consolas:h12                         " 半角文字用フォント
-  set guifontwide=UD_デジタル_教科書体_N-R:h12     " 全角文字用フォント
+  set directory=C:\WINDOWS\Temp               " スワップファイル保存先
+  set renderoptions=type:directx              " DirectXレンダリング使用
+  set ambiwidth=double                        " 曖昧幅文字を全角扱い
+  set guifont=Consolas:h12                    " 半角文字用フォント
+  set guifontwide=UD_デジタル_教科書体_N-R:h1 " 全角文字用フォント
 endif
 
 " Unix系OSでの自動クリップボード機能を抑制
@@ -43,8 +43,8 @@ set guioptions-=b  " 下部スクロールバーを非表示
 
 " Windows環境でのIME状態別カーソル色設定
 if has('xim') || has('multi_byte_ime')
-  highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold    " 通常カーソル
-  highlight CursorIM guifg=NONE guibg=#ecbcbc              " IME有効時カーソル
+  highlight Cursor guifg=#000d18 guibg=#8faf9f gui=bold " 通常カーソル
+  highlight CursorIM guifg=NONE guibg=#ecbcbc           " IME有効時カーソル
 endif
 
 " IME自動制御設定
