@@ -198,7 +198,6 @@ augroup fileTypeBinary
 augroup END
 
 " カスタムコマンド定義設定ファイル関連のコマンド
-" カスタムコマンド定義設定ファイル関連のコマンド
 command! Reload source $HOME/dotfiles/vimrc
 command! Config edit $HOME/dotfiles/vimrc
 command! PlugUpdate call dein#update()
