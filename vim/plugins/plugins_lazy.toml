@@ -112,29 +112,13 @@ repo = 'madox2/vim-ai'
 on_event = 'VimEnter'
 hook_source = '''
   let g:vim_ai_token_file_path = '~/.config/openai.token'
+  xnoremap <space>edit :AIEdit<space>
   xnoremap <silent> <space>ai :AI<CR>
   xnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
-  xnoremap <space>edit :AIEdit<space>
   xnoremap <silent> <space><CR> :AIChat<CR>
   nnoremap <silent> <space><CR> :AIChat<CR>
   nnoremap <silent> <space>img :AIImage<space>
   xnoremap <silent> <space>img :AIImage<CR>
-
-  " custom command suggesting git commit message, takes no arguments
-  function! GitCommitMessageFn()
-    let l:range = 0
-    let l:diff = system('git --no-pager diff')
-    let l:prompt = "generate a short commit message from the diff below:\n" . l:diff
-    let l:config = {
-    \  "options": {
-    \    "model": "gpt-4o",
-    \    "initial_prompt": ">>> system\nyou are a code assistant",
-    \    "temperature": 1,
-    \  },
-    \}
-    call vim_ai#AIRun(l:range, l:config, l:prompt)
-  endfunction
-  command! GitCommitMessage call GitCommitMessageFn()
 
   " custom command that provides a code review for selected code block
   function! CodeReviewFn(range) range
@@ -176,38 +160,9 @@ hook_source = '''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_event = 'VimEnter'
-hook_add = '''
-  let g:lsp_settings = {
-  \  'pylsp-all': {
-  \    'workspace_config': {
-  \      'pylsp': {
-  \        'configurationSources': ['flake8'],
-  \        'plugins': {
-  \          'flake8': {
-  \            'enabled': 1
-  \          },
-  \          'mccabe': {
-  \            'enabled': 0
-  \          },
-  \          'pycodestyle': {
-  \            'enabled': 0
-  \          },
-  \          'pyflakes': {
-  \            'enabled': 0
-  \          },
-  \        }
-  \      }
-  \    }
-  \  }
-  \}
-'''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'
-on_event = 'VimEnter'
-
-[[plugins]]
-repo = 'mattn/vim-sonictemplate'
 on_event = 'VimEnter'
 
 [[plugins]]

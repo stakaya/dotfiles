@@ -79,6 +79,9 @@ onoremap <TAB> <C-C><C-W>w
 noremap gb :bnext<CR>
 noremap gB :bprev<CR>
 
+" タブ操作
+noremap gn :tabnew<CR>
+
 " ウィンドウリサイズ
 noremap <S-LEFT> <C-W><
 noremap <S-RIGHT> <C-W>>
