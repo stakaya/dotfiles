@@ -15,13 +15,15 @@ set nowrap                                    " 長いファイル名の折り�
 set scrolloff=4                               " カーソルと画面端の間に4行の余白を保持
 set smartcase                                 " 大文字が含まれる場合のみ大文字小文字を区別
 set sortnumbers                               " ファイル名内の数値を自然順序でソート
-set statusline="  %t  %= %A %10u:%-7g %15s %20d "  " ステータスライン表示形式
+                                              " ステータスライン表示形式
+set statusline="  %t  %= %A %10u:%-7g %15s %20d "
 set syscalls                                  " ファイル操作をvifm自体で実行（高速化）
 set timefmt=%m/%d\ %H:%M                      " 時刻表示フォーマット
 set trash                                     " ゴミ箱機能を有効化
 set undolevels=100                            " 元に戻せる変更の最大数
 set vicmd=vim                                 " ファイル編集時に使用するエディタ
-set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}  " カラム表示設定
+                                              " カラム表示設定
+set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp                                   " Vimヘルプ形式を使用
 set wildmenu                                  " コマンドライン補完を有効化
 
@@ -55,36 +57,51 @@ endif
 " カスタムコマンド定義
 " command! debug echo %d %m 2> /dev/null
 
-command! search find . -name "%a" %m 2> /dev/null   " ファイル検索
-command! concat cat %f > %d/concat.%c               " ファイル結合
-command! df df -h %m 2> /dev/null                   " ディスク使用量表示
-command! zip zip -r %f.zip %f -x "*.DS_Store"       " ZIP圧縮（.DS_Store除外）
-command! run !! ./%f                                " ファイル実行
-command! make !!make %a                             " make実行
-command! look vi "+grep %a"                      " Vimでgrep実行
-command! reload :write | restart                    " 設定再読み込み
+" ファイル検索
+command! search find . -name "%a" %m 2> /dev/null
+
+" ファイル結合
+command! concat cat %f > %d/concat.%c
+
+" ディスク使用量表示
+command! df df -h %m 2> /dev/null
+
+" ZIP圧縮（.DS_Store除外）
+command! zip zip -r %f.zip %f -x "*.DS_Store"
+
+" ファイル実行
+command! run !! ./%f
+
+" make実行
+command! make !!make %a
+
+" Vimでgrep実行
+command! look vi "+grep %a"
+
+" 設定再読み込み
+command! reload :write | restart
 
 " エディタ別コマンド設定
 if executable('mvim')
   " MacVim使用時
-  command! config :!mvim --remote-tab-silent $MYVIFMRC  " 設定ファイル編集
-  command! diff :!mvim -d %f %F                         " ファイル差分表示
+  command! config :!mvim --remote-tab-silent $MYVIFMRC
+  command! diff :!mvim -d %f %F
 elseif executable('gvim')
   " GVim使用時
-  command! config :!gvim --remote-tab-silent $MYVIFMRC  " 設定ファイル編集
-  command! diff :!gvim -d %f %F                         " ファイル差分表示
+  command! config :!gvim --remote-tab-silent $MYVIFMRC
+  command! diff :!gvim -d %f %F
 else
   " 標準Vi使用時
-  command! config :write | exe ':!vi $MYVIFMRC' | restart  " 設定ファイル編集
-  command! diff :!vi -d %f %F                              " ファイル差分表示
+  command! config :write | exe ':!vi $MYVIFMRC' | restart
+  command! diff :!vi -d %f %F
 endif
 
 " キーマッピング設定
-nnoremap <space> t      " スペースキーでタグ切り替え
-nnoremap J :concat<cr>  " J でファイル結合
-nnoremap t :shell<cr>   " t でシェル起動
-nnoremap V v            " V で選択モード
-nnoremap v :view<cr>    " v でプレビュー表示
+nnoremap <space> t
+nnoremap J :concat<cr>
+nnoremap t :shell<cr>
+nnoremap V v
+nnoremap v :view<cr>
 
 " OS別ファイルオープン設定
 if executable('open')
@@ -108,21 +125,22 @@ endif
 " OS別クリップボード連携設定
 if executable('pbcopy')
   " macOS環境
-  nnoremap yp :!printf %d | pbcopy<cr>      " ディレクトリパスをコピー
-  nnoremap yf :!printf %c:p | pbcopy<cr>    " ファイルパスをコピー
+  nnoremap yp :!printf %d | pbcopy<cr>
+  nnoremap yf :!printf %c:p | pbcopy<cr>
 elseif executable('clip.exe')
   " Windows/WSL環境
-  nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>  " ディレクトリパスをコピー
-  nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>  " ファイルパスをコピー
+  nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
+  nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
 elseif executable('wl-copy')
   " Linux（Wayland）環境
-  nnoremap yp :!echo %d | wl-copy<cr>       " ディレクトリパスをコピー
-  nnoremap yf :!echo %c:p | wl-copy<cr>     " ファイルパスをコピー
+  nnoremap yp :!echo %d | wl-copy<cr>
+  nnoremap yf :!echo %c:p | wl-copy<cr>
 endif
 
 " macOS Quick Lookプレビュー
 if executable('qlmanage')
-  nnoremap q :!qlmanage -p %f > /dev/null 2>&1<cr>  " q でQuick Lookプレビュー
+  " q でQuick Lookプレビュー
+  nnoremap q :!qlmanage -p %f > /dev/null 2>&1<cr>
 endif
 
 " エディタ起動設定
@@ -145,11 +163,11 @@ vnoremap ; :
 vnoremap : ;
 
 " 隠しファイル表示切り替え
-nnoremap . zo    " . で隠しファイル表示
-nnoremap .. zm   " .. で隠しファイル非表示
+nnoremap . zo
+nnoremap .. zm
 
 " ペイン間移動
-nnoremap <Tab> <C-W>w  " Tab でペイン切り替え
+nnoremap <Tab> <C-W>w
 
 " 初回実行時にプレビューモードで開始
 view

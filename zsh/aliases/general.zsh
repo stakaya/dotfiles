@@ -10,7 +10,7 @@ alias weather='curl -H "Accept-Language: ja" wttr.in/tokyo'
 
 # プロジェクト内ファイル検索
 # .gitディレクトリを除外してgrep検索を実行
-alias look='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
+alias search='find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages $1 --color'
 
 # サフィックスエイリアス設定
 # ファイル拡張子に応じて自動的にアプリケーションを起動

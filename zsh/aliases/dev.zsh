@@ -16,4 +16,4 @@ alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Nam
 
 # tmux起動設定
 # UTF-8サポート（-u）と256色対応（-2）を有効化
-alias tmux='tmux -u -2'   
+alias tmux='tmux -u -2'

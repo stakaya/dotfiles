@@ -65,7 +65,7 @@ export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 
 # batを使用したファイルプレビュー設定
-export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header --line-range :100 {}"'
 
 # Alacritty起動時のtmux自動セッション管理（キャッシュ最適化）
 # Alacrittyターミナル起動時に既存のtmuxセッションに接続または新規作成
@@ -102,6 +102,11 @@ fi
 # 開発ツール、Git、一般コマンドのエイリアスを一括読み込み
 for alias_file in $HOME/dotfiles/zsh/aliases/*.zsh; do
   source $alias_file
+done
+
+# 関数設定ファイルの読み込み 
+for function_file in $HOME/dotfiles/zsh/functions/*.zsh; do
+  source $function_file
 done
 
 # カスタムウィジェットの登録
