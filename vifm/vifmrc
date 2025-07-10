@@ -151,7 +151,6 @@ else
 endif
 
 " セミコロンとコロンのキーバインド入れ替え
-" セミコロンでコマンド実行、コロンで前回のペインに移動
 nnoremap ; :
 nnoremap : ;
 vnoremap ; :
