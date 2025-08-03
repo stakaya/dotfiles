@@ -95,3 +95,5 @@ fabric.properties
 
 # ビルドされたVSCode拡張機能
 *.vsix
+
+**/.claude/settings.local.json
