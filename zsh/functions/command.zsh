@@ -38,6 +38,10 @@ claude-cli() {
 }
 
 # OpenAI GPT API
+# 事前準備:
+# brew install pipx
+# pipx ensurepath
+# pipx install openai
 codex-cli() {
   # 使い方: codex-cli input.md "指示文" > output.md
   if [ $# -lt 2 ]; then
