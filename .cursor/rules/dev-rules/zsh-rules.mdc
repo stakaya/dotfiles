@@ -1,13 +1,13 @@
 ---
-description: 
-globs: 
+description:
+globs:
 alwaysApply: false
 ---
 
 ---
 
 description: Apply this rule to the entire repository
-globs: 
+globs:
 alwaysApply: true
 
 ---
@@ -32,13 +32,8 @@ $HOME/
     │   ├── git.zsh        # Gitコマンド用エイリアス
     │   ├── system.zsh     # システム操作用エイリアス
     │   └── project.zsh    # プロジェクト固有のエイリアス
-    ├── functions/         # カスタム関数
-    │   ├── git-helpers/   # Git操作補助関数
-    │   ├── utils/         # 汎用ユーティリティ関数
-    │   └── prompt/        # プロンプト関連の関数
-    ├── completions/       # 補完定義
-    ├── plugins/           # プラグイン（手動管理の場合）
-    └── themes/            # テーマ設定
+    └─── functions/        # カスタム関数
+        └─── command.zsh   # コマンド関数
 ```
 
 ### 基本的な設定ファイル構成
@@ -184,14 +179,14 @@ alias di='docker images'
 ### 関数の例
 
 ```zsh
-# ~/.zsh/functions/utils/mkcd.zsh
+# ~/.zsh/functions/command.zsh
 # ディレクトリを作成して移動する
 mkcd() {
     if [[ -z "$1" ]]; then
         echo "Usage: mkcd <directory>" >&2
         return 1
     fi
-    
+
     mkdir -p "$1" && cd "$1"
 }
 
@@ -199,12 +194,12 @@ mkcd() {
 # マージ済みのローカルブランチを削除する
 git_clean_branches() {
     local current_branch=$(git rev-parse --abbrev-ref HEAD)
-    
+
     if [[ "$current_branch" != "main" && "$current_branch" != "master" ]]; then
         echo "Please checkout main or master branch first" >&2
         return 1
     fi
-    
+
     git branch --merged | grep -v "\*" | grep -v "master" | grep -v "main" | xargs -n 1 git branch -d
     echo "Merged branches have been removed"
 }
@@ -216,12 +211,12 @@ extract() {
         echo "Usage: extract <file>" >&2
         return 1
     fi
-    
+
     if [[ ! -f "$1" ]]; then
         echo "'$1' is not a valid file" >&2
         return 1
     fi
-    
+
     case "$1" in
         *.tar.bz2) tar xjf "$1" ;;
         *.tar.gz)  tar xzf "$1" ;;

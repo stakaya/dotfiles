@@ -186,3 +186,8 @@ function extract() {
     *.tar) tar xvf $1;;
   esac
 }
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/s.takaya/.lmstudio/bin"
+# End of LM Studio CLI section
+
