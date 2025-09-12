@@ -1,6 +1,5 @@
-
 # vimgrep
-look() {
+function look() {
   if [ -z "$1" ]; then
     echo "Usage: look <search_word>"
     return 1
@@ -8,8 +7,30 @@ look() {
   vi "+grep $1"
 }
 
+function space_widget() {
+  # when inptting spack key it changing directory
+  if [[ "${BUFFER}" == " " ]]; then
+    fzf-cd-widget
+  elif [[ "${BUFFER}" == "vi " || "${BUFFER}" == "vim " ]]; then
+    fzf-file-widget
+  else
+    zle self-insert
+  fi
+}
+
+function extract() {
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf $1;;
+    *.zip) unzip $1;;
+    *.tar.bz2|*.tbz) tar xjvf $1;;
+    *.gz) gzip -d $1;;
+    *.bz2) bzip2 -dc $1;;
+    *.tar) tar xvf $1;;
+  esac
+}
+
 # Anthropic Claude API
-claude-cli() {
+function claude-cli() {
   # 使い方: claude-cli input.md "指示文" > output.md
   if [ $# -lt 2 ]; then
     echo "Usage: claude-cli <input-file> <instruction>" >&2
@@ -42,7 +63,7 @@ claude-cli() {
 # brew install pipx
 # pipx ensurepath
 # pipx install openai
-codex-cli() {
+function codex-cli() {
   # 使い方: codex-cli input.md "指示文" > output.md
   if [ $# -lt 2 ]; then
     echo "Usage: codex-cli <input-file> <instruction>"
