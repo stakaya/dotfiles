@@ -8,8 +8,10 @@ set notitle      " ウィンドウタイトルを設定しない
 " OS別フォント・表示設定
 if has('mac')
   " macOS環境設定
-  set guifontwide=Menlo:h14      " 全角文字用フォント
-  set guifont=Menlo\ Regular:h14 " 半角文字用フォント
+  if !exists("g:neovide")
+    set guifontwide=Menlo:h14      " 全角文字用フォント
+    set guifont=Menlo\ Regular:h14 " 半角文字用フォント
+  endif
 
   " Command+[ で前の位置、Command+] で次の位置に移動
   nnoremap <D-[> g;
@@ -31,7 +33,9 @@ endif
 
 " タブラベル設定
 " %M: 変更フラグ、%t: ファイル名
-set guitablabel=%M%t
+if !exists("g:neovide")
+  set guitablabel=%M%t
+endif
 
 " GUI要素の非表示設定
 set guioptions-=T  " ツールバーを非表示
@@ -50,12 +54,20 @@ endif
 
 " IME自動制御設定
 " 挿入モード終了時にIMEを自動的にオフにする
-augroup InsModeAu
-  autocmd!
-  autocmd InsertEnter,CmdwinEnter * set noimdisable
-  autocmd InsertLeave,CmdwinLeave * set imdisable
-  autocmd InsertEnter,InsertLeave * set iminsert=0
-augroup END
+if exists("g:neovide")
+  augroup InsModeAu
+    autocmd!
+    autocmd InsertEnter * let g:neovide_input_ime = v:true
+    autocmd InsertLeave * let g:neovide_input_ime = v:false
+  augroup END
+else
+  augroup InsModeAu
+    autocmd!
+    autocmd InsertEnter,CmdwinEnter * set noimdisable
+    autocmd InsertLeave,CmdwinLeave * set imdisable
+    autocmd InsertEnter,InsertLeave * set iminsert=0
+  augroup END
+endif
 
 " タブ移動キーバインド
 noremap <C-S-Tab> :tabprev<CR>
