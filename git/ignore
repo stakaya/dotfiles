@@ -1,6 +1,9 @@
 # Git グローバル除外設定ファイル
 # 参考: https://git-scm.com/docs/gitignore
 
+# node modules
+node_modules/
+
 # ログファイル
 *.log
 .trash/
@@ -97,4 +100,9 @@ fabric.properties
 # ビルドされたVSCode拡張機能
 *.vsix
 
+# AI
 **/.claude/settings.local.json
+.cursorignore
+.cursorindexingignore
+.specstory/
+.specstory/**
