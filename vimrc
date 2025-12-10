@@ -26,14 +26,14 @@ if has('vim_starting')
   let &t_SR .= "\e[4 q" " 置換モード：下線カーソル
 
   " dein.vimプラグインマネージャーのパス設定
-  if has('win32') || has('win64')
+  if has('win64')
     set runtimepath+=$HOME\vimfiles\plugins\repos\github.com\Shougo\dein.vim
   else
     set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim/
   endif
 endif
 
-if has('win32') || has('win64')
+if has('win64')
   let s:plugin_config_dir = expand($HOME.'\vimfiles\plugins')
   let s:plugin_install_dir = s:plugin_config_dir
 
@@ -221,7 +221,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 " ターミナル
-if has('win32') || has('win64')
+if has('win64')
   " ubuntuをpowershellに変更可能未指定の場合cmd.exeが起動する
   noremap <silent> <leader>t :terminal ++close ++curwin ubuntu<CR>
 else

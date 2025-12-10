@@ -58,7 +58,7 @@ endif
 " command! debug echo %d %m 2> /dev/null
 
 " ファイル検索
-command! search find . -name "%a" %m 2> /dev/null
+command! search find ./ -type f -not -path "*/.git/*" | xargs grep --no-messages "%a" %m 2> /dev/null
 
 " ファイル結合
 command! concat cat %f > %d/concat.%c

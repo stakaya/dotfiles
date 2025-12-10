@@ -9,7 +9,7 @@ set inccommand=split     " 置換時にリアルタイムプレビューを分�
 if exists('g:vscode')
   " VSCode Neovim拡張使用時
   source $HOME/dotfiles/vimrc.keymap
-elseif has('win32') || has('win64')
+elseif has('win64')
   " Windows環境
   source $HOME\_vimrc
   let g:python3_host_prog=$HOME.'\Programs\Python\Python39\python'

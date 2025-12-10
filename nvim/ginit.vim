@@ -1,4 +1,4 @@
-if has('win32') || has('win64')
+if has('win64')
 	" Windows環境：ホームディレクトリのgvimrcを読み込み
 	source $HOME\_gvimrc
 else
