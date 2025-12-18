@@ -43,7 +43,7 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # Fzf option
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
-export FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
+export FZF_DEFAULT_OPTS='--preview-window=border-none --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
 export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
 
@@ -100,7 +100,15 @@ stty stop undef
 stty start undef
 
 # prompt
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
+
+if [ -f ~/.fzf/key-bindings.zsh ]; then
+	  source ~/.fzf/key-bindings.zsh
+fi
+
+if [ -f ~/.fzf/completion.zsh ]; then
+	  source ~/.fzf/completion.zsh
+fi
 
 function git_switch() {
   local branches branch
