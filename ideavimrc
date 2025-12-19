@@ -1,25 +1,38 @@
+" IdeaVim設定ファイル（IntelliJ IDEA用Vim拡張）
+" 参考: https://github.com/JetBrains/ideavim
+" 参考: https://github.com/JetBrains/ideavim/wiki
+
+" 共通キーマッピング設定を読み込み
 source ~/dotfiles/vimrc.keymap
 
-inoremap <C-[> <Esc>
-vnoremap <C-[> <Esc>
-nnoremap gd :<C-u>action GotoDeclaration<CR>
-nnoremap g; :<C-u>action JumpToLastChange<CR>
-nnoremap g, :<C-u>action JumpToNextChange<CR>
-nnoremap H :<C-u>action Back<CR>
-nnoremap L :<C-u>action Forward<CR>
-nnoremap == :<C-u>action ReformatCode<CR>
-vnoremap == :<C-u>action ReformatCode<CR>
-nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>
-nnoremap <Space>; :<C-u>action RunAnything<CR>
-nnoremap <Space>g :<C-u>action FindInPath<CR>
-vnoremap <Space>g :<C-u>action FindInPath<CR>
-nnoremap <Space>* :<C-u>action Find<CR>
-vnoremap <Space>* :<C-u>action Find<CR>
-nnoremap gcc :<C-u>action CommentByLineComment<CR>
-vnoremap gcc :<C-u>action CommentByLineComment<CR>
-nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>
-nnoremap <Space>r :<C-u>action ReplaceInPath<CR>
-vnoremap <Space>r :<C-u>action ReplaceInPath<CR>
+" IDE固有ナビゲーション
+nnoremap gd :<C-u>action GotoDeclaration<CR>     " 定義へジャンプ
+nnoremap g; :<C-u>action JumpToLastChange<CR>    " 最後の変更箇所へ
+nnoremap g, :<C-u>action JumpToNextChange<CR>    " 次の変更箇所へ
+nnoremap H :<C-u>action Back<CR>                 " 戻る
+nnoremap L :<C-u>action Forward<CR>              " 進む
 
-set surround
-set ideajoin
+" コード整形
+nnoremap == :<C-u>action ReformatCode<CR>        " コード整形
+vnoremap == :<C-u>action ReformatCode<CR>        " 選択範囲の整形
+
+" 検索・実行機能
+nnoremap <Space><Space> :<C-u>action SearchEverywhere<CR>  " 全体検索
+nnoremap <Space>; :<C-u>action RunAnything<CR>             " 実行メニュー
+nnoremap <Space>g :<C-u>action FindInPath<CR>              " パス内検索
+vnoremap <Space>g :<C-u>action FindInPath<CR>              " 選択範囲でパス内検索
+nnoremap <Space>* :<C-u>action Find<CR>                    " ファイル内検索
+vnoremap <Space>* :<C-u>action Find<CR>                    " 選択範囲でファイル内検索
+
+" コメント切り替え
+nnoremap gcc :<C-u>action CommentByLineComment<CR>         " 行コメント切り替え
+vnoremap gcc :<C-u>action CommentByLineComment<CR>         " 選択範囲コメント切り替え
+
+" ツールウィンドウ・置換
+nnoremap <Space>t :<C-u>action ActivateTerminalToolWindow<CR>  " ターミナル起動
+nnoremap <Space>r :<C-u>action ReplaceInPath<CR>              " パス内置換
+vnoremap <Space>r :<C-u>action ReplaceInPath<CR>              " 選択範囲でパス内置換
+
+" IdeaVimプラグイン設定
+set surround   " 囲み文字操作
+set ideajoin   " IDEA固有のjoin機能

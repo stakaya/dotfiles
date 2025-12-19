@@ -1,41 +1,46 @@
 # 遅延読み込みプラグイン
+# 参考: https://github.com/Shougo/dein.vim
 
+# eskk.vim（SKK日本語入力）
+# 参考: https://github.com/tyru/eskk.vim
 [[plugins]]
 repo = 'tyru/eskk.vim'
 on_event = 'VimEnter'
 hook_add = '''
   if has('vim_starting')
-    if has('win32') || has('win64')
-       let s:dict = expand($HOME.'\vimfiles\dict')
+    " 辞書ディレクトリの設定
+    if has('win64')
+       let s:dictionary_dir = expand($HOME.'\vimfiles\dict')
     else
-       let s:dict = expand('~/.vim/dict')
+       let s:dictionary_dir = expand('~/.vim/dict')
     endif
 
-    let g:eskk#marker_henkan = "💬"
-    let g:eskk#marker_henkan_select = "✅"
-    let g:eskk#marker_jisyo_touroku = "📖"
-    let g:eskk#egg_like_newline = 1
-    let g:eskk#dictionary = { 'path': s:dict.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
-    let g:eskk#large_dictionary = { 'path': s:dict.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+    " SKK入力モードマーカー設定
+    let g:eskk#marker_henkan = "💬"          " 変換モード
+    let g:eskk#marker_henkan_select = "✅"   " 変換選択モード
+    let g:eskk#marker_jisyo_touroku = "📖"   " 辞書登録モード
 
+    " Egg like newline（改行時の動作設定）
+    let g:eskk#egg_like_newline = 1
+
+    " ユーザー辞書設定（個人用単語）
+    let g:eskk#dictionary = { 'path': s:dictionary_dir.'/SKK-JISYO.user', 'sorted': 0, 'encoding': 'utf-8' }
+    " 大辞書設定（基本辞書）
+    let g:eskk#large_dictionary = { 'path': s:dictionary_dir.'/SKK-JISYO.L', 'sorted': 1,	'encoding': 'euc-jp' }
+
+    " eskk自動コマンド設定
     augroup eskk
       autocmd!
       autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
     augroup END
 
+    " SKK入力切り替えキーマップ
     imap <C-J> <Plug>(eskk:toggle)
     cmap <C-J> <Plug>(eskk:toggle)
     nmap <C-J> i<Plug>(eskk:toggle)
     imap JJ <Plug>(eskk:toggle)
     nmap <space>j i<Plug>(eskk:toggle)
   endif
-'''
-
-[[plugins]]
-repo = 'koron/dicwin-vim'
-on_event = 'VimEnter'
-hook_source = '''
-  let g:dicwin_mapleader = "\<C-k>"
 '''
 
 [[plugins]]
@@ -64,11 +69,11 @@ hook_source = '''
 [[plugins]]
 repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
-on_ft = ['md','markdown']
+on_ft = ['md', 'markdown']
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
-on_ft = ['md','markdown']
+on_ft = ['md', 'markdown']
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
@@ -83,18 +88,6 @@ repo = 'cespare/vim-toml'
 on_ft = ['conf', 'toml']
 
 [[plugins]]
-repo = 'udalov/kotlin-vim'
-on_ft = ['kt', 'kotlin']
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['asp', 'aspx', 'erb', 'html', 'jsp', 'jsx', 'php', 'svelte', 'tsx', 'vue', 'xhtml', 'xml']
-
-[[plugins]]
-repo = 'evanleck/vim-svelte'
-on_ft = ['svelte']
-
-[[plugins]]
 repo = 'mattn/webapi-vim'
 on_event = 'VimEnter'
 
@@ -105,22 +98,39 @@ on_cmd = 'Gist'
 
 [[plugins]]
 repo = 'madox2/vim-ai'
-on_cmd = ['AI', 'AIEdit', 'AIChat', 'AIRedo', 'AINewChat']
-hook_add = '''
+on_event = 'VimEnter'
+hook_source = '''
   let g:vim_ai_token_file_path = '~/.config/openai.token'
-  nnoremap <silent> <space>ai :AI<CR>
+  xnoremap <space>edit :AIEdit<space>
   xnoremap <silent> <space>ai :AI<CR>
   xnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
-  nnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
-  xnoremap <space>edit :AIEdit<space>
-  nnoremap <space>edit :AIEdit<space>
   xnoremap <silent> <space><CR> :AIChat<CR>
   nnoremap <silent> <space><CR> :AIChat<CR>
+  nnoremap <silent> <space>img :AIImage<space>
+  xnoremap <silent> <space>img :AIImage<CR>
+
+  " custom command that provides a code review for selected code block
+  function! CodeReviewFn(range) range
+    let l:prompt = "programming syntax is " . &filetype . ", review the code below:\n" . "レビューの言語は日本語でお願いします。\n"
+    let l:config = {
+    \  "options": {
+    \    "initial_prompt": ">>> system\nyou are a clean code expert",
+    \  },
+    \}
+    exe a:firstline.",".a:lastline . "call vim_ai#AIChatRun(a:range, l:config, l:prompt)"
+  endfunction
+  command! -range -nargs=? AICodeReview <line1>,<line2>call CodeReviewFn(<range>)
 '''
 
 [[plugins]]
 repo = 'shinchu/hz_ja.vim'
 on_event = 'VimEnter'
+hook_source = '''
+  nnoremap <silent><space>zh :HzjaConvert han_eisu<CR>
+  vnoremap <silent><space>zh :HzjaConvert han_eisu<CR>
+  nnoremap <silent><space>hz :HzjaConvert zen_kana<CR>
+  vnoremap <silent><space>hz :HzjaConvert zen_kana<CR>
+'''
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -145,43 +155,14 @@ hook_source = '''
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 on_event = 'VimEnter'
-hook_add = '''
-  let g:lsp_settings = {
-  \  'pylsp-all': {
-  \    'workspace_config': {
-  \      'pylsp': {
-  \        'configurationSources': ['flake8'],
-  \        'plugins': {
-  \          'flake8': {
-  \            'enabled': 1
-  \          },
-  \          'mccabe': {
-  \            'enabled': 0
-  \          },
-  \          'pycodestyle': {
-  \            'enabled': 0
-  \          },
-  \          'pyflakes': {
-  \            'enabled': 0
-  \          },
-  \        }
-  \      }
-  \    }
-  \  }
-  \}
-'''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-icons'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'mattn/vim-sonictemplate'
-on_event = 'VimEnter'
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete.vim'
-on_ft = ['css', 'html', 'java', 'javascript', 'kotlin', 'php', 'python', 'sh', 'svlete', 'swift', 'toml', 'vim']
+on_ft = ['css', 'html', 'javascript', 'python', 'sh', 'toml', 'vim']
 hook_source = '''
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -190,4 +171,4 @@ hook_source = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['css', 'html', 'java', 'javascript', 'kotlin', 'php', 'python', 'sh', 'svlete', 'swift', 'toml', 'vim']
+on_ft = ['css', 'html', 'javascript', 'python', 'sh', 'toml', 'vim']

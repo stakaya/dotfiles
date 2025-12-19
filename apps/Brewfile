@@ -1,49 +1,32 @@
-tap "browsh-org/browsh"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
-brew "bat"
-brew "openjdk"
-brew "curl"
-brew "fd"
-brew "fzf"
-brew "gcc"
-brew "git-lfs"
-brew "jq"
-brew "lazygit"
-brew "neovim"
-brew "ripgrep"
-brew "starship"
-brew "tmux"
-brew "tree"
-brew "vifm"
-cask "alacritty"
-cask "brave-browser"
-cask "docker"
-cask "google-japanese-ime"
-cask "intellij-idea"
-cask "macvim"
-cask "slack"
-cask "visual-studio-code"
-vscode "asvetliakov.vscode-neovim"
-vscode "bradlc.vscode-tailwindcss"
-vscode "dart-code.dart-code"
-vscode "dart-code.flutter"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-ceintl.vscode-language-pack-ja"
-vscode "ms-python.debugpy"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode-remote.remote-wsl"
-vscode "ms-vscode-remote.vscode-remote-extensionpack"
-vscode "ms-vscode.remote-explorer"
-vscode "ms-vscode.remote-server"
-vscode "rokoroku.vscode-theme-darcula"
-vscode "svelte.svelte-vscode"
-vscode "xdebug.php-debug"
+# Homebrew Bundle設定ファイル
+# 参考: https://brew.sh/
+# 参考: https://github.com/Homebrew/homebrew-bundle
+
+# Homebrewリポジトリ（Tap）
+tap "homebrew/bundle"          # Bundle機能
+tap "homebrew/cask"            # GUI アプリケーション
+tap "homebrew/cask-versions"   # 複数バージョンのアプリ
+tap "homebrew/core"            # コアパッケージ
+
+# コマンドラインツール
+brew "bat"       # cat代替（シンタックスハイライト付き）
+brew "openjdk"   # OpenJDK Java開発キット
+brew "curl"      # データ転送ツール
+brew "fd"        # find代替（高速検索）
+brew "fzf"       # ファジーファインダー
+brew "git-lfs"   # Git Large File Storage
+brew "jq"        # JSON処理ツール
+brew "lazygit"   # Git用TUIクライアント
+brew "neovim"    # 現代的なVim
+brew "ripgrep"   # 高速grep代替
+brew "starship"  # 高速プロンプト
+brew "tmux"      # ターミナルマルチプレクサ
+brew "tree"      # ディレクトリ構造表示
+brew "vifm"      # Vimライクファイルマネージャー
+
+# GUI アプリケーション
+cask "alacritty"          # 高速ターミナルエミュレータ
+cask "brave-browser"      # プライバシー重視Webブラウザ
+cask "google-japanese-ime" # Google日本語入力
+cask "intellij-idea"      # Java統合開発環境
+cask "macvim"             # macOS用Vim

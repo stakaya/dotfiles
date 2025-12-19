@@ -10,9 +10,6 @@
 					"PackageIdentifier" : "Brave.Brave"
 				},
 				{
-					"PackageIdentifier" : "Dropbox.Dropbox"
-				},
-				{
 					"PackageIdentifier" : "Git.Git"
 				},
 				{
@@ -20,9 +17,6 @@
 				},
 				{
 					"PackageIdentifier" : "Alacritty.Alacritty"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.VisualStudioCode"
 				}
 			],
 			"SourceDetails" :

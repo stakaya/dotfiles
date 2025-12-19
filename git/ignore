@@ -1,19 +1,26 @@
+# Git グローバル除外設定ファイル
+# 参考: https://git-scm.com/docs/gitignore
+
+# node modules
+node_modules/
+
+# ログファイル
 *.log
 .trash/
 
 ### macOS ###
-# General
+# 一般的なmacOSシステムファイル
 .DS_Store
 .AppleDouble
 .LSOverride
 
-# Icon must end with two \r
+# アイコンファイル（末尾に2つの\rが必要）
 Icon
 
-# Thumbnails
+# サムネイル
 ._*
 
-# Files that might appear in the root of a volume
+# ボリュームルートに作成される可能性のあるファイル
 .DocumentRevisions-V100
 .fseventsd
 .Spotlight-V100
@@ -22,7 +29,7 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
-# Directories potentially created on remote AFP share
+# リモートAFP共有で作成される可能性のあるディレクトリ
 .AppleDB
 .AppleDesktop
 Network Trash Folder
@@ -30,33 +37,33 @@ Temporary Items
 .apdisk
 
 ### Windows ###
-# Windows thumbnail cache files
+# Windowsサムネイルキャッシュファイル
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 
-# Dump file
+# ダンプファイル
 *.stackdump
 
-# Folder config file
+# フォルダ設定ファイル
 [Dd]esktop.ini
 
-# Recycle Bin used on file shares
+# ファイル共有で使用されるごみ箱
 $RECYCLE.BIN/
 
-# Windows Installer files
+# Windowsインストーラーファイル
 *.cab
 *.msi
 *.msix
 *.msm
 *.msp
 
-# Windows shortcuts
+# Windowsショートカット
 *.lnk
 
-### Intellij ###
-# Project format
+### IntelliJ IDEA ###
+# プロジェクト形式
 .idea/
 *.iml
 *.ipr
@@ -66,28 +73,36 @@ out/
 # CMake
 cmake-build-*/
 
-# mpeltonen/sbt-idea plugin
+# mpeltonen/sbt-idea プラグイン
 .idea_modules/
 
-# JIRA plugin
+# JIRA プラグイン
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
+# Crashlytics プラグイン（Android Studio・IntelliJ用）
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-### VisualStudioCode ###
+### Visual Studio Code ###
 .vscode/*
+!.vscode/mcp.json
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
-# Local History for Visual Studio Code
+# Visual Studio Code ローカル履歴
 .history/
 
-# Built Visual Studio Code Extensions
+# ビルドされたVSCode拡張機能
 *.vsix
+
+# AI
+**/.claude/settings.local.json
+.cursorignore
+.cursorindexingignore
+.specstory/
+.specstory/**

@@ -1,63 +1,77 @@
 # 起動時に読み込むプラグイン
+# 参考: https://github.com/Shougo/dein.vim
+
+# Darculaカラースキーム
+# 参考: https://github.com/blueshirts/darcula
 [[plugins]]
 repo = 'blueshirts/darcula'
 hook_add = '''
   colorscheme darcula
 '''
 
+# ライトライン（ステータスライン）
+# 参考: https://github.com/itchyny/lightline.vim
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
   let g:lightline = { 'colorscheme': 'wombat' }
 '''
 
+# フェイククリップボード（クリップボード機能拡張）
+# 参考: https://github.com/kana/vim-fakeclip
 [[plugins]]
 repo = 'kana/vim-fakeclip'
 
+# fzf（ファジーファインダー）本体
+# 参考: https://github.com/junegunn/fzf
 [[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
 merged = 0
 
+# fzf.vim（Vim用fzf拡張）
+# 参考: https://github.com/junegunn/fzf.vim
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-  let $FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
-  let $FZF_DEFAULT_OPTS='--preview-window=border-none --no-scrollbar --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
-  let $FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
-  let $FZF_CTRL_T_OPTS='--preview-window=+8,border-none --preview "bat --color=always --style=header --line-range :100 {}"'
-
-  let g:fzf_layout = {
-  \  'window': {
-  \    'width': 0.8,
-  \    'height': 0.6,
-  \    'border': 'none'
-  \  }
-  \ }
-
+  " キーマッピング設定
   nnoremap <silent> <space>; :Commands<CR>
   nnoremap <silent> <space>w :Buffers<CR>
   nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
 
+  " ripgrep検索設定
   if executable('rg')
     nnoremap <silent> <space>g "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
     vnoremap <silent> <space>g "zy:let @/ = @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
   endif
 
+  " Git対応ファイル検索関数
   function! FzfOmniFiles()
-	  let is_git = system('git status')
-	  if v:shell_error
-		  :Files
-	  else
+	  " Git状態チェックのキャッシュ機能（現在のディレクトリ用）
+	  let l:git_dir = expand('%:p:h')
+	  let l:cache_key = 'fzf_git_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
+
+	  if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
+		  let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
+		  let g:[l:cache_key] = !v:shell_error
+		  let g:[l:cache_key . '_time'] = localtime()
+	  endif
+
+	  if g:[l:cache_key]
 		  :GitFiles
+	  else
+		  :Files
 	  endif
   endfunction
 '''
 
+# Unite.vim（統合インターフェース）
+# 参考: https://github.com/Shougo/unite.vim
 [[plugins]]
 repo = 'Shougo/unite.vim'
 hook_add = '''
+  " ripgrepを使用したgrep設定
   if executable('rg')
   	let g:unite_source_grep_command = 'rg'
   	let g:unite_source_grep_default_opts = '-n --no-heading --color never'
@@ -65,38 +79,56 @@ hook_add = '''
   endif
 '''
 
+# VimFiler（ファイルエクスプローラー）
+# 参考: https://github.com/Shougo/vimfiler
 [[plugins]]
 repo = 'Shougo/vimfiler'
 depends = 'Shougo/unite.vim'
 hook_add = '''
+  " デフォルトエクスプローラーとして設定
   let g:vimfiler_as_default_explorer=1
+  " セーフモードを無効化
   let g:vimfiler_safe_mode_by_default=0
+  " netrwのリストスタイル設定
   let g:netrw_liststyle=3
+  " ファイルエクスプローラー起動キーマップ
   nnoremap <silent> <space>e :VimFilerExplorer<CR>
 '''
 
+# vim-matchup（括弧マッチング拡張）
+# 参考: https://github.com/andymass/vim-matchup
 [[plugins]]
 repo = 'andymass/vim-matchup'
 
+# tcomment（コメント切り替え）
+# 参考: https://github.com/tomtom/tcomment_vim
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 hook_add = '''
+  " コメント切り替えキーマップ
   nnoremap <silent> <D-/> :TComment<CR>
   nnoremap <silent> <C-_> :TComment<CR>
   vnoremap <silent> <D-/> :TComment<CR>
   vnoremap <silent> <C-_> :TComment<CR>
 '''
 
+# vim-abolish（単語変換・置換）
+# 参考: https://github.com/tpope/vim-abolish
 [[plugins]]
 repo = 'tpope/vim-abolish'
 hook_add = '''
+  " 単語検索と置換のキーマップ
   nnoremap <silent>* "zyiw:let @/ = @z<CR>:S/<C-r>/<CR>
   vnoremap <silent>* "zy:let @/ = @z<CR>:S/<C-r>/<CR>
 '''
 
+# vim-surround（囲み文字操作）
+# 参考: https://github.com/tpope/vim-surround
 [[plugins]]
 repo = 'tpope/vim-surround'
 
+# GitHub Copilot（AI補完）
+# 参考: https://github.com/github/copilot.vim
 # [[plugins]]
 # repo = 'github/copilot.vim'
 # hook_add = '''
