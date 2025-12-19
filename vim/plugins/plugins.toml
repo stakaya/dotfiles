@@ -22,50 +22,6 @@ hook_add = '''
 [[plugins]]
 repo = 'kana/vim-fakeclip'
 
-# fzf（ファジーファインダー）本体
-# 参考: https://github.com/junegunn/fzf
-[[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all'
-merged = 0
-
-# fzf.vim（Vim用fzf拡張）
-# 参考: https://github.com/junegunn/fzf.vim
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
-hook_add = '''
-  " キーマッピング設定
-  nnoremap <silent> <space>; :Commands<CR>
-  nnoremap <silent> <space>w :Buffers<CR>
-  nnoremap <silent> <space><space> :call FzfOmniFiles()<CR>
-
-  " ripgrep検索設定
-  if executable('rg')
-    nnoremap <silent> <space>g "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
-    vnoremap <silent> <space>g "zy:let @/ = @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
-  endif
-
-  " Git対応ファイル検索関数
-  function! FzfOmniFiles()
-	  " Git状態チェックのキャッシュ機能（現在のディレクトリ用）
-	  let l:git_dir = expand('%:p:h')
-	  let l:cache_key = 'fzf_git_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
-
-	  if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
-		  let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
-		  let g:[l:cache_key] = !v:shell_error
-		  let g:[l:cache_key . '_time'] = localtime()
-	  endif
-
-	  if g:[l:cache_key]
-		  :GitFiles
-	  else
-		  :Files
-	  endif
-  endfunction
-'''
-
 # Unite.vim（統合インターフェース）
 # 参考: https://github.com/Shougo/unite.vim
 [[plugins]]
