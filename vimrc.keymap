@@ -2,14 +2,6 @@
 " 参考: https://vim-jp.org/
 " 参考: https://qiita.com/tags/vim
 
-" 日本語キーボード互換マッピング
-nnoremap ( *
-nnoremap ! ~
-nnoremap & ^
-vnoremap ( *
-vnoremap ! ~
-vnoremap & ^
-
 " セミコロンとコロンのキーバインド入れ替え
 nnoremap ; :
 nnoremap : ;

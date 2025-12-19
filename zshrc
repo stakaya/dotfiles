@@ -53,10 +53,6 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 # 参考: https://github.com/rupa/z
 [ -f ~/z/z.sh ] && source ~/z/z.sh
 
-# fzf（ファジーファインダー）の初期化
-# 参考: https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # fzf設定オプション
 # ripgrepを使用してファイル検索を高速化
 export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
@@ -115,7 +111,6 @@ done
 zle -N git_add
 zle -N git_fetch
 zle -N git_switch
-zle -N space_widget
 
 # Keybind
 bindkey -v
