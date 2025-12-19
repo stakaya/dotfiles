@@ -126,12 +126,3 @@ hook_add = '''
 # 参考: https://github.com/tpope/vim-surround
 [[plugins]]
 repo = 'tpope/vim-surround'
-
-# GitHub Copilot（AI補完）
-# 参考: https://github.com/github/copilot.vim
-# [[plugins]]
-# repo = 'github/copilot.vim'
-# hook_add = '''
-#   let g:copilot_no_tab_map = v:true
-#   imap <silent><script><expr> <C-Y> copilot#Accept("\<CR>")
-# '''

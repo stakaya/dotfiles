@@ -97,32 +97,6 @@ depends = 'mattn/webapi-vim'
 on_cmd = 'Gist'
 
 [[plugins]]
-repo = 'madox2/vim-ai'
-on_event = 'VimEnter'
-hook_source = '''
-  let g:vim_ai_token_file_path = '~/.config/openai.token'
-  xnoremap <space>edit :AIEdit<space>
-  xnoremap <silent> <space>ai :AI<CR>
-  xnoremap <silent> <space>fix :AIEdit fix grammar and spelling<CR>
-  xnoremap <silent> <space><CR> :AIChat<CR>
-  nnoremap <silent> <space><CR> :AIChat<CR>
-  nnoremap <silent> <space>img :AIImage<space>
-  xnoremap <silent> <space>img :AIImage<CR>
-
-  " custom command that provides a code review for selected code block
-  function! CodeReviewFn(range) range
-    let l:prompt = "programming syntax is " . &filetype . ", review the code below:\n" . "レビューの言語は日本語でお願いします。\n"
-    let l:config = {
-    \  "options": {
-    \    "initial_prompt": ">>> system\nyou are a clean code expert",
-    \  },
-    \}
-    exe a:firstline.",".a:lastline . "call vim_ai#AIChatRun(a:range, l:config, l:prompt)"
-  endfunction
-  command! -range -nargs=? AICodeReview <line1>,<line2>call CodeReviewFn(<range>)
-'''
-
-[[plugins]]
 repo = 'shinchu/hz_ja.vim'
 on_event = 'VimEnter'
 hook_source = '''
