@@ -154,6 +154,10 @@ if executable('rg')
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
+if executable('jq')
+  noremap <silent> <leader>json :%!jq '.'<CR>
+endif
+
 " ステータスライン設定
 " 文字エンコーディング、改行コード、カーソル位置を表示
 set statusline=%{'['.(&fenc!=''?&fenc:&enc).']['.&fileformat.']'}
