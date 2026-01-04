@@ -1,6 +1,10 @@
 # Zsh設定ファイル
 # 参考: https://github.com/zdharma-continuum/zinit
 # 参考: https://zsh.sourceforge.io/
+# STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
+
+alias ls="exa"
+source ~/.config/starship/full-init.zsh
 
 ### Zinitプラグインマネージャーの自動インストール
 # Zinitが未インストールの場合は自動的にダウンロード・セットアップ
@@ -54,12 +58,12 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 [ -f ~/z/z.sh ] && source ~/z/z.sh
 
 # fzf設定オプション
-# ripgrepを使用してファイル検索を高速化
-export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
+export FZF_DEFAULT_COMMAND='fd --type f'
+export FZF_DEFAULT_OPTS='--preview-window=border-none --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
+export FZF_ALT_C_COMMAND='fd --type d'
 
 # Ctrl+Tでのファイル検索設定
-export FZF_DEFAULT_OPTS='--preview-window=border-none --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
-export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND='fd --type f'
 
 # batを使用したファイルプレビュー設定
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header --line-range :100 {}"'
