@@ -55,8 +55,22 @@ on_event = 'VimEnter'
 repo = 'tyru/open-browser.vim'
 on_event = 'VimEnter'
 hook_source = '''
-  nnoremap <silent> <space>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
-  vnoremap <silent> <space>b "zy:let @/ = @z<CR>:set hlsearch<CR>:OpenBrowserSmartSearch<Space><C-r>/<CR>
+  nnoremap <silent> <space>b "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:call <SID>OpenUrlOrSmartSearchFromSearchReg()<CR>
+  vnoremap <silent> <space>b "zy:let @/ = @z<CR>:set hlsearch<CR>:call <SID>OpenUrlOrSmartSearchFromSearchReg()<CR>
+
+  function! s:OpenUrlOrSmartSearchFromSearchReg()
+    let q = getreg('/')
+    let q = trim(q)
+
+    " URLならURLを開く
+    if q =~# '\v^https?://\S+'
+      call OpenBrowser(q)
+      return
+    endif
+
+    " URLじゃないならSmartSearch
+    execute 'OpenBrowserSmartSearch ' . q
+  endfunction
 '''
 
 [[plugins]]
