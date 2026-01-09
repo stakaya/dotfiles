@@ -1,9 +1,7 @@
 # Zsh設定ファイル
 # 参考: https://github.com/zdharma-continuum/zinit
 # 参考: https://zsh.sourceforge.io/
-# STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
-alias ls="exa"
 source ~/.config/starship/full-init.zsh
 
 ### Zinitプラグインマネージャーの自動インストール
