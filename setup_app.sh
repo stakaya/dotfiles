@@ -1,8 +1,6 @@
 #!/bin/zsh
 
-# 参考: https://www.gnu.org/software/bash/manual/
-
-DOT_FILES=(gvimrc vimrc ideavimrc vim vifm tmux.conf zsh)
+DOT_FILES=(vimrc vim vifm tmux.conf zsh)
 for file in ${DOT_FILES[@]}
 do
 	if [ ! -e ~/.$file ]; then
@@ -16,7 +14,7 @@ if [ ! -e ~/.config ]; then
 fi
 
 # link for config directory and files
-CONFIG_FILES=(nvim vifm alacritty starship.toml git)
+CONFIG_FILES=(vifm starship.toml git)
 for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/.config/$file ]; then
@@ -24,9 +22,6 @@ do
 		ln -s $HOME/dotfiles/$file $HOME/.config/$file
 	fi
 done
-
-# link dictionary file
-ln -s $HOME/dotfiles/vim/dict $HOME/dotfiles/nvim/dict
 
 # 参考: https://github.com/Shougo/dein.vim
 [ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim

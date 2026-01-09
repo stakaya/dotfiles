@@ -59,7 +59,6 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # fzf設定オプション
 export FZF_DEFAULT_COMMAND='fd --type f'
-export FZF_DEFAULT_OPTS='--preview-window=border-none --height 40% --color=fg:#d0d0d0,bg:#121212,hl:#5f87af --color=fg+:#d0d0d0,bg+:#262626,hl+:#5fd7ff --color=info:#afaf87,prompt:#d7005f,pointer:#af5fff --color=marker:#87ff00,spinner:#af5fff,header:#87afaf'
 export FZF_ALT_C_COMMAND='fd --type d'
 
 # Ctrl+Tでのファイル検索設定
@@ -67,37 +66,6 @@ export FZF_CTRL_T_COMMAND='fd --type f'
 
 # batを使用したファイルプレビュー設定
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header --line-range :100 {}"'
-
-# Alacritty起動時のtmux自動セッション管理（キャッシュ最適化）
-# Alacrittyターミナル起動時に既存のtmuxセッションに接続または新規作成
-if [[ -n "$ALACRITTY_WINDOW_ID" && ! -n $TMUX && $- == *l* ]]; then
-	# tmuxセッションを5秒間キャッシュして重複呼び出しを回避
-	local cache_file="/tmp/tmux_sessions_$$"
-	local cache_time=5
-
-	if [[ ! -f "$cache_file" ]] || [[ $(($(date +%s) - $(stat -c %Y "$cache_file" 2>/dev/null || echo 0))) -gt $cache_time ]]; then
-		tmux list-sessions 2>/dev/null > "$cache_file"
-	fi
-
-	session_list="$(cat "$cache_file" 2>/dev/null)"
-	if [[ -z "$session_list" ]]; then
-		# セッションが存在しない場合は新規作成
-		tmux new-session
-	else
-		# 新規セッション作成オプションを追加
-		create_new_session="Create New Session"
-		session_list="$session_list\n${create_new_session}:"
-		# fzfでセッションを選択
-		selected_session="$(echo $session_list | fzf | cut -d: -f1)"
-		if [[ "$selected_session" = "${create_new_session}" ]]; then
-			# 新規セッション作成
-			tmux new-session
-		elif [[ -n "$selected_session" ]]; then
-			# 既存セッションにアタッチ
-			tmux attach-session -t "$selected_session"
-		fi
-	fi
-fi
 
 # エイリアス設定ファイルの読み込み
 # 開発ツール、Git、一般コマンドのエイリアスを一括読み込み

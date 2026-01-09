@@ -1,8 +1,11 @@
 # 一般コマンド用エイリアス設定
 # 参考: https://www.gnu.org/software/coreutils/
 
+alias top='htop'
+alias cat='bat'
+
 # ファイル一覧表示（色付き）
-alias ls='ls --color'
+alias ls='eza'
 
 # 東京の天気予報を日本語で取得
 # 参考: https://wttr.in/
