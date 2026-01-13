@@ -15,7 +15,7 @@ opt.clipboard = 'unnamedplus'
 opt.inccommand = 'split'
 
 -- Python3パス設定
-g.python3_host_prog = vim.fn.substitute(vim.fn.system('which python3'), '\n', '', '')
+g.python3_host_prog = vim.fn.expand("~/.venvs/bin/python")
 
 -- True Color（24bit色）サポート
 opt.termguicolors = true
