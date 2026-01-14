@@ -9,8 +9,16 @@
 # カスタムプロンプトフォーマット
 # 2行表示でシェル情報、時刻、ディレクトリ、Git情報、実行時間を表示
 format = """
-[┌ ](bold blue)$shell$time$directory$git_branch$git_status$cmd_duration
+[┌ ](bold blue)$shell$time$directory
 [└](bold blue)$character"""
 
+[git_branch]
+disabled = true
 [git_status]
+disabled = true
+[git_commit]
+disabled = true
+[git_state]
+disabled = true
+[git_metrics]
 disabled = true
