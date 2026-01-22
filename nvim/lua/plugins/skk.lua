@@ -15,10 +15,11 @@ return {
       })
 
       local keymap = vim.keymap.set
-      local opts = { noremap = true, silent = true }
 
       keymap('i', '<C-J>', '<Plug>(skkeleton-toggle)', {})
       keymap('c', '<C-J>', '<Plug>(skkeleton-toggle)', {})
+      keymap('n', '<C-J>', 'i<Plug>(skkeleton-toggle)', {})
+      keymap('i', 'JJ', '<Plug>(skkeleton-toggle)', {})
       keymap('n', '<leader>j', 'i<Plug>(skkeleton-toggle)', {})
     end,
   },

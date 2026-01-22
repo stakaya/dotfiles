@@ -211,15 +211,6 @@ vim.api.nvim_create_user_command('Config', function()
   vim.cmd('edit $HOME/dotfiles/nvim/lua/init.lua')
 end, {})
 
--- 引数なしでNeovim起動時は挿入モードで開始
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    if vim.fn.argc() == 0 then
-      vim.cmd('startinsert')
-    end
-  end,
-})
-
 -- ファイル編集時にカレントディレクトリを自動変更
 vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()

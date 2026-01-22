@@ -10,6 +10,7 @@
   "darcula": { "branch": "master", "commit": "92e8f51d82b36fc6cca148eb98dd3e4cfacc92cd" },
   "denops.vim": { "branch": "main", "commit": "5cfca39988a36e42d81b925264fc846077a727e3" },
   "editorconfig-vim": { "branch": "master", "commit": "13b86c5c691785ffbf2d6508c621dabb08e93df0" },
+  "firenvim": { "branch": "master", "commit": "a18ef908ac06b52ad9333b70e3e630b0a56ecb3d" },
   "fzf": { "branch": "master", "commit": "d1f037059ab57aa1c70abe124b2b72a710f4a28f" },
   "fzf.vim": { "branch": "master", "commit": "ddc14a6a5471147e2a38e6b32a7268282f669b0a" },
   "gist-vim": { "branch": "master", "commit": "5bfbb5450d9eff248f6c074de0b7800392439304" },

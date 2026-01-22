@@ -4,14 +4,6 @@
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- 日本語キーボード互換マッピング
-keymap('n', '(', '*', opts)
-keymap('n', '!', '~', opts)
-keymap('n', '&', '^', opts)
-keymap('v', '(', '*', opts)
-keymap('v', '!', '~', opts)
-keymap('v', '&', '^', opts)
-
 -- セミコロンとコロンのキーバインド入れ替え
 keymap('n', ';', ':', { noremap = true })
 keymap('n', ':', ';', opts)

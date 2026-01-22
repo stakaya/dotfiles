@@ -10,6 +10,17 @@ return {
         },
         renderer = {
           group_empty = true,
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = false,
+              git = false,
+              modified = false,
+              diagnostics = false,
+              bookmarks = false,
+            },
+          },
         },
         filters = {
           dotfiles = false,

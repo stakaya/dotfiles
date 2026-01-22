@@ -16,7 +16,6 @@ return {
   { 'editorconfig/editorconfig-vim' },
 
   -- open-browser.vim
-    -- dependencies = { 'tyru/urilib.vim' },
   {
     'tyru/open-browser.vim',
     config = function()

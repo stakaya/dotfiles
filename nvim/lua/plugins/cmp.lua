@@ -1,4 +1,4 @@
--- 補完設定（asyncomplete.vimの代替）
+-- 補完設定
 return {
   {
     'hrsh7th/nvim-cmp',
