@@ -4,9 +4,6 @@ return {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
-
-      local keymap = vim.keymap.set
-      local opts = { noremap = true, silent = true }
     end,
   },
 }

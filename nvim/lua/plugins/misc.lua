@@ -68,16 +68,6 @@ return {
     ft = { 'markdown', 'md' },
   },
 
-  -- TypeScript
-  {
-    'leafgarland/typescript-vim',
-    ft = { 'typescript', 'ts' },
-  },
-  {
-    'peitalin/vim-jsx-typescript',
-    ft = { 'typescript', 'ts', 'tsx' },
-  },
-
   -- TOML
   {
     'cespare/vim-toml',

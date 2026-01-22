@@ -18,7 +18,7 @@ keymap('v', '<C-X>', '"+x', opts)
 keymap('v', '<C-C>', '"+y', opts)
 
 -- Ctrl+V でペースト
-keymap({ 'n', 'v' }, '<C-V>', '"+gP', opts)
+keymap({ 'n', 'v' }, '<C-V>', '"+p', opts)
 keymap('c', '<C-V>', '<C-R>+', { noremap = true })
 keymap('i', '<C-V>', '<C-R>+', opts)
 
