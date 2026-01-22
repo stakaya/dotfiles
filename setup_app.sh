@@ -28,6 +28,12 @@ done
 # link dictionary file
 ln -s $HOME/dotfiles/vim/dict $HOME/dotfiles/nvim/dict
 
+# Python仮想環境作成とNeovim用パッケージインストール
+mkdir -p ~/.venvs/global
+python3 -m venv ~/.venvs/global
+~/.venvs/global/bin/python -m pip install -U pip
+~/.venvs/global/bin/python -m pip install pynvim neovim
+
 # 参考: https://github.com/Shougo/dein.vim
 [ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim
 git clone https://github.com/Shougo/dein.vim ~/.vim/plugins/repos/github.com/Shougo/dein.vim

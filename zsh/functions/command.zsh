@@ -11,7 +11,7 @@ function space_widget() {
   # when inptting spack key it changing directory
   if [[ "${BUFFER}" == " " ]]; then
     fzf-cd-widget
-  elif [[ "${BUFFER}" == "vi " || "${BUFFER}" == "vim " ]]; then
+  elif [[ "${BUFFER}" == "vi " || "${BUFFER}" == "vim " || "${BUFFER}" == "nvim " ]]; then
     fzf-file-widget
   else
     zle self-insert
@@ -67,7 +67,7 @@ function codex-cli() {
 
   local payload
   payload="$(jq -Rs --arg instr "$instruction" \
-    '{model:"gpt-5",
+    '{model:"gpt-5.2",
       messages:[
         {role:"system", content:$instr},
         {role:"user",   content:.}
