@@ -15,7 +15,7 @@ opt.clipboard = 'unnamedplus'
 opt.inccommand = 'split'
 
 -- Python3パス設定
-g.python3_host_prog = vim.fn.expand("~/.venvs/bin/python")
+g.python3_host_prog = vim.fn.expand("~/.venvs/global/bin/python")
 
 -- True Color（24bit色）サポート
 opt.termguicolors = true
@@ -134,7 +134,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   group = filetype_group,
-  pattern = { '*.json', '*.md', '*.html', '*.css', '*.ts', '*.js', '*vimrc*' },
+  pattern = { '*.json', '*.md', '*.html', '*.css', '*.js', '*vimrc*' },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.shiftwidth = 2
@@ -142,7 +142,7 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   group = filetype_group,
-  pattern = { '*.ts', '*.js' },
+  pattern = { '*.js' },
   callback = function()
     vim.opt_local.cindent = true
     vim.opt_local.expandtab = true

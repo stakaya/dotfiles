@@ -38,7 +38,7 @@ require('lazy').setup({
   { import = 'plugins' },
 }, {
   install = {
-    colorscheme = { 'darcula', 'habamax' },
+    colorscheme = { 'darcula' },
   },
   checker = {
     enabled = true,

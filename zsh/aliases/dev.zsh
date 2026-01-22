@@ -13,7 +13,7 @@ alias adbdebug='cd $ANDROID_HOME/emulator && ./emulator -avd $1'
 
 # Python仮想環境の作成と有効化
 alias venv="python -m venv venv && source venv/bin/activate"
-alias gvenv="python -m venv ~/.venvs && source ~/.venvs/bin/activate"
+alias gvenv="python -m venv ~/.venvs/global && source ~/.venvs/bin/activate"
 alias python="python3"
 alias pip="pip3"
 
