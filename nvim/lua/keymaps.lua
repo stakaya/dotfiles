@@ -79,7 +79,11 @@ keymap('n', '<S-UP>', '<C-W>-', opts)
 keymap('n', '<C-l>', ':<C-u>nohlsearch<CR><C-l>', opts)
 
 -- ターミナル
-keymap('n', '<leader>t', ':terminal<CR>', opts)
+keymap('n', '<leader>t', function()
+  vim.cmd('belowright split')
+  vim.cmd('terminal')
+  vim.cmd('startinsert')
+end, opts)
 keymap('t', '<C-l>', '<C-\\><C-N>', opts)
 keymap('t', '<C-n>', '<DOWN>', opts)
 keymap('t', '<C-p>', '<UP>', opts)

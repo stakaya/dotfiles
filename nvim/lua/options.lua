@@ -17,6 +17,31 @@ opt.inccommand = 'split'
 -- Python3パス設定
 g.python3_host_prog = vim.fn.expand("~/.venvs/global/bin/python")
 
+vim.api.nvim_set_hl(0, "Terminal", {
+  fg = "#bbbbbb",
+  bg = "#2a2a2a",
+})
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.g.terminal_color_0  = "#000000"
+    vim.g.terminal_color_1  = "#fd6b67"
+    vim.g.terminal_color_2  = "#097e00"
+    vim.g.terminal_color_3  = "#ccca00"
+    vim.g.terminal_color_4  = "#5496ef"
+    vim.g.terminal_color_5  = "#fd75ff"
+    vim.g.terminal_color_6  = "#39cbcc"
+    vim.g.terminal_color_7  = "#bbbbbb"
+    vim.g.terminal_color_8  = "#676767"
+    vim.g.terminal_color_9  = "#fd8784"
+    vim.g.terminal_color_10 = "#73f961"
+    vim.g.terminal_color_11 = "#fefb00"
+    vim.g.terminal_color_12 = "#7eaff4"
+    vim.g.terminal_color_13 = "#fd9cff"
+    vim.g.terminal_color_14 = "#6ed9d9"
+    vim.g.terminal_color_15 = "#f1f1f1"
+  end,
+})
+
 -- True Color（24bit色）サポート
 opt.termguicolors = true
 
