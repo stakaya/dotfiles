@@ -1,5 +1,4 @@
 -- Neovimキーマッピング設定
--- vimrc.keymapからの移行版
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }

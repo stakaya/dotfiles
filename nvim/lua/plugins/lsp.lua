@@ -32,12 +32,15 @@ return {
       -- Mason-lspconfigで自動セットアップ (v2.x API)
       require('mason-lspconfig').setup({
         ensure_installed = {
-          'lua_ls',
-          'ts_ls',
-          'pyright',
-          'html',
-          'cssls',
+          'bashls',
           'jsonls',
+          'lemminx',
+          'lua_ls',
+          'marksman',
+          'pyright',
+          'taplo',
+          'vimls',
+          'yamlls',
         },
         handlers = {
           function(server_name)

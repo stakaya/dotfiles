@@ -107,9 +107,7 @@ repo = 'tomtom/tcomment_vim'
 hook_add = '''
   " コメント切り替えキーマップ
   nnoremap <silent> <D-/> :TComment<CR>
-  nnoremap <silent> <C-_> :TComment<CR>
   vnoremap <silent> <D-/> :TComment<CR>
-  vnoremap <silent> <C-_> :TComment<CR>
 '''
 
 # vim-abolish（単語変換・置換）

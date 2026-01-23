@@ -1,14 +1,8 @@
----
-description:
-globs:
-alwaysApply: false
----
-
----
+--
 
 description: Apply this rule to the entire repository
 globs:
-alwaysApply: true
+alwaysApply: false
 
 ---
 

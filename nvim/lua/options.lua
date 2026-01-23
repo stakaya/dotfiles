@@ -1,6 +1,4 @@
 -- Neovim基本設定
--- vimrcからの移行版
-
 local opt = vim.opt
 local g = vim.g
 
