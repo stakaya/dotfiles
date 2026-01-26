@@ -21,7 +21,7 @@ set syscalls                                  " ファイル操作をvifm自体�
 set timefmt=%m/%d\ %H:%M                      " 時刻表示フォーマット
 set trash                                     " ゴミ箱機能を有効化
 set undolevels=100                            " 元に戻せる変更の最大数
-set vicmd=vim                                 " ファイル編集時に使用するエディタ
+set vicmd=nvim                                " ファイル編集時に使用するエディタ
                                               " カラム表示設定
 set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp                                   " Vimヘルプ形式を使用
@@ -76,14 +76,12 @@ command! look vi "+grep %a"
 command! reload :write | restart
 
 " エディタ別コマンド設定
-if executable('mvim')
-  " MacVim使用時
-  command! config :!mvim --remote-tab-silent $MYVIFMRC
-  command! diff :!mvim -d %f %F
-elseif executable('gvim')
-  " GVim使用時
-  command! config :!gvim --remote-tab-silent $MYVIFMRC
-  command! diff :!gvim -d %f %F
+if executable('nvim')
+  command! config :!nvim $MYVIFMRC
+  command! diff :!nvim -d %f %F
+elseif executable('vim')
+  command! config :!vim $MYVIFMRC
+  command! diff :!vim -d %f %F
 else
   " 標準Vi使用時
   command! config :write | exe ':!vi $MYVIFMRC' | restart

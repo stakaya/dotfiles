@@ -40,16 +40,3 @@ require('lazy').setup({
 vim.api.nvim_create_user_command('PlugUpdate', function()
   require('lazy').sync()
 end, {})
-
--- GUI設定を読み込み（GUIクライアント用）
--- UIEnterイベントでGUIを検出してginit.luaを読み込む
-vim.api.nvim_create_autocmd('UIEnter', {
-  once = true,
-  callback = function()
-    local ui = vim.api.nvim_list_uis()[1]
-    if ui and ui.chan > 0 then
-        vim.cmd('runtime ginit.lua')
-    end
-  end,
-})
-

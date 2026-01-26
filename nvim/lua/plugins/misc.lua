@@ -15,37 +15,6 @@ return {
   -- editorconfig
   { 'editorconfig/editorconfig-vim' },
 
-  -- open-browser.vim
-  {
-    'tyru/open-browser.vim',
-    config = function()
-      local function open_url_or_search()
-        local q = vim.fn.getreg('/')
-        q = vim.fn.trim(q)
-
-        if q:match('^https?://') then
-          vim.fn['openbrowser#open'](q)
-        else
-          vim.cmd('OpenBrowserSmartSearch ' .. q)
-        end
-      end
-
-      vim.keymap.set('n', '<leader>b', function()
-        local word = vim.fn.expand('<cword>')
-        vim.fn.setreg('/', word)
-        vim.opt.hlsearch = true
-        open_url_or_search()
-      end, { noremap = true, silent = true })
-
-      vim.keymap.set('v', '<leader>b', function()
-        vim.cmd('normal! "zy')
-        vim.fn.setreg('/', vim.fn.getreg('z'))
-        vim.opt.hlsearch = true
-        open_url_or_search()
-      end, { noremap = true, silent = true })
-    end,
-  },
-
   -- qfreplace
   {
     'thinca/vim-qfreplace',
@@ -53,13 +22,6 @@ return {
     config = function()
       vim.keymap.set('n', '<leader>R', ':Qfreplace<CR>', { noremap = true, silent = true })
     end,
-  },
-
-  -- previm（Markdownプレビュー）
-  {
-    'kannokanno/previm',
-    ft = { 'markdown', 'md' },
-    cmd = 'PrevimOpen',
   },
 
   -- vim-markdown

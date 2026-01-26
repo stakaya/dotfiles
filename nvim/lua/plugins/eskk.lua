@@ -1,0 +1,32 @@
+return {
+  'tyru/eskk.vim',
+  event = 'VimEnter',
+  config = function()
+    local dictionary_dir
+    if vim.fn.has('win64') == 1 then
+      dictionary_dir = vim.fn.expand(vim.env.HOME .. '\\vimfiles\\dict')
+    else
+      dictionary_dir = vim.fn.expand('~/.vim/dict')
+    end
+
+    vim.g['eskk#marker_henkan'] = "💬"
+    vim.g['eskk#marker_henkan_select'] = "✅"
+    vim.g['eskk#marker_jisyo_touroku'] = "📖"
+    vim.g['eskk#egg_like_newline'] = 1
+    vim.g['eskk#dictionary'] = { path = dictionary_dir .. '/SKK-JISYO.user', sorted = 0, encoding = 'utf-8' }
+    vim.g['eskk#large_dictionary'] = { path = dictionary_dir .. '/SKK-JISYO.L', sorted = 1, encoding = 'euc-jp' }
+
+    vim.cmd([[
+      augroup eskk
+        autocmd!
+        autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
+      augroup END
+    ]])
+
+    vim.keymap.set('i', '<C-J>', '<Plug>(eskk:toggle)')
+    vim.keymap.set('c', '<C-J>', '<Plug>(eskk:toggle)')
+    vim.keymap.set('n', '<C-J>', 'i<Plug>(eskk:toggle)')
+    vim.keymap.set('i', 'jj', '<Plug>(eskk:toggle)')
+    vim.keymap.set('n', '<leader>j', 'i<Plug>(eskk:toggle)')
+  end,
+}
