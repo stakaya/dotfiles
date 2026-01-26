@@ -14,7 +14,7 @@ if [ ! -e ~/.config ]; then
 fi
 
 # link for config directory and files
-CONFIG_FILES=(vifm starship.toml git)
+CONFIG_FILES=(vifm starship.toml git nvim)
 for file in ${CONFIG_FILES[@]}
 do
 	if [ ! -e ~/.config/$file ]; then
@@ -22,6 +22,9 @@ do
 		ln -s $HOME/dotfiles/$file $HOME/.config/$file
 	fi
 done
+
+# iSHで/bin/shがない場合
+ln -sf /bin/ash /bin/sh
 
 # 参考: https://github.com/Shougo/dein.vim
 [ ! -d ~/.vim/plugins/repos/github.com/Shougo/dein.vim ] && mkdir -p ~/.vim/plugins/repos/github.com/Shougo/dein.vim
