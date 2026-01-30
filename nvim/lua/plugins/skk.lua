@@ -1,26 +1,28 @@
 -- SKK日本語入力設定
 return {
   {
-    'vim-skk/skkeleton',
-    dependencies = { 'vim-denops/denops.vim' },
+    'tyru/eskk.vim',
     config = function()
-      local dict_dir = vim.fn.expand('~/.vim/dict')
+      local dictionary_dir = vim.fn.expand('~/.vim/dict')
+      vim.g['eskk#marker_henkan'] = "💬"
+      vim.g['eskk#marker_henkan_select'] = "✅"
+      vim.g['eskk#marker_jisyo_touroku'] = "📖"
+      vim.g['eskk#egg_like_newline'] = 1
+      vim.g['eskk#dictionary'] = { path = dictionary_dir .. '/SKK-JISYO.user', sorted = 0, encoding = 'utf-8' }
+      vim.g['eskk#large_dictionary'] = { path = dictionary_dir .. '/SKK-JISYO.L', sorted = 1, encoding = 'euc-jp' }
 
-      vim.fn['skkeleton#config']({
-        globalDictionaries = { dict_dir .. '/SKK-JISYO.L' },
-        userDictionary = dict_dir .. '/SKK-JISYO.user',
-        eggLikeNewline = true,
-        markerHenkan = '>>>',
-        markerHenkanSelect = '>>>',
-      })
+      vim.cmd([[
+        augroup eskk
+          autocmd!
+          autocmd User eskk-enable-post lmap <buffer> l <Plug>(eskk:disable)
+        augroup END
+      ]])
 
-      local keymap = vim.keymap.set
-
-      keymap('i', '<C-J>', '<Plug>(skkeleton-toggle)', {})
-      keymap('c', '<C-J>', '<Plug>(skkeleton-toggle)', {})
-      keymap('n', '<C-J>', 'i<Plug>(skkeleton-toggle)', {})
-      keymap('i', 'JJ', '<Plug>(skkeleton-toggle)', {})
-      keymap('n', '<leader>j', 'i<Plug>(skkeleton-toggle)', {})
+      vim.keymap.set('i', '<C-J>', '<Plug>(eskk:toggle)')
+      vim.keymap.set('c', '<C-J>', '<Plug>(eskk:toggle)')
+      vim.keymap.set('n', '<C-J>', 'i<Plug>(eskk:toggle)')
+      vim.keymap.set('i', 'jj', '<Plug>(eskk:toggle)')
+      vim.keymap.set('n', '<leader>j', 'i<Plug>(eskk:toggle)')
     end,
   },
 }
