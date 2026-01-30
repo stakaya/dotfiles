@@ -48,10 +48,6 @@ repo = 'editorconfig/editorconfig-vim'
 on_event = 'VimEnter'
 
 [[plugins]]
-repo = 'tyru/urilib.vim'
-on_event = 'VimEnter'
-
-[[plugins]]
 repo = 'tyru/open-browser.vim'
 on_event = 'VimEnter'
 hook_source = '''
