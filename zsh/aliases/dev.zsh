@@ -11,6 +11,13 @@ alias apkpull='adb shell pm list package -f | sed -e "s/package:\([^=]*\).*/\1/g
 alias apkcheck='jarsigner -verify -verbose -certs $1'
 alias adbdebug='cd $ANDROID_HOME/emulator && ./emulator -avd $1'
 
+# iOS開発用エイリアス
+alias ioslist='xcrun simctl list devices'
+alias iosclean='xcrun simctl delete unavailable'
+alias iosreset='killall Simulator 2>/dev/null; \
+killall -9 com.apple.CoreSimulator.CoreSimulatorService 2>/dev/null; \
+xcrun simctl delete unavailable'
+
 # Python仮想環境の作成と有効化
 alias venv="python -m venv venv && source venv/bin/activate"
 alias gvenv="python -m venv ~/.venvs/global && source ~/.venvs/bin/activate"

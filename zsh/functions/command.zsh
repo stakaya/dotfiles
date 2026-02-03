@@ -92,3 +92,31 @@ gemini-cli() {
   local body; body="$(cat)"
   printf "%s\n\n-----\n%s\n" "$instruction" "$body" | gemini
 }
+
+xcode_nuke() {
+  echo "⚠️  This will COMPLETELY reset Xcode environment."
+  echo "   - DerivedData"
+  echo "   - Simulators"
+  echo "   - Xcode caches & preferences"
+  echo ""
+  read "ans?Type YES to continue: "
+
+  if [[ "$ans" != "YES" ]]; then
+    echo "Aborted."
+    return 1
+  fi
+
+  echo "Stopping Xcode related services..."
+  killall Xcode 2>/dev/null
+  killall Simulator 2>/dev/null
+  killall -9 com.apple.CoreSimulator.CoreSimulatorService 2>/dev/null
+
+  echo "Removing Xcode data..."
+  rm -rf ~/Library/Developer/Xcode
+  rm -rf ~/Library/Developer/CoreSimulator
+  rm -rf ~/Library/Caches/com.apple.dt.Xcode
+  rm -rf ~/Library/Preferences/com.apple.dt.Xcode.plist
+  rm -rf ~/Library/Saved\ Application\ State/com.apple.dt.Xcode.savedState
+
+  echo "✅ Xcode environment nuked. Reboot Xcode when ready."
+}
