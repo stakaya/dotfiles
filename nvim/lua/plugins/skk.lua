@@ -21,7 +21,6 @@ return {
       vim.keymap.set('i', '<C-J>', '<Plug>(eskk:toggle)')
       vim.keymap.set('c', '<C-J>', '<Plug>(eskk:toggle)')
       vim.keymap.set('n', '<C-J>', 'i<Plug>(eskk:toggle)')
-      vim.keymap.set('i', 'jj', '<Plug>(eskk:toggle)')
       vim.keymap.set('n', '<leader>j', 'i<Plug>(eskk:toggle)')
     end,
   },
