@@ -29,6 +29,9 @@ if !has('unix')
   set guioptions-=a
 endif
 
+" 透明度設定
+set transparency=2
+
 " タブラベル設定
 " %M: 変更フラグ、%t: ファイル名
 set guitablabel=%M%t

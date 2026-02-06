@@ -58,6 +58,7 @@ mods = "Command"
 # ウィンドウ設定
 [window]
 title = ""  # ウィンドウタイトル（空文字）
+opacity = 0.97  # ウィンドウ不透明度
 
 # ウィンドウパディング設定
 [window.padding]

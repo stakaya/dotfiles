@@ -27,6 +27,10 @@ set viewcolumns=-45%{name}..,-{ext},10{size},21{mtime}
 set vimhelp                                   " Vimヘルプ形式を使用
 set wildmenu                                  " コマンドライン補完を有効化
 
+highlight Win ctermbg=-1
+highlight Border ctermbg=-1 ctermfg=default
+highlight CurrLine cterm=bold,reverse ctermfg=none ctermbg=none
+
 " macOS・Unix環境での追加設定
 if has('mac') || has('unix')
   " ファイルタイプ別アイコン設定
