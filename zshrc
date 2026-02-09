@@ -49,6 +49,12 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
   }
 }
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+
 # z（ディレクトリジャンプツール）の初期化
 # 参考: https://github.com/rupa/z
 [ -f ~/z/z.sh ] && source ~/z/z.sh

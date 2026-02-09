@@ -14,6 +14,12 @@ if has('mac')
   " Command+[ で前の位置、Command+] で次の位置に移動
   nnoremap <D-[> g;
   nnoremap <D-]> g,
+
+  " nvm の Node が存在する場合のみ PATH に追加
+  let s:nvm_node_bin = expand('~/.nvm/versions/node/v23.11.1/bin')
+  if isdirectory(s:nvm_node_bin)
+    let $PATH = s:nvm_node_bin . ':' . $PATH
+  endif
 elseif has('win64')
   " Windows環境設定
   set directory=C:\WINDOWS\Temp             " スワップファイル保存先
