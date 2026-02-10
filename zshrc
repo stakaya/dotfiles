@@ -2,6 +2,36 @@
 # 参考: https://github.com/zdharma-continuum/zinit
 # 参考: https://zsh.sourceforge.io/
 
+# 環境変数設定
+export LANG=ja_JP.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
+export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
+
+# Node.js
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+
+# rbenv（Ruby環境管理）の遅延初期化（起動時間改善）
+[[ -d ~/.rbenv ]] && {
+  export PATH=${HOME}/.rbenv/bin:${PATH}
+  # 必要時のみrbenvを初期化（遅延読み込み）
+  rbenv() {
+    eval "$(command rbenv init -)"
+    rbenv "$@"
+  }
+}
+
+# fzf設定オプション
+# ripgrepを使用してファイル検索を高速化
+export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
+
+# Ctrl+Tでのファイル検索設定
+export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
+
+# batを使用したファイルプレビュー設定
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header --line-range :100 {}"'
+
 ### Zinitプラグインマネージャーの自動インストール
 # Zinitが未インストールの場合は自動的にダウンロード・セットアップ
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -34,27 +64,6 @@ zinit wait lucid for \
   zdharma/fast-syntax-highlighting \
   rupa/z
 
-# 環境変数設定
-export LANG=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
-export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
-
-# rbenv（Ruby環境管理）の遅延初期化（起動時間改善）
-[[ -d ~/.rbenv ]] && {
-  export PATH=${HOME}/.rbenv/bin:${PATH}
-  # 必要時のみrbenvを初期化（遅延読み込み）
-  rbenv() {
-    eval "$(command rbenv init -)"
-    rbenv "$@"
-  }
-}
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-
 # z（ディレクトリジャンプツール）の初期化
 # 参考: https://github.com/rupa/z
 [ -f ~/z/z.sh ] && source ~/z/z.sh
@@ -62,16 +71,6 @@ export NVM_DIR="$HOME/.nvm"
 # fzf（ファジーファインダー）の初期化
 # 参考: https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# fzf設定オプション
-# ripgrepを使用してファイル検索を高速化
-export FZF_DEFAULT_COMMAND='rg --no-messages --files --hidden --follow --glob "!**/.git/*"'
-
-# Ctrl+Tでのファイル検索設定
-export FZF_CTRL_T_COMMAND='rg --no-messages --files --hidden --follow --glob "!.git/*"'
-
-# batを使用したファイルプレビュー設定
-export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header --line-range :100 {}"'
 
 # Alacritty起動時のtmux自動セッション管理（キャッシュ最適化）
 # Alacrittyターミナル起動時に既存のtmuxセッションに接続または新規作成

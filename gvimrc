@@ -16,9 +16,13 @@ if has('mac')
   nnoremap <D-]> g,
 
   " nvm の Node が存在する場合のみ PATH に追加
-  let s:nvm_node_bin = expand('~/.nvm/versions/node/v23.11.1/bin')
-  if isdirectory(s:nvm_node_bin)
-    let $PATH = s:nvm_node_bin . ':' . $PATH
+  let s:nvm_dir = expand('~/.nvm/versions/node')
+  let s:bins = globpath(s:nvm_dir, 'v*/bin', 0, 1)
+
+  call filter(s:bins, {_, v -> executable(v . '/node')})
+
+  if !empty(s:bins)
+    let $PATH = s:bins[-1] . ':' . $PATH
   endif
 elseif has('win64')
   " Windows環境設定
