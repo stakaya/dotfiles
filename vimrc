@@ -10,13 +10,10 @@ let g:mapleader = "\<space>"
 " 日本語キーボード対応やVimライクなキーバインドを設定
 source $HOME/dotfiles/vimrc.keymap
 
-" Neovim以外の場合の設定
-if !has('nvim')
-  " Vimのデフォルト設定を読み込み
-  source $VIMRUNTIME/defaults.vim
-  " クリップボード連携を有効化
-  set clipboard=unnamed,autoselect
-endif
+" Vimのデフォルト設定を読み込み
+source $VIMRUNTIME/defaults.vim
+" クリップボード連携を有効化
+set clipboard=unnamed,autoselect
 
 " Vim起動時の初期設定
 if has('vim_starting')
@@ -44,11 +41,7 @@ if has('win64')
   endif
 else
   let s:plugin_config_dir = expand('~/.vim/plugins')
-  if has('nvim')
-    let s:plugin_install_dir = expand('~/.config/nvim/plugins')
-  else
-    let s:plugin_install_dir = expand('~/.vim/plugins')
-  endif
+  let s:plugin_install_dir = expand('~/.vim/plugins')
 endif
 
 " プラグインの読み込み
@@ -70,7 +63,7 @@ endif
 " 不要なプラグインの自動削除（起動時間改善のため1日1回のみチェック）
 let s:cleanup_file = expand('~/.vim/.dein_cleanup_check')
 let s:should_cleanup = !filereadable(s:cleanup_file) ||
-  \ (localtime() - getftime(s:cleanup_file)) > 86400
+      \ (localtime() - getftime(s:cleanup_file)) > 86400
 
 if s:should_cleanup
   let s:removed_plugins = dein#check_clean()
@@ -114,7 +107,6 @@ let g:terminal_ansi_colors = [
 
 " 基本設定
 " 参考: https://vim-jp.org/vimdoc-ja/options.html
-
 set ambiwidth=single   " 全角文字の幅を1文字分として扱う
 set autoindent         " 新しい行で前の行のインデントを維持
 set autowrite          " バッファ切り替え時に自動保存
