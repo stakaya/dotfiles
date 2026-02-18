@@ -6,10 +6,14 @@ function git_switch() {
 }
 
 function git_fetch() {
-  local branches branch
-  branches=$(git branch -vv -r) && \
+  local branches branch remote_ref remote local_branch
+  branches=$(git for-each-ref --format='%(refname:short)' refs/remotes | grep -v '/HEAD$') && \
     branch=$(echo "$branches" | fzf +m) && \
-    git fetch $(echo "$branch" | awk '{print $1}' | sed "s/\// /")
+    remote_ref="$branch" && \
+    remote="${remote_ref%%/*}" && \
+    local_branch="${remote_ref#*/}" && \
+    git fetch "$remote" "$local_branch" && \
+    (git switch "$local_branch" || git switch --track -c "$local_branch" "$remote_ref")
 }
 
 function git_add() {
