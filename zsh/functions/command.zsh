@@ -81,7 +81,7 @@ function codex-cli() {
 }
 
 # Google
-gemini-cli() {
+function gemini-cli() {
   # 使い方: cat input.md | gemini-cli "指示文" > output.md
   if [ $# -lt 1 ]; then
     echo "Usage: gemini-cli <instruction>" >&2
@@ -93,7 +93,7 @@ gemini-cli() {
   printf "%s\n\n-----\n%s\n" "$instruction" "$body" | gemini
 }
 
-xcode_nuke() {
+function xcode-nuke() {
   echo "⚠️  This will COMPLETELY reset Xcode environment."
   echo "   - DerivedData"
   echo "   - Simulators"

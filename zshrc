@@ -9,8 +9,6 @@ export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
 # Node.js
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # rbenv（Ruby環境管理）の遅延初期化（起動時間改善）
 [[ -d ~/.rbenv ]] && {
@@ -109,7 +107,7 @@ for alias_file in $HOME/dotfiles/zsh/aliases/*.zsh; do
   source $alias_file
 done
 
-# 関数設定ファイルの読み込み 
+# 関数設定ファイルの読み込み
 for function_file in $HOME/dotfiles/zsh/functions/*.zsh; do
   source $function_file
 done
