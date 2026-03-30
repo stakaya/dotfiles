@@ -24,16 +24,17 @@ else
 fi
 
 cd dotfiles
-if command -v brew >/dev/null 2>&1; then
-    echo "ソフトウェア・ライブラリをインストール中..."
-    brew bundle -v --file=./apps/Brewfile
-fi
 
 echo "Zshをセットアップ中..."
 zsh -f setup_shell.sh && echo "完了。"
 
 echo "Vimをセットアップ中..."
 zsh -f setup_app.sh && echo "完了。"
+
+if command -v brew >/dev/null 2>&1; then
+    echo "ソフトウェア・ライブラリをインストール中..."
+    brew bundle -v --file=./apps/Brewfile
+fi
 
 if [ -f /usr/bin/defaults ]
 	then
