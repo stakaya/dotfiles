@@ -16,6 +16,8 @@ brew "starship"  # 高速プロンプト
 brew "tmux"      # ターミナルマルチプレクサ
 brew "tree"      # ディレクトリ構造表示
 brew "vifm"      # Vimライクファイルマネージャー
+brew "node"      # Node.js JavaScriptランタイム
+brew "volta"     # Node.jsバージョンマネージャー
 
 # GUI アプリケーション
 cask "alacritty"           # 高速ターミナルエミュレータ

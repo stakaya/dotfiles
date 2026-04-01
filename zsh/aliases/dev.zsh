@@ -37,3 +37,10 @@ alias indocker='docker exec -it `docker ps -a -f status=running --format "{{.Nam
 # tmux起動設定
 # UTF-8サポート（-u）と256色対応（-2）を有効化
 alias tmux='tmux -u -2'
+
+# AWS MFA
+# security add-generic-password -a "$USER" -s "aws-mfa-secret" -w "あなたのMFAシークレットキー"
+# security add-generic-password -a "$USER" -s "aws-mfa-arn" -w "arn:aws:iam::123456789012:mfa/あなたのデバイス名"
+alias awsmfa='awsmfa \
+--serial-number "$(security find-generic-password -a "$USER" -s "aws-mfa-arn" -w)" \
+"$(oathtool --totp --base32 "$(security find-generic-password -a "$USER" -s "aws-mfa-secret" -w)")"'
