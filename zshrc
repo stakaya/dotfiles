@@ -7,6 +7,9 @@ export LANG=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
 
+# エディタ設定
+export EDITOR="vim"
+
 # Node.js
 export NVM_DIR="$HOME/.nvm"
 

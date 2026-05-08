@@ -8,6 +8,7 @@ vim/*
 
 # vifm 実行時生成ファイル
 vifm/vifminfo.json
+vifm/Trash/
 
 # Neovim プラグインディレクトリ
 nvim/plugins/*

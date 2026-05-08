@@ -100,9 +100,14 @@ fabric.properties
 # ビルドされたVSCode拡張機能
 *.vsix
 
-# AI
-**/.claude/settings.local.json
+# AI agent関連
+.cursor/
 .cursorignore
 .cursorindexingignore
 .specstory/
-.specstory/**
+
+.claude/
+**/.claude/settings.local.json
+
+/.opencode/
+/opencode.json

@@ -23,6 +23,7 @@ else
 	echo "dotfiles は既にクローン済みです。"
 fi
 
+source ~/.zshrc
 cd dotfiles
 
 echo "Zshをセットアップ中..."
