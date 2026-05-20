@@ -42,27 +42,54 @@ hook_add = '''
 
   " ripgrep検索設定
   if executable('rg')
+    nnoremap <silent> <space>p :call FzfRead()<CR>
     nnoremap <silent> <space>g "zyiw:let @/ =  @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
     vnoremap <silent> <space>g "zy:let @/ = @z<CR>:set hlsearch<CR>:Rg<Space><C-r>/<CR>
+    nnoremap <silent> <space>p :call FzfRead()<CR>
   endif
 
   " Git対応ファイル検索関数
   function! FzfOmniFiles()
-	  " Git状態チェックのキャッシュ機能（現在のディレクトリ用）
-	  let l:git_dir = expand('%:p:h')
-	  let l:cache_key = 'fzf_git_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
+    " Git状態チェックのキャッシュ機能（現在のディレクトリ用）
+    let l:git_dir = expand('%:p:h')
+    let l:cache_key = 'fzf_git_' . substitute(l:git_dir, '[^a-zA-Z0-9]', '_', 'g')
 
-	  if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
-		  let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
-		  let g:[l:cache_key] = !v:shell_error
-		  let g:[l:cache_key . '_time'] = localtime()
-	  endif
+    if !exists('g:' . l:cache_key) || (localtime() - get(g:, l:cache_key . '_time', 0)) > 30
+        let l:is_git = system('git -C ' . shellescape(l:git_dir) . ' rev-parse --git-dir 2>/dev/null')
+        let g:[l:cache_key] = !v:shell_error
+        let g:[l:cache_key . '_time'] = localtime()
+    endif
 
-	  if g:[l:cache_key]
-		  :GitFiles
-	  else
-		  :Files
-	  endif
+    if g:[l:cache_key]
+        :GitFiles
+    else
+        :Files
+    endif
+  endfunction
+
+  " ripgrepとfzfを組み合わせたファイル検索関数
+  let s:fzf_src = -1
+  let s:fzf_tmp = ''
+  let s:fzf_buf = -1
+
+  function! s:FzfDone(job, status)
+    let file = expand(trim(get(readfile(s:fzf_tmp), 0, '')))
+    call delete(s:fzf_tmp)
+    if bufexists(s:fzf_buf) | execute 'bwipeout! ' . s:fzf_buf | endif
+    if filereadable(file)
+      execute 'buffer ' . s:fzf_src
+      execute 'read ' . fnameescape(file)
+    endif
+  endfunction
+
+  function! FzfRead()
+    let s:fzf_tmp = tempname()
+    let s:fzf_src = bufnr('%')
+    let s:fzf_buf = term_start('/bin/sh -c "rg --files ~/Documents/.memory | fzf > ' . s:fzf_tmp . '"', {
+      \ 'exit_cb': function('s:FzfDone'),
+      \ 'term_rows': 15,
+      \})
+    startinsert
   endfunction
 '''
 

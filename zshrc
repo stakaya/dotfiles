@@ -129,9 +129,9 @@ bindkey ";;" end-of-line
 bindkey "jj" vi-cmd-mode
 bindkey '^N' history-beginning-search-forward
 bindkey '^P' history-beginning-search-backward
-bindkey 'ga' git_add
-bindkey 'gs' git_switch
-bindkey 'gf' git_fetch
+bindkey 'Ga' git_add
+bindkey 'Gs' git_switch
+bindkey 'Gf' git_fetch
 bindkey 'kk' fzf-history-widget
 
 # vim でCtrl Keyが効かないのを修整
