@@ -90,7 +90,7 @@ function gemini-cli() {
   local instruction="$*"
   # 標準入力の本文を読み取り、指示文と結合して1本のプロンプトとして送る
   local body; body="$(cat)"
-  printf "%s\n\n-----\n%s\n" "$instruction" "$body" | gemini
+  printf "%s\n\n-----\n%s\n" "$instruction" "$body" | agy
 }
 
 function xcode-nuke() {

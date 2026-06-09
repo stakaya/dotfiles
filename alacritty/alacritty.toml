@@ -59,8 +59,12 @@ mods = "Command"
 [window]
 title = ""  # ウィンドウタイトル（空文字）
 opacity = 0.97  # ウィンドウ不透明度
+dynamic_padding = true
 
 # ウィンドウパディング設定
 [window.padding]
 x = 2  # 水平パディング
 y = 0  # 垂直パディング
+
+[terminal]
+shell = { program = "/bin/zsh", args = ["-l", "-c", "tmux a || tmux"] }
