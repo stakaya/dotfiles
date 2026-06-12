@@ -101,6 +101,11 @@ stty start undef
 # prompt
 eval "$(starship init zsh)"
 
+# carapace
+autoload -U compinit && compinit
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \

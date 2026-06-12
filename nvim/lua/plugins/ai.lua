@@ -7,21 +7,21 @@ return {
 
       vim.g.vim_ai_chat = {
         options = {
-          model = 'gpt-5.2',
+          model = 'gpt-5.4',
           temperature = 0.7,
         },
       }
 
       vim.g.vim_ai_complete = {
         options = {
-          model = 'gpt-5.2',
+          model = 'gpt-5.4',
           temperature = 0.1,
         },
       }
 
       vim.g.vim_ai_edit = {
         options = {
-          model = 'gpt-5.2',
+          model = 'gpt-5.4',
         },
       }
 

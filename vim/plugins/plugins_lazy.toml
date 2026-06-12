@@ -105,21 +105,21 @@ hook_source = '''
   let g:vim_ai_token_file_path = '~/.config/openai.token'
   let g:vim_ai_chat = {
   \ "options": {
-  \   "model": "gpt-5.2",
+  \   "model": "gpt-5.4",
   \   "temperature": 0.7,
   \ },
   \}
 
   let g:vim_ai_complete = {
   \ "options": {
-  \   "model": "gpt-5.2",
+  \   "model": "gpt-5.4",
   \   "temperature": 0.1,
   \ },
   \}
 
   let g:vim_ai_edit = {
   \  "options": {
-  \    "model": "gpt-5.2",
+  \    "model": "gpt-5.4",
   \  },
   \}
 

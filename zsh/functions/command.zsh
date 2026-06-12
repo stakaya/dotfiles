@@ -67,7 +67,7 @@ function codex-cli() {
 
   local payload
   payload="$(jq -Rs --arg instr "$instruction" \
-    '{model:"gpt-5.2",
+    '{model:"gpt-5.4",
       messages:[
         {role:"system", content:$instr},
         {role:"user",   content:.}
