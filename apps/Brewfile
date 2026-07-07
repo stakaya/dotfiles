@@ -4,12 +4,10 @@
 
 # コマンドラインツール
 brew "bat"       # cat代替（シンタックスハイライト付き）
-brew "openjdk"   # OpenJDK Java開発キット
 brew "curl"      # データ転送ツール
 brew "fd"        # find代替（高速検索）
 brew "fzf"       # ファジーファインダー
 brew "jq"        # JSON処理ツール
-brew "lazygit"   # Git用TUIクライアント
 brew "neovim"    # 現代的なVim
 brew "ripgrep"   # 高速grep代替
 brew "starship"  # 高速プロンプト
@@ -23,5 +21,4 @@ brew "volta"     # Node.jsバージョンマネージャー
 cask "alacritty"           # 高速ターミナルエミュレータ
 cask "brave-browser"       # プライバシー重視Webブラウザ
 cask "google-japanese-ime" # Google日本語入力
-cask "intellij-idea"       # Java統合開発環境
 cask "macvim"              # macOS用Vim
