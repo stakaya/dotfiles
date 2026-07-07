@@ -23,11 +23,11 @@ else
 	echo "dotfiles は既にクローン済みです。"
 fi
 
-source ~/.zshrc
 cd dotfiles
 
 echo "Zshをセットアップ中..."
 zsh -f setup_shell.sh && echo "完了。"
+source ~/.zshrc
 
 echo "Vimをセットアップ中..."
 zsh -f setup_app.sh && echo "完了。"
