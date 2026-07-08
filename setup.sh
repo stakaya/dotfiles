@@ -84,6 +84,12 @@ if [ -f /usr/bin/defaults ]
         # ライブラリの表示
         chflags nohidden ~/Library
 
+        # 不要なフォルダの非表示
+        chflags hidden ~/Movies
+        chflags hidden ~/Music
+        chflags hidden ~/Pictures
+        chflags hidden ~/Public
+
         # ネットワークの設定
         networksetup -SetDNSServers Wi-Fi 8.8.8.8 8.8.4.4
         networksetup -SetV6Off Wi-Fi
