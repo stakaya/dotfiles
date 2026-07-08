@@ -4,6 +4,7 @@
 
 # コマンドラインツール
 brew "bat"       # cat代替（シンタックスハイライト付き）
+brew "carapace"  # Multi-shell multi-command argument completer
 brew "curl"      # データ転送ツール
 brew "fd"        # find代替（高速検索）
 brew "fzf"       # ファジーファインダー
