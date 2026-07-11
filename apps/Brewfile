@@ -20,6 +20,5 @@ brew "volta"     # Node.jsバージョンマネージャー
 
 # GUI アプリケーション
 cask "alacritty"           # 高速ターミナルエミュレータ
-cask "brave-browser"       # プライバシー重視Webブラウザ
 cask "google-japanese-ime" # Google日本語入力
-cask "macvim"              # macOS用Vim
+cask "macvim-app"          # macOS用Vim
