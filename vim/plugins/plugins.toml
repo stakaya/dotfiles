@@ -168,5 +168,10 @@ hook_add = '''
 repo = 'ojroques/vim-oscyank'
 rev = 'main'
 hook_add = '''
-  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankRegister '"' | endif
+  augroup OSCYankGroup
+    autocmd!
+    autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is ''
+          \ | OSCYankRegister
+          \ | endif
+  augroup END
 '''
