@@ -162,3 +162,11 @@ hook_add = '''
   " Ctrl+Yで補完を受け入れ
   imap <silent><script><expr> <C-Y> copilot#Accept("\<CR>")
 '''
+
+# クリップボード共有
+[[plugins]]
+repo = 'ojroques/vim-oscyank'
+rev = 'main'
+hook_add = '''
+  autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankRegister '"' | endif
+'''
