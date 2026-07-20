@@ -116,4 +116,4 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # OpenClaw Completion
-[ -f "/Users/stakaya/.openclaw/completions/openclaw.zsh" ] && source "/Users/stakaya/.openclaw/completions/openclaw.zsh"
+[ -f "$HOME/.openclaw/completions/openclaw.zsh" ] && source "$HOME/.openclaw/completions/openclaw.zsh"
