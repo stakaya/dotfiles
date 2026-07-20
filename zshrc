@@ -114,3 +114,6 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 ### End of Zinit's installer chunk
+
+# OpenClaw Completion
+[ -f "/Users/stakaya/.openclaw/completions/openclaw.zsh" ] && source "/Users/stakaya/.openclaw/completions/openclaw.zsh"
