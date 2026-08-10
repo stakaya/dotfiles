@@ -54,8 +54,8 @@ keymap('n', 'vv', '<C-V>', opts)
 keymap('n', '==', 'ggvG$=<C-O><C-O>', opts)
 
 -- 画面分割操作
-keymap('n', '_', ':split<CR><C-W>w', opts)
-keymap('n', '<BAR>', ':vsplit<CR><C-W>w', opts)
+keymap('n', '-', ':split<CR><C-W>w', opts)
+keymap('n', '\\', ':vsplit<CR><C-W>w', opts)
 
 -- ウィンドウ切り替え
 keymap('n', '<TAB>', '<C-W>w', opts)

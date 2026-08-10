@@ -60,8 +60,8 @@ if exists('g:vscode')
 endif
 
 " 画面分割操作
-noremap _ :split<CR><C-W>w
-noremap <BAR> :vsplit<CR><C-W>w
+noremap - :split<CR><C-W>w
+noremap \ :vsplit<CR><C-W>w
 
 " ウィンドウ切り替え
 noremap <TAB> <C-W>w
