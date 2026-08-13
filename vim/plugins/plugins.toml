@@ -157,6 +157,18 @@ repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'github/copilot.vim'
 hook_add = '''
+  let g:copilot_filetypes = {
+  \   '*': v:false,
+  \   'lua': v:true,
+  \   'python': v:true,
+  \   'javascript': v:true,
+  \   'typescript': v:true,
+  \   'sh': v:true,
+  \   'json': v:true,
+  \   'toml': v:true,
+  \   'conf': v:true,
+  \ }
+
   " タブキーマッピングを無効化
   let g:copilot_no_tab_map = v:true
   " Ctrl+Yで補完を受け入れ
