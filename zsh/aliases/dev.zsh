@@ -44,3 +44,6 @@ alias tmux='tmux -u -2'
 alias awsmfa='awsmfa \
 --serial-number "$(security find-generic-password -a "$USER" -s "aws-mfa-arn" -w)" \
 "$(oathtool --totp --base32 "$(security find-generic-password -a "$USER" -s "aws-mfa-secret" -w)")"'
+
+# codex
+alias lcodex='CODEX_OSS_BASE_URL=http://127.0.0.1:11434/v1 codex --oss --local-provider ollama --model qwen3.8:27b-fast'
