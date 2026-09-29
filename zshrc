@@ -5,6 +5,9 @@
 # エディタ設定
 export EDITOR="vim"
 
+# home brewを優先
+export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
+
 # Node.js
 export NVM_DIR="$HOME/.nvm"
 
