@@ -2,6 +2,11 @@
 # 参考: https://github.com/zdharma-continuum/zinit
 # 参考: https://zsh.sourceforge.io/
 
+# 環境変数設定
+export LANG=ja_JP.UTF-8
+export LC_CTYPE=ja_JP.UTF-8
+export PATH=$HOME/.nodebrew/current/bin:/opt/homebrew/bin:$PATH
+
 # エディタ設定
 export EDITOR="vim"
 
