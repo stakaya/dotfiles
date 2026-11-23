@@ -46,4 +46,33 @@ alias awsmfa='awsmfa \
 "$(oathtool --totp --base32 "$(security find-generic-password -a "$USER" -s "aws-mfa-secret" -w)")"'
 
 # codex
-alias lcodex='CODEX_OSS_BASE_URL=http://127.0.0.1:11434/v1 codex --oss --local-provider ollama --model qwen3.8:27b-fast'
+alias codexl='CODEX_OSS_BASE_URL=http://127.0.0.1:11434/v1 codex --oss --local-provider ollama --model qwen3.8:27b-fast'
+
+# Qwen3.8-27B & pi エージェント一括起動環境 (tmux画面分割)
+# 左ペイン: llama-server (127.0.0.1:9931)
+# 右ペイン: pi エージェント (ヘルスチェック完了後に自動起動、プロンプト画面にフォーカス)
+qwen-pi() {
+    local session="qwen-pi"
+    local model_dir="$HOME/models/qwen3.8-27b"
+    local workdir="$PWD"
+    local server_cmd="cd $model_dir && ./run-local.sh server; exec $SHELL"
+    local pi_cmd="echo 'Waiting for llama-server (127.0.0.1:9931)...'; until curl --noproxy '*' -fsS http://127.0.0.1:9931/health >/dev/null 2>&1; do sleep 1; done; echo 'llama-server is ready!'; $model_dir/run-local.sh pi; exec $SHELL"
+
+    if [ -n "$TMUX" ]; then
+        tmux new-window -n "qwen-pi" -c "$model_dir" "$server_cmd"
+        tmux split-window -h -c "$workdir" "$pi_cmd"
+        tmux select-pane -t 1
+    else
+        if tmux has-session -t "$session" 2>/dev/null; then
+            echo "Session $session already exists. Attaching..."
+            tmux attach-session -t "$session"
+        else
+            tmux new-session -d -s "$session" -c "$model_dir" "$server_cmd"
+            tmux split-window -h -t "$session" -c "$workdir" "$pi_cmd"
+            tmux select-pane -t "$session:0.1"
+            tmux attach-session -t "$session"
+        fi
+    fi
+}
+alias pil='qwen-pi'
+
